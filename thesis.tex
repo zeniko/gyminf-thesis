@@ -1,0 +1,100 @@
+\documentclass[oneside,a4paper]{book}
+%\pagestyle{headings}
+\frontmatter
+\input{preamble}
+
+% A B S T R A C T
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\chapter*{\centering Abstract}
+\begin{quotation}
+\noindent
+
+\textbf{Not an \emph{abstract} yet, but the original project description:}
+
+Ziel des Projekts ist ein empirisch abgestütztes Instrument für den Programmier-Unterricht am Gymnasium zu entwickeln, in welchem Schüler:innen verschiedene Abstraktionsebenen interaktiv erleben können.
+
+Auf der Basis von Processing mit Python Syntax (https://py.processing.org/) soll der einerseits der visuelle Ablauf eines Programms, aber auch die Parsing-Schritte und die Übersetzung in Byte-Code Seite-an-Seite sicht- und untersuchbar gemacht werden, damit Schüler:innen die Auswirkungen ihres Programmcodes auf die Maschine live erleben können.
+
+Die Entwicklung des Produkts wird theoretisch begleitet und das Produkt selbst empirisch geprüft werden.
+
+Als Basis der Umsetzung dient Glamorous Toolkit, eine Entwicklungsumgebung basierend auf Smalltalk/Pharo, welche u.a. von Oscar Nierstrasz für Master- und Doktoratsstudiengänge weiterentwickelt worden ist.
+
+\end{quotation}
+\clearpage
+
+
+% C O N T E N T S
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\tableofcontents
+
+\mainmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% NEW CHAPTER %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+\label{cha:introduction}
+
+\chapter {Related Work}
+In which we learn what have other done to address similar problems. For example, the work of Star \cite{Star89}
+
+\chapter{The Problem}
+In which we understand what the problem is in detail.
+
+\chapter {The Solution}
+In which you describe your solution.
+
+\chapter {The Validation}
+In which you show how well the solution works.
+
+\chapter {Conclusion and Future Work}
+In which we step back, have a critical look at the entire work, then conclude, and learn what lays beyond this thesis.
+
+\chapter {st80-test}
+
+\lstnewenvironment{code}{%
+	\lstset{%
+		% frame=lines,
+		frame=single,
+		framerule=0pt,
+		mathescape=false
+	}
+}{}
+
+take plain, verbatim code,
+and translate some special characters like $\wedge$ to \ct{^}. Even tabs are handled, (which is not true for verbatim).
+\begin{code}
+"All handled correctly: ^ $ ' % \\ << >> _ { }"
+"NB: If you !{\bf really}! want an exclamation mark you must spell it BANG"
+| y |
+true & false not & (nil isNil) ifFalse: [self halt].
+y _ self size + super size.
+#($a #a 'a' 1 1.0)
+	do: [:each | Transcript 
+			show: (each class name); 
+                     show: ' ';
+                     show: (each printString).
+{ 1 + 2 . 3 \\ 4 . 1 << 3. 2 >> 5 . 1 % 2 }.
+^ x < y 
+\end{code}
+
+In-line code with \verb|\ct| is typed like this \verb|\ct{1 + 2 --> 3}| and looks like this: \ct{1 + 2 --> 3}, text can follow immediately.  The ``brackets'' around \verb|\ct| can be any matching pair of characters, useful if you want \ct${ and }$ in the code.
+
+%=============================================================
+\subsection*{Special chars with $\backslash$ct}
+\ct@^ ~ # $ ' % \\ << >> _ {  } ! -- --> @\\
+\verb|\ct@^ ~ # $ ' % \\ << >> _ {  } ! -- --> @|
+
+%=============================================================
+\subsection*{Special conventions}
+
+\verb$\ct{Class>>>method}$ prints as \ct{Class>>>method}.\\
+\verb$\ct{3 + 4 - 5 --> 2}$ prints as \ct{3 + 4 - 5 --> 2}.
+
+
+%END Doc
+%-------------------------------------------------------
+
+\bibliography{thesis}
+\bibliographystyle{plain}
+
+\end{document}

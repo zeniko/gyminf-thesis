@@ -1,0 +1,10 @@
+TEX = $(glob *.tex)
+OBJS = $(TEX:.tex=.log) $(TEX:.tex=.aux) $(TEX:.tex=.out) $(TEX:.tex=.toc) $(TEX:.tex=.synctex.gz)
+
+thesis: thesis.pdf
+
+thesis.pdf: $(TEX)
+	pdflatex.exe -synctex=1 thesis.tex
+
+clean:
+	del $(OBJS)

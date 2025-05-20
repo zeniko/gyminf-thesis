@@ -1,0 +1,36 @@
+%
+% Package xxx - Provides !!!-marks
+%
+% Author: Simon B"unzli <zeniko@gmx.ch>
+%
+\NeedsTeXFormat{LaTeX2e} % actually tested with LaTeX2e <2001/06/01>
+\ProvidesPackage{xxx}[2003/12/04 Provides !!!-marks]
+%
+% Options:
+%     hide - Prevents !!!-marks from being displayed in the text
+%     error - Causes xxx to throw an error for each !!!-mark encountered
+%
+% Usage:
+%     \xxx{...}
+%
+\DeclareRobustCommand{\xxx}[1]{%
+    \xxxPrint{#1}\xxxWarning{!!! #1 !!!}%
+}
+\newcommand{\xxxPrint}[1]{%
+    \textbf{!`{#1}!}%
+}
+\newcommand{\xxxWarning}[1]{%
+    \PackageWarning{xxx}{#1}%
+}
+%
+\DeclareOption{hide}{%
+    \renewcommand{\xxxPrint}[1]{}%
+}
+\DeclareOption{error}{%
+    \renewcommand{\xxxWarning}[1]{%
+        \PackageError{xxx}{#1}{Take care of the !!!-marks and remove them when you're done!}%
+    }%
+}
+\ProcessOptions\relax
+%
+\endinput
