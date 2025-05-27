@@ -1,10 +1,18 @@
-TEX = $(glob *.tex)
-OBJS = $(TEX:.tex=.log) $(TEX:.tex=.aux) $(TEX:.tex=.out) $(TEX:.tex=.toc) $(TEX:.tex=.synctex.gz)
+MAIN = thesis.tex
+OBJS = $(MAIN:.tex=.log) $(MAIN:.tex=.aux) $(MAIN:.tex=.out) $(MAIN:.tex=.toc) $(MAIN:.tex=.synctex.gz) $(MAIN:.tex=.bbl) $(MAIN:.tex=.blg)
 
-thesis: thesis.pdf
+thesis: $(MAIN:.tex=.pdf)
 
-thesis.pdf: $(TEX)
-	pdflatex.exe -synctex=1 thesis.tex
+$(MAIN:.tex=.pdf): $(MAIN:.tex=.bib) $(glob *.tex)
 
+.tex.pdf:
+	$(MAKE) $(<:.tex=.bbl)
+	pdflatex.exe -synctex=1 $<
+	pdflatex.exe -synctex=1 $<
+
+.bib.bbl:
+	pdflatex.exe -synctex=1 $(<:.bib=.tex)
+	bibtex.exe $(<:.bib=)
+	
 clean:
 	del $(OBJS)
