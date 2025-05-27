@@ -6,13 +6,10 @@ thesis: $(MAIN:.tex=.pdf)
 $(MAIN:.tex=.pdf): $(MAIN:.tex=.bib) $(glob *.tex)
 
 .tex.pdf:
-	$(MAKE) $(<:.tex=.bbl)
+	pdflatex.exe -synctex=1 $(<:.bib=.tex)
+	bibtex.exe $(<:.bib=)
 	pdflatex.exe -synctex=1 $<
 	pdflatex.exe -synctex=1 $<
 
-.bib.bbl:
-	pdflatex.exe -synctex=1 $(<:.bib=.tex)
-	bibtex.exe $(<:.bib=)
-	
 clean:
 	del $(OBJS)
