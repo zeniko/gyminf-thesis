@@ -6,9 +6,9 @@ thesis: $(MAIN:.tex=.pdf)
 $(MAIN:.tex=.pdf): $(MAIN:.tex=.bib) $(glob *.tex)
 
 .tex.pdf:
-	pdflatex.exe -synctex=1 $(<:.bib=.tex)
-	bibtex.exe $(<:.bib=)
-	pdflatex.exe -synctex=1 $<
+	pdflatex.exe $(<:.bib=.tex)
+	bibtex.exe $(<:.tex=)
+	pdflatex.exe $<
 	pdflatex.exe -synctex=1 $<
 
 clean:
