@@ -17,7 +17,7 @@ Auf der Basis von Processing mit Python Syntax (https://py.processing.org/) soll
 
 Die Entwicklung des Produkts wird theoretisch begleitet und das Produkt selbst empirisch geprüft werden.
 
-Als Basis der Umsetzung dient Glamorous Toolkit, eine Entwicklungsumgebung basierend auf Smalltalk/Pharo, welche u.a. von Oscar Nierstrasz für Master- und Doktoratsstudiengänge weiterentwickelt worden ist.
+Als Basis der Umsetzung dient Glamorous Toolkit, eine Entwicklungsumgebung basierend auf Smalltalk/Pharo, welche u.\,a. von Oscar Nierstrasz für Master- und Doktoratsstudiengänge weiterentwickelt worden ist.
 
 \end{quotation}
 \clearpage
@@ -32,88 +32,10 @@ Als Basis der Umsetzung dient Glamorous Toolkit, eine Entwicklungsumgebung basie
 \chapter{Introduction}
 Programming with Processing vs. "Little Man Computer" or "Human Resource Machine"
 
-
-%%%%% The Problem %%%%%
-%%%%% Related Work %%%%%
-\chapter{Leaky Abstractions when Teaching Programming}
-On the lack of connecting high-level languages with lower-level concepts
-
-\section{Multitier Architectures}
-A common concept in computer science as seen in computer architecture, network stacks, but also outside in Mathematics, language, etc.
-
-\section{Leaky Abstractions}
-Where knowledge of lower abstraction levels might help, concept introduced by \cite{Spo02}.
-
-\section{Didactic Approaches}
-See e.g. \cite{Sch11}, \cite{Mod16}, \cite{Har20} or \cite{Lee20} only focusing on one aspect
-
-\section{Abstractions in IDEs}
-Brief overview over views offered by common IDEs (such as VS Code) but mainly didactic ones such as Thonny (\cite{Ann15}), Mu (\cite{Tol23}), \emph{etc.}.
-
-\section{Teaching Top Down}
-Working downwards from gaming, as in \cite{Wei16}
-
-\section{Teaching Bottom Up}
-Running Tetris on NANDs as described in \cite{Cak17}, \cite{Nis21}
-
-
-%%%%% Background Information %%%%%
-\chapter{Technical Background}
-Background knowledge required for understanding the following chapters.
-
-\section{Processing}
-Brief overview over the ''Processing'' programming language (along \cite{Cas14}) and reasons for using it.
-
-\section{Glamorous Toolkit}
-Brief introduction into GT for the uninitiated and reasons for using it. (\cite{Gir23})
-
-\section{Moldable Development}
-Referring to \cite{Nie24}.
-
-%%%%% The Solution %%%%%
-\chapter {\texttt{Processing Abstractions}}
-
-\section{Development of "Processing Abstractions"}
-Excerpts from gt-exploration Lepiter pages
-
-\section{Abstraction Levels}
-For each a short problem description and a presentation of the chosen approach:
-
-\subsection{Source Code}
-\subsection{Abstract Syntax Tree}
-\subsection{Transpilation/IR}
-\subsection{Machine Code}
-\subsection{Output}
-
-
-%%%%% The Validation %%%%%
-\chapter{Teaching with \texttt{PA}}
-How to use it
-
-\section{Lesson on Computer Architecture}
-Using PA to demonstrate what happens under the hood when running a program in a high level language.
-
-\section{Lesson on Compilers}
-Using PA to demonstrated the steps of lexing, parsing, transpiling, compiling and optimizing.
-
-\section{Lesson on Introduction to Programming}
-Using PA as a live programming environment.
-
-\chapter{\texttt{PA} in Practice}
-PA has been used twice with students (on 2025-05-12 and 2025-06-30).
-
-\section{First Round}
-\subsection{Setting}
-\subsection{Observations}
-\subsection{Student Feedback}
-\subsection{Learnings}
-
-\section{Second Round}
-\subsection{Setting}
-\subsection{Observations}
-\subsection{Student Feedback}
-\subsection{Learnings}
-
+\input{theory.tex}
+\input{background.tex}
+\input{processing-abstractions.tex}
+\input{praxis.tex}
 
 %%%%% Conclusion and Future Work %%%%%
 \chapter{Conclusion}

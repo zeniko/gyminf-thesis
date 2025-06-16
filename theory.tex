@@ -1,0 +1,41 @@
+%%MAIN: thesis.tex
+
+%%%%% The Problem %%%%%
+%%%%% Related Work %%%%%
+\chapter{Leaky Abstractions when Teaching Programming} \label{cp_theory}
+% On the lack of connecting high-level languages with lower-level concepts
+
+Before introducing the product of this thesis in chapter \ref{ch_pa}, we first introduce the problem it should help solve in this chapter: How abstractions involved in programming are taught.
+
+In detail, we first introduce the concept of (leaky) abstractions in multitier architectures in section \ref{sc_abstractions}; show how these are discussed in didactic literature in sections \ref{sc_didactic}; and how common IDEs already support handling these difficulties (in section \ref{sc_ides}).
+
+
+\section{Multitier Architectures and (Leaky) Abstractions} \label{sc_abstractions}
+In order to handle complexities arising in both theoretical and practical computer science \xxx{citation}, subjects are split into multiple layers to be described, investigated and used separatedly.
+
+Common such multitier architectures taught at high school level are the networking stack (either the seven layered ISO architecture or the simplified four layered DoD architecture \xxx{citation}) or the software-hardware stack ranging from apps and hardware abstracting OS down to transistors consisting of e.\,g. silicium atoms.
+
+\xxx{diagram of such an architecture}
+
+Ideally, in such architectures all layers above the layer to be investigated can be ignored (beyond what the layer will be used for) and all the layers below can be abstracted away into a nicely defined interface.
+
+As such, programming should be possible to be done independent of hardware and even the operating system, in the same way that natural languages can be taught independently of body or mind of the students.
+
+In his article ''The Law of Leaky Abstractions'' \citep{Spo02} introduces the concept of \emph{leaky abstractions}, claiming that for all non-trivial such architectures, details of lower layers are to some degree bound to bleed through to upper layers. In other words, in practice complex interfaces tend to be incomplete or 'leaky'.
+
+In teaching computer science, such leaky abstractions occur repeatedly, e.\,g. when an app doesn't run on a different device (with either the OS or the processor architecture leaking); or when a document seemingly can't be saved (with either the file system or different kinds of apps leaking).
+
+
+
+\section{Didactic Approaches} \label{sc_didactic}
+See e.\,g. \cite{Sch11}, \cite{Mod16}, \cite{Har20} or \cite{Lee20} only focusing on one aspect
+
+\subsection{Teaching Top Down}
+Working downwards from gaming, as in \cite{Wei16}
+
+\subsection{Teaching Bottom Up}
+Running Tetris on NANDs as described in \cite{Cak17}, \cite{Nis21}
+
+
+\section{Abstractions in IDEs} \label{sc_ides}
+Brief overview over views offered by common IDEs (such as VS Code) but mainly didactic ones such as Thonny (\cite{Ann15}), Mu (\cite{Tol23}), \emph{etc.}.
