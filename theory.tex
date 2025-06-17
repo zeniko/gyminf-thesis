@@ -38,4 +38,12 @@ Running Tetris on NANDs as described in \cite{Cak17}, \cite{Nis21}
 
 
 \section{Abstractions in IDEs} \label{sc_ides}
-Brief overview over views offered by common IDEs (such as VS Code) but mainly didactic ones such as Thonny (\cite{Ann15}), Mu (\cite{Tol23}), \emph{etc.}.
+% Brief overview over views offered by common IDEs (such as VS Code) but mainly didactic ones such as Thonny (\cite{Ann15}), Mu (\cite{Tol23}), \emph{etc.}.
+Integrated development environments used for programming offer a variety of different views on a program beyond its source code and its runtime output. The popular Visual Studio Code offers e.g. through extensions step-by-step debugging with variables and the call stack listed \cite{Mic25}. This is mirrored in most other full fledged IDEs such as PyCharm \citep{Jet25} or Eclipse \citep{Ecl25}.
+
+And while such IDEs through appropriate extensions even allow inspecting Python bytecode, the respective views are usually overwhelming for programming novices and thus rather targetted at professional developers than high school students.
+
+As a remedy, several teaching oriented IDEs have been developped, such as ''Code with Mu'' which offers a minimal command set and still allows runtime inspection \citep{Tol23}; or Thonny which had the goal to visualize runtime concepts beyond what IDEs offered at the time \citep[p. 119]{Ann15}:
+
+On the one hand, Thonny shows intermediary steps during expression evaluation. This demonstrates that statements are not evaluated in one go, but indeed in a predetermined order operation by operation.\footnote{In professional IDEs, intermediary results are usually available by hovering over a specific operator with the order of evaluation being left to the user to determine.}
+
