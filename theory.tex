@@ -27,6 +27,7 @@ In teaching computer science, such leaky abstractions occur repeatedly, e.\,g. w
 
 
 
+
 \section{Didactic Approaches} \label{sc_didactic}
 See e.\,g. \cite{Sch11}, \cite{Mod16}, \cite{Har20} or \cite{Lee20} only focusing on one aspect
 
@@ -39,6 +40,7 @@ Running Tetris on NANDs as described in \cite{Cak17}, \cite{Nis21}
 
 \section{Abstractions in IDEs} \label{sc_ides}
 % Brief overview over views offered by common IDEs (such as VS Code) but mainly didactic ones such as Thonny (\cite{Ann15}), Mu (\cite{Tol23}), \emph{etc.}.
+
 Integrated development environments used for programming offer a variety of different views on a program beyond its source code and its runtime output. The popular Visual Studio Code offers e.g. through extensions step-by-step debugging with variables and the call stack listed \cite{Mic25}. This is mirrored in most other full fledged IDEs such as PyCharm \citep{Jet25} or Eclipse \citep{Ecl25}.
 
 And while such IDEs through appropriate extensions even allow inspecting Python bytecode, the respective views are usually overwhelming for programming novices and thus rather targetted at professional developers than high school students.
@@ -47,3 +49,10 @@ As a remedy, several teaching oriented IDEs have been developped, such as ''Code
 
 On the one hand, Thonny shows intermediary steps during expression evaluation. This demonstrates that statements are not evaluated in one go, but indeed in a predetermined order operation by operation.\footnote{In professional IDEs, intermediary results are usually available by hovering over a specific operator with the order of evaluation being left to the user to determine.}
 
+On the other hand, Thonny visualizes recursion by showing code in a new pop-up for every function call, so that multiple recursive function calls lead to an equivalent number of visible pop-ups. Most other IDEs rather show a call stack as in a separate view, which abstracts the stack into a list.\footnote{As a compromise, Glamorous Toolkit presented in chapter \ref{ch_background} displays the call stack as a list of expandable method sources with the call location highlighted.}
+
+Finally, Thonny distinguishes between values on the stack and on the heap, showing the pointer to the heap as the value actually pushed on the stack and in a separate view the actual object on the heap at the given address.
+
+Thus, the Thonny IDE set out to and indeed nicely visualizes several concepts on lower runtime layers.
+
+\cite{Jal22} has assembled a list of tools targetted at visualizing some of these concepts outside of an IDE. One noteable such alternative approach is taken by Python Tutor \citep{Pyt25} which combines a visualization of stack frames variable values as pointers and deconstructed objects.
