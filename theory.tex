@@ -21,7 +21,7 @@ Ideally, in such architectures all layers above the layer to be investigated can
 
 As such, programming should be possible to be done independently of hardware and even the operating system, in the same way that natural languages can be taught independently of body or mind of the students.
 
-In his article ''The Law of Leaky Abstractions'' \citep{Spo02} introduces the concept of \emph{leaky abstractions}, claiming that for all non-trivial such architectures, details of lower layers are to some degree bound to bleed through to upper layers. In other words, in practice complex interfaces tend to be incomplete or 'leaky'.
+In his article ``The Law of Leaky Abstractions'' \citep{Spo02} introduces the concept of \emph{leaky abstractions}, claiming that for all non-trivial such architectures, details of lower layers are to some degree bound to bleed through to upper layers. In other words, in practice complex interfaces tend to be incomplete or 'leaky'.
 
 In teaching computer science, such leaky abstractions occur repeatedly, e.\,g. when an app doesn't run on a different device (with either the OS or the processor architecture leaking); or when a document seemingly can't be saved (with either the file system or differences between apps leaking).
 
@@ -30,28 +30,45 @@ More specifically, in programming there are several ways of abstracting away tec
 \begin{itemize}
 \item Programming instructions consist of source code which consists of encoded bits which are stored in memory or on a drive.
 \item Source code consists of tokens which are usually parsed into an abstract syntax tree (AST) which are either directly or via intermediary representations translated into machine code to be run on a virtual or actual machine.
-\item When programming instructions through the above abstractions are executed, variable values are encoded and stored in memory, function calls are tracked through a call stack, input state is continually mapped into memory and output is generated in several forms -- where e.g. textual output causes a font renderer to interpret glyph instructions for every character; or graphical output is anti-aliased before any pixel data is produced.
+\item When programming instructions through the above abstractions are executed, variable values are encoded and stored in memory, function calls are tracked through a call stack, input state is continually mapped into memory and output is generated in several forms -- where e.\,g. textual output causes a font renderer to interpret glyph instructions for every character; or graphical output is anti-aliased before any pixel data is produced.
 \end{itemize}
 \xxx{citation needed?}
 
 Of these different layers, students usually focus on turining instructions into source code and then checking the program's output -- or any error messages produced by the compiler or interpreter (see section \ref{sc_didactic}). Still, several of the lower layered abstractions might leak through, such as:
 
 \begin{itemize}
-\item Missing a stop condition in a recursive function leads to a cryptic ''Stack overflow'' error -- leaking information about the call stack.
+\item Missing a stop condition in a recursive function leads to a cryptic ``Stack overflow'' error -- leaking information about the call stack.
 \item If a program outputs emojis, they might look notably differently in source code and output -- leaking font rendering.
 \item Similarly, programs containing emojis might have emojis garbled depending on the app used for inspecting the source code -- leaking text encoding.
 \item If a program contains an endless loop, there might be neither error message nor output, so that it might wrongly seem that the computer isn't doing anything. This isn't an abstraction leak in the above sense but a related student misconception.
 \end{itemize}
 
+Besides the above rather easily observable abstraction leaks, the issue might also have to be discussed itself, since one class of leaky abstractions has been shown to be security critical: timing attacks. Since programs might be compiled differently and optimized differently and run on different hardware, runtime timing is not considered to be inherent to a particular source code.\footnote{At least beyond generic complexity considerations on an algorithmic level.}
+
+In cryptography, timing attacks have been successfully used for extracting passwords from insufficiently protected webservers \citep{Por18}. More recently, another class of timing attacks taking advantage of modern CPU's branch prediction optimizations has been demonstrated \citep{Koc19}. In the latter case, an implementation detail of the CPU managed to leak. And in both cases, at least implementors of cryptographic programs must be aware of lower abstraction layers.
+
 
 \section{Didactic Approaches} \label{sc_didactic}
-See e.\,g. \cite{Sch11}, \cite{Mod16}, \cite{Har20} or \cite{Lee20} only focusing on one aspect
+% See e.\,g. \cite{Sch11}, \cite{Mod16}, \cite{Har20} or \cite{Lee20} only focusing on one aspect
+The abstractions encountered in programming as discussed in section \ref{sc_abstractions}, are not always handled in didactic literature.
 
-\subsection{Teaching Top Down}
-Working downwards from gaming, as in \cite{Wei16}
+Traditional introductions into programming focus on the language, its syntax and the available semantics. E.\,g. \cite{Har20} introduces most of Python so that it can later be used for scientific calculations. This traditional introduction omits many of the lower abstraction levels listed in the previous section. Interestingly, it does not assume an IDE (see section \ref{sc_ides} below), but instead very briefly introduces the command line and the Python REPL\footnote{REPL is short for \emph{Read-Evaluate-Print-Loop} i.\,e. an interactive interpreter.}. Even though in that way, files are not guaranteed to be UTF-8 encoded (as examples assume, cf. p.\,118), encodings are not mentioned beyond pure ASCII (p.\,115). And the Python interpreter is just in the preface briefly characterized as ``program which translates source code into electronic instructions''\footnote{German original: ''[...] das Programm, das den Programmcode in Elektronik-Anweisungen übersetzt.''}.
+
+\xxx{verify page numbers for \cite{Sch11}}
+In the context of most introductions to programming, that might be sufficient with relation to available time and goal of the course. In broader teaching context such as high school CS courses, didactic teachers ask for more. \cite{Sch11} proposes an introduction into programming to use several different programming languages along different paradigma: e.\,g. Prolog as a declarative language (pp.\,97--98) and Java as object oriented language (pp.\,157--185), in order to demonstrate to students already at the level of instructions that the language chosen comes with inherent limitations in expressibility (p.\,154).
+
+Furthermore in a broader context, they propose to explicitly discuss multitier architectures -- and that not only in the context of the networking stack and computer archictecture (pp.\,114-116):
+
+They introduce the notion of \emph{Sichtenwechsel}, a change of perspective with relation to the current layer, which should help students better understand concepts of one layer by inspecting lower layers. As an example, the show a live model of a calculator app whose input is translated to both pseudo code and machine code (p.\,115); an environment for inspecting live Java objects (pp.\,208--209); or the Filius environment for inspecting a virtual computer network at its different layers (p.\,284).
+
+They conclude that ``it was a fallacy to assume that students would be able to develop a working model of a computer [...] by designing small programs'' (p.\,213),\footnote{German original: ''Es erwies sich als Irrtum, dass SchülerInnen beim Entwerfen kleiner Programme ein tragfähiges kognitives Modell vom Rechner oder von Informatiksystemen im allgemeinen entwickeln.''} reinforcing the need for going beyond of what traditional programming courses (used to) do.
+
 
 \subsection{Teaching Bottom Up}
 Running Tetris on NANDs as described in \cite{Cak17}, \cite{Nis21}
+
+\subsection{Teaching Top Down}
+Working downwards from gaming, as in \cite{Wei16}
 
 
 \section{Abstractions in IDEs} \label{sc_ides}
@@ -61,7 +78,7 @@ Integrated development environments used for programming offer a variety of diff
 
 And while such IDEs through appropriate extensions even allow inspecting Python bytecode, the respective views are usually overwhelming for programming novices and thus rather targetted at professional developers than high school students.
 
-As a remedy, several teaching oriented IDEs have been developped, such as ''Code with Mu'' which offers a minimal command set and still allows runtime inspection \citep{Tol23}; or Thonny which had the goal to visualize runtime concepts beyond what IDEs offered at the time \citep[p. 119]{Ann15}:
+As a remedy, several teaching oriented IDEs have been developped, such as ``Code with Mu'' which offers a minimal command set and still allows runtime inspection \citep{Tol23}; or Thonny which had the goal to visualize runtime concepts beyond what IDEs offered at the time \citep[p.\,119]{Ann15}:
 
 On the one hand, Thonny shows intermediary steps during expression evaluation. This demonstrates that statements are not evaluated in one go, but indeed in a predetermined order operation by operation.\footnote{In professional IDEs, intermediary results are usually available by hovering over a specific operator with the order of evaluation being left to the user to determine.}
 
