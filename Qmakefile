@@ -17,4 +17,3 @@ fixup:
 	-xse -x\0 "s/etc\.(?!\})/\\emph{etc.}/g" *.tex
 	-xse -x\0 "s/\b(pp?\.) ?(\d+)/\1\\,\2/g" *.tex
 	-xse -x\0 "s/''\b([^`']+\b'')/``\1/g" *.tex
-	-xse -x\0 "s/(\b\d+\b)-((?1))/\1--\2/g" *.tex
