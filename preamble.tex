@@ -197,6 +197,21 @@
 %\usepackage[hide,error]{xxx}
 \usepackage[]{xxx}
 
+\newenvironment{todo}{
+	\begin{list}{$\square$}{}
+}{
+	\end{list}
+}
+
+\lstnewenvironment{code}{%
+	\lstset{%
+		% frame=lines,
+		frame=single,
+		framerule=0pt,
+		mathescape=false
+	}
+}{}
+
 % \bibliographystyle{plainnat}
 
 \newcommand{\thesistitle}{Revealing Programming Language Abstractions}

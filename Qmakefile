@@ -1,5 +1,5 @@
 MAIN = thesis.tex
-OBJS = $(MAIN:.tex=.log) $(MAIN:.tex=.aux) $(MAIN:.tex=.out) $(MAIN:.tex=.toc) $(MAIN:.tex=.synctex.gz) $(MAIN:.tex=.bbl) $(MAIN:.tex=.blg)
+OBJS = $(MAIN:.tex=.log) $(MAIN:.tex=.aux) $(MAIN:.tex=.out) $(MAIN:.tex=.toc) $(MAIN:.tex=.bbl) $(MAIN:.tex=.blg)
 
 thesis: $(MAIN:.tex=.pdf)
 
@@ -17,3 +17,6 @@ fixup:
 	-xse -x\0 "s/etc\.(?!\})/\\emph{etc.}/g" *.tex
 	-xse -x\0 "s/\b(pp?\.) ?(\d+)/\1\\,\2/g" *.tex
 	-xse -x\0 "s/''\b([^`']+\b'')/``\1/g" *.tex
+
+clean:
+	del $(OBJS) $(MAIN:.tex=.synctex.gz) $(MAIN:.tex=.synctex.gz.sum.synctex)

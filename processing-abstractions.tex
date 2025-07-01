@@ -7,11 +7,11 @@
 \section{Development of "Processing Abstractions"}
 Excerpts from gt-exploration Lepiter pages
 
-\begin{itemize}
+\begin{todo}
 \item Adaptable foundation: GT
 \item Various approaches to run Processing: PythonBridge, interpreter, compiler, transpiler
 \item Class hierarchy
-\end{itemize}
+\end{todo}
 
 
 \section{Abstraction Levels}
@@ -22,3 +22,23 @@ For each a short problem description and a presentation of the chosen approach:
 \subsection{Transpilation/IR}
 \subsection{Machine Code}
 \subsection{Output}
+
+
+\begin{code}
+ProcessingCanvas >> ellipse: x y: y dx: dx dy: dy [
+	self
+		ellipse: dx
+		by: dy
+		at: x @ y
+]
+\end{code}
+
+
+\begin{code}
+ProcessingCanvas >> endFrame [
+	presenter updateOutput.
+	(1 / frameRate) seconds wait.	"The frame rate is adjustable through `frameRate()`"
+	frameCount := frameCount + 1.
+	transform := #yourself	"Transforms are reset at the end of a draw-cycle"
+]
+\end{code}
