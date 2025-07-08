@@ -1,0 +1,35 @@
+%%MAIN: thesis.tex
+
+\chapter{Installing and Using \texttt{Processing Abstractions}} \label{ch_setup}
+
+\texttt{startup.st}:
+
+\begin{code}
+Metacello new
+	repository: 'github://zeniko/gt-exploration:main/src';
+	baseline: 'GtExploration';
+	load.
+
+Metacello new
+	repository: 'github://zeniko/processing-abstractions:main/src';
+	baseline: 'ProcessingAbstractions';
+	load.
+
+"Hide the 'Implementation and Tests' section."
+GtExplorationHomeSection studentMode: true.
+
+"Make indenting keyboard shortcuts available to non-US-English keyboard layouts."
+LeSnippetElement keyboardShortcuts
+	at: #IndentSnippet
+		put: BlKeyCombinationBuilder new alt shift arrowRight build;
+	at: #UnindentSnippet
+		put: BlKeyCombinationBuilder new alt shift arrowLeft build.
+
+"Patch unneeded addressbar out of YouTube snippet. (TODO: fix properly)"
+LeYoutubeReferenceElement compile:
+	((LeYoutubeReferenceElement methodNamed: #updatePicture) sourceCode
+		copyReplaceAll: '</iframe>'' ' with: '</iframe>''; removeChildAt: 1 ').
+\end{code}
+
+
+\chapter{Data from Questionnaires}

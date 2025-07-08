@@ -10,16 +10,27 @@ Before introducing the product of this thesis in chapter \ref{ch_pa}, we first i
 
 In detail, we first discuss didactic literature on teaching computer science at high school level in section \ref{sc_didactic}; then we review tools used for programming in such courses in section \ref{sc_ides}; finally, in \ref{sc_abstractions} we introduce the motivation for this thesis.
 
+\begin{todo}
+\item Computer Science in High School
+\item based on introduction in primary school
+\item broad overview, not just programming, but also hardware, networking, encoding, etc. (see e.g. \cite{Erz16})
+\item here focus on various abstractions involved in programming
+\end{todo}
+
 
 \section{Didactic Approaches} \label{sc_didactic}
 % See e.\,g. \cite{Sch11}, \cite{Mod16}, \cite{Har20} or \cite{Lee20} only focusing on one aspect
 
+\begin{todo}
+\item Various approaches for teaching programming:
+\begin{itemize}
+\item only focus on language and output (\cite{Har20})
+\item focus on programming without dealing with syntax (\cite{Mod16})
+\item broader approach, showing various abstraction levels (\emph{Sichtenwechsel}, \cite{Sch11})
+\end{itemize}
+\end{todo}
 
-The abstractions encountered in programming as discussed in section \ref{sc_abstractions}, are not always handled in didactic literature.
-
-Traditional introductions into programming focus on the language, its syntax and the available semantics. E.\,g. \cite{Har20} introduces most of Python so that it can later be used for scientific calculations. This traditional introduction omits many of the lower abstraction levels listed in the previous section. Interestingly, it does not assume an IDE (see section \ref{sc_ides} below), but instead very briefly introduces the command line and the Python REPL\footnote{REPL is short for \emph{Read-Evaluate-Print-Loop} i.\,e. an interactive interpreter.}. Even though in that way, files are not guaranteed to be UTF-8 encoded (as examples assume, cf. p.\,118), encodings are not mentioned beyond pure ASCII (p.\,115). And the Python interpreter is just in the preface briefly characterized as ``program which translates source code into electronic instructions''\footnote{German original: ''[...] das Programm, das den Programmcode in Elektronik-Anweisungen übersetzt.''}.
-
-In the context of most introductions to programming, that might be sufficient with relation to available time and goal of the course. In broader teaching context such as high school CS courses, didactic teachers ask for more. \cite{Sch11} proposes an introduction into programming to use several different programming languages along different paradigma: e.\,g. Prolog as a declarative language (pp.\,91--104) and Python as object oriented language (pp.\,157--185), in order to demonstrate to students already at the level of instructions that the language chosen comes with inherent limitations in expressibility (p.\,154, comparing programming languages with natural languages and referring to Wittgenstein's philosophy of language).
+\cite{Sch11} proposes an introduction into programming to use several different programming languages along different paradigma: e.\,g. Prolog as a declarative language (pp.\,91--104) and Python as object oriented language (pp.\,157--185), in order to demonstrate to students already at the level of instructions that the language chosen comes with inherent limitations in expressibility (p.\,154, comparing programming languages with natural languages and referring to Wittgenstein's philosophy of language).
 
 \subsection{\emph{Sichtenwechsel}} \label{sichtenwechsel}
 Furthermore in a broader context, they propose to explicitly discuss multitier architectures -- and that not only in the context of the networking stack and computer archictecture (pp.\,113--116):
@@ -29,14 +40,45 @@ They introduce the notion of \emph{Sichtenwechsel}, a change of perspective with
 They conclude that ``it was a fallacy to assume that students would be able to develop a working model of a computer [...] by designing small programs'' (p.\,213),\footnote{German original: ''Es erwies sich als Irrtum, dass Schüler beim Entwerfen kleiner Programme ein tragfähiges kognitives Modell vom Rechner oder von Informatiksystemen im Allgemeinen entwickeln.''} reinforcing the need for going beyond of what traditional programming courses (used to) do.
 
 
+Traditional introductions into programming focus on the language, its syntax and the available semantics. E.\,g. \cite{Har20} introduces most of Python so that it can later be used for scientific calculations. This traditional introduction omits many of the lower abstraction levels listed in the previous section. Interestingly, it does not assume an IDE (see section \ref{sc_ides} below), but instead very briefly introduces the command line and the Python REPL\footnote{REPL is short for \emph{Read-Evaluate-Print-Loop} i.\,e. an interactive interpreter.}. Even though in that way, files are not guaranteed to be UTF-8 encoded (as examples assume, cf. p.\,118), encodings are not mentioned beyond pure ASCII (p.\,115). And the Python interpreter is just in the preface briefly characterized as ``program which translates source code into electronic instructions''\footnote{German original: ''[...] das Programm, das den Programmcode in Elektronik-Anweisungen übersetzt.''}.
+
+In the context of most introductions to programming, that might be sufficient with relation to available time and goal of the course. In broader teaching context such as high school CS courses, didactic teachers ask for more -- as seen above.
+
 \subsection{Teaching Bottom Up} \label{ssc_bottom_up}
 Running Tetris on NANDs as described in \cite{Cak17}, \cite{Nis21}; basing every layer on the layers below
+
+\begin{todo}
+\item \cite{Nis21} goes through most relevant abstraction levels involved
+\item starting with NAND gates (i.e. stopping at the transistor layer)
+\item allowing to build later lessons on earlier ones (or skipping them)
+\item basis is virtual hardware, so parts are still abstracted away (although not necessarily so)
+\item introduction is top-down: ...
+\end{todo}
+
 
 \subsection{Teaching Top Down} \label{ssc_top_down}
 Working downwards from gaming, as in \cite{Wei16}, or art as in \cite{Rea14}; starting at motivating examples and then extending unterstanding and capabilites
 
+\begin{todo}
+\item \cite{Rea14} (see later in \ref{sc_processing}) motivates programming with art
+\item creating art requires instructions, these can be given through programming (one abstraction level down)
+\item high-level primitives allow for quick results
+\item alternatives consist in starting e.g. with gaming (see \cite{Wei16})
+\item programming is used for extending a game (or creating a game)
+\item in both approaches, we could step further down!
+\end{todo}
+
+
 \subsection{Exploratory and Live Programming} \label{ssc_exploration}
 Letting students explore concepts on their own -- with live feedback from the environment
+
+\begin{todo}
+\item live programming: results and intermediary products adapt when code changes (\cite{Rei18})
+\item exploratory programming: students modify given examples for building a mental model of the code through the effects of the changes
+\item both \cite{Sch11} and \cite{Mod16} suggest exploratoration for allowing students to work at their speed and depth
+\item live programming gives the quickest results
+\item exploration is enhanced by either IDE or the language chosen (REPL, Scratch in \cite{Mod16}, GT in \ref{sc_gt})
+\end{todo}
 
 
 \section{Abstractions in IDEs} \label{sc_ides}
@@ -95,3 +137,5 @@ Of these different layers, students usually focus on turining instructions into 
 Besides the above rather easily observable abstraction leaks, the issue might also have to be discussed itself, since one class of leaky abstractions has been shown to be security critical: timing attacks. Since programs might be compiled differently and optimized differently and run on different hardware, runtime timing is not considered to be inherent to a particular source code.\footnote{At least beyond generic complexity considerations on an algorithmic level.}
 
 In cryptography, timing attacks have been successfully used for extracting passwords from insufficiently protected webservers \cite{Por18}. More recently, another class of timing attacks taking advantage of modern CPU's branch prediction optimizations has been demonstrated \cite{Koc19}. In the latter case, an implementation detail of the CPU managed to leak. And in both cases, at least implementors of cryptographic programs must be aware of lower abstraction layers.
+
+The abstractions encountered in programming as discussed here, are not always handled in didactic literature.
