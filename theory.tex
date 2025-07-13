@@ -13,7 +13,7 @@ In detail, we first discuss didactic literature on teaching computer science at 
 \begin{todo}
 \item Computer Science in High School
 \item based on introduction in primary school
-\item broad overview, not just programming, but also hardware, networking, encoding, etc. (see e.g. \cite{Erz16})
+\item broad overview, not just programming, but also hardware, networking, encoding, \emph{etc.} (see e.\,g. \cite{Erz16})
 \item here focus on various abstractions involved in programming
 \end{todo}
 
@@ -44,15 +44,18 @@ Traditional introductions into programming focus on the language, its syntax and
 
 In the context of most introductions to programming, that might be sufficient with relation to available time and goal of the course. In broader teaching context such as high school CS courses, didactic teachers ask for more -- as seen above.
 
+
 \subsection{Teaching Bottom Up} \label{ssc_bottom_up}
 Running Tetris on NANDs as described in \cite{Cak17}, \cite{Nis21}; basing every layer on the layers below
 
 \begin{todo}
 \item \cite{Nis21} goes through most relevant abstraction levels involved
-\item starting with NAND gates (i.e. stopping at the transistor layer)
+\item starting with NAND gates (i.\,e. stopping at the transistor layer)
 \item allowing to build later lessons on earlier ones (or skipping them)
 \item basis is virtual hardware, so parts are still abstracted away (although not necessarily so)
 \item introduction is top-down: ...
+\item Difference to bottom-up development: small building blocks, build abstractions out of them
+\item Bottom up development is how students approach programming (\cite{Mod16})
 \end{todo}
 
 
@@ -63,9 +66,10 @@ Working downwards from gaming, as in \cite{Wei16}, or art as in \cite{Rea14}; st
 \item \cite{Rea14} (see later in \ref{sc_processing}) motivates programming with art
 \item creating art requires instructions, these can be given through programming (one abstraction level down)
 \item high-level primitives allow for quick results
-\item alternatives consist in starting e.g. with gaming (see \cite{Wei16})
+\item alternatives consist in starting e.\,g. with gaming (see \cite{Wei16})
 \item programming is used for extending a game (or creating a game)
 \item in both approaches, we could step further down!
+\item Difference to top-down development: start at abstraction, simplify/modularize it for implementation
 \end{todo}
 
 
@@ -78,6 +82,11 @@ Letting students explore concepts on their own -- with live feedback from the en
 \item both \cite{Sch11} and \cite{Mod16} suggest exploratoration for allowing students to work at their speed and depth
 \item live programming gives the quickest results
 \item exploration is enhanced by either IDE or the language chosen (REPL, Scratch in \cite{Mod16}, GT in \ref{sc_gt})
+\end{todo}
+
+\begin{todo}
+\item Other requirements for teaching programming: Manageable Complexity, Meaningful Engagement, Clean Problem Decomposition \cite{Chi23}
+\item Base requirements: Motivational learning, transparency, activating prior knowledge, multiple methods, \emph{etc.} \cite[p.\,998]{Erc20}
 \end{todo}
 
 
@@ -99,6 +108,10 @@ Finally, Thonny distinguishes between values on the stack and on the heap, showi
 Thus, the Thonny IDE set out to and indeed nicely visualizes several concepts on lower runtime layers.
 
 \cite{Jal22} has assembled a list of tools targetted at visualizing some of these concepts outside of an IDE. One noteable such alternative approach is taken by Python Tutor \cite{Pyt25} which combines a visualization of stack frames variable values as pointers and deconstructed objects.
+
+\begin{todo}
+\item Other helpful IDE views: syntax hints (\cite{Syc21}), Programming Error Message interpretation (\cite{Bou24}), LLM interpretation (\cite[p.\,28]{Bou24}), algorithm visualization (\cite{Jal22})
+\end{todo}
 
 
 \section{Multitier Architectures and (Leaky) Abstractions} \label{sc_abstractions}

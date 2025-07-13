@@ -31,6 +31,8 @@ Brief introduction into GT for the uninitiated and reasons for using it. \cite{G
 \item Easy to inspect, adapt, extend
 \item Developed by feenk (nod to Oscar)
 \item Base concepts: \ct{<gtView>}, \ct{<gtExample>}, ...
+\item Currently tied to Smalltalk, with other languages such as Python, JavaScript, Java supported through bridges
+\item Development happens mainly under MacOS, thus Windows integration lags behind (visible e.\,g. when using PythonBridge)
 \end{todo}
 
 
@@ -38,7 +40,17 @@ Brief introduction into GT for the uninitiated and reasons for using it. \cite{G
 Referring to Nierstrasz and Gîrba \cite{Nie24}.
 
 \begin{todo}
-\item Tool should adaptable to data
+\item Alternative to inspecting static source code or live runtime objects
+\item Tool should be adaptable to data
 \item Live exploration by writing throw-away code
+\item Compare to web development through Web Developer console
 \item Quick refactoring for keeping useful code around
+\item Development patterns: Moldable Tool, Moldable Object, Throwaway Analysis Tool, Custom View, ...
+\item Allows bottom-up development (cf. \ref{ssc_bottom_up}?) and thus e.\,g. implementing support for new languages
+\item Languages implemented within GT are inspectable and moldable as far as they're implemented: parser state, tokens, parse tree, bytecode, \emph{etc.}
+\item Custom views are cheap to implement, given knowledge of Smalltalk+GT
+\item Composed Narrative: Visualize object relations through side-by-side views -- useful as pedagogic tool
+\item Moldable Object: Incremental development of objects with state and prior views always available; forces transparency and clean separation
+\item Project Diary: Lepiter notebook page with runnable code and live views; document progress -- useable as learning journal for students (similar to Microsoft OneNote), or as project basis (similar to Jupyter)
+\item Was very useful for quick prototyping, reusable code, ... (cf. chapter \ref{ch_pa})
 \end{todo}
