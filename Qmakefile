@@ -14,7 +14,7 @@ $(MAIN:.tex=.pdf): $(MAIN:.tex=.bib) $(glob *.tex)
 
 fixup:
 	-xse -x\0 "s/\b(\w\.)(\w\.)(?=\s)/\1\\,\2/g" *.tex
-	-xse -x\0 "s/etc\.(?!\})/\\emph{etc.}/g" *.tex
+	-xse -x\0 "s/(etc|et al)\.(?!\})/\\emph{\1.}/g" *.tex
 	-xse -x\0 "s/\b(pp?\.) ?(\d+)/\1\\,\2/g" *.tex
 	-xse -x\0 "s/''\b([^`']+\b'')/``\1/g" *.tex
 
