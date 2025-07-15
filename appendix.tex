@@ -1,8 +1,10 @@
 %%MAIN: thesis.tex
 
-\chapter{Installing and Using \texttt{Processing Abstractions}} \label{ch_setup}
+\chapter{Installing and Using \texttt{Processing Abstractions}} \label{app_setup}
 
-\texttt{startup.st}:
+In order to set up \texttt{Processing Abstractions}, first download Glamorous Toolkit from \url{https://gtoolkit.com/download/} for your platform and extract the archive's entire content.
+
+Before running it, create a new text file called \texttt{startup.st} in GT's top level folder (besides \texttt{GlamorousToolkit.image}) with the following content:
 
 \begin{code}
 Metacello new
@@ -31,5 +33,139 @@ LeYoutubeReferenceElement compile:
 		copyReplaceAll: '</iframe>'' ' with: '</iframe>''; removeChildAt: 1 ').
 \end{code}
 
+Finally run the \texttt{GlamorousToolkit} executable (under Windows and Linux it's located in the \texttt{bin} subfolder). The content of \texttt{Processing Abstractions} are now available behind the ``Unterrichtseinheiten'' home tile.
 
-\chapter{Data from Questionnaires}
+
+\chapter{GT Processing API} \label{app_api}
+
+This appendix lists the available API calls implemented in Processing Abstraction's Processing. This has been auto-generated from GT page ``Processing API'' (\ct{db=5rgxfv9r684digmpw7ph7kbt4}):
+
+\section{Rendering}
+
+\subsection{Setup}
+\begin{description}
+\item[\texttt{background(r, g, b)}] \hfill \\
+	Clears the canvas and changes its color (see \ct{fill(r, g, b)}). Default is light gray (192, 192, 192).
+\item[\texttt{background(gray)}] \hfill \\
+	Clears the canvas and changes its color (see \ct{fill(gray)}). Default is light gray (192).
+\item[\texttt{size(width, height)}] \hfill \\
+	Prepares an output canvas of the given dimensions. This command must always be called first (for animations: first command in \ct{def setup}).
+\end{description}
+
+\subsection{Shapes}
+\begin{description}
+\item[\texttt{circle(x, y, d)}] \hfill \\
+	Draws a circle with the given diameter and its center at \ct{(x; y)}. Short for \ct{ellipse(x, y, d, d)}.
+\item[\texttt{ellipse(x, y, dx, dy)}] \hfill \\
+	Draws an ellipse with the given diameters and its center at \ct{(x; y)}.
+\item[\texttt{image(image, x, y)}, \texttt{image(image, x, y, width, height)}] \hfill \\
+	Renders the image loaded with \ct{loadImage(...)} at the given coordinates (and scales it to fit the given size). Arguments following after the first are identical to \ct{rect}'s. If \ct{width} and \ct{height} are not given, the image's native dimensions are used.
+\item[\texttt{line(x1, y1, x2, y2)}] \hfill \\
+	Draws a line from \ct{(x1; y1)} to \ct{(x2; y2)}.
+\item[\texttt{loadImage(pathOrUrl)}] \hfill \\
+	Loads the image from the given URL or path. The returned value is to be used with \ct{image(...)}.
+Paths can be absolute or relative to either \ct{FileLocator class>>gtResource} or:
+\begin{code}
+Element
+GtInspector newOn: FileLocator documents / 'lepiter'
+\end{code}
+\item[\texttt{rect(x, y, width, height)}] \hfill \\
+	Draws a rectangle of the given width and height, parallel to the coordinate axes with its top left corner at \ct{(x; y)}.
+\item[\texttt{square(x, y, side)}] \hfill \\
+	Draws a square with the given side length, parallel to the coordinate axes with its top left corner at \ct{(x; y)}. Short for \ct{rect(x, y, side, side)}.
+\item[\texttt{text(string, x, y)}] \hfill \\
+	Renders the given \ct{string} with its baseline starting at \ct{(x; y)}.
+\item[\texttt{textSize(size)}] \hfill \\
+	Sets the size for rendering text in pixels. Default is 12px.
+\item[\texttt{triangle(x1, y1, x2, y2, x3, y3)}] \hfill \\
+	Draws a triangle with its vertices at the points \ct{(x1; y1)}, \ct{(x2; y2)} and \ct{(x3; y3)}.
+\end{description}
+
+\subsection{Colors}
+\begin{description}
+\item[\texttt{color(r, g, b)}] \hfill \\
+	Generates a color object which can be stored in a variable also be used with \ct{fill(...)}, \ct{stroke(...)} and \ct{background(...)}.
+\item[\texttt{fill(r, g, b)}] \hfill \\
+	Selects the color to use for filling rendered shapes. The color is given as three values in the range of 0 to 255 (red, green and blue respectively). Default is white (255, 255, 255).
+\item[\texttt{fill(gray)}] \hfill \\
+	Selects the gray scale value to use for filling rendered shapes. The color is given as a single value in the range of 0 to 255 (black/dark to white/light). Default is white (255).
+\item[\texttt{noStroke()}] \hfill \\
+	Disables borders for future shapes. Equivalent to \ct{strokeWeight(0)}.
+\item[\texttt{stroke(r, g, b)}] \hfill \\
+	Selects the color to use for the borders of rendered shapes (see \ct{fill(r, g, b)}). Default is black (0, 0, 0).
+\item[\texttt{stroke(gray)}] \hfill \\
+	Selects the gray scale value to use for the borders of rendered shapes (see \ct{fill(gray)}). Default is black (0).
+\item[\texttt{strokeWeight(weight)}] \hfill \\
+	Determines the size of drawn borders in pixels. Default is 0.5px.
+\end{description}
+
+\subsection{Transforms}
+\begin{description}
+\item[\texttt{rotate(angle)}] \hfill \\
+	Rotates all future shapes by the given angle (in \ct{radians}!) clockwise around the origin.
+\item[\texttt{scale(factor)}] \hfill \\
+	Linearly scales all future shapes by the given factor from the origin.
+\item[\texttt{translate(x, y)}] \hfill \\
+	Moves the origin \ct{(0; 0)} for all future shapes (defaults to the upper left corner).
+\end{description}
+
+\section{Events}
+\begin{description}
+\item[\texttt{def draw():}] \hfill \\
+	is called repeatedly (up to \ct{frameRate} times per second) for drawing the output.
+\item[\texttt{def mouseClicked():}] \hfill \\
+	is called whenever a mouse button has been clicked \emph{and} released.
+\item[\texttt{def mouseMoved():}] \hfill \\
+	is called whenever the mouse has been moved. Alternatively query \ct{mouseX} and \ct{mouseY} in \ct{draw()}.
+\item[\texttt{def mousePressed():}] \hfill \\
+	is called whenever a mouse button has been pressed. Alternatively query \ct{mousePressed} in \ct{draw()}.
+\item[\texttt{def mouseReleased():}] \hfill \\
+	is called whenever a mouse button has been released.
+\item[\texttt{def setup():}] \hfill \\
+	is called once as the program starts.
+\end{description}
+
+\section{Mathematics}
+\begin{description}
+\item[\texttt{cos(angle)}] \hfill \\
+	Returns the cosine value for the given angle (measured in radians).
+\item[\texttt{int(value)}] \hfill \\
+	Rounds the value to an integer.
+\item[\texttt{PI}] \hfill \\
+	The value of the mathematical constant p.
+\item[\texttt{radians(angle)}] \hfill \\
+	Converts the given angle (measured in degrees) into radians.
+\item[\texttt{random(limit)}] \hfill \\
+	Returns a random floating point number between 0 and limit (inclusive).
+\item[\texttt{sin(angle)}] \hfill \\
+	Returns the sine value for the given angle (measured in radians).
+\item[\texttt{sq(value)}] \hfill \\
+	Returns the squared value. Equivalent to \ct{value ** 2}
+\item[\texttt{sqrt(value)}] \hfill \\
+	Returns the square root of the given value.
+\item[\texttt{tan(angle)}] \hfill \\
+	Returns the tangent value for the given angle (measured in radians).
+\end{description}
+
+\section{Miscellanea}
+\begin{description}
+\item[\texttt{delay(ms)}] \hfill \\
+	Waits \ct{ms} milliseconds before continuing (mainly needed for demonstration purposes).
+\item[\texttt{frameRate(fps)}] \hfill \\
+	Limits the frame rate of animations to a maximum of \ct{fps} frames per second. Default is 30.
+\item[\texttt{height}] \hfill \\
+	Contains the canvas height as set by \ct{size()}.
+\item[\texttt{millis()}] \hfill \\
+	Returns the number of milliseconds that have passed since the program has started.
+\item[\texttt{mouseX}, \texttt{mouseY}, \texttt{mousePressed}] \hfill \\
+	Contains the \ct{x}- and \ct{y}-coordinates of the mouse cursor and whether the mouse has been pressed at the start of a \ct{draw}-phase (undefined outside of \ct{draw}).
+\item[\texttt{print(value)}, \texttt{println(value)}] \hfill \\
+	Prints the given value into an output console (mainly for debugging and for graphic-less program).
+\item[\texttt{str(value)}] \hfill \\
+	Turns the value into a string, e.\,g. for concatenating several values for use with \ct{text(...)}.
+\item[\texttt{width}] \hfill \\
+	Contains the canvas width as set by \ct{size()}.
+\end{description}
+
+
+\chapter{Data from Questionnaires} \label{app_data}

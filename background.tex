@@ -2,24 +2,79 @@
 
 %%%%% Background Information %%%%%
 \chapter{Technical Background} \label{ch_background}
-Background knowledge required for understanding the following chapters.
+
+The product of this thesis is implemented in Glamorous Toolkit and bases teaching material on the ``Processing'' programming language. On overview of both is given in this chapter for readers unaware of either of them.
+
 
 \section{Processing} \label{sc_processing}
-Brief overview over the ``Processing'' programming language (along Reas and Fry \cite{Rea14}) and reasons for using it.
 
-\begin{todo}
-\item Processing is taught using a top down approach (cf. \ref{ssc_top_down})
-\item Processing is an imperative language with visual primitives, allowing for quick visual results
-\item Developed in the early 2000s at MIT Media Lab, based on then popular Java
-\item Since Python has become the prevalent teaching language (\cite{Cod20}), Processing has been extended with a Python mode
-\item This allows a seamless transition to using all of Python
-\item The original IDE is still based on the JRE and transpile code to Java
-\item Built-in structure for animations, interaction, \emph{etc.}
-\item Some basic code examples: ...
-\item Quick results possible: Flappy Bird, Pong, ...
-\item Own experience since the 2010s, originally using \url{https://software.zeniko.ch/ProcessingIDE.zip}
-\item Newer alternatives are p5.js, p5.py, \emph{etc.}
-\end{todo}
+``Processing'' is a programming language consisting of a graphics API built upon a mainstream language as a base. Development started between 1997 and 2004 at the MIT Media Lab with the goal of creating a language for teaching art students the fundamentals of programming as basis for creating digital, visual art.
+
+Its authors, Reas and Fry \cite{Rea14}, wanted to create a unified teaching system consisting of art, language and a matching IDE. They based the language upon then popular and portable Java, removing much of the boilerplate required for object orientation, enhancing it with visual primitives and implicitly showing an output window, allowing for quick results (see figure \ref{fig_alpinerWanderweg}).
+
+\begin{figure} \label{fig_alpinerWanderweg}
+\centering
+\begin{minipage}{.5\textwidth}
+\begin{code}
+// Output canvas dimensions
+size(200, 200);
+// (Default white) square
+rect(50, 50, 100, 100);
+// Red inner rectangle
+fill(255, 0, 0);
+rect(50, 50 + 100 / 3, 100, 100 / 3);
+\end{code}
+\end{minipage}
+\begin{minipage}{.45\textwidth}
+\centering
+\includegraphics[height=3cm]{images/alpinerWanderweg}
+\end{minipage}
+\caption{Example code (with Java syntax) and output}
+\end{figure}
+
+As elaborated in \ref{ssc_top_down}, Processing was meant to be taught top down, starting from art and then decomposing it. As such, its main introduction features several chapters focused on exhibits of digital or hybrid art such as Manfred Mohr's \emph{Une esthétique programmée} or Steph Thirion's \emph{Eliss}.
+
+Apart from graphical primitives (see appendix \ref{app_api} for a subset), Processing features an implicit event loop which allows for creating (interactive) animations within a dozen lines of code (see figure \ref{fig_jumpingBall}).
+
+\begin{figure} \label{fig_jumpingBall}
+\centering
+\begin{minipage}{.5\textwidth}
+\begin{code}
+y = 50; dy = 0
+
+# called once after global code
+def setup():
+    size(100, 200)
+
+# called repeatedly for every frame
+def draw():
+    global y, dy
+    background(192)
+    circle(50, y, 50)
+    y += dy; dy += 1
+    if y > height - 25:
+        dy = -0.9 * dy
+\end{code}
+\end{minipage}
+\begin{minipage}{.45\textwidth}
+\centering
+\includegraphics[height=3cm]{images/ball1}
+\includegraphics[height=3cm]{images/ball2}
+\includegraphics[height=3cm]{images/ball3}
+\includegraphics[height=3cm]{images/ball4}
+\end{minipage}
+\caption{Example code (with Python syntax) and one output frames}
+\end{figure}
+
+Reacting to input happens either by pulling state while painting a frame (implicit global variables \ct{mousePressed}, \emph{etc.}) or by defining event handlers alongside \ct{setup} and \ct{draw}.
+
+Since Python has become the prevalent teaching language (\cite{Cod20}), Processing has been extended with a Python mode which leads to Processing code reading like Python code with the additional Processing API calls and exposes most of Python's libraries to Processing code. This allows using Processing as a starting language and later seamlessly transitioning to pure Python code, which remains part of the motivation for students: learning an ``actually useful'' language.
+
+As the official Processing IDE continues to be written in Java, Processing's official Python mode uses Jython for compiling the code to Java Bytecode. Since developers have started moving away from Java, there are now several reimplementations of Processing such as p5.js for running Processing on top of JavaScript in a web environment, p5.py for running Processing in a pure Python environment\footnote{Requiring two additional lines: \ct{from p5 import *} at the top and \ct{run()} at the bottom.} or a version of Processing for microcontrollers such as Arduino. With this thesis, a limited version for a Smalltalk environment is also available.
+
+Initially in the early 2010s, we ran our own IDE based on p5.js with custom error handling\footnote{This is still available from \url{https://software.zeniko.ch/ProcessingIDE.zip}. Note that it's targeted at \ct{mshta.exe} and as such runs best under Windows.} before changing to the official IDE for its Python mode.
+
+Our experience of working with Processing over the past decade has shown that it allows novice programmers in the first year of high school to learn enough of the language within a month that they're able to write a clone of a game like ``Pong'', ``Flappy Bird'' or ``Geometry Dash'' as a group project. Feedback from the various student groups about this part of the computer science curriculum has always been positive to very positive. This aligns with what didactics states about student motivation (see \ref{sc_didactic}).
 
 
 \section{Glamorous Toolkit} \label{sc_gt}
@@ -34,6 +89,7 @@ Brief introduction into GT for the uninitiated and reasons for using it. \cite{G
 \item Currently tied to Smalltalk, with other languages such as Python, JavaScript, Java supported through bridges
 \item Development happens mainly under MacOS, thus Windows integration lags behind (visible e.\,g. when using PythonBridge)
 \end{todo}
+
 
 
 \section{Moldable Development}
