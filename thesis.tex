@@ -30,42 +30,17 @@ Text written like this: \xxx{delete this}
 \tableofcontents
 
 \mainmatter
-%%%%% Introduction %%%%%
-\chapter{Introduction}
 
-In modern digitized society, the importance of computer science has grown to the point where some of its subjects are taught at schools of all levels. Whereas elementary schools focus on introducing digital, connected devices and their applications, high schools also teach fundamentals. And while programming or application use courses have been implemented since decades ago, broader and more theoretical courses have recently become standard. E.\,g. in Switzerland, computer science has become an obligatory subject for all high school students similar to more traditional sciences starting in 2019.
-
-The curricula used usually contain introductions not only to algorithms and programming, but among others also into encodings, computer architecture, networking and social ramifications such as privacy and security (see e.\,g. \cite{Erz16}). As such, students not only are taught a high level programming language such as Python, but should also have insights into what happens at various other abstraction layers when such a program is stored and run.
-
-One traditional approach to this consists in teaching a separate assembly-like language during the introduction to computer architecture. This can happen closer to theory like \cite{Gan23} or in a more gamified fashion e.\,g. with \cite{Tom15} or even without mnemonics as using the Little Man Computer architecture \cite{Oin25}. While all of these approaches help to show how a microprocessor might approximately work, none of them offer a direct, explorable connection to a high level language.
-
-One suggestion for such a direct connection between high level language and machine code will be presented in this thesis. As high level language, ``Processing'' based on Python syntax is chosen (which will be introduced in section \ref{sc_processing}), and the implementation is based on ``Glamorous Toolkit'' (which will be introduced in section \ref{sc_gt}).
-
-Before going into the technical details, we'll first introduce the notion of ``leaky abstractions'' in chapter \ref{ch_theory}; motivate why having a direct connection over multiple abstraction layers is helpful from a dictactic point of view in section \ref{sc_didactic}; and show how currently used development environments already help exploring such abstractions in section \ref{sc_ides}.
-
-The tool introduced in this thesis is called \texttt{Processing Abstractions} and will be introduced in chapter \ref{ch_pa}. In chapter \ref{ch_teaching}, we'll offer suggestions for how to employ it in the high school classroom, and in chapter \ref{ch_practice} student feedback from two trial runs is discussed.
-
-All of this wouldn't have been possible without the very helpful support of Prof.\,em. Oscar Nierstraz who has finally managed to introduce me to Smalltalk and Prof. Timo Kehrer who has taken this project below his wing. I'd also want to thank my students from the classes 27Ga and 28Ga of Gymnasium Neufeld who have worked with my productions and given helpful feedback. Finally, many thanks go to my kids for letting me work even during their holidays and to my wife for her endless support when morale was low.
-
-\xxx{expand, include full motivation, product overview and results (expanded from abstract)}
-
-\begin{todo}
-\item Computer Science in High School
-\item based on introduction in primary school
-\item broad overview, not just programming, but also hardware, networking, encoding, \emph{etc.} (see e.\,g. \cite{Erz16})
-\item here focus on various abstractions involved in programming
-\item Programming with Processing vs. "Little Man Computer" or "Human Resource Machine"
-\end{todo}
-
-
-\input{theory.tex}
-\input{background.tex}
-\input{processing-abstractions.tex}
-\input{praxis.tex}
-\input{future.tex}
+\input{introduction}
+\input{theory}
+\input{background}
+\input{processing-abstractions}
+\input{praxis}
+\input{future}
 
 \appendix
-\input{appendix.tex}
+
+\input{appendix}
 
 %END Doc
 %-------------------------------------------------------

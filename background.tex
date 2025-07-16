@@ -77,36 +77,45 @@ Initially in the early 2010s, we ran our own IDE based on p5.js with custom erro
 Our experience of working with Processing over the past decade has shown that it allows novice programmers in the first year of high school to learn enough of the language within a month that they're able to write a clone of a game like ``Pong'', ``Flappy Bird'' or ``Geometry Dash'' as a group project. Feedback from the various student groups about this part of the computer science curriculum has always been positive to very positive. This aligns with what didactics states about student motivation (see \ref{sc_didactic}).
 
 
+
+\section{Moldable Development} \label{sc_moldable}
+
+``Moldable development'' is a term coined by Nierstrasz and Gîrba \cite{Gir22,Nie24} for a collection of development patterns which should make it easier to understand a computer system by extending (`molding') it with views and features. The goal of moldable development is to quickly get feedback on code and objects being worked on so that a programmer can confidently make appropriate changes.
+
+In traditional IDEs, a running system is inspected either through its source code or its live runtime objects. Available views (see \ref{ssc_ides}) are static and new views are added through non-trivial extensions. Moldable development asks for an environment in which a tool is more easily adaptable to data, making it simple to write either one-off throw-away views and tools but also allowing to refactor such throw-away code into reusable components when needed.
+
+Moldable development is thus a form of exploratory programming (cf. \ref{ssc_exploration}) on live objects where tools, whether one-off or reusable, are created in a bottom up approach with immediate feedback available at every step.
+
+In order to support this, a moldable environment must have extensibility in its core, allowing to register tools and views e.\,g. through a simple code annotation of a few characters which the environment can use to detect and include it (instead of having to write a lot of configuration boilerplate and overhead which IDE extensions meant for independent distribution usually involve).
+
+One core pattern of moldable development is the ``Moldable Object'': Objects should be implementable incrementally with live object states and previously developed views remaining available throughout the whole process. An object consisting of little more than a data wrapper is thus extended with new functionality as it fits the available live data -- instead of designing an object on a clean slate or along tests. Exploration code can then be extracted into tests, ensuring that what worked once will continue to work. Extending objects iteratively based on actual needs ensures that they remain transparent and that code is cleanly separated.
+
+Having a moldable environment also allows for working on code and documentation intertwined, similar to literate programming \cite{Knu84}. Opposed to literate programming where code has to be extracted first, in moldable development every code snippet should be runnable on its own and beside code and documentation also live results can be included. This allows a moldable environment to be used to either first document ideas and then add matching code but also to document progress or explain written code (which can then easily be extracted into a test case).
+
+For students, such a ``Project Diary'' pattern could be used as a learning journal (similar to Microsoft OneNote), for project exploration (similar to Jupyter notebooks) or for project documentation. Another useful pattern for teaching is the ``Composed Narrative'' which visualizes object relations through side-by-side views tailored towards explaining a relation or interaction.
+
+
+
 \section{Glamorous Toolkit} \label{sc_gt}
+
+``Glamorous Toolkit'' (GT) is a fully programmable environment optimized for moldable development (see \ref{sc_moldable}). It is programmed in Smalltalk and by default persists its entire state when shut down so that live objects don't have to be recreated at restart.
+
+Historically, GT dates back to the 1990s and the Squeak virtual machine \cite{Ing97} which allowed for live code inspection, reflection and ease of customization. Squeak was among others created by the same minds that authored the Smalltalk language and was thus based on Smalltalk.
+
+
+\begin{figure} \label{fig_gt_screenshot}
+\centering
+\includegraphics[height=3cm]{images/gt_screenshot}
+\caption{GT with a live notebook page (left) and inspectable object view (right)}
+\end{figure}
+
 Brief introduction into GT for the uninitiated and reasons for using it. \cite{Gir23}
 
 \begin{todo}
-\item GT is a fully programmable environment (similar to Wirth's Oberon)
 \item Origins of GT in Smalltalk, Squeak, Pharo
 \item Easy to inspect, adapt, extend
 \item Developed by feenk (nod to Oscar)
 \item Base concepts: \ct{<gtView>}, \ct{<gtExample>}, ...
 \item Currently tied to Smalltalk, with other languages such as Python, JavaScript, Java supported through bridges
 \item Development happens mainly under MacOS, thus Windows integration lags behind (visible e.\,g. when using PythonBridge)
-\end{todo}
-
-
-
-\section{Moldable Development}
-Referring to Nierstrasz and Gîrba \cite{Nie24}.
-
-\begin{todo}
-\item Alternative to inspecting static source code or live runtime objects
-\item Tool should be adaptable to data
-\item Live exploration by writing throw-away code
-\item Compare to web development through Web Developer console
-\item Quick refactoring for keeping useful code around
-\item Development patterns: Moldable Tool, Moldable Object, Throwaway Analysis Tool, Custom View, ...
-\item Allows bottom-up development (cf. \ref{ssc_bottom_up}?) and thus e.\,g. implementing support for new languages
-\item Languages implemented within GT are inspectable and moldable as far as they're implemented: parser state, tokens, parse tree, bytecode, \emph{etc.}
-\item Custom views are cheap to implement, given knowledge of Smalltalk+GT
-\item Composed Narrative: Visualize object relations through side-by-side views -- useful as pedagogic tool
-\item Moldable Object: Incremental development of objects with state and prior views always available; forces transparency and clean separation
-\item Project Diary: Lepiter notebook page with runnable code and live views; document progress -- useable as learning journal for students (similar to Microsoft OneNote), or as project basis (similar to Jupyter)
-\item Was very useful for quick prototyping, reusable code, ... (cf. chapter \ref{ch_pa})
 \end{todo}

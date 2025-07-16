@@ -12,7 +12,7 @@ In detail, we first discuss didactic literature on teaching computer science at 
 
 Traditional introductions into programming focus on a single programming language, its syntax and the available semantics -- introducing them iteratively and practising each element with basic exercises. E.\,g. Hartinger introduces most of Python in this way so that it can later be used for scientific calculations \cite{Har20}. 
 
-This traditional introduction works mainly on the level of the programming language, only barely mentioning a simplified memory model (p.\,31) and binary encoding (pp.\,114--115). Interestingly, it does not assume an IDE (see section \ref{sc_ides} below), but instead very briefly introduces the command line and the Python REPL. Even though in that way, files are not guaranteed to be UTF-8 encoded (as examples assume, cf. p.\,118), encodings are not mentioned beyond pure ASCII. And the Python interpreter is just in the preface briefly characterized as ``program which translates source code into electronic instructions''\footnote{German original: ''[...] das Programm, das den Programmcode in Elektronik-Anweisungen übersetzt.''}.
+This traditional introduction works mainly on the level of the programming language, only barely mentioning a simplified memory model (p.\,31) and binary encoding (pp.\,114--115). Interestingly, it does not assume an IDE (see section \ref{ssc_ides} below), but instead very briefly introduces the command line and the Python REPL. Even though in that way, files are not guaranteed to be UTF-8 encoded (as examples assume, cf. p.\,118), encodings are not mentioned beyond pure ASCII. And the Python interpreter is just in the preface briefly characterized as ``program which translates source code into electronic instructions''\footnote{German original: ''[...] das Programm, das den Programmcode in Elektronik-Anweisungen übersetzt.''}.
 
 While the needs of academic teaching and the form of semester courses with lectures and separate lab work tends to suggest such an approach, this is not a good fit with suggestions from current didactic literature \cite{Sch11, Mod16} (and even past texts \cite{Doy84}):
 
@@ -97,7 +97,7 @@ Exploratory programming on the other hand refers to students being given sample 
 
 Both Schubert and Schwill \cite[p.\,367]{Sch11} and Modrow and Strecker \cite[p.\,167]{Mod16} suggest exploratory programming for allowing students to work at their own speed and depth: With given examples, less experienced students can stay closer to the given -- simple but working -- code, while more experienced students can use their knowledge for testing more complicated hypotheses.
 
-While live programming requires explicit support from the programming environment (see \ref{sc_ides}), exploratory programming can be done without. Apps can still support exploration better by providing a form of REPL\footnote{REPL is short for \emph{Read-Evaluate-Print-Loop} i.\,e. an interactive interpreter.} which most scripting languages do, an interactive notebook (such as Jupyter or Lepiter, see \ref{sc_gt}) or a way of direclty running any part of a program, as Scratch does (see \ref{ssc_manageability}).
+While live programming requires explicit support from the programming environment (see \ref{ssc_ides}), exploratory programming can be done without. Apps can still support exploration better by providing a form of REPL\footnote{REPL is short for \emph{Read-Evaluate-Print-Loop} i.\,e. an interactive interpreter.} which most scripting languages do, an interactive notebook (such as Jupyter or Lepiter, see \ref{sc_gt}) or a way of direclty running any part of a program, as Scratch does (see \ref{ssc_manageability}).
 
 The didactic reasons for using both exploratory and live programming also apply outside or pure programming, such as when inspecting and modifying live systems, networks, \emph{etc.}.
 
@@ -195,7 +195,7 @@ Further examples of leaky abstractions are discussed by Egger \cite{Egg24}. Thes
 Since abstraction leaks are unavoidable in programming -- even with block based languages such as Scratch --, they have to be discussed anyway. Instead of tackling them one by one as separate exceptional cases, literature discussed above suggests to use this opportunity to work out the foundational idea of a multitier architecture and of the interconnectivity of computer systems.
 
 
-\subsection{Abstractions in IDEs} \label{sc_ides}
+\subsection{Abstractions in IDEs} \label{ssc_ides}
 
 Integrated development environments used for programming offer a variety of different views on a program beyond its source code and its runtime output. The popular Visual Studio Code offers e.\,g. through extensions step-by-step debugging with variables and the call stack listed \cite{Mic25}. This is mirrored in most other full fledged IDEs such as PyCharm \cite{Jet25} or Eclipse \cite{Ecl25}.
 
@@ -216,3 +216,9 @@ Jalalitabar and Wang \cite{Jal22} have assembled a list of tools targetted at vi
 Sychev \cite{Syc21} suggests as an additional IDE feature hints for syntax errors which show students a side-by-side view of their entered code and the corrected code with all required transformations highlighted. They have implemented this feature for Moodle.
 
 Bouvier \emph{et al.} \cite{Bou24} ask for an extension of this: a view to show details about any form of errors, helping students to better understand the issue at hand. In particular, they suggest including an LLM assistant which can further help explain an error to a novice student. How effective such an assistant would be, remains to be seen (see \ref{ssc_ct}).
+
+Comparing to programming IDEs, the web development consoles offered by modern web browsers also provide a variety of views into the various layers of the network stack. These views are however tailored to answer the most common questions of a web developer instead of providing a coherent overview of how the network layers interact.
+
+\begin{todo}
+\item Conclusion
+\end{todo}
