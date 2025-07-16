@@ -2,37 +2,54 @@
 
 %%%%% The Solution %%%%%
 \chapter{Proposed Solution: A New Teaching Environment} \label{ch_pa}
-% formerly: \texttt{Processing Abstractions}
 
-\section{Development of "Processing Abstractions"}
-Excerpts from gt-exploration Lepiter pages
+In order to let students have a \emph{Sichtenwechsel} with relation to programming, i.\,e. have them experience several different abstraction layers involved between a program's source code and its execution, a new teaching environment dubbed ``Processing Abstractions'' is proposed:
+
+Within Glamorous Toolkit, we've implemented support for the Processing programming language and molded views for every implementation step along the way. This allows for creating interactive notebook pages containing source code and a variety of these views, showing e.\,g. the abstract syntax tree (AST) and resulting bytecode for the GT virtual machine side-by-side (see figure \ref{fig_gt_screenshot}).
+
+In this chapter, we document the development of this environment and the reasons for the approaches chosen.
+
+
+\section{Motivation for ``Processing Abstractions''}
+
+For the past decade, we've taught the introduction to programming using Processing to ninth graders. This consisted of an introduction into the language along relatively simple examples inspired by minimalist art and games (similar to the approach by Reas and Fry \cite{Rea14} described in \ref{ssc_top_down}). In a separate sequence, we've taught computer architecture in a bottom up approach (inspired by Nisan and Schocken \cite{Nis21} as described in \ref{ssc_bottom_up} but much abbreviated).
+
+While the introduction to programming was usually quite well received by students and also led to satisfying results, the sequence on computer architecture did less so. The two sequences also didn't fit together as nicely as we'd have liked and processor and memory remained a mystery for too many students.
 
 \begin{todo}
-\item Adaptable foundation: GT
-\item Student language: visual language, own language (e.\,g. like Grace \cite{Bla18}), common language?
-\item Decision: Processing/Python (cf. \ref{sc_processing}) -- based on popular Python, visual primitives for quick results (which is motivating cf. \cite{Chi23})
-\item API reference in appendix \ref{app_api}
-\item setup instructions in appendix \ref{app_setup}
+\item Reasons for Processing (cf. \ref{sc_processing}): art is motivating, quick results (which is motivating cf. \cite{Chi23}), good experience, active sharing community, based on popular Python; still new for all students
+\item Rejected alternative: own language (e.\,g. like Grace \cite{Bla18}) -- specification would've been fun, but takes time; lack of teaching materials; less motivating
+\item Rejected alternative: visual language (e.\,g. Scratch) -- differentiation from middle school; more serious; better tooling
 \item Critics from \cite{Chi23}: limited API (\ct{square}, \ct{circle} could be removed; see also \ref{ssc_manageability}), absolute coordinates initially more intuitive, Turtle and other approaches implementable through transparent functions or libraries
-\item Various approaches to run Processing: PythonBridge, interpreter, compiler, transpiler
-\item Class hierarchy
 \end{todo}
 
 \begin{todo}
+\item Reasons for GT: moldable environment leads to quick result; views are easy to create and combine; something new for all students
+\item Rejected alternative: web platform -- many libraries, less ideal interaction, requires server infrastructure for reliable saving
+
 \item Languages implemented within GT are inspectable and moldable as far as they're implemented: parser state, tokens, parse tree, bytecode, \emph{etc.}
 \item Custom views are cheap to implement, given knowledge of Smalltalk+GT
 \item Was very useful for quick prototyping, reusable code, ... (cf. chapter \ref{ch_pa})
 \end{todo}
 
 
-\section{Abstraction Levels}
-For each a short problem description and a presentation of the chosen approach:
+\section{Development of ``Processing Abstractions''}
 
-\subsection{Source Code}
-\subsection{Abstract Syntax Tree}
-\subsection{Transpilation/IR}
-\subsection{Machine Code}
-\subsection{Output}
+\begin{todo}
+\item Various approaches to run Processing: PythonBridge, interpreter, compiler, transpiler (chosen)
+\item Python maps relatively well to Smalltalk
+\item Lack of first class functions: transpiling only known functions
+\item No type checking (Python and Smalltalk are both strictly but dynamically typed)
+\item Option to translate bytecode or intermediary code to other assembly syntaxes (Intel x86, LMA, WASM, ...)
+\item API reference in appendix \ref{app_api}
+\item setup instructions in appendix \ref{app_setup}
+\end{todo}
+
+\section{Class Hierarchy}
+
+\begin{todo}
+\item \ct{ProcessingCodeBase}, \ct{ProcessingCanvas}, \ct{ProcessingParser}, \ct{ProcessingTranspiler}, \ct{ProcessingProgram}, \ct{ProcessingSource}, \ct{ProcessingSnippet} exceptions, helpers, events
+\end{todo}
 
 
 \begin{code}
@@ -53,3 +70,16 @@ ProcessingCanvas >> endFrame [
 	transform := #yourself	"Transforms are reset at the end of a draw-cycle"
 ]
 \end{code}
+
+
+\section{Abstraction Levels}
+For each a short problem description and a presentation of the chosen approach:
+
+\begin{todo}
+\item Source Code
+\item AST
+\item Transpilation (and IR)
+\item Machine Code
+\item Output
+\item Others
+\end{todo}
