@@ -3,7 +3,7 @@
 %%%%% Background Information %%%%%
 \chapter{Technical Background} \label{ch_background}
 
-The product of this thesis is implemented in Glamorous Toolkit and bases teaching material on the ``Processing'' programming language. On overview of both is given in this chapter for readers unaware of either of them.
+The product of this thesis is implemented in Glamorous Toolkit and bases teaching material on the ``Processing'' programming language. A brief overview of both is given in this chapter for readers unaware of either of them.
 
 
 \section{Processing} \label{sc_processing}
@@ -34,7 +34,7 @@ rect(50, 50 + 100 / 3, 100, 100 / 3);
 
 As elaborated in \ref{ssc_top_down}, Processing was meant to be taught top down, starting from art and then decomposing it. As such, its main introduction features several chapters focused on exhibits of digital or hybrid art such as Manfred Mohr's \emph{Une esthétique programmée} or Steph Thirion's \emph{Eliss}.
 
-Apart from graphical primitives (see appendix \ref{app_api} for a subset), Processing features an implicit event loop which allows for creating (interactive) animations within a dozen lines of code (see figure \ref{fig_jumpingBall}).
+Apart from graphical primitives (see appendix \ref{app_api} for the API subset implemented for this thesis), Processing features an implicit event loop which allows for creating (interactive) animations within a dozen lines of code (see figure \ref{fig_jumpingBall}).
 
 \begin{figure} \label{fig_jumpingBall}
 \centering
@@ -98,10 +98,28 @@ For students, such a ``Project Diary'' pattern could be used as a learning journ
 
 \section{Glamorous Toolkit} \label{sc_gt}
 
-``Glamorous Toolkit'' (GT) is a fully programmable environment optimized for moldable development (see \ref{sc_moldable}). It is programmed in Smalltalk and by default persists its entire state when shut down so that live objects don't have to be recreated at restart.
+``Glamorous Toolkit'' (GT) is a fully programmable environment optimized for moldable development (see \ref{sc_moldable}). It is programmed in Smalltalk and by default persists its entire state into an \ct{.image} file when shut down so that live objects don't have to be recreated at restart \cite{Gir23}.
 
-Historically, GT dates back to the 1990s and the Squeak virtual machine \cite{Ing97} which allowed for live code inspection, reflection and ease of customization. Squeak was among others created by the same minds that authored the Smalltalk language and was thus based on Smalltalk.
+Smalltalk environments have had that property since the early days in the 1970s, when Alan Kay sketched out the original Smalltalk which he eventually standardized at Xerox into Smalltalk-80. Based on a Smalltalk-80 virtual machine by Apple, Ingals, Kay \emph{et al.} started developing a new virtual machine and development environment, Squeak, which had the goal to also be customizable by non-programmers \cite{Ing97}. Squeak inherited its built-in capabilites for live and exploratory coding from the original Smalltalk and its back to this point that GT's heritage is tied directly.
 
+While Squeak was further developed at Walt Disney Media Labs and among others included in the ``One Laptop per Child'' laptops, it remained a niche product -- likely due to missing interoperability between the live environment inside its virtual machine and outside code. Still, Squeak and its later fork Pharo continued being worked on and were actively being used in academia and related spin-offs. Eventually, a team around Tudor Gîrba -- including this thesis' supporter Oscar Nierstrasz -- set out to implement their idea of a moldable environment on the basis of Pharo, thus creating Glamorous Toolkit \cite{Fee25}. Version 1.0 has been released in 2023 and is still being actively worked on.
+
+Glamorous Toolkit thus has an illustrious lineage and has achieved support for many concepts asked for by literature (as outlined in \ref{sc_didactic} and \ref{sc_moldable}): It's a moldable environment, supports a clean object-oriented language, allows for live and exploratory programming, still remains comparatively manageable and -- particularly relevant for this thesis -- allows for reflection at various levels, including for every object access to its method's source code, its compiled form and even its memory layout inside the virtual machine.
+
+GT provides a tabbed interface which can show one of several tools: an object viewer, a notebook, a code browser, a git interface and many more. While such tools are about as difficult to implement as an IDE extension, the object viewer -- a tabbed interface itself -- is extended by annotating an object method which returns a \ct{GtPhlowView} object with \ct{<gtView>}:
+
+\begin{code}
+ProcessingCodeBase >> gtOutputFor: aView [
+	<gtView>
+	^ aView explicit
+		title: 'Output' translated;
+		priority: 40;
+		stencil: [ (ProcessingRunner new
+				limitTo: (self gtIsAnimation ifTrue: [ 30 ] ifFalse: [ 2 ]) seconds;
+				run: self clone;
+				canvas) asElement ]
+]
+\end{code}
 
 \begin{figure} \label{fig_gt_screenshot}
 \centering
@@ -109,13 +127,10 @@ Historically, GT dates back to the 1990s and the Squeak virtual machine \cite{In
 \caption{GT with a live notebook page (left) and inspectable object view (right)}
 \end{figure}
 
-Brief introduction into GT for the uninitiated and reasons for using it. \cite{Gir23}
+The element passed to the \ct{stencil:} message -- here the canvas resulting from running a Processing program -- could instead also be displayed inside a notebook page, with no annotations needed at all.
 
-\begin{todo}
-\item Origins of GT in Smalltalk, Squeak, Pharo
-\item Easy to inspect, adapt, extend
-\item Developed by feenk (nod to Oscar)
-\item Base concepts: \ct{<gtView>}, \ct{<gtExample>}, ...
-\item Currently tied to Smalltalk, with other languages such as Python, JavaScript, Java supported through bridges
-\item Development happens mainly under MacOS, thus Windows integration lags behind (visible e.\,g. when using PythonBridge)
-\end{todo}
+Annotations are thus only required to allow GT to discover messages of a certain type. Similarly, methods annotated with \ct{<gtExample>} are considered tests and can be collectively inspected and run for a class or an entire package. This achieves several goals of moldable development: What starts as throw-away code can be extracted into a method, annotated and remains then permanently available for repeated testing. Examples are also includable by name in notebooks, where they do function as (tested and thus guaranteed working) examples for documentation.
+
+While GT is based on a Smalltalk virtual machine, support for other modern languages such as Python, JavaScript or Java has been added through a language bridge connecting to an external virtual machine and allowing for inspection and visualization of objects originating there. Unfortunately, these language bridges are one example where one of GT's major drawbacks starts showing:
+
+GT is mainly developed under macOS and makes some platform assumptions with relation to its host operating system. This isn't noteable when working purely within GT but occasionally shows at its seams. Also, GT follows a trunk-only development style without release branches. This means that downloading GT on two different days might result in subtle differences. If GT with an app is to be distributed, the best way to do this is by downloading the latest version, loading the app into it, testing it and then distributing \emph{this known good} image (as is described in \ref{app_setup}).
