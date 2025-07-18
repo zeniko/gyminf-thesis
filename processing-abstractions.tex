@@ -14,10 +14,14 @@ In this chapter, we document the development of this environment and the reasons
 
 For the past decade, we've taught the introduction to programming using Processing to ninth graders. This consisted of an introduction into the language along relatively simple examples inspired by minimalist art and games (similar to the approach by Reas and Fry \cite{Rea14} described in \ref{ssc_top_down}). In a separate sequence, we've taught computer architecture in a bottom up approach (inspired by Nisan and Schocken \cite{Nis21} as described in \ref{ssc_bottom_up} but much abbreviated).
 
-While the introduction to programming was usually quite well received by students and also led to satisfying results, the sequence on computer architecture did less so. The two sequences also didn't fit together as nicely as we'd have liked and processor and memory remained a mystery for too many students.
+While the introduction to programming was usually quite well received by students and also led to satisfying results, the sequence on computer architecture did less so. The two sequences also didn't fit together as nicely as we'd have liked and processor and memory remained a mystery for too many students. Hence the decision to look into combining the two sequences.
+
+At this point, we've briefly evaluated whether staying with Processing was reasonable. Reasons to do so were manyfold: As seen in \ref{sc_processing}, Processing allows a top down approach starting at visual arts, which allows to motivate students with less interest in mathematics and natural sciences; Processing also quickly yields pleasant looking results, which also adds to initial motivation \cite{Chi23}; then it can be based on still popular and widely used Python, which allows using it as a stepping stone and makes it a `real' programming language in the eyes of novices; on the other hand, Processing itself is sufficiently unknown that even students already experienced with programming will have something new to discover; additionally, Processing has a large community sharing sketches and ideas which can be used as inspiration for both students and teachers; finally, its proven itself in our own experience over the years.
+
+While Modrow and Strecker prefer a visual language, we feel that at least parts of their issue with a text based programming language can be remedied by having a live environment with custom error messages.
+
 
 \begin{todo}
-\item Reasons for Processing (cf. \ref{sc_processing}): art is motivating, quick results (which is motivating cf. \cite{Chi23}), good experience, active sharing community, based on popular Python; still new for all students
 \item Rejected alternative: own language (e.\,g. like Grace \cite{Bla18}) -- specification would've been fun, but takes time; lack of teaching materials; less motivating
 \item Rejected alternative: visual language (e.\,g. Scratch) -- differentiation from middle school; more serious; better tooling
 \item Critics from \cite{Chi23}: limited API (\ct{square}, \ct{circle} could be removed; see also \ref{ssc_manageability}), absolute coordinates initially more intuitive, Turtle and other approaches implementable through transparent functions or libraries
