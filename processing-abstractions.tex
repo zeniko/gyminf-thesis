@@ -7,10 +7,10 @@ In order to let students have a \emph{Sichtenwechsel} with relation to programmi
 
 Within Glamorous Toolkit, we've implemented support for the Processing programming language and molded views for every implementation step along the way. This allows for creating interactive notebook pages containing source code and a variety of these views, showing e.\,g. the abstract syntax tree (AST) and resulting bytecode for the GT virtual machine side-by-side (see figure \ref{fig_gt_screenshot}).
 
-In this chapter, we document the development of this environment and the reasons for the approaches chosen.
+In this chapter, we document the development of this environment and the reasons for the approaches chosen. If you want to try things out directly, see appendix \ref{app_setup} for how to install all referenced code\footnote{Remove the line \ct{GtExplorationHomeSection studentMode: true.} in order to also see our implementation notes.}
 
 
-\section{Motivation for ``Processing Abstractions''}
+\section{Reasons for Using Processing and Glamorous Toolkit}
 
 For the past decade, we've taught the introduction to programming using Processing to ninth graders. This consisted of an introduction into the language along relatively simple examples inspired by minimalist art and games (similar to the approach by Reas and Fry \cite{Rea14} described in \ref{ssc_top_down}). In a separate sequence, we've taught computer architecture in a bottom up approach (inspired by Nisan and Schocken \cite{Nis21} as described in \ref{ssc_bottom_up} but much abbreviated).
 
@@ -18,53 +18,87 @@ While the introduction to programming was usually quite well received by student
 
 At this point, we've briefly evaluated whether staying with Processing was reasonable. Reasons to do so were manyfold: As seen in \ref{sc_processing}, Processing allows a top down approach starting at visual arts, which allows to motivate students with less interest in mathematics and natural sciences; Processing also quickly yields pleasant looking results, which also adds to initial motivation \cite{Chi23}; then it can be based on still popular and widely used Python, which allows using it as a stepping stone and makes it a `real' programming language in the eyes of novices; on the other hand, Processing itself is sufficiently unknown that even students already experienced with programming will have something new to discover; additionally, Processing has a large community sharing sketches and ideas which can be used as inspiration for both students and teachers; finally, its proven itself in our own experience over the years.
 
-While Modrow and Strecker prefer a visual language, we feel that at least parts of their issue with a text based programming language can be remedied by having a live environment with custom error messages.
+While Modrow and Strecker prefer a block based language, we feel that at least parts of their issue with a text based programming language can be remedied by having a live environment with custom error messages. For remedying their remaining issue about allowing individual bits of code to be called independently, that could be achieved in one of the ways Glamorous Toolkit does this: either by offering separate playgrounds which do work similarly to a REPL; by allowing multiple code snippets to access the same environment (as it also works in Jupyter notebooks); or by allowing only selected code to be executed. The last option would be easiest to implement.\footnote{It hasn't been implemented for two reasons: At least in the beginning, it might confuse students more than it helps, which goes against manageability (see \ref{ssc_manageability}); and most visual commands can't be executed entirely independently in Processing, as output always depends on \ct{size} and maybe other stateful commands.}
 
+Chiodini \emph{et al.} \cite{Chi23} also propose starting with visual programming but have different requirements: In order to keep an introductionary language manageable, they ask among others for a limited API which should be expandable by students (see also \ref{ssc_manageability}). And the full Processing API can indeed be quite overwhelming, so only a subset must be introduced at the start. Indeed also for this reason only a subset has been implemented in GT (see \ref{app_api}), although already including some seemingly unnecessary functions: E.\,g. the \ct{circle} function is easily implemented in terms of the more generic \ct{ellipse} function (see figure \ref{fig_circle}) -- either in the implementation of the Processing API or by students.
 
-\begin{todo}
-\item Rejected alternative: own language (e.\,g. like Grace \cite{Bla18}) -- specification would've been fun, but takes time; lack of teaching materials; less motivating
-\item Rejected alternative: visual language (e.\,g. Scratch) -- differentiation from middle school; more serious; better tooling
-\item Critics from \cite{Chi23}: limited API (\ct{square}, \ct{circle} could be removed; see also \ref{ssc_manageability}), absolute coordinates initially more intuitive, Turtle and other approaches implementable through transparent functions or libraries
-\end{todo}
+\begin{figure} \label{fig_circle}
+\begin{minipage}{.5\textwidth}
+\begin{code}
+ProcessingCanvas >> circle: x y: y d: d
+	self
+		ellipse: d
+		by: d
+		at: x @ y
+\end{code}
+\end{minipage}
+\begin{minipage}{.45\textwidth}
+\begin{code}
+def circle(x, y, d):
+	ellipse(x, y, d, d)
+\end{code}
+\end{minipage}
+\caption{Implementation of \ct{circle} as built-in API and in user code}
+\end{figure}
 
-\begin{todo}
-\item Reasons for GT: moldable environment leads to quick result; views are easy to create and combine; something new for all students
-\item Rejected alternative: web platform -- many libraries, less ideal interaction, requires server infrastructure for reliable saving
+Another requirement by Chiodini \emph{et al.} is for problems to be transparently decomposed and solutions recomposed. This is indeed an issue with Processing: Moving a composed shape to a different location requires adjusting the coordinates of all basic shapes involved, therefore variables and even functions have to be introduced sooner rather than latter to allow the examples shown \cite{Chi23} to work. Similar to how they introduce a library to achieve their desired API, the same functionality could be implemented on top of Processing at a later stage if desired.\footnote{In the provided teaching materials, an example of how to implement a simpler Turtle based API is provided (see ``Schildkröten und Rekursion'').}
 
-\item Languages implemented within GT are inspectable and moldable as far as they're implemented: parser state, tokens, parse tree, bytecode, \emph{etc.}
-\item Custom views are cheap to implement, given knowledge of Smalltalk+GT
-\item Was very useful for quick prototyping, reusable code, ... (cf. chapter \ref{ch_pa})
-\end{todo}
+The main reason for not introducing a new API as proposed by Chiodini \emph{et al.} is the same as the reason for not introducing an entirely new programming language optimized for teaching (as done e.\,g. by Black and Bruce \cite{Bla18}): This prevents benefiting from the large community and preexisting documentation and example code.
+
+As development framework, Glamorous Toolkit was chosen for its moldable environment: As shown in \ref{sc_gt}, different views are quick to implement and can be combined freely with interactions and updates between them.
+
+Of course, since GT is based on Smalltalk, an initial effort is required to learn language and environment before these benefits can be used. This is helped by Smalltalk's regular syntax and GT's reflection capabilities, which allows finding API, documentation and examples easily.\footnote{For Smalltalk and GT's ancestor Pharo, there are sufficient resources available online, for GT itself, there's the ``Glamorous Toolkit Book'' \cite{Gir23} and a Discord server.}
+
+Implementing a new language in GT can happen along the moldable patterns documented in \ref{sc_moldable}: Starting with concrete samples, classes and views for handling them are molded in steps until the desired behavior is reached; then code is refactored into permanent methods on the one hand and a concrete example serving as test case on the other. Whenever the need for a different view into the program or one of its intermediary forms (such as AST, bytecode or output) arises, the view is constructed in the same way by first iteratively shaping the data into the desired form and then either passing this to one of GT's standard views (text, list, tree, table, forward) or composing the view's layout in the same way iteratively.
 
 
 \section{Development of ``Processing Abstractions''}
 
+Within Glamorous Toolkit, Processing is implemented through transpilation to Smalltalk. This allows reusing several of GT's libraries: \ct{PythonParser} for parsing Processing with Python syntax and \ct{OpalCompiler} for compiling Smalltalk with bytecode extractable through \ct{CompiledCode>>>symbolicBytecodes}.
+
+Since Processing implemented on top of Python is a strongly but dynamically typed language, it maps well onto Smalltalk which is the same. Still, initially three other approaches were considered:
+
+Processing could be run either in the original JRE and then accessed through Python or directly run using one of several Python libraries \cite{Tab22}. In all cases, its objects would be accessed through \ct{PythonBridge}. Since at the time of writing, support for PythonBridge under Windows was difficult to achieve in a portable manner (i.\,e. without requiring students to install multiple different packages which increases the risk of accidental breaking and thus potential support issues), this approach was rejected.
+
+Alternatively, Processing could have been implemented through an interpreter in GT\footnote{Remnants of which are available as \ct{ProcessingInterpreter}}. This would have required to write a separate compiler for creating bytecode just for demonstration purposes. Instead, a compiler from Processing to Smalltalk bytecode could have been written.\footnote{A compiler for a tiny subset of Processing is included as \ct{ProcessingCompiler}.} While this would have allowed for closer control over optimizations, it would effectively have become a reimplementation of most of \ct{OpalCompiler}.
+
+
+
+
 \begin{todo}
-\item Various approaches to run Processing: PythonBridge, interpreter, compiler, transpiler (chosen)
-\item Python maps relatively well to Smalltalk
 \item Lack of first class functions: transpiling only known functions
 \item No type checking (Python and Smalltalk are both strictly but dynamically typed)
 \item Option to translate bytecode or intermediary code to other assembly syntaxes (Intel x86, LMA, WASM, ...)
-\item API reference in appendix \ref{app_api}
-\item setup instructions in appendix \ref{app_setup}
 \end{todo}
 
 \section{Class Hierarchy}
 
 \begin{todo}
-\item \ct{ProcessingCodeBase}, \ct{ProcessingCanvas}, \ct{ProcessingParser}, \ct{ProcessingTranspiler}, \ct{ProcessingProgram}, \ct{ProcessingSource}, \ct{ProcessingSnippet} exceptions, helpers, events
+\item \ct{ProcessingCanvas} provides most of the API, created per program
+\item \ct{ProcessingCodeBase} is anonymously subclassed for each program, provides various views (not involving Processing)
+\item \ct{ProcessingTranspiler} uses the result of \ct{ProcessingParser} (resp. \ct{PythonParser}) to transpile Python to Smalltalk code which is attached to a subclass of \ct{ProcessingCodeBase}; functions become methods (nested functions aren't supported yet), globals become instance slots, ... (\ct{emit_COMMAND})
+\item \ct{ProcessingProgram} takes a source, compiles it and provides all available views (see below); has specialized views for Abstractions and Output through \ct{gtDefaultInspectorTool}
+\item \ct{ProcessingSource} is created from a file, a string or a snippet, allowing to easily turn a Lepiter snippet into any of the views
+\begin{code}
+ProcessingSource fromPage: thisSnippet page at: 1
+\end{code}
+\item \ct{LeProcessingSnippet} is built upon \ct{LePythonSnippet} with the bridge removed and error handling added. Allows three different ways to run a program
+\item exceptions, helpers, events
 \end{todo}
 
 
-\begin{code}
-ProcessingCanvas >> ellipse: x y: y dx: dx dy: dy [
-	self
-		ellipse: dx
-		by: dy
-		at: x @ y
-]
-\end{code}
 
+
+\section{Abstraction Levels}
+
+\begin{todo}
+\item Source Code: views for source code, characters and (UTF-8 encoded) bytes -- connect program and encodings
+\item AST: views for tokens, AST as treelist and Mondrian AST, including side-by-side views -- allows exploration of what a token is and what tokens are parsed to
+\item Transpilation -- comparison of Processing and Smalltalk, looking under the hood of \ct{setup} and \ct{draw}; entry point is \ct{gtRun}
+\item Machine Code and IR -- lower level, assembly and actual numbers, optimizations
+\item Output (and shapes) -- product of \ct{ProcessingCanvas} API calls, can be ``explained'' through \ct{ProcessingProgram>>>gtExplain:}
+\item Others: ...
+\end{todo}
 
 \begin{code}
 ProcessingCanvas >> endFrame [
@@ -74,16 +108,3 @@ ProcessingCanvas >> endFrame [
 	transform := #yourself	"Transforms are reset at the end of a draw-cycle"
 ]
 \end{code}
-
-
-\section{Abstraction Levels}
-For each a short problem description and a presentation of the chosen approach:
-
-\begin{todo}
-\item Source Code
-\item AST
-\item Transpilation (and IR)
-\item Machine Code
-\item Output
-\item Others
-\end{todo}

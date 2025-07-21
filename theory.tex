@@ -80,7 +80,7 @@ At this point a rather traditional approach starts with games: Weintrop and Wile
 
 While gaming works as an approach into programming, it's rarely used for inspecting further layers in an educational context. Motivation for doing so is usually constricted to performance optimizations for game platform developers.
 
-An alternative approach which was originally targetted at art students but works well at high school as well is proposed by Reas and Fry \cite{Reas}: Starting from visual arts and extending the capabilities of the artist through digital means. While the involved programming language, Processing, will be discussed in its own merit in \ref{sc_processing}, their didactic approach is notable as well:
+An alternative approach which was originally targetted at art students but works well at high school as well is proposed by Reas and Fry \cite{Rea14}: Starting from visual arts and extending the capabilities of the artist through digital means. While the involved programming language, Processing, will be discussed in its own merit in \ref{sc_processing}, their didactic approach is notable as well:
 
 A work of art on its own is something abstract which can not only be interpreted but also created. For (re)creating it, various painting techniques are needed which can be further broken down to basic movements. At this abstraction layer, they set in with high-level programming primitives for creating basic shapes. This allows them to achieve pleasing visual results with just a few commands and initially barely any programming knowledge. Afterwards, the question as to how to achieve more complex output is naturally motivated by already discussed more complex works of art.
 
@@ -106,7 +106,7 @@ The didactic reasons for using both exploratory and live programming also apply 
 
 Since other disciplines have started to rely on computers as more than a glorified typewriter and filing system, the notion of preparing students for working in academia and industry has shifted from teaching applications to teaching ``Computational Thinking''. Lee \emph{et al.} \cite{Lee20} have assembled cases from schools where programming is used in physics, biology, chemistry and other sciences, linking it to the role that mathematics have had in the past centuries.
 
-As a basis for employing programming, simulation or data transformations to solve problems in other domains, students must be versed in dealing with different abstraction levels in order to connect the abilities of a computer with the subject at hand. Flórez \emph{et al.} \cite{Flo17} also point out that students must know the limits of computers and not attribute them understanding and intelligence.
+As a basis for employing programming, simulation or data transformations to solve problems in other domains, students must be versed in dealing with different abstraction levels in order to connect the abilities of a computer with the subject at hand. Buitrago \emph{et al.} \cite{Bui17} also point out that students must know the limits of computers and not attribute them understanding and intelligence.
 
 With the sudden rise of large language models in the past decade, computational thinking even refers back to programming: Martini \cite{Mar24} argues that with LLMs being able to write programs on their own, programming curricula have to be adjusted accordingly. Students will still have to be able to understand the basics, in order to be able to instruct an LLM towards a desired result.
 
@@ -190,7 +190,7 @@ Besides the above rather easily observable abstraction leaks, the issue might al
 
 In cryptography, timing attacks have been successfully used for extracting passwords from insufficiently protected webservers \cite{Por18}. More recently, another class of timing attacks taking advantage of modern CPU's branch prediction optimizations has been demonstrated \cite{Koc19}. In the latter case, an implementation detail of the CPU managed to leak. And in both cases, at least implementors of cryptographic programs must be aware of lower abstraction layers.
 
-Further examples of leaky abstractions are discussed by Egger \cite{Egg24}. These show that knowledge of lower layers are particularly important for developers of compilers and other performance-critical programs: In order to optimize a program, the specifics of the platform architecture and the implementation of processors and networking become crucial.
+Further examples of leaky abstractions are discussed by Egger \cite{Egg24} and many others \cite{Nat25, Kan25}. These show that knowledge of lower layers are particularly important for developers of compilers and other performance-critical programs: In order to optimize a program, the specifics of the platform architecture and the implementation of processors and networking become crucial.
 
 Since abstraction leaks are unavoidable in programming -- even with block based languages such as Scratch --, they have to be discussed anyway. Instead of tackling them one by one as separate exceptional cases, literature discussed above suggests to use this opportunity to work out the foundational idea of a multitier architecture and of the interconnectivity of computer systems.
 

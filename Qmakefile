@@ -20,3 +20,6 @@ fixup:
 
 clean:
 	del $(OBJS) $(MAIN:.tex=.synctex.gz) $(MAIN:.tex=.synctex.gz.sum.synctex)
+
+release:
+	$(MAKE) fixup thesis clean
