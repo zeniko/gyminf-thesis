@@ -39,6 +39,7 @@ def circle(x, y, d):
 	ellipse(x, y, d, d)
 \end{code}
 \end{minipage}
+\lessSpace
 \caption{Implementation of \ct{circle} as built-in API and in user code}
 \end{figure}
 
@@ -79,9 +80,10 @@ Processing programs can be written either inside GT's notebook in form of a ``Pr
 For a pure introduction to programming, it's even enough to rely on the Processing snippet to produce output, as that allows for the most common forms of output:
 
 \begin{itemize}
-\item \faPlay\ (or its shortcut \ct{Ctrl+R} for ``Run'') runs the program and either display its visual output or an inline error message.
-\item \faPlay\texttt{i} (or its shortcut \ct{Ctrl+G} for ``debuG'') runs the program, recording all individual steps at the level of (nested) Python expressions -- allowing to step through the program and inspecting among others the values of variables and the current state of the output.
-\item \faPlay\texttt{a} (or its shortcut \ct{Ctrl+D} for ``Details'') shows the program in its main decomposed states: source, abstract syntax tree, bytecode and output.
+\item {\small\faPlay} (or its shortcut \ct{Ctrl+R} for ``Run'') runs the program and either display its visual output or an inline error message.
+\item {\small\faPlay}\texttt{i} (or its shortcut \ct{Ctrl+G} for ``debuG'') runs the program, recording all individual steps at the level of (nested) Python expressions -- allowing to step through the program and inspecting among others the values of variables and the current state of the output.
+\item {\small\faPlay}\texttt{a} (or its shortcut \ct{Ctrl+D} for ``Details'') shows the program in its main decomposed states: source, abstract syntax tree, bytecode and output.
+\item \lightning\ (or its shortcut \ct{Ctrl+Shift+D}) opens GT's Smalltalk debugger at the \ct{gtRun} entry point of the transpiled code for live debugging for either advanced students or for looking under the hood of the API calls.
 \end{itemize}
 
 The snippet is implemented in \ct{LeProcessingSnippet} which builds upon GT's \ct{LePythonSnippet} for syntax highlighting but accesses Processing through \ct{ProcessingSource} instead of Python through \ct{PythonBridge}.
@@ -92,30 +94,40 @@ For all the views, a \ct{ProcessingProgram} is created through \ct{ProcessingSou
 
 \begin{itemize}
 \item \ct{ProcessingParser} is used for parsing the source into an AST. Since Processing shares Python's syntax, the parser is a very thin wrapper around GT's \ct{PythonParser}. The AST is then slightly modified through \ct{ProcessingAstCleaner} to better map Python to Smalltalk: Since statements after a \ct{return} are allowed in Python but not supported in Smalltalk, they're silently dropped (a warning about unreachable code could be added); and parenthesized expressions are parsed into \ct{PyTupleExpressionNode} which complicate later optimizations with relation to operator chains, in particular logical operators \ct{and} and \ct{or}.
-\item \ct{ProcessingTranspiler} then walks through the cleaned AST and transpiles Python expressions to the corresponding Smalltalk, recording a \ct{ProcessingTranspilationSlice} for every (sub)expression, thus later allowing to map bytecode its mapping into Smalltalk code back to the corresponding Processing source. If \ct{setup} and/or \ct{draw} functions are defined in Processing code, the implicit animation loop is added to the end of top-level code. Processing API calls -- if not overwritten by user code -- are translated through messages of the form \ct{ProcessingTranspiler>>>emit_NAME:} which the transpiler detects through reflection.
-\item The transpiled code is compiled to methods of an anonymous subclass of \ct{ProcessingCodeBase}. This base class provides views at the lower abstraction levels from transpiled code to bytecode and also the entry point to the user supplied program \ct{gtRun} which contains top-level code. Global variables are turned into instance variables, thus being available to all Processing functions in the form of Smalltalk methods.
+\item \ct{ProcessingTranspiler} then walks through the cleaned AST and transpiles Python expressions to the corresponding Smalltalk, recording a \ct{ProcessingTranspilationSlice} for every (sub)expression, thus later allowing to map bytecode its mapping into Smalltalk code back to the corresponding Processing source. If \ct{setup} and/or \ct{draw} functions are defined in Processing code, the implicit animation loop is added to the end of top-level code. Processing API calls -- if not overwritten by user code -- are translated through messages of the form \ct{ProcessingTranspiler>>>emit_...:} which the transpiler detects through reflection.
+\item The transpiled code is compiled to methods of an anonymous subclass of \ct{ProcessingCodeBase}. This base class provides views at the lower abstraction levels from transpiled code to bytecode and also the entry point to the user supplied program \ct{gtRun} which contains top-level code. Global variables are turned into instance variables, thus being available to all Processing functions in the form of Smalltalk methods.\footnote{In order to prevent overriding of \ct{gtRun} and the different view messages, Processing names starting with \ct{gt} are renamed to starting with \ct{gt_} during transpilation.}
 \end{itemize}
 
-From these, \ct{ProcessingProgram} provides all views corresponding to Processing code and combined views. In order not to overwhelm students with the many views, \ct{gtDefaultInspectorTool} has been implemented for hiding all but the main four views behind the same symbols as used by the snippet.
+While compiled Processing programs can be run directly, \ct{ProcessingRunner} is used for ensuring the presence of an output canvas, for allowing program execution to be interrupted and for extracting \ct{ProcessingRunStep} instances for every Processing (sub)expression.
 
-\begin{todo}
-\item exceptions, helpers, events
-\end{todo}
+From these, \ct{ProcessingProgram} provides all views corresponding to Processing code and combined views. In order not to overwhelm students with too many views, \ct{gtDefaultInspectorTool} has been implemented for hiding all but the main four views behind the same symbols as used by the snippet.
 
-
+During compilation, most common exceptions are \ct{SmaCCParserError} during parsing, \ct{ProcessingCompileTimeException} during transpilation and \ct{ProcessingRunTimeException} during execution. At this point, exceptions occurring in the transpiled code are not translated yet. Since most programs are meant to be re-run live, a heuristic has been implemented for catching endless loops which may naturally occur while a program's source is modified where e.\,g. a variable's value is modified but at the end of a \ct{while} loop. Instead of detecting the endless loop from code, runtime has been restricted to a maximum of two seconds for non-animated programs and thirty seconds for animated programs.
 
 
-\section{Abstraction Levels}
+\subsection{Implemented Views}
 
-\begin{todo}
-\item Source Code: views for source code, characters and (UTF-8 encoded) bytes -- connect program and encodings
-\item AST: views for tokens, AST as treelist and Mondrian AST, including side-by-side views -- allows exploration of what a token is and what tokens are parsed to
-\item Transpilation -- comparison of Processing and Smalltalk, looking under the hood of \ct{setup} and \ct{draw}; entry point is \ct{gtRun}
-\item Machine Code and IR -- lower level, assembly and actual numbers, optimizations
-\item Output (and shapes) -- product of \ct{ProcessingCanvas} API calls, can be ``explained'' through \ct{ProcessingProgram>>>gtExplain:}
-\item Others: ...
-\end{todo}
+Since the goal of this product was showing various states of a program in a way that can be explored live, may different views into the classes listed above have been implemented. These views are all available either from \ct{ProcessingProgram} or through \ct{ProcessingSource>>>renderLiveView:}. Note that the convention is that any view has a name of the form \ct{gt...For:}, is categorized as ``views'' (and of course has a \ct{<gtView>} annotation).
 
+At the level of source code, there's three different views showing the source with syntax highlighting (\ct{gtContentsFor:}), showing the individual source characters with their unicode value (\ct{gtSourceCharsFor:}), and showing the bytes as they would be written to disk, assuming the default UTF-8 encoding also used by the original Processing IDE, with bytes also displayed in hexadecimal and binary notations (\ct{gtSourceBytesFor:}). With these views and suitable sample code, students might be able to deduce some regularities with relation to ASCII character ranges and UTF-8 encoding.
+
+As most of the available views, these views can be combined, so that students can navigate one view and compare the selected character or byte with its position in the source code. Sensible combinations such as \ct{gtSourceBytesPlusSourceFor:} are provided, others can be created as desired on the basis of the provided ones. Using the helper class \ct{ViewComparison}, the same view for multiple programs can also be linked for side-by-side comparison.
+
+For the parsing phase, there's another three views showing either just the tokens after the lexing phase, including line number and indentation (\ct{gtTokensFor:}), showing the abstract syntax tree as a tree list with purely structural tokens visually distinguished (\ct{gtTreeFor:}), and showing the abstract syntax tree layed out horizontally using GT's Mondrian library (\ct{gtTreeMondrianFor:}). All of these views can again adjust live to code changes, allowing students to explore how tokenization and parsing might work by modifying source code and hypothesizing.
+
+The view \ct{gtTranspilationFor:} allows on the one hand to see what Processing does implicitly behind the scenes -- setting and updating implicit variables such as \ct{width}, \ct{mousePressed}, \emph{etc.}, calling \ct{setup} once and \ct{draw} repeatedly, and running top-level code before entering the animation loop (see figure \ref{fig_animation_loop}); on the other hand, it also allows for a comparison of subsets of the Python and Smalltalk languages.
+
+\begin{figure} \label{fig_animation_loop}
+\begin{code}
+SubclassOfProcessingCodeBase >> gtRun
+	self setup.
+	[ gtCanvas frameRate > 0 ] whileTrue: [
+		mouseX := gtCanvas mouseX. mouseY := gtCanvas mouseY.
+		mousePressed := gtCanvas mousePressed.
+		self draw.
+		gtCanvas endFrame.
+	].
+\end{code}
 \begin{code}
 ProcessingCanvas >> endFrame [
 	presenter updateOutput.
@@ -124,6 +136,18 @@ ProcessingCanvas >> endFrame [
 	transform := #yourself	"Transforms are reset at the end of a draw-cycle"
 ]
 \end{code}
+\lessSpace
+\caption{Implicit animation loop (Transpilation view) and part of the required API (only visible when debugging transpiled code)}
+\end{figure}
+
+For the compilation phase, there's views for Smalltalk's intermediary representation without optimizations (\ct{gtIntermediaryRepresentationFor:}) where variables are still named and jump labels sequentially numbered, and for Smalltalk's bytecode (\ct{gtBytecodeFor:}) with bytes being laid out sequentially for an object.\footnote{The bytecode format used was proposed by Béra and Miranda \cite{Ber14} in 2014 for Pharo from which GT inherited it and diverges somewhat from the original Smalltalk-80 bytecode format \cite[p.\,596]{Gol83}.} At this point, students can see that their original program, which is stored as one set of numbers (UTF-8 encoded text), has become a different set of numbers which a computer -- or in this case the Smalltalk virtual machine -- can execute.
+
+
+\begin{todo}
+\item Output (and shapes) -- product of \ct{ProcessingCanvas} API calls, can be ``explained'' through \ct{ProcessingProgram>>>gtExplain:}, run steps
+\item Others: ...
+\end{todo}
+
 
 \begin{todo}
 \item Lack of first class functions (beyond code blocks): transpiling only known functions
