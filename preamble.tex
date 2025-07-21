@@ -197,10 +197,12 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,fit,positioning,shapes.symbols,chains,shapes.geometric,shapes.arrows,calc}
 
-\newcommand{\xxx}[1]{\textbf{!`{#1}!}\PackageWarning{ToDo}{!!! #1 !!!}}
+\usepackage{fontawesome5}
+
+\newcommand{\xxx}[1]{\textbf{!` \faTasks {#1}!}\PackageWarning{ToDo}{!!! #1 !!!}}
 
 \newenvironment{todo}{
-	\begin{list}{$\square$}{}
+	\begin{list}{\faTasks}{}
 }{
 	\end{list}
 }

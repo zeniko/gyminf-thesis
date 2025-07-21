@@ -6,6 +6,7 @@
 The product of this thesis is implemented in Glamorous Toolkit and bases teaching material on the ``Processing'' programming language. A brief overview of both is given in this chapter for readers unaware of either of them.
 
 
+
 \section{Processing} \label{sc_processing}
 
 ``Processing'' is a programming language consisting of a graphics API built upon a mainstream language as a base. Development started between 1997 and 2004 at the MIT Media Lab with the goal of creating a language for teaching art students the fundamentals of programming as basis for creating digital, visual art.
@@ -104,7 +105,7 @@ While Squeak was further developed at Walt Disney Media Labs and among others in
 
 Glamorous Toolkit thus has an illustrious lineage and has achieved support for many concepts asked for by literature (as outlined in \ref{sc_didactic} and \ref{sc_moldable}): It's a moldable environment, supports a clean object-oriented language, allows for live and exploratory programming, still remains comparatively manageable and -- particularly relevant for this thesis -- allows for reflection at various levels, including for every object access to its method's source code, its compiled form and even its memory layout inside the virtual machine.
 
-GT provides a tabbed interface which can show one of several tools: an object viewer, a notebook, a code browser, a git interface and many more. While such tools are about as difficult to implement as an IDE extension, the object viewer -- a tabbed interface itself -- is extended by annotating an object method which returns a \ct{GtPhlowView} object with \ct{<gtView>}:
+GT provides a tabbed interface which can show one of several tools: an object viewer, a notebook (dubbed ``Lepiter''), a code browser, a git interface and many more. While such tools are about as difficult to implement as an IDE extension, the object viewer -- a tabbed interface itself -- is extended by annotating an object method which returns a \ct{GtPhlowView} object with \ct{<gtView>}:
 
 \begin{code}
 ProcessingCodeBase >> gtOutputFor: aView [
