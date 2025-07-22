@@ -19,7 +19,7 @@ While the introduction to programming was usually quite well received by student
 
 At this point, we've briefly evaluated whether staying with Processing was reasonable. Reasons to do so were manyfold: As seen in \ref{sc_processing}, Processing allows a top down approach starting at visual arts, which allows to motivate students with less interest in mathematics and natural sciences; Processing also quickly yields pleasant looking results, which also adds to initial motivation \cite{Chi23}; then it can be based on still popular and widely used Python, which allows using it as a stepping stone and makes it a `real' programming language in the eyes of novices; on the other hand, Processing itself is sufficiently unknown that even students already experienced with programming will have something new to discover; additionally, Processing has a large community sharing sketches and ideas which can be used as inspiration for both students and teachers; finally, its proven itself in our own experience over the years.
 
-While Modrow and Strecker prefer a block based language, we feel that at least parts of their issue with a text based programming language can be remedied by having a live environment with custom error messages. For remedying their remaining issue about allowing individual bits of code to be called independently, that could be achieved in one of the ways Glamorous Toolkit does this: either by offering separate playgrounds which do work similarly to a REPL; by allowing multiple code snippets to access the same environment (as it also works in Jupyter notebooks); or by allowing only selected code to be executed. The last option would be easiest to implement.\footnote{It hasn't been implemented for two reasons: At least in the beginning, it might confuse students more than it helps, which goes against manageability (see \ref{ssc_manageability}); and most visual commands can't be executed entirely independently in Processing, as output always depends on \ct{size} and maybe other stateful commands.}
+While Modrow and Strecker prefer a block based language, we feel that at least parts of their issue with a text based programming language can be remedied by having a live environment with custom error messages. For remedying their remaining issue about allowing individual bits of code to be called independently, that could be achieved in one of the ways Glamorous Toolkit does this: either by offering separate playgrounds which do work similarly to a REPL; by allowing multiple code snippets to access the same environment (as it also works in Jupyter notebooks); or by allowing only selected code to be executed. The last option would be easiest to implement.\footnote{It hasn't been implemented for three reasons: At least in the beginning, it might confuse students more than it helps, which goes against manageability (see \ref{ssc_manageability}); most visual commands can't be executed entirely independently in Processing, as output always depends on \ct{size} and maybe other stateful commands; and interaction with the animation loop would have to be figured out: whether it's has to be paused during the entire interaction, just between two user commands or even not at all.}
 
 Chiodini \emph{et al.} \cite{Chi23} also propose starting with visual programming but have different requirements: In order to keep an introductionary language manageable, they ask among others for a limited API which should be expandable by students (see also \ref{ssc_manageability}). And the full Processing API can indeed be quite overwhelming, so only a subset must be introduced at the start. Indeed also for this reason only a subset has been implemented in GT (see \ref{app_api}), although already including some seemingly unnecessary functions: E.\,g. the \ct{circle} function is easily implemented in terms of the more generic \ct{ellipse} function (see figure \ref{fig_circle}) -- either in the implementation of the Processing API or by students.
 
@@ -142,15 +142,24 @@ ProcessingCanvas >> endFrame [
 
 For the compilation phase, there's views for Smalltalk's intermediary representation without optimizations (\ct{gtIntermediaryRepresentationFor:}) where variables are still named and jump labels sequentially numbered, and for Smalltalk's bytecode (\ct{gtBytecodeFor:}) with bytes being laid out sequentially for an object.\footnote{The bytecode format used was proposed by Béra and Miranda \cite{Ber14} in 2014 for Pharo from which GT inherited it and diverges somewhat from the original Smalltalk-80 bytecode format \cite[p.\,596]{Gol83}.} At this point, students can see that their original program, which is stored as one set of numbers (UTF-8 encoded text), has become a different set of numbers which a computer -- or in this case the Smalltalk virtual machine -- can execute.
 
+Finally, there's three views tied to a program's runtime which may be helpful even for a pure introduction to programming: \ct{gtOutptFor:} shows the output of a program which may continuously change, if the program describes an animation, and which may be interacted with\footnote{For now only using the mouse which changes the implicit variables \ct{mouseX}, \ct{mouseY} and \ct{mousePressed} and calls the callbacks \ct{mousePressed}, \ct{mouseReleased}, \ct{mouseClicked} and \ct{mouseMoved} if any of them has been defined by the user.}; \ct{gtOutputShapesFor:} allows inspecting the individual shapes in the order they've been rendered (this view is disabled for animations); and \ct{gtStepsFor:} shows an overview of all views of \ct{ProcessingRunStep} for every Processing (sub)expression that has been evaluated -- including the expression in the source, the transpilation and its bytecode form, current variable values, values on the Smalltalk VM's stack and the current output state. This gives us a debugging view in which a student can step forward and backward through the execution of the program but also shows an excerpt of the different layers involved in program execution.
+
+Any of these views can be integrated on its own into an interactive notebook page for producing student content, they are however also all available to students through the Processing/Python snippet's various execution modes: Either running the program for pure output ({\small\faPlay} or \ct{Ctrl+R}) gives access to the most common views by inspecting the object behind the output ({\small\faPlay}\texttt{i} in the upper right corner); or running the program for details ({\small\faPlay}\texttt{a} or \ct{Ctrl+D}) yields all the views through \texttt{i} at the top center. For manageability, both of these options can be ignored at the start, as the default views should provide sufficient informations and the remaining ones can be continually introduced during class.
+
+
+
+\section{Usage}
+
+With this, highschool teachers get a toolkit for teaching programming and systems at various levels:
+
+At the start of a course, the environment can be used as an introduction to programming (see the suggested lessons in \ref{sc_lesson_intro}). When the limitations of the environment are reached, the move over to the official Processing IDE should be seemless: code copied over and run (with the same icon and shortcut) yields the same output and can then be further modified with the full Processing API, once students are ready.
+
+
+ Later on, the same environment can be used as motivation and for some of the contents about computer architecture (see \ref{sc_lesson_ca}), tying it back to the already made programming experiences.
+
+
 
 \begin{todo}
-\item Output (and shapes) -- product of \ct{ProcessingCanvas} API calls, can be ``explained'' through \ct{ProcessingProgram>>>gtExplain:}, run steps
-\item Others: ...
-\end{todo}
-
-
-\begin{todo}
-\item Lack of first class functions (beyond code blocks): transpiling only known functions
-\item No type checking (Python and Smalltalk are both strictly but dynamically typed)
-\item Option to translate bytecode or intermediary code to other assembly syntaxes (Intel x86, LMA, WASM, ...)
+\item primary school: environment too confusing
+\item university: not deep enough (yet)
 \end{todo}
