@@ -4,7 +4,7 @@
 
 In order to set up \texttt{Processing Abstractions}, first download Glamorous Toolkit from \url{https://gtoolkit.com/download/} for your platform and extract the archive's entire content.
 
-Before running it, create a new text file called \texttt{startup.st} in GT's top level folder (besides \texttt{GlamorousToolkit.image}) with the following content:
+Before running it, create a new text file called \texttt{startup.st} in GT's top-level folder besides \ct{GlamorousToolkit.image} with the following content (access it through figure \ref{fig_startup_st_qr}):
 
 \begin{code}
 Metacello new
@@ -27,13 +27,28 @@ LeSnippetElement keyboardShortcuts
 	at: #UnindentSnippet
 		put: BlKeyCombinationBuilder new alt shift arrowLeft build.
 
-"Patch unneeded addressbar out of YouTube snippet. (TODO: fix properly)"
+"Patch unneeded addressbar out of YouTube snippet
+(cf. https://github.com/feenkcom/gtoolkit/issues/4560)."
 LeYoutubeReferenceElement compile:
 	((LeYoutubeReferenceElement methodNamed: #updatePicture) sourceCode
 		copyReplaceAll: '</iframe>'' ' with: '</iframe>''; removeChildAt: 1 ').
 \end{code}
 
-Finally run the \texttt{GlamorousToolkit} executable (under Windows and Linux it's located in the \texttt{bin} subfolder). The content of \texttt{Processing Abstractions} are now available behind the ``Unterrichtseinheiten'' home tile.
+Finally run the \texttt{GlamorousToolkit} executable (under Windows and Linux it's located in the \ct{bin} subfolder). The content of \texttt{Processing Abstractions} are now available behind the ``Unterrichtseinheiten'' home tile.
+
+Verify that everything works as desired and then close and save the changes to the image. Now, the above \ct{startup.st} can be removed, since all its changes have been persisted in GT's \ct{.image} file.
+
+\emph{Warning:} If you've already used GT before, the contents of your local knowledge database will also be included in GT's image. Therefore rename that folder (usually \ct{lepiter/default} in your documents folder) before starting the GT meant for distribution.
+
+Also, since the executable \ct{GlamorousToolkit.exe} is located in a subdirectory under Windows and Linux, adding a top-level link can help students. See \url{https://github.com/zeniko/gtRunner} for a ready-to-use drop-in.
+
+\begin{figure} \label{fig_startup_st_qr}
+\centering
+\href{https://github.com/zeniko/gyminf-thesis/blob/main/appendix.tex}{\includegraphics[height=2.5cm]{images/startup.st}}
+\lessSpace
+\caption{QR-link to the code for \ct{startup.st} for convenience}
+\end{figure}
+
 
 
 \chapter{GT Processing API} \label{app_api}
@@ -166,6 +181,7 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \item[\texttt{width}] \hfill \\
 	Contains the canvas width as set by \ct{size()}.
 \end{description}
+
 
 
 \chapter{Data from Questionnaires} \label{app_data}
