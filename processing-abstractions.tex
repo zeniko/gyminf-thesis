@@ -1,7 +1,7 @@
 %%MAIN: thesis.tex
 
 %%%%% The Solution %%%%%
-\chapter{Proposed Solution: A New Teaching Environment} \label{ch_pa}
+\chapter{Proposed Solution: A New Teaching Environment for Programming} \label{ch_pa}
 
 In order to let students have a \emph{Sichtenwechsel} with relation to programming, i.\,e. have them experience several different abstraction layers involved between a program's source code and its execution, a new teaching environment dubbed ``Processing Abstractions'' is proposed:
 
@@ -68,6 +68,11 @@ Alternatively, Processing could have been implemented through an interpreter in 
 
 \subsection{Implemented Classes}
 
+\begin{todo}
+\item Shorten this chapter, move the details into an appendix
+\end{todo}
+
+
 The product consists of the following main classes which can be found in GT through the spotter (\faSearch):
 
 \ct{ProcessingCanvas} provides the implementation of most of the Processing API for rendering the various shapes in the form of \ct{BlElement}s (wrapped through \ct{ProcessingCanvasShape}). It does this through \ct{ProcessingCanvasPresenter} into a \ct{ProcessingCanvasElement} of which there can be multiple, allowing to use a canvas for multiple views. The canvas also provides access to the individual shapes and all of its state. Rendering onto the canvas happens through the transpiled and compiled Processing program for which a new canvas is created for every separate run.
@@ -113,7 +118,14 @@ At the level of source code, there's three different views showing the source wi
 
 As most of the available views, these views can be combined, so that students can navigate one view and compare the selected character or byte with its position in the source code. Sensible combinations such as \ct{gtSourceBytesPlusSourceFor:} are provided, others can be created as desired on the basis of the provided ones. Using the helper class \ct{ViewComparison}, the same view for multiple programs can also be linked for side-by-side comparison.
 
-For the parsing phase, there's another three views showing either just the tokens after the lexing phase, including line number and indentation (\ct{gtTokensFor:}), showing the abstract syntax tree as a tree list with purely structural tokens visually distinguished (\ct{gtTreeFor:}), and showing the abstract syntax tree layed out horizontally using GT's Mondrian library (\ct{gtTreeMondrianFor:}). All of these views can again adjust live to code changes, allowing students to explore how tokenization and parsing might work by modifying source code and hypothesizing.
+For the parsing phase, there's another three views showing either just the tokens after the lexing phase, including line number and indentation (\ct{gtTokensFor:}), showing the abstract syntax tree as a tree list with purely structural tokens visually distinguished (\ct{gtTreeFor:}), and showing the abstract syntax tree layed out horizontally using GT's Mondrian library (\ct{gtTreeMondrianFor:}). All of these views can again adjust live to code changes, allowing students to explore how tokenization and parsing might work by modifying source code and hypothesizing (see figure \ref{fig_views_parser}).
+
+\begin{figure} \label{fig_views_parser}
+\centering
+\includegraphics{images/screenshot_parser}
+\lessSpace
+\caption{Screenshot of a page of student content showing modifyable Processing source with live views for tokenization (left) and abstract syntax tree (right).}
+\end{figure}
 
 The view \ct{gtTranspilationFor:} allows on the one hand to see what Processing does implicitly behind the scenes -- setting and updating implicit variables such as \ct{width}, \ct{mousePressed}, \emph{etc.}, calling \ct{setup} once and \ct{draw} repeatedly, and running top-level code before entering the animation loop (see figure \ref{fig_animation_loop}); on the other hand, it also allows for a comparison of subsets of the Python and Smalltalk languages.
 

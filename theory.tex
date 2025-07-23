@@ -22,7 +22,7 @@ While the needs of academic teaching and the form of semester courses with lectu
 
 Schubert and Schwill \cite{Sch11} base their didactic approach around the notion of ``foundational ideas'' derived from Jerome Bruner and Alfred Schreiber. A foundational idea is a concept which is deeply ingrained in a specific subject such as computer science and without which the subject would loose part of its core. Additionally, they ask for a foundational idea to have the following properties (pp.\,62--63):
 \begin{itemize}
-\item Breath: the concept is applicable not just in one specific context but can be used more generally.
+\item Breadth: the concept is applicable not just in one specific context but can be used more generally.
 \item Abundance: The concept can be applied in different ways.
 \item Meaning: The concept is meaningful to the learner beyond the scope of a course.
 \end{itemize}
@@ -122,10 +122,11 @@ As a consequence, the functioning and limits of large language models must not o
 
 In order to handle complexities arising in both theoretical and practical computer science, subjects are split into multiple layers or tiers to be described, investigated and used separatedly.
 
-Common such multitier architectures taught at high school level are the networking stack (either the seven layered OSI model or the simplified four layered DoD architecture) or the software-hardware stack ranging from apps and hardware abstracting OS down to transistors consisting of e.\,g. silicium atoms:
+Common such multitier architectures taught at high school level are the networking stack (either the seven layered OSI model or the simplified four layered DoD architecture) or the software-hardware stack ranging from apps and hardware abstracting OS down to transistors consisting of e.\,g. silicium atoms (see figure \ref{fig_multitier}).
 
+\begin{figure} \label{fig_multitier}
+\centering
 % adapted from https://github.com/dev-gb/TikZ-osi-model
-\begin{center}
 \begin{tikzpicture}[scale=0.7]
 
 \draw[rounded corners=2mm] (-2,0) rectangle (2,-1);
@@ -154,7 +155,9 @@ Common such multitier architectures taught at high school level are the networki
 \draw[->, line width=0.5mm] (5.5,-8.75) -- (5.5,-0.75);
 
 \end{tikzpicture}
-\end{center}
+\lessSpace
+\caption{Multitier model of a computer system.}
+\end{figure}
 
 Ideally, in such architectures all layers above the layer to be investigated can be ignored (beyond what the layer will be used for) and all the layers below can be abstracted away into a nicely defined interface.
 

@@ -35,27 +35,23 @@ Students need experience in using their own computer, including ...
 \item dealing with their virus scanner\footnote{At least under Windows, many scanners flag GT as untrustworthy due to its executable lacking a valid signature. Some virus scanners even block the entire download, if the archive is distributed over a network.}
 \end{itemize}
 
-Additionally, the teacher must prepare their contents in GT e.\,g. as described in \ref{app_setup} and distribute them.
+Additionally, the teacher must prepare their contents in GT e.\,g. as described in \ref{app_setup} and distribute them. Ensure that the first lesson page will be displayed on first startup.
 
 
 \subsection{Introduction to Glamorous Toolkit} \label{ssc_lesson_gt}
 
-Since Glamorous Toolkit will be a new environment altogether for all students, some basics on its usage have to be introduced first:
+Since Glamorous Toolkit will be a new environment altogether for all students, some basics on its usage have to be introduced first within ten minutes:
 
-\begin{itemize}
+\begin{instructions}
 \item Ask students to download and extract your GT distribution as homework for the first lesson. Under Windows, they might run into a first issue with their virus scanner blocking the download, so remind them about what to do in that case.\footnote{In most virus scanner settings, the warning can be overruled by the user; else they might have to \emph{temporarily} disable scanning for this one download.}
-\item Tell students to start GT and open the notebook page about working with Glamorous Toolkit (``Arbeiten mit Glamorous Toolkit'' in the included teaching materials). Also ask them to help their neighbours, if they see them struggling.
-\item Use the time while students are reading and doing the first tasks for ensuring that everyone has managed to get GT running.
-\end{itemize}
+\item Tell students to start GT and open the notebook page about working with Glamorous Toolkit (``Arbeiten mit Glamorous Toolkit'' in the included teaching materials). Also ask them to help their neighbours, if they see them struggling. Use the time while students are reading and doing the first tasks for ensuring that everyone has managed to get GT running.
+\item Introduce GT as an interactive notebook similar to what students already know from class.\footnote{Many schools have standardized on working with the Microsoft 365 Office Suite which includes OneNote.} One main difference will be that additional views will open to the side, hiding the table of contents. So show them, how to get back by selecting the left-most view (through the blue dots at the center top) and expand it (through the $+$ at the top left).
+\item If you want students to be able to take notes of their own inside GT notebooks, show them how to move a page to their local knowledge base (where it can be backed up individually) and how to create and structure new paragraphs (\ct{Ctrl+Enter}, \ct{Alt+Shift+Arrow}). Markdown syntax for formatting does not have to be introduced explicitly, that can be replicated by students by inspecting your content.
+\item Finally, keep in mind GT's ability to be inspected at every level and point more advanced students towards using these (e.\,g. by \ct{Ctrl+Shift+Alt+Click} anywhere, by double-clicking on list items, or by going through the different views of an object).
+\end{instructions}
 
+Please note that as described in \ref{sc_gt}, GT is bleeding edge technology and might not always behave the way you and your students have become used to: Since notebook pages are rendered progressively, scrolling won't always work smoothly (and will scroll inner content, if the mouse cursor isn't positioned at a page's border); occasionally unexpected error messages trigger the debugger to pop up which has to be closed again; and sometimes the keyboard modifiers may get stuck, resulting in shortcuts no longer working (which is resolved by switching to a different app and back).
 
-\begin{todo}
-\item After extracting GT, a brief overview is needed before starting
-\item Introduction to GT as an interactive notebook (compare to previously known software such as OneNote or Jupyter)
-\item GT is bleeding edge (development on trunk), introduce most pressing issues (navigation, keyboard issues, saving, scrolling, zooming)
-\item Some quick tasks for getting the hang of it and identifying students with more supporting needs (let them help themselves)
-\item Point more advanced students towards inspectability
-\end{todo}
 
 
 \subsection{Lesson Plans}
@@ -92,12 +88,17 @@ Part of this has been validated (cf. \ref{sc_validation_ca})
 \subsection{Prerequisites}
 Students must already know basic programming skills in a high level language such as Processing (see section \ref{sc_processing}). In particular, they must know about variables and loops. An introduction to programming could also be done using \texttt{PA} as outlined in \ref{sc_lesson_intro} above.
 
-The more students are supposed to work on their own, the more they'll need an overview over the different layers prior to combining them. As a prerequisite, it it recommended to at least introduce the Von Neumann architecture and its split of the CPU into control unit and arithmetic unit:
+The more students are supposed to work on their own, the more they'll need an overview over the different layers prior to combining them. As a prerequisite, it it recommended to at least introduce the Von Neumann architecture and its split of the CPU into control unit and arithmetic unit (see figure \ref{fig_von_neumann}).
 
-\begin{center}
+\begin{figure} \label{fig_von_neumann}
+\centering
 \includegraphics[width=10cm]{images/Von_Neumann_Architecture.pdf}
-\\ \xxx{replace or properly attribute: Kapooht, 2013, CC BY-SA 3.0}
-\end{center}
+\lessSpace
+\caption{Von Neumann architecture.}
+\begin{todo}
+\item replace or properly attribute: Kapooht, 2013, CC BY-SA 3.0
+\end{todo}
+\end{figure}
 
 In a bottom up approach, this might also include the introduction of transistors, logic gates and circuits. In a top down approach, these could also be treated afterwards.
 
@@ -143,7 +144,7 @@ Part of this has been validated (cf. \ref{sc_validation_compiler})
 \item Comparision with low level programming (e.\,g. \cite{Tom15}): levels 1 to 6 (introduces jumps, memory access, arithmetic)
 \item Presenting/reading overview, compare with natural language
 \item Lexer: compare given example with mainly different whitespace; what are tokens?
-\item Parser: describe AST in own words, compare with sentence structure from natural languages; develop simple parsing model (\xxx{better views?})
+\item Parser: describe AST in own words, compare with sentence structure from natural languages; develop simple parsing model (better views?)
 \item Transpiler (optional): compare Processing and Smalltalk
 \item Compiler: compare AST with intermediary representation; compare Program with intermediary representation; compare intermediary representation with \cite{Tom15}
 \item Optimization: naive examples

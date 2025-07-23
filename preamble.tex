@@ -200,9 +200,14 @@
 \usepackage{fontawesome5}
 \usepackage{wasysym}
 
-\newcommand{\xxx}[1]{\textbf{!` \faTasks {#1}!}\PackageWarning{ToDo}{!!! #1 !!!}}
+\newenvironment{instructions}{
+	\begin{list}{$\rightarrow$}{}
+}{
+	\end{list}
+}
 
 \newenvironment{todo}{
+	\PackageWarning{ToDo}{!!! Unresolved issues !!!}
 	\begin{list}{\faTasks}{}
 }{
 	\end{list}

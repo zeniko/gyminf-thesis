@@ -20,12 +20,19 @@ Metacello new
 "Hide the 'Implementation and Tests' section."
 GtExplorationHomeSection studentMode: true.
 
-"Make indenting keyboard shortcuts available to non-US-English keyboard layouts."
+"Make indenting keyboard shortcuts available to non-US-English keyboard layouts
+(cf. https://github.com/feenkcom/gtoolkit/issues/3002)."
 LeSnippetElement keyboardShortcuts
 	at: #IndentSnippet
 		put: BlKeyCombinationBuilder new alt shift arrowRight build;
 	at: #UnindentSnippet
 		put: BlKeyCombinationBuilder new alt shift arrowLeft build.
+
+"Make the zoom in keyboard shortcut available to de-CH keyboard layouts
+(cf. https://github.com/feenkcom/gtoolkit/issues/4624)."
+TLeWithFontSize compile:
+	((TLeWithFontSize methodNamed: #initializeFontSizeShortcuts) sourceCode
+		copyReplaceAll: 'equal' with: 'shift minus').
 
 "Patch unneeded addressbar out of YouTube snippet
 (cf. https://github.com/feenkcom/gtoolkit/issues/4560)."
