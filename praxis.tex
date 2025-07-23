@@ -18,21 +18,22 @@ While the ``Processing Abstractions'' environment has been developed for linking
 
 \subsection{Educational objective}
 
-After the introduction, students should ...
+After the introduction, students should \dots
 \begin{itemize}
-\item be able to write programs matching given visual outputs.
-\item be able to read and understan programs with a limited command set.
+\item be able to work within GT.
+\item be able to read, write and understand programs with a limited command set, including working with the implicit animation loop.
 \item be able to learn from their mistakes, correct themselves and not be afraid of breaking things.
-\item have a solid foundation for taking on the task of writing a basic but still interesting app or game.
 \end{itemize}
+
+In the end, students should have a solid foundation for taking on the task of writing a basic but still interesting app or game.\footnote{Possible ideas, which all have been implemented by students, include: ``Flappy Bird'', ``Geometry Dash'', ``Pong'', ``Doodle Jump'', ``Snake'', a quiz, a labyrinth, \emph{etc.}. For most of these, ``Processing Abstractions'' provides sufficent support, the main deficit being the lack of keyboard input.}
 
 
 \subsection{Prerequisites}
 
-Students need experience in using their own computer, including ...
+Students need experience in using their own computer, including \dots
 \begin{itemize}
-\item downloading and extracting archives
-\item dealing with their virus scanner\footnote{At least under Windows, many scanners flag GT as untrustworthy due to its executable lacking a valid signature. Some virus scanners even block the entire download, if the archive is distributed over a network.}
+\item downloading and extracting archives, and
+\item dealing with their virus scanner.\footnote{At least under Windows, many scanners flag GT as untrustworthy due to its executable lacking a valid signature. Some virus scanners even block the entire download, if the archive is distributed over a network.}
 \end{itemize}
 
 Additionally, the teacher must prepare their contents in GT e.\,g. as described in \ref{app_setup} and distribute them. Ensure that the first lesson page will be displayed on first startup.
@@ -53,42 +54,72 @@ Since Glamorous Toolkit will be a new environment altogether for all students, s
 Please note that as described in \ref{sc_gt}, GT is bleeding edge technology and might not always behave the way you and your students have become used to: Since notebook pages are rendered progressively, scrolling won't always work smoothly (and will scroll inner content, if the mouse cursor isn't positioned at a page's border); occasionally unexpected error messages trigger the debugger to pop up which has to be closed again; and sometimes the keyboard modifiers may get stuck, resulting in shortcuts no longer working (which is resolved by switching to a different app and back).
 
 
-
 \subsection{Lesson Plans}
 
-\begin{todo}
-\item stepwise introduction to Processing (introduced in \ref{sc_processing})
-\item imperative, few commands: \texttt{size}, \texttt{rect}, \texttt{ellipse}, \texttt{fill}
-\item teaches importance of order
-\item tasks: produce given output
-\item debugging consists in modifying values (result is immediately visible)
-\item quicker and more proficient students can easily skip ahead (loops, animations, recursion)
-\item introduce variables, loops, animation, interaction
-\item available tools: output, step-by-step debugger (for now, more later)
-\end{todo}
+Since this isn't the focus of this thesis, we won't go into much detail about introducing programming, but just summarize what might work within the provided environment:
+
+Start top down as suggested in \ref{ssc_top_down} from either abstract art or games\footnote{Most one-tap games should work, e.\,g. \url{https://www.lessmilk.com/almost-pong/} has reasonably simple gameplay with minimalist visuals.} and start dissecting how this concrete entity might be described, first in natural language and then in formalized language.
+
+Then follow Reas and Fry \cite{Rea14} and introduce the Processing language (see \ref{sc_processing}), by starting with a sequence of statements with few commands (e.\,g. \ct{size}, \ct{rect}, \ct{ellipse} and \ct{fill}), and then sequentially introducing comments, colors, variables and arithmetic, the animation loop, conditions and interactivity.
+
+Every concept can be described on a notebook page with given examples for first exploring the effects of a command and its arguments\footnote{Students may either describe the expected behavior and then verify that their expectation matches the outcome, or less taxingly try given or random values and then describe their observations. Variations consist e.\,g. in a student describing desired behavior and then (another student) trying to achieve this.} and then later using the concept for solving problems by starting from a skeleton program (see figure \ref{fig_screenshot_introduction} for an example of both).
+
+\begin{cfigure}[fig_screenshot_introduction]{Excerpt from an interactive notebook page with exploratory and live programming tasks.}
+\includegraphics[width=.7\textwidth]{screenshot_introduction}
+\end{cfigure}
+
+At the beginning, debugging will only consist in modifying values and observing live changes until the desired output is reached. At later stages, the step-by-step execution views will be useful, where executed expression, variable values and visual output are displayed side-by-side and execution can be played forward and also in reverse.
+
+Quicker and more proficient students could also already at this point start to delve deeper: The third and fourth execution icons will lead them to discover by themselves what lies under the hood.
+
+Sample content for this is included in the \emph{Unterrichtsmaterialien} of  ``Processing Abstractions'' as ``\emph{Programmieren mit Processing}''.
 
 
 
 \section{Lesson on Computer Architecture} \label{sc_lesson_ca}
-% Using PA to demonstrate what happens under the hood when running a program in a high level language.
+
+The main objective of this thesis was to demonstrate, how understanding of what happens when executing a program could be improved by having students perform a \emph{Sichtenwechsel}. The same goes for the other way around, where computer architecture is explained in more concrete form by tying it to previous programming experience.
+
 Introductions to computer science which extend beyond a pure programming course often contain lessons on computer architecture. E.\,g. the curriculum \cite[p.\,145]{Erz16} asks for students to ``know how computers and networks are structured and work''.
 
-Now a sequence of lessons on the subject might be ordered either bottom up (as elaborated in subsection \ref{ssc_bottom_up}) or top down (\ref{ssc_top_down}). In either case, this proposed lesson will go towards the middle or can be used at the end as part of a repetition sequence.
+We again propose to approach this task top down (see \ref{ssc_top_down}) and move along the path specified in figure \ref{fig_multitier}. This will be outlined here with validation of part of this approach following in \ref{sc_validation_ca}.
 
-Part of this has been validated (cf. \ref{sc_validation_ca})
+With respect to manageability (see \ref{ssc_manageability}), it is proposed to mostly skip the inner workings of a compiler and treat that in a separate sequence (maybe only for students specializing in computer science).
 
 
 \subsection{Educational objective}
 
-\begin{todo}
-\item students can explain how a program might actually be run on hardware
-\end{todo}
+After these lessons, students should \dots
+\begin{itemize}
+\item be able to explain the concepts of (virtual) machine, memory, stack, machine language, and program counter (with relation to a von Neumann model).
+\item have a notion of why machine language must be different from a high-level language such as Processing.
+\item be able to explain why some commands are slower than others.
+\item connect their knowledge about encodings with how values and machine code are stored.
+\item consequently understand how one of their programs might be run on actual hardware and document their understanding with correct terms.
+\end{itemize}
 
 
 \subsection{Prerequisites}
-Students must already know basic programming skills in a high level language such as Processing (see section \ref{sc_processing}). In particular, they must know about variables and loops. An introduction to programming could also be done using \texttt{PA} as outlined in \ref{sc_lesson_intro} above.
 
-The more students are supposed to work on their own, the more they'll need an overview over the different layers prior to combining them. As a prerequisite, it it recommended to at least introduce the Von Neumann architecture and its split of the CPU into control unit and arithmetic unit (see figure \ref{fig_von_neumann}).
+Students must already have basic programming skills in a high level language. In particular, they must know about variables and loops. If they don't know Processing or at least Python yet, a brief introduction (maybe along the ideas proposed in \ref{sc_lesson_intro} above) is required.
+
+
+\subsection{Lesson Plan}
+
+Whereas Nisan and Schocken \cite{Nis21} introduce their bottom up course with a top down overview, we propose doing the same in reverse for this top down approach:
+
+\begin{instructions}
+\item Start with a brief repetition on programming by giving students a few quickly solved tasks (including one about the animation loop, where at least the skeleton structure is given). If this is the student's first encounter with Glamorous Toolkit, use this opportunity to introduce it (see \ref{ssc_lesson_gt}).
+\item Show students the innards of a computer and ask where their programs reside in there. Use this for discussing hard drives and volatile memory, and a repetition about encodings and how everything boils down to \texttt{1}s and \texttt{0}s (or current and no current respectively).
+\item Briefly start at the desired lowest abstraction layer, e.\,g. (light) switches, and explain how they're used for creating processors.
+\item 
+
+
+
+\item Finally, treat circuits, logic gates, transistors and maybe down to silicon outside of GT to the desired depth.
+\end{instructions}
+
+The more students are supposed to work on their own, the more they'll need an overview over the different layers prior to combining them. As a prerequisite, it is recommended to at least introduce the Von Neumann architecture and its split of the CPU into control unit and arithmetic unit (see figure \ref{fig_von_neumann}).
 
 \begin{cfigure}[fig_von_neumann]{Von Neumann architecture.}
 \includegraphics[width=10cm]{Von_Neumann_Architecture}
@@ -97,15 +128,13 @@ The more students are supposed to work on their own, the more they'll need an ov
 \end{todo}
 \end{cfigure}
 
-In a bottom up approach, this might also include the introduction of transistors, logic gates and circuits. In a top down approach, these could also be treated afterwards.
 
-
-\subsection{Lesson Plan}
-
-The goal of the lesson is for students to have connected their knowledge of high level programming with what happens within their machine when a program is executed.
-
-If this is the student's encounter with Glamorous Toolkit, at least a brief introduction is in order (see \ref{ssc_lesson_gt}). Else we can directly start with a reminder of what they already know about programming.
-
+\begin{cfigure}[fig_screenshot_vm_execution]{Excerpt from an interactive notebook page on .}
+\includegraphics[width=.7\textwidth]{screenshot_vm_execution}
+\begin{todo}
+\item Decide which screenshots belong into the appendix instead.
+\end{todo}
+\end{cfigure}
 
 
 
@@ -151,4 +180,4 @@ Part of this has been validated (cf. \ref{sc_validation_compiler})
 
 \section{Further Lesson Ideas} \label{sc_lesson_other}
 
-Connecting PA with Smalltalk; extend it to object oriented programming; mould the environment to questions developed during the course; ...
+Connecting PA with Smalltalk; extend it to object oriented programming; mould the environment to questions developed during the course; \dots

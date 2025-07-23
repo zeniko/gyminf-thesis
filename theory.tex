@@ -13,7 +13,7 @@ In detail, we first discuss didactic literature on teaching computer science at 
 
 Traditional introductions into programming focus on a single programming language, its syntax and the available semantics -- introducing them iteratively and practising each element with basic exercises. E.\,g. Hartinger introduces most of Python in this way so that it can later be used for scientific calculations \cite{Har20}. 
 
-This traditional introduction works mainly on the level of the programming language, only barely mentioning a simplified memory model (p.\,31) and binary encoding (pp.\,114--115). Interestingly, it does not assume an IDE (see section \ref{ssc_ides} below), but instead very briefly introduces the command line and the Python REPL. Even though in that way, files are not guaranteed to be UTF-8 encoded (as examples assume, cf. p.\,118), encodings are not mentioned beyond pure ASCII. And the Python interpreter is just in the preface briefly characterized as ``program which translates source code into electronic instructions''\footnote{German original: ''[...] das Programm, das den Programmcode in Elektronik-Anweisungen übersetzt.''}.
+This traditional introduction works mainly on the level of the programming language, only barely mentioning a simplified memory model (p.\,31) and binary encoding (pp.\,114--115). Interestingly, it does not assume an IDE (see section \ref{ssc_ides} below), but instead very briefly introduces the command line and the Python REPL. Even though in that way, files are not guaranteed to be UTF-8 encoded (as examples assume, cf. p.\,118), encodings are not mentioned beyond pure ASCII. And the Python interpreter is just in the preface briefly characterized as ``program which translates source code into electronic instructions''\footnote{German original: ''[\dots] das Programm, das den Programmcode in Elektronik-Anweisungen übersetzt.''}.
 
 While the needs of academic teaching and the form of semester courses with lectures and separate lab work tends to suggest such an approach, this is not a good fit with suggestions from current didactic literature \cite{Sch11, Mod16} (and even past texts \cite{Doy84}):
 
@@ -40,7 +40,7 @@ Consequently, they propose to explicitly discuss the foundational idea of multit
 
 They introduce the notion of \emph{Sichtenwechsel}, a change of perspective with relation to the current layer, which should help students better understand concepts of one layer by inspecting lower layers. As an example, they show a live model of a calculator app whose input is translated to both pseudo code and machine code (p.\,115); an environment for inspecting live Java objects (pp.\,208--209); or the Filius environment for inspecting a virtual computer network at its different layers (p.\,284).
 
-They conclude that ``it was a fallacy to assume that students would be able to develop a working model of a computer [...] by designing small programs'' (p.\,213),\footnote{German original: ''Es erwies sich als Irrtum, dass Schüler beim Entwerfen kleiner Programme ein tragfähiges kognitives Modell vom Rechner oder von Informatiksystemen im Allgemeinen entwickeln.''} reinforcing the need for going beyond of what traditional programming courses (used to) do.
+They conclude that ``it was a fallacy to assume that students would be able to develop a working model of a computer [\dots] by designing small programs'' (p.\,213),\footnote{German original: ''Es erwies sich als Irrtum, dass Schüler beim Entwerfen kleiner Programme ein tragfähiges kognitives Modell vom Rechner oder von Informatiksystemen im Allgemeinen entwickeln.''} reinforcing the need for going beyond of what traditional programming courses (used to) do.
 
 This conclusion is repeated again and again, e.\,g. by Jaokar \cite[p.\,51]{Jao12} or Zhang \cite[p.\,407]{Zha19}.
 
@@ -69,7 +69,7 @@ Beyond suggesting to connect multiple abstraction layers in a \emph{Sichtenwechs
 
 Starting at the bottom conceptually seems to be the more sound way and is e.\,g. how Mathematics are taught. One rigorous implementation of this approach is offered by Nisan and Schocken \cite{Nis21}: They offer a course which starts with basic logic gates and builds out of them first the parts of and later a fully functioning, basic CPU for which they continue to develop a low level and a high level programming language until reaching the point where applications can be run on the developed hardware (this was originally dubbed as ``NAND to Tetris'').
 
-Their motivation is the same as the motivation for this thesis: ``The most fundamental ideas [...] are now hidden under many layers of obscure interfaces'' (p.\,ix). Since the course is taught at university with hundreds of students, once concession is hardware virtualization: The original logic gates are not built out of silicon or electronics but instead simulated in a portable Java app. This does allow skipping intermediary steps and allows to start the course at any desired level.
+Their motivation is the same as the motivation for this thesis: ``The most fundamental ideas [\dots] are now hidden under many layers of obscure interfaces'' (p.\,ix). Since the course is taught at university with hundreds of students, once concession is hardware virtualization: The original logic gates are not built out of silicon or electronics but instead simulated in a portable Java app. This does allow skipping intermediary steps and allows to start the course at any desired level.
 
 Since working with logic gates without seeing their eventual purpose may lack motivation, the course starts with an overview from the top (pp.\,1--4) which also serves as the table of contents. With this, students keep in sight what they're working towards and can start connecting their own preexisting notions with the new material.
 
@@ -124,7 +124,7 @@ In order to handle complexities arising in both theoretical and practical comput
 
 Common such multitier architectures taught at high school level are the networking stack (either the seven layered OSI model or the simplified four layered DoD architecture) or the software-hardware stack ranging from apps and hardware abstracting OS down to transistors consisting of e.\,g. silicium atoms (see figure \ref{fig_multitier}).
 
-\begin{cfigure}[fig_multitier]{Multitier model of a computer system.}
+\begin{cfigure}[fig_multitier]{Multitier model of a computer system \cite[p.\,xii]{Nis21}.}
 % adapted from https://github.com/dev-gb/TikZ-osi-model
 \begin{tikzpicture}[scale=0.7]
 
@@ -138,10 +138,10 @@ Common such multitier architectures taught at high school level are the networki
 
 \node at (0, -0.5) {Application};
 \node at (0, -1.75) {Operating System};
-\node at (0, -3) {Drivers};
-\node at (0, -4.25) {Processor};
-\node at (0, -5.5) {Arithmetic Logic Unit};
-\node at (0, -6.75) {Logic Circuit};
+\node at (0, -3) {Compiler};
+\node at (0, -4.25) {Virtual Macihne};
+\node at (0, -5.5) {Machine Language};
+\node at (0, -6.75) {ALU / Logic Circuit};
 \node at (0, -8) {Logic Gate};
 
 \node[align = center] at (-5.5, 0) {\textbf{Top Down}};
@@ -222,5 +222,6 @@ Bouvier \emph{et al.} \cite{Bou24} ask for an extension of this: a view to show 
 Comparing to programming IDEs, the web development consoles offered by modern web browsers also provide a variety of views into the various layers of the network stack. These views are however tailored to answer the most common questions of a web developer instead of providing a coherent overview of how the network layers interact.
 
 \begin{todo}
+\item \cite{Oin25c}
 \item Conclusion
 \end{todo}
