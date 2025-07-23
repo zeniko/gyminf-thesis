@@ -200,6 +200,17 @@
 \usepackage{fontawesome5}
 \usepackage{wasysym}
 
+\newcommand{\cfigureCaption}{}
+\newenvironment{cfigure}[2][]{
+	\begin{figure}
+	\centering
+	\renewcommand{\cfigureCaption}{\label{#1}#2}
+}{
+	\lessSpace
+	\caption{\cfigureCaption}
+	\end{figure}
+}
+
 \newenvironment{instructions}{
 	\begin{list}{$\rightarrow$}{}
 }{

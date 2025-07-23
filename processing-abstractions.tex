@@ -23,7 +23,7 @@ While Modrow and Strecker prefer a block based language, we feel that at least p
 
 Chiodini \emph{et al.} \cite{Chi23} also propose starting with visual programming but have different requirements: In order to keep an introductionary language manageable, they ask among others for a limited API which should be expandable by students (see also \ref{ssc_manageability}). And the full Processing API can indeed be quite overwhelming, so only a subset must be introduced at the start. Indeed also for this reason only a subset has been implemented in GT (see \ref{app_api}), although already including some seemingly unnecessary functions: E.\,g. the \ct{circle} function is easily implemented in terms of the more generic \ct{ellipse} function (see figure \ref{fig_circle}) -- either in the implementation of the Processing API or by students.
 
-\begin{figure} \label{fig_circle}
+\begin{cfigure}[fig_circle]{Implementation of \ct{circle} as built-in API and in user code}
 \begin{minipage}{.5\textwidth}
 \begin{code}
 ProcessingCanvas >> circle: x y: y d: d
@@ -39,9 +39,7 @@ def circle(x, y, d):
 	ellipse(x, y, d, d)
 \end{code}
 \end{minipage}
-\lessSpace
-\caption{Implementation of \ct{circle} as built-in API and in user code}
-\end{figure}
+\end{cfigure}
 
 Another requirement by Chiodini \emph{et al.} is for problems to be transparently decomposed and solutions recomposed. This is indeed an issue with Processing: Moving a composed shape to a different location requires adjusting the coordinates of all basic shapes involved, therefore variables and even functions have to be introduced sooner rather than latter to allow the examples shown \cite{Chi23} to work. Similar to how they introduce a library to achieve their desired API, the same functionality could be implemented on top of Processing at a later stage if desired.\footnote{In the provided teaching materials, an example of how to implement a simpler Turtle based API is provided (see ``Schildkröten und Rekursion'').}
 
@@ -120,16 +118,14 @@ As most of the available views, these views can be combined, so that students ca
 
 For the parsing phase, there's another three views showing either just the tokens after the lexing phase, including line number and indentation (\ct{gtTokensFor:}), showing the abstract syntax tree as a tree list with purely structural tokens visually distinguished (\ct{gtTreeFor:}), and showing the abstract syntax tree layed out horizontally using GT's Mondrian library (\ct{gtTreeMondrianFor:}). All of these views can again adjust live to code changes, allowing students to explore how tokenization and parsing might work by modifying source code and hypothesizing (see figure \ref{fig_views_parser}).
 
-\begin{figure} \label{fig_views_parser}
+\begin{cfigure}[fig_views_parser]{Screenshot of a page of student content showing modifyable Processing source with live views for tokenization (left) and abstract syntax tree (right).}
 \centering
-\includegraphics{images/screenshot_parser}
-\lessSpace
-\caption{Screenshot of a page of student content showing modifyable Processing source with live views for tokenization (left) and abstract syntax tree (right).}
-\end{figure}
+\includegraphics[width=.8\textwidth]{screenshot_parser}
+\end{cfigure}
 
 The view \ct{gtTranspilationFor:} allows on the one hand to see what Processing does implicitly behind the scenes -- setting and updating implicit variables such as \ct{width}, \ct{mousePressed}, \emph{etc.}, calling \ct{setup} once and \ct{draw} repeatedly, and running top-level code before entering the animation loop (see figure \ref{fig_animation_loop}); on the other hand, it also allows for a comparison of subsets of the Python and Smalltalk languages.
 
-\begin{figure} \label{fig_animation_loop}
+\begin{cfigure}[fig_animation_loop]{Implicit animation loop (Transpilation view) and part of the required API (only visible when debugging transpiled code)}
 \begin{code}
 SubclassOfProcessingCodeBase >> gtRun
 	self setup.
@@ -140,6 +136,7 @@ SubclassOfProcessingCodeBase >> gtRun
 		gtCanvas endFrame.
 	].
 \end{code}
+
 \begin{code}
 ProcessingCanvas >> endFrame [
 	presenter updateOutput.
@@ -148,9 +145,7 @@ ProcessingCanvas >> endFrame [
 	transform := #yourself	"Transforms are reset at the end of a draw-cycle"
 ]
 \end{code}
-\lessSpace
-\caption{Implicit animation loop (Transpilation view) and part of the required API (only visible when debugging transpiled code)}
-\end{figure}
+\end{cfigure}
 
 For the compilation phase, there's views for Smalltalk's intermediary representation without optimizations (\ct{gtIntermediaryRepresentationFor:}) where variables are still named and jump labels sequentially numbered, and for Smalltalk's bytecode (\ct{gtBytecodeFor:}) with bytes being laid out sequentially for an object.\footnote{The bytecode format used was proposed by Béra and Miranda \cite{Ber14} in 2014 for Pharo from which GT inherited it and diverges somewhat from the original Smalltalk-80 bytecode format \cite[p.\,596]{Gol83}.} At this point, students can see that their original program, which is stored as one set of numbers (UTF-8 encoded text), has become a different set of numbers which a computer -- or in this case the Smalltalk virtual machine -- can execute.
 

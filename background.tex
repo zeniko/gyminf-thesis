@@ -13,7 +13,7 @@ The product of this thesis is implemented in Glamorous Toolkit and bases teachin
 
 Its authors, Reas and Fry \cite{Rea14}, wanted to create a unified teaching system consisting of art, language and a matching IDE. They based the language upon then popular and portable Java, removing much of the boilerplate required for object orientation, enhancing it with visual primitives and implicitly showing an output window, allowing for quick results (see figure \ref{fig_alpinerWanderweg}).
 
-\begin{figure} \label{fig_alpinerWanderweg}
+\begin{cfigure}[fig_alpinerWanderweg]{Example code (with Java syntax) and output}
 \begin{minipage}{.5\textwidth}
 \begin{code}
 // Output canvas dimensions
@@ -27,17 +27,15 @@ rect(50, 50 + 100 / 3, 100, 100 / 3);
 \end{minipage}
 \begin{minipage}{.45\textwidth}
 \centering
-\includegraphics[height=3cm]{images/alpinerWanderweg}
+\includegraphics[height=3cm]{alpinerWanderweg}
 \end{minipage}
-\lessSpace
-\caption{Example code (with Java syntax) and output}
-\end{figure}
+\end{cfigure}
 
 As elaborated in \ref{ssc_top_down}, Processing was meant to be taught top down, starting from art and then decomposing it. As such, its main introduction features several chapters focused on exhibits of digital or hybrid art such as Manfred Mohr's \emph{Une esthétique programmée} or Steph Thirion's \emph{Eliss}.
 
 Apart from graphical primitives (see appendix \ref{app_api} for the API subset implemented for this thesis), Processing features an implicit event loop which allows for creating (interactive) animations within a dozen lines of code (see figure \ref{fig_jumpingBall}).
 
-\begin{figure} \label{fig_jumpingBall}
+\begin{cfigure}[fig_jumpingBall]{Example code (with Python syntax) and one output frames}
 \begin{minipage}{.5\textwidth}
 \begin{code}
 y = 50; dy = 0
@@ -58,14 +56,12 @@ def draw():
 \end{minipage}
 \begin{minipage}{.45\textwidth}
 \centering
-\includegraphics[height=3cm]{images/ball1}
-\includegraphics[height=3cm]{images/ball2}
-\includegraphics[height=3cm]{images/ball3}
-\includegraphics[height=3cm]{images/ball4}
+\includegraphics[height=3cm]{ball1}
+\includegraphics[height=3cm]{ball2}
+\includegraphics[height=3cm]{ball3}
+\includegraphics[height=3cm]{ball4}
 \end{minipage}
-\lessSpace
-\caption{Example code (with Python syntax) and one output frames}
-\end{figure}
+\end{cfigure}
 
 Reacting to input happens either by pulling state while painting a frame (implicit global variables \ct{mousePressed}, \emph{etc.}) or by defining event handlers alongside \ct{setup} and \ct{draw}.
 
@@ -122,12 +118,9 @@ ProcessingCodeBase >> gtOutputFor: aView [
 ]
 \end{code}
 
-\begin{figure} \label{fig_gt_screenshot}
-\centering
-\includegraphics[height=3cm]{images/gt_screenshot}
-\lessSpace
-\caption{GT with a live notebook page (left) and inspectable object view (right)}
-\end{figure}
+\begin{cfigure}[fig_gt_screenshot]{GT with a live notebook page (left) and inspectable object view (right)}
+\includegraphics[width=.7\textwidth]{gt_screenshot}
+\end{cfigure}
 
 The element passed to the \ct{stencil:} message -- here the canvas resulting from running a Processing program -- could instead also be displayed inside a notebook page, with no annotations needed at all.
 

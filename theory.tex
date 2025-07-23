@@ -124,8 +124,7 @@ In order to handle complexities arising in both theoretical and practical comput
 
 Common such multitier architectures taught at high school level are the networking stack (either the seven layered OSI model or the simplified four layered DoD architecture) or the software-hardware stack ranging from apps and hardware abstracting OS down to transistors consisting of e.\,g. silicium atoms (see figure \ref{fig_multitier}).
 
-\begin{figure} \label{fig_multitier}
-\centering
+\begin{cfigure}[fig_multitier]{Multitier model of a computer system.}
 % adapted from https://github.com/dev-gb/TikZ-osi-model
 \begin{tikzpicture}[scale=0.7]
 
@@ -155,9 +154,7 @@ Common such multitier architectures taught at high school level are the networki
 \draw[->, line width=0.5mm] (5.5,-8.75) -- (5.5,-0.75);
 
 \end{tikzpicture}
-\lessSpace
-\caption{Multitier model of a computer system.}
-\end{figure}
+\end{cfigure}
 
 Ideally, in such architectures all layers above the layer to be investigated can be ignored (beyond what the layer will be used for) and all the layers below can be abstracted away into a nicely defined interface.
 
