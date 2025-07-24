@@ -18,11 +18,11 @@ While the ``Processing Abstractions'' environment has been developed for linking
 
 \subsection{Educational objective}
 
-After the introduction, students should \dots
+After the introduction, students should be able to \dots
 \begin{itemize}
-\item be able to work within GT.
-\item be able to read, write and understand programs with a limited command set, including working with the implicit animation loop.
-\item be able to learn from their mistakes, correct themselves and not be afraid of breaking things.
+\item work within GT.
+\item read, write and understand programs with a limited command set, including working with the implicit animation loop.
+\item learn from their mistakes, correct themselves and not be afraid of breaking things.
 \end{itemize}
 
 In the end, students should have a solid foundation for taking on the task of writing a basic but still interesting app or game.\footnote{Possible ideas, which all have been implemented by students, include: ``Flappy Bird'', ``Geometry Dash'', ``Pong'', ``Doodle Jump'', ``Snake'', a quiz, a labyrinth, \emph{etc.}. For most of these, ``Processing Abstractions'' provides sufficent support, the main deficit being the lack of keyboard input.}
@@ -54,7 +54,7 @@ Since Glamorous Toolkit will be a new environment altogether for all students, s
 Please note that as described in \ref{sc_gt}, GT is bleeding edge technology and might not always behave the way you and your students have become used to: Since notebook pages are rendered progressively, scrolling won't always work smoothly (and will scroll inner content, if the mouse cursor isn't positioned at a page's border); occasionally unexpected error messages trigger the debugger to pop up which has to be closed again; and sometimes the keyboard modifiers may get stuck, resulting in shortcuts no longer working (which is resolved by switching to a different app and back).
 
 
-\subsection{Lesson Plans}
+\subsection{Lesson Plan}
 
 Since this isn't the focus of this thesis, we won't go into much detail about introducing programming, but just summarize what might work within the provided environment:
 
@@ -89,11 +89,11 @@ With respect to manageability (see \ref{ssc_manageability}), it is proposed to m
 
 \subsection{Educational objective}
 
-After these lessons, students should \dots
+After these lessons, students should be able to \dots
 \begin{itemize}
-\item be able to explain the concepts of (virtual) machine, memory, stack, machine language, and program counter (with relation to a von Neumann model).
-\item have a notion of why machine language must be different from a high-level language such as Processing.
-\item be able to explain why some commands are slower than others.
+\item explain the concepts of (virtual) machine, memory, stack, machine language, and program counter (with relation to a von Neumann model).
+\item elaborate why machine language must be different from a high-level language such as Processing.
+\item explain why some commands are slower than others.
 \item connect their knowledge about encodings with how values and machine code are stored.
 \item consequently understand how one of their programs might be run on actual hardware and document their understanding with correct terms.
 \end{itemize}
@@ -112,14 +112,28 @@ Whereas Nisan and Schocken \cite{Nis21} introduce their bottom up course with a 
 \item Start with a brief repetition on programming by giving students a few quickly solved tasks (including one about the animation loop, where at least the skeleton structure is given). If this is the student's first encounter with Glamorous Toolkit, use this opportunity to introduce it (see \ref{ssc_lesson_gt}).
 \item Show students the innards of a computer and ask where their programs reside in there. Use this for discussing hard drives and volatile memory, and a repetition about encodings and how everything boils down to \texttt{1}s and \texttt{0}s (or current and no current respectively).
 \item Briefly start at the desired lowest abstraction layer, e.\,g. (light) switches, and explain how they're used for creating processors.
-\item 
-
+\item \dots
 
 
 \item Finally, treat circuits, logic gates, transistors and maybe down to silicon outside of GT to the desired depth.
 \end{instructions}
 
-The more students are supposed to work on their own, the more they'll need an overview over the different layers prior to combining them. As a prerequisite, it is recommended to at least introduce the Von Neumann architecture and its split of the CPU into control unit and arithmetic unit (see figure \ref{fig_von_neumann}).
+\begin{todo}
+\item compare program with game console: ``go there'' translates into presses of just a few buttons -- why?
+\item compare program with drawing: ``draw a house'' translates into individual brush strokes -- why?
+\item for the same reason, the program translates into fewer, more basic commands: machine code (or byte code)
+\item what is relevant for running a program? -> memory for variables, line pointer, calculator for arithmetic, input and output, \dots
+\item introduce von Neumann architecture (see figure \ref{fig_von_neumann})
+\item what physical parts of a computer belong to which idealized ones?
+\item VM is a simulation of such a machine (used for portable programs as additional abstraction layer)
+\item look at simple Processing program \dots
+\item (see figure \ref{fig_screenshot_vm_execution})
+\item \dots
+\item let students play ``Human Resource Machine'' \cite{Tom15}\footnote{The ``Hour of Code Edition'' is free to download for notebooks.} which introduces students to the limitations of machine language; suggestion: at least until level 6 for everybody, quicker students will find sufficient challenges later on (introduces jumps, memory access, arithmetic)
+\item compare the command range with the one of Smalltalk bytecode
+\item \dots
+\end{todo}
+
 
 \begin{cfigure}[fig_von_neumann]{Von Neumann architecture.}
 \includegraphics[width=10cm]{Von_Neumann_Architecture}
@@ -129,7 +143,7 @@ The more students are supposed to work on their own, the more they'll need an ov
 \end{cfigure}
 
 
-\begin{cfigure}[fig_screenshot_vm_execution]{Excerpt from an interactive notebook page on .}
+\begin{cfigure}[fig_screenshot_vm_execution]{Excerpt from an interactive notebook page on program execution in a VM.}
 \includegraphics[width=.7\textwidth]{screenshot_vm_execution}
 \begin{todo}
 \item Decide which screenshots belong into the appendix instead.
@@ -140,40 +154,52 @@ The more students are supposed to work on their own, the more they'll need an ov
 
 \section{Lesson on Compilers} \label{sc_lesson_compiler}
 
-Using PA to demonstrated the steps of lexing, parsing, transpiling, compiling and optimizing.
+Once students have an approximate understanding of into what a program must be transformed in order to be run on actual hardware or inside a VM, the question remains as to how the transformation from source code to machine code happens.
 
-Part of this has been validated (cf. \ref{sc_validation_compiler})
+While this is usually not in the focus of a general introduction into computer science beyond the superficial treatment occurring during the lessons on computer architecture, this is quite relevant for students specializing in computer science.
+
+However, using the environment presented here, this topic could just as well be used either for all students or for quicker students to work on mostly by themselves. Part of the lesson presented here has indeed been validated under these circumstances (cf. \ref{sc_validation_compiler}).
 
 
 \subsection{Educational objective}
 
-\begin{todo}
-\item students can explain the difference between high and low level language
-\item students can enumerate the steps required for compiling a program
-\item students have an understanding of the roles a lexer, parser, transpiler and compiler play
-\end{todo}
+After these lessons, students should be able to \dots
+\begin{itemize}
+\item explain the difference between high and low level languages.
+\item enumerate the steps required during compilation, using proper terminology (lexer, parser, transpiler, compiler, optimizer).
+\item connect this knowledge with their knowledge on computer architecture and programming.
+\end{itemize}
 
 
 \subsection{Prerequisites}
 
-\begin{todo}
-\item programming with Processing (e.\,g. from \ref{sc_lesson_intro})
-\item GT/PA installed (e.\,g. from \ref{ssc_lesson_gt})
-\item Stacks and registers
-\end{todo}
+Students must have experience in programming and computer architecture, e.\,g. from the lessons described above (cf. \ref{sc_lesson_introduction} and \ref{sc_lesson_ca}). It helps, if their programming experience is based on Processing or at least Python. Additionally, the need to have GT installed and introduced (see \ref{ssc_lesson_gt}).
 
 
 \subsection{Lesson Plan}
 
+The natural way to progress on understanding a compiler is top down, which is the same as chronological order:
+
+\begin{instructions}
+\item Before starting to fill in the content missing from the previous lesson on computer architecture, begin with a repetition on how a program is run in a VM (see figure \ref{fig_screenshot_vm_execution}), letting students run again a given or one of their own program and seeing into what commands their code was translated.
+\item As an analogy, analyse with students how they would go about translating an unknown language using just a dictionary: splitting the text into words where punctuation yields some structure; then looking words up (where again several words might belong together for the sake of translation\footnote{Compare e.\,g. the meanings of ``see'', ``see to'', ``see through'' and ``see out''.}); writing the translation down; and finally rewriting it so that it sounds more akin to how you'd write it in the target language. This analogy yields a fitting overview over the different steps involved.
+\item Now let students work through discovering the individual concepts encountered:
+\begin{itemize}
+\item Have them compare a program and the resulting lexed tokens: What modifications to a program result in different tokens, what modifications don't cause changes? What does this correspond to in the analogy about translating a natural language?
+\item Have them compare the abstract syntax trees resulting from their program(s). Are they able to explain how the parser structures the tokens together? How would they go about if all they saw were just two tokens? (For this, use a view of tokens showing just two lines.)
+\item Discuss how a recursive descent parser works through tokens. Since Python and thus Processing based on Python uses indentation for command grouping, also highlight the need for tracking indentation at least per statement.
+\item Have students compare given Processing source code with the resulting AST and transpiled Smalltalk: How literal is the translation? What is different between Processing and Smalltalk? Have them try to invent a syntax of their own which is easier to map to the AST (and later discuss Lisp and Forth syntaxes as examples for alternative syntax\footnote{Views for variants of both are available.}).
+
+\end{itemize}
+
+\end{instructions}
+
+
 \begin{todo}
-\item Repetition high level programming (see tasks in PA)
-\item Comparision with low level programming (e.\,g. \cite{Tom15}): levels 1 to 6 (introduces jumps, memory access, arithmetic)
-\item Presenting/reading overview, compare with natural language
-\item Lexer: compare given example with mainly different whitespace; what are tokens?
-\item Parser: describe AST in own words, compare with sentence structure from natural languages; develop simple parsing model (better views?)
 \item Transpiler (optional): compare Processing and Smalltalk
 \item Compiler: compare AST with intermediary representation; compare Program with intermediary representation; compare intermediary representation with \cite{Tom15}
 \item Optimization: naive examples
+\item Comparision with low level programming (e.\,g. \cite{Tom15})
 \end{todo}
 
 
