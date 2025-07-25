@@ -166,6 +166,20 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 	Returns the tangent value for the given angle (measured in radians).
 \end{description}
 
+\section{Lists}
+\begin{description}
+\item[\texttt{append(list, value)}] \hfill \\
+	Appends the value to the end of the list and returns \emph{a new} list. (Note: \ct{list + [value]}is \emph{not yet} supported.)
+\item[\texttt{concat(list, otherList)}] \hfill \\
+	Combines the two lists to a single \emph{new} list. (Note: \ct{list + otherList} is \emph{not yet} supported.)
+\item[\texttt{reversed(list)}, \texttt{reverse(list)}] \hfill \\
+	Returns a \emph{new} list with its content reversed.
+\item[\texttt{shorten(list)}] \hfill \\
+	Returns a \emph{new} list without the last argument (equivalent to \ct{list[:-1]}).
+\item[\texttt{sorted(list)}, \texttt{sort(list)}] \hfill \\
+	Returns \emph{new} list with its content sorted.
+\end{description}
+
 \section{Miscellanea}
 \begin{description}
 \item[\texttt{delay(ms)}] \hfill \\
@@ -185,6 +199,16 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \item[\texttt{width}] \hfill \\
 	Contains the canvas width as set by \ct{size()}.
 \end{description}
+
+\begin{todo}
+\item Synchronize with \url{https://github.com/zeniko/gt-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
+\item fix \ct{append} spacing
+\end{todo}
+
+
+
+
+\chapter{Technical Implementation of ``Processing Abstractions''} \label{app_implementation}
 
 
 

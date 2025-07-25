@@ -177,22 +177,23 @@ The natural way to progress on understanding a compiler is top down, which is th
 \item Have them compare a program and the resulting lexed tokens: What modifications to a program result in different tokens, what modifications don't cause changes? What does this correspond to in the analogy about translating a natural language?
 \item Have them compare the abstract syntax trees resulting from their program(s). Are they able to explain how the parser structures the tokens together? How would they go about if all they saw were just two tokens? (For this, use a view of tokens showing just two lines.)
 \item Discuss how a recursive descent parser works through tokens. Since Python and thus Processing based on Python uses indentation for command grouping, also highlight the need for tracking indentation at least per statement.
-\item Have students compare given Processing source code with the resulting AST and transpiled Smalltalk: How literal is the translation? What is different between Processing and Smalltalk? Have them try to invent a syntax of their own which is easier to map to the AST (and later discuss Lisp and Forth syntaxes as examples for alternative syntax\footnote{Views for variants of both are available.}).
-
+\item Optionally have students compare given Processing source code with the resulting AST and transpiled Smalltalk: How literal is the translation? What is different between Processing and Smalltalk? Have them try to invent a syntax of their own which is easier to map to the AST (and later discuss Lisp and Forth syntaxes as examples for alternative, easier to parse syntaxes\footnote{Views for variants of both are available.}).
+\item Since usually, an intermediary representation is directly produced from an AST, collect common statement types (variable assignment, function calls, loops, \dots) and have them translated live to intermediary representation. Let students work out common patterns to see what translation might take place.
+\item Have views for intermediary representation and actual Smalltalk bytecode side-by-side for students to figure out, what transformations remain and why these might be required (comparing with their knowledge from computer architecture lessons).
+\item Should students have prior experience with ``Human Resource Machine'' \cite{Tom15}, have them translate Processing to a program in that game's simplified language and translate code for a level of that game back to Processing (and from that Smalltalk bytecode with the environment's help).
+\item For the final step, offer some simple code examples which can obviously be simplified.\footnote{E.\,g. \ct{print(1+1+1+1+1)} or \ct{for i in rnage(10): pass}, both of which should be trivially optimizeable}. What optimizations are present in the intermediary representation and which in bytecode? What patterns could be optimized? Also discuss the difference of optimizing for size, for speed and for quick compilation.\footnote{For players of ``Human Resource Machine'', the first two are the bonus challenges for all later levels.}
 \end{itemize}
-
+\item What can't be shown inside GT are the equivalent of optimizations within a processor (or already the x86, IA64, \emph{etc.} code produced by the Just in Time compiler). Students should at this point however have sufficient understanding of the various transformations, that they might be able to understand what happened e.\,g. with the Spectre attack \cite{Koc19} and why understanding of machine code might be relevant for timing attacks.
 \end{instructions}
-
-
-\begin{todo}
-\item Transpiler (optional): compare Processing and Smalltalk
-\item Compiler: compare AST with intermediary representation; compare Program with intermediary representation; compare intermediary representation with \cite{Tom15}
-\item Optimization: naive examples
-\item Comparision with low level programming (e.\,g. \cite{Tom15})
-\end{todo}
 
 
 
 \section{Further Lesson Ideas} \label{sc_lesson_other}
 
-Connecting PA with Smalltalk; extend it to object oriented programming; mould the environment to questions developed during the course; \dots
+Whereas the environment presented here is mainly targeted at introductionary high school classes, it might also be employed in a specialization course. Since this isn't this thesis' focus, we'll just list a few ideas:
+
+\begin{itemize}
+\item Smalltalk is a rather elegant language and has aged quite well. It can still be used to introduce students into pure object oriented programming with a for them somewhat unusual syntax. And such an introduction could use transpilations from ``Processing Abstractions'' as a stepping stone, if students have already used it.
+\item Since the here provided code is run dynamically in Glamorous Toolkit, it can also be molded further, e.\,g. to implement as of yet missing support for object oriented programming.
+\item The provided code might also be used as a template for students to implement their own programming language or see if they manage to write an interpreter for one of the two provided prefix and postfix mini-languages.\footnote{This might already have been discussed in the compiler lessons above. Very briefly, a program such as \ct{a = 42; print(a)} is translated to \ct{(= a 42) (print a)} and \ct{\$a 42 = a print} respectively which both should be simple enough to parse.}
+\end{itemize}
