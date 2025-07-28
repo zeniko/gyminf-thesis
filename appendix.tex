@@ -152,10 +152,16 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 	Rounds the value to an integer.
 \item[\texttt{PI}] \hfill \\
 	The value of the mathematical constant p.
+\item[\texttt{max(a, b)}] \hfill \\
+	Returns the larger of the two values (\ct{max(a)} returns the largest value contained in the list \ct{a}).
+\item[\texttt{min(a, b)}] \hfill \\
+	Returns the smaller of the two values (\ct{min(a)} returns the smallest value contained in the list \ct{a}).
 \item[\texttt{radians(angle)}] \hfill \\
 	Converts the given angle (measured in degrees) into radians.
 \item[\texttt{random(limit)}] \hfill \\
 	Returns a random floating point number between 0 and limit (inclusive).
+\item[\texttt{randomSeed(seed)}] \hfill \\
+	Reinitializes the random generator with the given \ct{seed} number. Using the same number will result in the exact same sequence of pseudo-randomly generated numbers.
 \item[\texttt{sin(angle)}] \hfill \\
 	Returns the sine value for the given angle (measured in radians).
 \item[\texttt{sq(value)}] \hfill \\
@@ -169,11 +175,11 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \section{Lists}
 \begin{description}
 \item[\texttt{append(list, value)}] \hfill \\
-	Appends the value to the end of the list and returns \emph{a new} list. (Note: \ct{list + [value]}is \emph{not yet} supported.)
+	Appends the value to the end of the list and returns \emph{a new} list (equivalent to \ct{list + [value]}).
 \item[\texttt{concat(list, otherList)}] \hfill \\
-	Combines the two lists to a single \emph{new} list. (Note: \ct{list + otherList} is \emph{not yet} supported.)
+	Combines the two lists to a single \emph{new} list (equivalent to \ct{list + otherList}).
 \item[\texttt{reversed(list)}, \texttt{reverse(list)}] \hfill \\
-	Returns a \emph{new} list with its content reversed.
+	Returns a \emph{new} list with its content reversed. (Note: \ct{list[::-1]} is \emph{not yet} supported.)
 \item[\texttt{shorten(list)}] \hfill \\
 	Returns a \emph{new} list without the last argument (equivalent to \ct{list[:-1]}).
 \item[\texttt{sorted(list)}, \texttt{sort(list)}] \hfill \\
@@ -202,7 +208,6 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 
 \begin{todo}
 \item Synchronize with \url{https://github.com/zeniko/gt-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
-\item fix \ct{append} spacing
 \end{todo}
 
 
@@ -210,6 +215,3 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 
 \chapter{Technical Implementation of ``Processing Abstractions''} \label{app_implementation}
 
-
-
-\chapter{Data from Questionnaires} \label{app_data}
