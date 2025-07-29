@@ -1,0 +1,125 @@
+%%MAIN: thesis.tex
+
+\newgeometry{bottom=1cm}
+
+\begin{landscape}
+
+\begin{cfigure}[fig_uml_processing]{Diagram of most classes involved in running Processing code within Glamorous Toolkit}
+
+\begin{tikzpicture}
+
+\begin{package}{Processing}
+
+\begin{class}[text width=6cm]{ProcessingSource}{0, 0}
+\operation{fromFile:}
+\operation{fromPage:at:}
+\operation{fromSnippet:}
+\end{class}
+
+\begin{class}[text width=6cm]{ProcessingProgram}{0, 2.5}
+\operation{source:}
+\end{class}
+
+\begin{class}[text width=6cm]{ProcessingParser}{8, 0}
+\operation{parse:}
+\end{class}
+
+\begin{class}[text width=6cm]{ProcessingTranspiler}{8, 2.5}
+\operation{transpile:}
+\end{class}
+
+\begin{class}[text width=6cm]{ProcessingTranspilationSlice}{16, 0}
+\operation{link:method:from:to:}
+\end{class}
+
+\begin{interface}[text width=6cm]{ProcessingCodeBase}{0, 5}
+\operation{gtRun}
+\end{interface}
+
+\begin{class}[text width=6cm]{ProcessingRunner}{8, 5}
+\operation{run:}
+\operation{runSteps:}
+\end{class}
+
+\begin{class}[text width=6cm]{ProcessingCanvas}{0, 7.5}
+\end{class}
+
+\begin{class}[text width=6cm]{ProcessingCanvasPresenter}{8, 7.5}
+\implement{ProcessingCanvas}
+\end{class}
+
+\begin{class}[text width=6cm]{ProcessingCanvasElement}{16, 7.5}
+\end{class}
+
+\begin{class}[text width=6cm]{ProcessingAstCleaner}{16, 2.5}
+\operation{clean:}
+\end{class}
+
+\begin{interface}[text width=6cm]{ProcessingCanvasShape}{8, 9}
+\end{interface}
+
+\begin{class}[text width=6cm]{ProcessingRunStep}{16, 5}
+\operation{clean:}
+\end{class}
+
+\draw[umlcd style dashed line, ->] (ProcessingSource) -- node[black]{program} (ProcessingProgram);
+\draw[umlcd style dashed line, <->] (ProcessingProgram) -- node[black, sloped]{ast} (ProcessingParser);
+\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{(source:)} (ProcessingTranspiler);
+\draw[umlcd style dashed line, ->] (ProcessingTranspiler) -- node[black, sloped]{compile:} (ProcessingCodeBase);
+\draw[umlcd style dashed line, <->] (ProcessingTranspiler) -- node[black]{(transpile:)} (ProcessingAstCleaner);
+\draw[umlcd style dashed line, ->] (ProcessingTranspiler) -- node[black, sloped]{(compile:)} (ProcessingTranspilationSlice);
+\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{compilation} (ProcessingCodeBase);
+\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{run} (ProcessingRunner);
+\draw[umlcd style dashed line, ->] (ProcessingRunner) -- node[black]{runStepwise:} (ProcessingRunStep);
+\draw[umlcd style dashed line, ->] (ProcessingCodeBase) -- node[black]{gtCanvas} (ProcessingCanvas);
+\draw[umlcd style dashed line, ->] (ProcessingCanvas) -- node[black]{presenter} (ProcessingCanvasPresenter);
+\draw[umlcd style dashed line, ->] (ProcessingCanvasPresenter) -- node[black]{canvasElement} (ProcessingCanvasElement);
+\draw[umlcd style dashed line, ->] (ProcessingCanvas) -- node[black, sloped]{(draw)} (ProcessingCanvasShape);
+\draw[umlcd style dashed line, <-] (ProcessingCanvasShape) -- node[black, sloped]{asElement} (ProcessingCanvasElement);
+
+\end{package}
+
+\end{tikzpicture}
+
+\end{cfigure}
+
+\end{landscape}
+
+\restoregeometry
+
+\begin{cfigure}[fig_uml_snippet]{Diagram of classes involved in \ct{LeProcessingSnippet}}
+
+\begin{tikzpicture}
+
+\begin{package}{Snippet}
+
+\begin{class}[text width=6.6cm]{LeProcessingSnippet}{0, 0}
+\end{class}
+
+\begin{class}[text width=6.6cm]{LeProcessingSnippetViewModel}{0, 2}
+\end{class}
+
+\begin{class}[text width=6.6cm]{LeProcessingSnippetElement}{0, 4}
+\end{class}
+
+\begin{class}[text width=6.6cm]{GtProcessingCoderModel}{8, 0}
+\end{class}
+
+\begin{class}[text width=6.6cm]{GtProcessingCoderViewModel}{8, 4}
+\operation{doIt:}
+\operation{doItAndGo:}
+\operation{doItAndGoAsynchronous:}
+\operation{doItAndGoSerialized:}
+\operation{doItAndPublish:with:}
+\end{class}
+
+\draw[umlcd style dashed line, ->] (LeProcessingSnippet) -- node[black]{asSnippetViewModel} (LeProcessingSnippetViewModel);
+\draw[umlcd style dashed line, ->] (LeProcessingSnippetViewModel) -- node[black]{snippetElementClass} (LeProcessingSnippetElement);
+\draw[umlcd style dashed line, ->] (LeProcessingSnippet) -- node[black, rotate=90]{newCoder} (GtProcessingCoderModel);
+\draw[umlcd style dashed line, ->] (GtProcessingCoderModel) -- node[black]{asCoderViewModel} (GtProcessingCoderViewModel);
+
+\end{package}
+
+\end{tikzpicture}
+
+\end{cfigure}
