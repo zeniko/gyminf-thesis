@@ -1,12 +1,31 @@
-%%MAIN: thesis.tex
-
 %%%%% Conclusion and Future Work %%%%%
+
 \chapter{Conclusion} \label{ch_conclusion}
+
+\begin{todo}
+\item new teaching environment according to didactic recommended practice
+\item various abstraction layers observable for the same program, at the same time, with live changes
+\item works mostly with minor hiccups
+\item students have been using it somewhat successfully
+\item effects not (yet) measurable
+\item future work required
+\end{todo}
+
 
 \section{Future Work} \label{sc_future}
 
 \begin{todo}
-\item Lack of first class functions (beyond code blocks): transpiling only known functions
-\item No type checking (Python and Smalltalk are both strictly but dynamically typed)
+\item better study
+\item applying the same principle to other domains: natural sciences (cf. simulations, e.\,g. ``Epidemien-Simulation''), psychology, languages, \emph{etc.}
+\item Things to implement
+\begin{itemize}
+\item fuller Processing API (although: manageability)
+\item inner functions, functions as objects (mapping to callable objects)
+\item objects (mapping to Smalltalk objects)
+\item type checking (Python and Smalltalk are both strictly but dynamically typed)
 \item Option to translate bytecode or intermediary code to other assembly syntaxes (Intel x86, LMA, WASM, \dots)
+\item optimizer and views
+\item animations, better visualizations
+\end{itemize}
+\item adaption for different languages (few changes required for Python, whatever's missing is also missing for Processing)
 \end{todo}

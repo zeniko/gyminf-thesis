@@ -1,9 +1,15 @@
 MAIN = thesis.tex
+MAIN_PDF = $(MAIN:.tex=.pdf)
+
 OBJS = $(MAIN:.tex=.log) $(MAIN:.tex=.aux) $(MAIN:.tex=.out) $(MAIN:.tex=.toc) $(MAIN:.tex=.bbl) $(MAIN:.tex=.blg)
 
-thesis: $(MAIN:.tex=.pdf)
+thesis:
+	$(MAKE) fixup $(MAIN_PDF) clean
 
-$(MAIN:.tex=.pdf): $(MAIN:.tex=.bib) $(glob *.tex)
+$(MAIN_PDF): $(MAIN:.tex=.bib) $(glob *.tex)
+
+$(glob *.tex:.tex=.pdf:$(MAIN_PDF)=):
+	$(MAKE) $(MAIN_PDF)
 
 .tex.pdf:
 	pdflatex.exe $(<:.bib=.tex)
@@ -21,6 +27,3 @@ fixup:
 
 clean:
 	del $(OBJS) $(MAIN:.tex=.synctex.gz) $(MAIN:.tex=.synctex.gz.sum.synctex)
-
-release:
-	$(MAKE) fixup thesis clean
