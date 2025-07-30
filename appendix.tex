@@ -1,10 +1,10 @@
 %%%%% Technical Details %%%%%
 
-\chapter{Installing and Using \texttt{Processing Abstractions}} \label{app_setup}
+\chapter{Installing and Using ``Processing Abstractions''} \label{app_setup}
 
-In order to set up \texttt{Processing Abstractions}, first download Glamorous Toolkit from \url{https://gtoolkit.com/download/} for your platform and extract the archive's entire content.
+In order to set up ``Processing Abstractions'', first download Glamorous Toolkit from \url{https://gtoolkit.com/download/} for your platform and extract the archive's entire content.
 
-Before running it, create a new text file called \texttt{startup.st} in GT's top-level folder besides \ct{GlamorousToolkit.image} with the following content (access it through figure \ref{fig_startup_st_qr}):
+Before running it, create a new text file called \ct{startup.st} in GT's top-level folder besides \ct{GlamorousToolkit.image} with the following content (access it through figure \ref{fig_startup_st_qr}):
 
 \begin{code}
 Metacello new
@@ -41,7 +41,7 @@ LeYoutubeReferenceElement compile:
 		copyReplaceAll: '</iframe>'' ' with: '</iframe>''; removeChildAt: 1 ').
 \end{code}
 
-Finally run the \texttt{GlamorousToolkit} executable (under Windows and Linux it's located in the \ct{bin} subfolder). The content of \texttt{Processing Abstractions} are now available behind the ``Unterrichtseinheiten'' home tile.
+Finally run the \ct{GlamorousToolkit} executable (under Windows and Linux it's located in the \ct{bin} subfolder). The content of ``Processing Abstractions'' are now available behind the ``Unterrichtseinheiten'' home tile.
 
 Verify that everything works as desired and then close and save the changes to the image. Now, the above \ct{startup.st} can be removed, since all its changes have been persisted in GT's \ct{.image} file.
 

@@ -2,9 +2,15 @@
 
 \chapter{State of the Art in Computer Science Didactics} \label{ch_theory}
 
-Before introducing the product of this thesis in chapter \ref{ch_pa}, we first introduce the problem it should help solve: How abstractions involved in programming are taught.
+With relation to systems, didactic literature recommends to examine multiple layers of a system, in order for students to better understand the material. This concept (later called \emph{Sichtenwechsel} for lack of a better fitting English term) is introduced in \ref{ssc_sichtenwechsel} and is considered a foundational idea which should be taught explicitly (elaborated in \ref{ssc_fundamentale_ideen}).
 
-In detail, we first discuss didactic literature on teaching computer science at high school level, introducing the notions of ``foundational idea'' one of which is a \emph{Sichtenwechsel} -- a change of perspective in a multitier architecture; then we show the relevance and limits of abstractions in programming and motivate why students should look beyond a single abstraction layer in \ref{sc_abstractions}.
+Learning to handle complex systems is at the core of what happens in many subjects in school (high school and beyond). With relation to computer science, this is asked for in particular when teaching students ``computational thinking'' (see \ref{ssc_ct}). One aspect that we feel is particularly important in this regard is the fact that systems can rarely be separated into independently investigable layers in a clean way -- or in other words: many abstractions involved in layering complex systems leak (see \ref{ssc_leaky_abstractions}).
+
+When multiple abstraction layers are taught together, common approaches consist in doing so either bottom up (\ref{ssc_bottom_up}) or top down (\ref{ssc_top_down}), showing how to potentially proceed.
+
+In our experience, one thing high school students like particularly well during their computer science curriculum is programming (which is reflected in student feedback discussed in chapter \ref{ch_practice}). Therefore, we want to merge the discussion on multitier abstractions and abstraction leaks with programming. However, available IDEs as discussed in \ref{ssc_ides} only support this up to a point we found insufficient. Thus we set out to create our own teaching environment (presented in chapter \ref{ch_pa}).
+
+This environment for combining programming with a view on different abstraction layers should also adhere to current didactic best practices, among others manageability (\ref{ssc_manageability}), liveness and explorability (\ref{ssc_exploration}).
 
 
 
@@ -44,22 +50,17 @@ They conclude that ``it was a fallacy to assume that students would be able to d
 This conclusion is repeated again and again, e.\,g. by Jaokar \cite[p.\,51]{Jao12} or Zhang \cite[p.\,407]{Zha19}.
 
 
-\subsection{Manageability} \label{ssc_manageability}
+\subsection{Computational Thinking} \label{ssc_ct}
 
-Modrow and Strecker \cite{Mod16} follow Schubert and Schwill \cite{Sch11} in also building upon the concept of foundational ideas. They do however propose to significantly reduce their number and focus on a few very general such ideas such as modelling (\emph{Modellierbarkeit}), connectivity (\emph{Vernetzbarkeit}), digitization (\emph{Digitalisierbarkeit}) and algorithms (\emph{Algorithmisierbarkeit}) (pp.\,27--37). As a consequence, they do propose to focus programming exposure for high school students to block based programming languages such as MIT's Scratch \cite{Mit25} or Berkeley's variant Snap! \cite{Ber25} (p.\,125).
+Since other disciplines have started to rely on computers as more than a glorified typewriter and filing system, the notion of preparing students for working in academia and industry has shifted from teaching applications to teaching ``Computational Thinking''. Lee \emph{et al.} \cite{Lee20} have assembled cases from schools where programming is used in physics, biology, chemistry and other sciences, linking it to the role that mathematics have had in the past centuries.
 
-Their reasoning for this is that students should not (yet) have to deal with syntax errors (as opposed to teaching them as suggested by Bouvier \emph{et al.} \cite{Bou24}) and only have a manageable command palette. Furthermore, they note that block based languages with free form layouting encourages to build complex behavior from simple building blocks which can always be run and inspected individually (pp.\,184--185). This allows for a bottom up development approach in which abstractions are incrementally developed out of basic command blocks which they deem more suiteable for students than starting development at the abstract algorithm.
+As a basis for employing programming, simulation or data transformations to solve problems in other domains, students must be versed in dealing with different abstraction levels in order to connect the abilities of a computer with the subject at hand. Buitrago \emph{et al.} \cite{Bui17} also point out that students must know the limits of computers and not attribute them understanding and intelligence.
 
-While Modrow and Strecker do suggest also including digital circuits in the curriculum as concrete examples of digitization (p.\,118), they seem content in programming them without inspecting the layers in between. From their foundational idea of connectivity, treating these layers could however still follow: If students are to see how hardware and software are connected -- and that such a connection is even possible --, intermediary steps between program and hardware must be explorable by students.
+With the sudden rise of large language models in the past decade, computational thinking even refers back to programming: Martini \cite{Mar24} argues that with LLMs being able to write programs on their own, programming curricula have to be adjusted accordingly. Students will still have to be able to understand the basics, in order to be able to instruct an LLM towards a desired result.
 
-Following in these footsteps, Chiodini \emph{et al.} \cite{Chi23} similarly state as requirements for programming classes:
-\begin{itemize}
-\item Manageable complexity: IDEs and APIs must not be unnecessarily complex so as to not confuse students.
-\item Meaningful engagement: Samples and exercises should be introduced such that it's clear what they refer to outside of class. Their usefulness shouldn't end at the exam.
-\item Clean problem decomposition: Bottom up development should be effortless and code should compose with as little refactoring as possible.
-\end{itemize}
+Also, recent studies seem to suggest that relying on LLMs for coding does not lead to better developer performance \cite{Bec25} nor to better code \cite{Moh25}, as cognitive offloading has been observed. This effect is likely even more pronounced for students, as getting quick results for simple tasks might lull them into overconfidence with relation to the available LLM.
 
-The last point explicitly asks for a clean separation of abstraction levels which might be an ideal to strive for but might not be realistically achievable (cf. \ref{ssc_leaky_abstractions}).
+As a consequence, the functioning and limits of large language models must not only be taught as part of computational thinking but also used as another example for examining different abstraction levels in a computer system.
 
 
 \subsection{Teaching Bottom Up} \label{ssc_bottom_up}
@@ -90,6 +91,24 @@ Additionally, as art can be considered as individual expression, the parallel to
 While in both approaches -- gaming and art --, stepping further down to lower abstraction levels is a possibility, only one or two such steps are naturally motivated from the source material. Nonetheless, in both cases a \emph{Sichtenwechsel} is possible.
 
 
+\subsection{Manageability} \label{ssc_manageability}
+
+Modrow and Strecker \cite{Mod16} follow Schubert and Schwill \cite{Sch11} in also building upon the concept of foundational ideas. They do however propose to significantly reduce their number and focus on a few very general such ideas such as modelling (\emph{Modellierbarkeit}), connectivity (\emph{Vernetzbarkeit}), digitization (\emph{Digitalisierbarkeit}) and algorithms (\emph{Algorithmisierbarkeit}) (pp.\,27--37). As a consequence, they do propose to focus programming exposure for high school students to block based programming languages such as MIT's Scratch \cite{Mit25} or Berkeley's variant Snap! \cite{Ber25} (p.\,125).
+
+Their reasoning for this is that students should not (yet) have to deal with syntax errors (as opposed to teaching them as suggested by Bouvier \emph{et al.} \cite{Bou24}) and only have a manageable command palette. Furthermore, they note that block based languages with free form layouting encourages to build complex behavior from simple building blocks which can always be run and inspected individually (pp.\,184--185). This allows for a bottom up development approach in which abstractions are incrementally developed out of basic command blocks which they deem more suiteable for students than starting development at the abstract algorithm.
+
+While Modrow and Strecker do suggest also including digital circuits in the curriculum as concrete examples of digitization (p.\,118), they seem content in programming them without inspecting the layers in between. From their foundational idea of connectivity, treating these layers could however still follow: If students are to see how hardware and software are connected -- and that such a connection is even possible --, intermediary steps between program and hardware must be explorable by students.
+
+Following in these footsteps, Chiodini \emph{et al.} \cite{Chi23} similarly state as requirements for programming classes:
+\begin{itemize}
+\item Manageable complexity: IDEs and APIs must not be unnecessarily complex so as to not confuse students.
+\item Meaningful engagement: Samples and exercises should be introduced such that it's clear what they refer to outside of class. Their usefulness shouldn't end at the exam.
+\item Clean problem decomposition: Bottom up development should be effortless and code should compose with as little refactoring as possible.
+\end{itemize}
+
+The last point explicitly asks for a clean separation of abstraction levels which might be an ideal to strive for but might not be realistically achievable (cf. \ref{ssc_leaky_abstractions}).
+
+
 \subsection{Exploratory and Live Programming} \label{ssc_exploration}
 
 Live programming refers to output and other intermediary products being adapted or recalculated every time source code changes, without any explicit saving and/or rerunning required by the programmer \cite{Rei18}. This gives students the quickest results, as otherwise they might tend to work on code too long without occasionally testing it, if doing so requires additional interactions (for the same reason, many applications have switched to auto-saving instead of relying on users to do so manually from time to time). Live programming also gives students immediate feedback about their code and modifications.
@@ -101,19 +120,6 @@ Both Schubert and Schwill \cite[p.\,367]{Sch11} and Modrow and Strecker \cite[p.
 While live programming requires explicit support from the programming environment (see \ref{ssc_ides}), exploratory programming can be done without. Apps can still support exploration better by providing a form of REPL\footnote{REPL is short for \emph{Read-Evaluate-Print-Loop} i.\,e. an interactive interpreter.} which most scripting languages do, an interactive notebook (such as Jupyter or Lepiter, see \ref{sc_gt}) or a way of direclty running any part of a program, as Scratch does (see \ref{ssc_manageability}).
 
 The didactic reasons for using both exploratory and live programming also apply outside or pure programming, such as when inspecting and modifying live systems, networks, \emph{etc.}.
-
-
-\subsection{Computational Thinking} \label{ssc_ct}
-
-Since other disciplines have started to rely on computers as more than a glorified typewriter and filing system, the notion of preparing students for working in academia and industry has shifted from teaching applications to teaching ``Computational Thinking''. Lee \emph{et al.} \cite{Lee20} have assembled cases from schools where programming is used in physics, biology, chemistry and other sciences, linking it to the role that mathematics have had in the past centuries.
-
-As a basis for employing programming, simulation or data transformations to solve problems in other domains, students must be versed in dealing with different abstraction levels in order to connect the abilities of a computer with the subject at hand. Buitrago \emph{et al.} \cite{Bui17} also point out that students must know the limits of computers and not attribute them understanding and intelligence.
-
-With the sudden rise of large language models in the past decade, computational thinking even refers back to programming: Martini \cite{Mar24} argues that with LLMs being able to write programs on their own, programming curricula have to be adjusted accordingly. Students will still have to be able to understand the basics, in order to be able to instruct an LLM towards a desired result.
-
-Also, recent studies seem to suggest that relying on LLMs for coding does not lead to better developer performance \cite{Bec25} nor to better code \cite{Moh25}, as cognitive offloading has been observed. This effect is likely even more pronounced for students, as getting quick results for simple tasks might lull them into overconfidence with relation to the available LLM.
-
-As a consequence, the functioning and limits of large language models must not only be taught as part of computational thinking but also used as another example for examining different abstraction levels in a computer system.
 
 
 
@@ -138,7 +144,7 @@ Common such multitier architectures taught at high school level are the networki
 \node at (0, -0.5) {Application};
 \node at (0, -1.75) {Operating System};
 \node at (0, -3) {Compiler};
-\node at (0, -4.25) {Virtual Macihne};
+\node at (0, -4.25) {Virtual Machine};
 \node at (0, -5.5) {Machine Language};
 \node at (0, -6.75) {ALU / Logic Circuit};
 \node at (0, -8) {Logic Gate};
@@ -223,6 +229,10 @@ Comparing to programming IDEs, the web development consoles offered by modern we
 \begin{todo}
 \item focus: \emph{Sichtenwechsel} suggested, IDE support not ideal, new environment required
 \item additional niceties: liveness, explorativity, \dots
+\item \cite{Lim24} Python on Arduino, but views missing
 \item \cite{Oin25c}
+\item \cite{Woe24} low-level block based programming
+\item \cite{Kyf21} frame-based programming (shows AST interactively)
+\item \cite{Mic25a} should but doesn't
 \item Conclusion
 \end{todo}
