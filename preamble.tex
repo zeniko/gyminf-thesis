@@ -193,8 +193,6 @@
 
 %:CONFIGURE THIS
 
-\urlstyle{same}
-
 \usepackage{tikz}
 \usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,fit,positioning,shapes.symbols,chains,shapes.geometric,shapes.arrows,calc}
 \usepackage[simplified]{pgf-umlcd}
@@ -202,6 +200,10 @@
 \usepackage{pdflscape}
 \usepackage{fontawesome5}
 \usepackage{wasysym}
+
+\urlstyle{same}
+
+\newcommand{\archivedurl}[1]{\href{https://web.archive.org/web/*/#1}{\nolinkurl{#1}}}
 
 \newcommand{\cfigureCaption}{}
 \newenvironment{cfigure}[2][]{
