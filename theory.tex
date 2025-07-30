@@ -10,7 +10,7 @@ When multiple abstraction layers are taught together, common approaches consist 
 
 In our experience, one thing high school students like particularly well during their computer science curriculum is programming (which is reflected in student feedback discussed in chapter \ref{ch_practice}). Therefore, we want to merge the discussion on multitier abstractions and abstraction leaks with programming. However, available IDEs as discussed in \ref{ssc_ides} only support this up to a point we found insufficient. Thus we set out to create our own teaching environment (presented in chapter \ref{ch_pa}).
 
-This environment for combining programming with a view on different abstraction layers should also adhere to current didactic best practices, among others manageability (\ref{ssc_manageability}), liveness and explorability (\ref{ssc_exploration}).
+Finally, this environment for combining programming with a view on different abstraction layers should also adhere to current didactic best practices, mainly manageability (\ref{ssc_manageability}), liveness and explorability (\ref{ssc_exploration}).
 
 
 
@@ -18,7 +18,7 @@ This environment for combining programming with a view on different abstraction 
 
 Traditional introductions into programming focus on a single programming language, its syntax and the available semantics -- introducing them iteratively and practising each element with basic exercises. E.\,g. Hartinger introduces most of Python in this way so that it can later be used for scientific calculations \cite{Har20}. 
 
-This traditional introduction works mainly on the level of the programming language, only barely mentioning a simplified memory model (p.\,31) and binary encoding (pp.\,114--115). Interestingly, it does not assume an IDE (see section \ref{ssc_ides} below), but instead very briefly introduces the command line and the Python REPL. Even though in that way, files are not guaranteed to be UTF-8 encoded (as examples assume, cf. p.\,118), encodings are not mentioned beyond pure ASCII. And the Python interpreter is just in the preface briefly characterized as ``program which translates source code into electronic instructions''\footnote{German original: ''[\dots] das Programm, das den Programmcode in Elektronik-Anweisungen übersetzt.''}.
+This traditional introduction works mainly on the level of the programming language, only barely mentioning a simplified memory model (p.\,31) and binary encoding (pp.\,114--115). Interestingly, it does not assume an IDE, but instead very briefly introduces the command line and the Python REPL\footnote{REPL is short for \emph{Read-Evaluate-Print-Loop} i.\,e. an interactive interpreter.}. Even though in that way, files are not guaranteed to be UTF-8 encoded (as examples assume, cf. p.\,118), encodings are not mentioned beyond pure ASCII. And the Python interpreter is just in the preface briefly characterized as ``program which translates source code into electronic instructions''\footnote{German original: ''[\dots] das Programm, das den Programmcode in Elektronik-Anweisungen übersetzt.''}.
 
 While the needs of academic teaching and the form of semester courses with lectures and separate lab work tends to suggest such an approach, this is not a good fit with suggestions from current didactic literature \cite{Sch11, Mod16} (and even past texts \cite{Doy84}):
 
@@ -34,29 +34,31 @@ Schubert and Schwill \cite{Sch11} base their didactic approach around the notion
 
 In a later refinement, the property of Historical Relevance is added by requiring a foundational idea to also have persisted through time \cite[p.\,17]{Mod16}.
 
-Such foundational ideas are among many others the idea of modularization, the idea of layered archictectures or the idea of encoding information and instructions.
+As such foundational ideas they list among many others the idea of modularization, the idea of layered archictectures and the idea of encoding information (and as a special case: instructions).
 
-As a consequence, they propose an introduction into programming to use several different programming languages along different paradigma: e.\,g. Prolog as a declarative language (pp.\,91--104) and Python as object oriented language (pp.\,157--185), in order to better teach the foundational idea of `language' and to demonstrate to students already at the level of instructions that the language chosen comes with inherent limitations in expressibility (p.\,154, comparing programming languages with natural languages and referring to Wittgenstein's philosophy of language).
+As a consequence, they propose an introduction into programming to use several different programming languages along different paradigma: e.\,g. Prolog as a declarative language (pp.\,91--104) and Python as an object oriented language (pp.\,157--185), in order to better teach the foundational idea of `language' and to demonstrate to students already at the level of instructions that the language chosen comes with inherent limitations in expressibility (p.\,154, comparing programming languages with natural languages and referring to Wittgenstein's philosophy of language).
+
+Interestingly, they don't mention any lower level language as an alternative, as translations between different high level languages might at least at first glance seem plausible, whereas the limitations of languages such as an Assembly variation seem more plausible.
 
 
 \subsection{\emph{Sichtenwechsel}} \label{ssc_sichtenwechsel}
 
-Consequently, they propose to explicitly discuss the foundational idea of multitier architectures -- and that not only in the context of the networking stack and computer archictecture (pp.\,113--116):
+Consequently, Schubert and Schwill \cite{Sch11} propose to explicitly discuss the foundational idea of multitier architectures -- and that not only in the context of the networking stack and computer archictecture (pp.\,113--116):
 
-They introduce the notion of \emph{Sichtenwechsel}, a change of perspective with relation to the current layer, which should help students better understand concepts of one layer by inspecting lower layers. As an example, they show a live model of a calculator app whose input is translated to both pseudo code and machine code (p.\,115); an environment for inspecting live Java objects (pp.\,208--209); or the Filius environment for inspecting a virtual computer network at its different layers (p.\,284).
+They introduce the notion of \emph{Sichtenwechsel}, a change of perspective with relation to the current layer, which should help students better understand concepts of one layer by inspecting lower layers. As an example, they show a live model of a calculator app whose input is translated to both pseudo code and machine code (p.\,115); an environment for inspecting live Java objects (pp.\,208--209); or the Filius environment for inspecting a virtual computer network at its different layers (p.\,284, \cite{Gar15}).
 
-They conclude that ``it was a fallacy to assume that students would be able to develop a working model of a computer [\dots] by designing small programs'' (p.\,213),\footnote{German original: ''Es erwies sich als Irrtum, dass Schüler beim Entwerfen kleiner Programme ein tragfähiges kognitives Modell vom Rechner oder von Informatiksystemen im Allgemeinen entwickeln.''} reinforcing the need for going beyond of what traditional programming courses (used to) do.
+They conclude that ``it was a fallacy to assume that students would be able to develop a working model of a computer [\dots] by designing small programs'' (p.\,213),\footnote{German original: ''Es erwies sich als Irrtum, dass Schüler beim Entwerfen kleiner Programme ein tragfähiges kognitives Modell vom Rechner oder von Informatiksystemen im Allgemeinen entwickeln.''} reinforcing the need for combining programming with computer architecture.
 
-This conclusion is repeated again and again, e.\,g. by Jaokar \cite[p.\,51]{Jao12} or Zhang \cite[p.\,407]{Zha19}.
+This conclusion is reached repeatedly, e.\,g. also by Jaokar \cite[p.\,51]{Jao12} or Zhang \cite[p.\,407]{Zha19}.
 
 
 \subsection{Computational Thinking} \label{ssc_ct}
 
-Since other disciplines have started to rely on computers as more than a glorified typewriter and filing system, the notion of preparing students for working in academia and industry has shifted from teaching applications to teaching ``Computational Thinking''. Lee \emph{et al.} \cite{Lee20} have assembled cases from schools where programming is used in physics, biology, chemistry and other sciences, linking it to the role that mathematics have had in the past centuries.
+Since other disciplines have started to rely on computers as more than a glorified digital typewriter and filing cabinet, the notion of preparing students for working in academia and industry has shifted from teaching applications to teaching ``Computational Thinking''. Lee \emph{et al.} \cite{Lee20} have assembled cases from schools where programming is used in physics, biology, chemistry and other sciences, linking it to the role that mathematics have had in the past centuries.
 
 As a basis for employing programming, simulation or data transformations to solve problems in other domains, students must be versed in dealing with different abstraction levels in order to connect the abilities of a computer with the subject at hand. Buitrago \emph{et al.} \cite{Bui17} also point out that students must know the limits of computers and not attribute them understanding and intelligence.
 
-With the sudden rise of large language models in the past decade, computational thinking even refers back to programming: Martini \cite{Mar24} argues that with LLMs being able to write programs on their own, programming curricula have to be adjusted accordingly. Students will still have to be able to understand the basics, in order to be able to instruct an LLM towards a desired result.
+This has become an even more important matter with the recent rise of large language models (LLMs) to being ubiquitously available. With LLMs available, computational thinking even refers back to programming: Martini \cite{Mar24} argues that with LLMs being able to write programs on their own, programming curricula have to be adjusted accordingly. However students will still have to be able to understand the basics, in order to be able to instruct an LLM towards a desired result.
 
 Also, recent studies seem to suggest that relying on LLMs for coding does not lead to better developer performance \cite{Bec25} nor to better code \cite{Moh25}, as cognitive offloading has been observed. This effect is likely even more pronounced for students, as getting quick results for simple tasks might lull them into overconfidence with relation to the available LLM.
 
@@ -69,16 +71,16 @@ Beyond suggesting to connect multiple abstraction layers in a \emph{Sichtenwechs
 
 Starting at the bottom conceptually seems to be the more sound way and is e.\,g. how Mathematics are taught. One rigorous implementation of this approach is offered by Nisan and Schocken \cite{Nis21}: They offer a course which starts with basic logic gates and builds out of them first the parts of and later a fully functioning, basic CPU for which they continue to develop a low level and a high level programming language until reaching the point where applications can be run on the developed hardware (this was originally dubbed as ``NAND to Tetris'').
 
-Their motivation is the same as the motivation for this thesis: ``The most fundamental ideas [\dots] are now hidden under many layers of obscure interfaces'' (p.\,ix). Since the course is taught at university with hundreds of students, once concession is hardware virtualization: The original logic gates are not built out of silicon or electronics but instead simulated in a portable Java app. This does allow skipping intermediary steps and allows to start the course at any desired level.
+Their motivation is the same as the motivation for this thesis: ``The most fundamental ideas [\dots] are now hidden under many layers of obscure interfaces'' (p.\,ix). Since the course is taught at university with hundreds of students, one concession is hardware virtualization: The original logic gates are not built out of silicon or electronics but instead simulated in a portable Java app. This does allow skipping intermediary steps and allows to start the course at any desired level.
 
-Since working with logic gates without seeing their eventual purpose may lack motivation, the course starts with an overview from the top (pp.\,1--4) which also serves as the table of contents. With this, students keep in sight what they're working towards and can start connecting their own preexisting notions with the new material.
+Since working with logic gates without seeing their eventual purpose may lack motivation, the course starts with an overview from the top which also serves as the table of contents (pp.\,1--4, represented in figure \ref{fig_multitier} on page \pageref{fig_multitier}). With this, students keep in sight what they're working towards and can start connecting their own preexisting notions with the new material.
 
 
 \subsection{Teaching Top Down} \label{ssc_top_down}
 
 An alternative teaching approach starts directly at the students' experience, e.\,g. at gaming \cite{Wei16}, art \cite{Rea14} or even toy houses requiring intruder alerts \cite{Mod16} and starts exposing lower abstraction layers as required for gaining more control (and understanding) and extending available capabilities.
 
-At this point a rather traditional approach starts with games: Weintrop and Wilensky \cite{Wei16} discuss a variety of games where programming plays a role in either shaping an avatar, improving its available actions or make it move altogether. Whereas such games are specifically created as `pedagogical' games, many other games have at least part of their logic implemented in scripting languages such as Lua \cite{Lua25} which allows them to be modified by players. While the content involved is more complex, modifying or creating a game within still popular `Roblox' might be sufficiently motivating.
+An at this point rather traditional approach starts with games: Weintrop and Wilensky \cite{Wei16} discuss a variety of games where programming plays a role in either shaping an avatar, improving its available actions or make it move altogether. Whereas such games are specifically created as `pedagogical' games, many other games have at least part of their logic implemented in scripting languages such as Lua \cite{Lua25} which allows them to be modified by players. While the content involved is more complex, modifying or creating a game within still popular `Roblox' might be sufficiently motivating.
 
 While gaming works as an approach into programming, it's rarely used for inspecting further layers in an educational context. Motivation for doing so is usually constricted to performance optimizations for game platform developers.
 
@@ -90,10 +92,12 @@ Additionally, as art can be considered as individual expression, the parallel to
 
 While in both approaches -- gaming and art --, stepping further down to lower abstraction levels is a possibility, only one or two such steps are naturally motivated from the source material. Nonetheless, in both cases a \emph{Sichtenwechsel} is possible.
 
+As a side note: In high school courses spanning over one or even multiple years, either a top down or a bottom up approach could be implemented consistently. At university, with independent semester lectures being the standard, the focus usually lies on a single abstration layer or picking out just a few. Courses as the one held by Nisan and Schocken \cite{Nis21} seem to be the exception. Arguably, computer science students should be able to better cope with such disparities, whereas a more coherent approach might be desireable at high school.
+
 
 \subsection{Manageability} \label{ssc_manageability}
 
-Modrow and Strecker \cite{Mod16} follow Schubert and Schwill \cite{Sch11} in also building upon the concept of foundational ideas. They do however propose to significantly reduce their number and focus on a few very general such ideas such as modelling (\emph{Modellierbarkeit}), connectivity (\emph{Vernetzbarkeit}), digitization (\emph{Digitalisierbarkeit}) and algorithms (\emph{Algorithmisierbarkeit}) (pp.\,27--37). As a consequence, they do propose to focus programming exposure for high school students to block based programming languages such as MIT's Scratch \cite{Mit25} or Berkeley's variant Snap! \cite{Ber25} (p.\,125).
+Modrow and Strecker \cite{Mod16} follow Schubert and Schwill \cite{Sch11} in also building upon the concept of foundational ideas. They do however propose to significantly reduce their number and focus on a few very general such ideas such as modelling (\emph{Modellierbarkeit}), connectivity (\emph{Vernetzbarkeit}), digitization (\emph{Digitalisierbarkeit}) and algorithms (\emph{Algorithmisierbarkeit}) (pp.\,27--37). As a consequence, they do propose to focus programming exposure for high school students to block based programming languages such as MIT's Scratch\footnote{\url{https://scratch.mit.edu/}} or Berkeley's variant Snap!\footnote{\url{https://snap.berkeley.edu/}} (p.\,125).
 
 Their reasoning for this is that students should not (yet) have to deal with syntax errors (as opposed to teaching them as suggested by Bouvier \emph{et al.} \cite{Bou24}) and only have a manageable command palette. Furthermore, they note that block based languages with free form layouting encourages to build complex behavior from simple building blocks which can always be run and inspected individually (pp.\,184--185). This allows for a bottom up development approach in which abstractions are incrementally developed out of basic command blocks which they deem more suiteable for students than starting development at the abstract algorithm.
 
@@ -117,7 +121,7 @@ Exploratory programming on the other hand refers to students being given sample 
 
 Both Schubert and Schwill \cite[p.\,367]{Sch11} and Modrow and Strecker \cite[p.\,167]{Mod16} suggest exploratory programming for allowing students to work at their own speed and depth: With given examples, less experienced students can stay closer to the given -- simple but working -- code, while more experienced students can use their knowledge for testing more complicated hypotheses.
 
-While live programming requires explicit support from the programming environment (see \ref{ssc_ides}), exploratory programming can be done without. Apps can still support exploration better by providing a form of REPL\footnote{REPL is short for \emph{Read-Evaluate-Print-Loop} i.\,e. an interactive interpreter.} which most scripting languages do, an interactive notebook (such as Jupyter or Lepiter, see \ref{sc_gt}) or a way of direclty running any part of a program, as Scratch does (see \ref{ssc_manageability}).
+While live programming requires explicit support from the programming environment (see \ref{ssc_ides}), exploratory programming can be done without. Apps can still support exploration better by providing a form of REPL which most scripting languages do, an interactive notebook (such as Jupyter or Lepiter, see \ref{sc_gt}) or a way of direclty running any part of a program, as Scratch does (see \ref{ssc_manageability}).
 
 The didactic reasons for using both exploratory and live programming also apply outside or pure programming, such as when inspecting and modifying live systems, networks, \emph{etc.}.
 
@@ -127,7 +131,7 @@ The didactic reasons for using both exploratory and live programming also apply 
 
 In order to handle complexities arising in both theoretical and practical computer science, subjects are split into multiple layers or tiers to be described, investigated and used separatedly.
 
-Common such multitier architectures taught at high school level are the networking stack (either the seven layered OSI model or the simplified four layered DoD architecture) or the software-hardware stack ranging from apps and hardware abstracting OS down to transistors consisting of e.\,g. silicium atoms (see figure \ref{fig_multitier}).
+Common such multitier architectures taught at high school level are the networking stack (for manageability reasons rather the simplified four layered DoD architecture than the seven layered OSI model) or the software-hardware stack ranging from apps and hardware abstracting OS down to transistors consisting of e.\,g. silicium atoms (see \cite{Oin25c}, figure \ref{fig_multitier}).
 
 \begin{cfigure}[fig_multitier]{Multitier model of a computer system \cite[p.\,xii]{Nis21}.}
 % adapted from https://github.com/dev-gb/TikZ-osi-model
@@ -167,7 +171,7 @@ As such, programming should be possible to be done independently of hardware and
 
 This analogy however shows that even in computer science, the philosophical mind-body problem persists, albeit in a different form: ``At the grossest physical level, a computer process is a series of changes in the state of a machine'' \cite[p.\,12]{Col99}. In contrast to the human mind, where the interaction between objectively observable brain matter and subjective thought is at the core of an ongoing philosophical and neuroscientific debate, in computer science this duality of having electrical currenty on the one hand and a running program on the other is decomposable all the way through.
 
-And as has been shown in \ref{sc_didactic}, didactic literature suggests that this feature should be discussed, as this is a foundational idea of computer science.
+And as has been shown above, didactic literature suggests that this feature should be discussed, as this is a foundational idea of computer science.
 
 
 \subsection{Leaky Abstractions} \label{ssc_leaky_abstractions}
@@ -199,7 +203,7 @@ In cryptography, timing attacks have been successfully used for extracting passw
 
 Further examples of leaky abstractions are discussed by Egger \cite{Egg24} and many others \cite{Nat25, Kan25}. These show that knowledge of lower layers are particularly important for developers of compilers and other performance-critical programs: In order to optimize a program, the specifics of the platform architecture and the implementation of processors and networking become crucial.
 
-Since abstraction leaks are unavoidable in programming -- even with block based languages such as Scratch --, they have to be discussed anyway. Instead of tackling them one by one as separate exceptional cases, literature discussed above suggests to use this opportunity to work out the foundational idea of a multitier architecture and of the interconnectivity of computer systems.
+Since abstraction leaks are unavoidable in programming -- even within block based languages such as Scratch --, they have to be discussed anyway. Instead of tackling them one by one as separate exceptional cases, literature discussed above suggests to use this opportunity to work out the foundational idea of a multitier architecture and of the interconnectivity of computer systems.
 
 
 \subsection{Abstractions in IDEs} \label{ssc_ides}
@@ -212,9 +216,9 @@ As a remedy, several teaching oriented IDEs have been developped, such as ``Code
 
 On the one hand, Thonny shows intermediary steps during expression evaluation. This demonstrates that statements are not evaluated in one go, but indeed in a predetermined order operation by operation.\footnote{In professional IDEs, intermediary results are usually available by hovering over a specific operator with the order of evaluation being left to the user to determine.}
 
-On the other hand, Thonny visualizes recursion by showing code in a new pop-up for every function call, so that multiple recursive function calls lead to an equivalent number of visible pop-ups. Most other IDEs rather show a call stack as in a separate view, which abstracts the stack into a list.\footnote{As a compromise, Glamorous Toolkit presented in chapter \ref{ch_background} displays the call stack as a list of expandable method sources with the call location highlighted.}
+On the other hand, Thonny visualizes recursion by showing code in a new pop-up for every function call, so that multiple recursive function calls lead to an equivalent number of visible pop-ups. Most other IDEs rather show a call stack as in a separate view, which abstracts the stack into a list.\footnote{As a compromise, Glamorous Toolkit presented in \ref{sc_gt} displays the call stack as a list of expandable method sources with the call location highlighted.}
 
-Finally, Thonny distinguishes between values on the stack and on the heap, showing the pointer to the heap as the value actually pushed on the stack and in a separate view the actual object on the heap at the given address.
+Finally, Thonny distinguishes between values on the stack and values on the heap, showing the pointer to the heap as the value actually pushed on the stack and in a separate view the actual object on the heap at the given address.
 
 Thus, the Thonny IDE set out to and indeed nicely visualizes several concepts on lower runtime layers.
 
@@ -226,13 +230,9 @@ Bouvier \emph{et al.} \cite{Bou24} ask for an extension of this: a view to show 
 
 Comparing to programming IDEs, the web development consoles offered by modern web browsers also provide a variety of views into the various layers of the network stack. These views are however tailored to answer the most common questions of a web developer instead of providing a coherent overview of how the network layers interact.
 
-\begin{todo}
-\item focus: \emph{Sichtenwechsel} suggested, IDE support not ideal, new environment required
-\item additional niceties: liveness, explorativity, \dots
-\item \cite{Lim24} Python on Arduino, but views missing
-\item \cite{Oin25c}
-\item \cite{Woe24} low-level block based programming
-\item \cite{Kyf21} frame-based programming (shows AST interactively)
-\item \cite{Mic25a} should but doesn't
-\item Conclusion
-\end{todo}
+A different introduction to lower system layers is taken by Wörister and Knobelsdorf \cite{Woe24}, who for manageability (see \ref{ssc_manageability}) also keep to block based programming languages. They propose teaching lower level concepts based on a newly developed block based language ``Blocksambler'' where the block structure is translated live into pure text based assembly language and whose debugging view exposes program counter, registers and memory. What is missing from Blocksambler is a way to directly connect it with Scratch or any other high level language.
+
+As an intermediary step between block based and purely text based languages, Kyfonidis \emph{et al.} \cite{Kyf21} propose a frame-based interface which adds a colored background to blocks and statements. While this is meant to mimic a block based view, it could just as well be used as an inline view of a program's AST. Their solution for preventing parser errors does however lie in heavily restricting possible student input which effectively introduces a new input mode.\footnote{The original proponents of frame-based editing, Kölling \emph{et al.} \cite{Koe15} also noted as much.}
+
+One kind of IDE where a close connection to lower architectural layers would be expected, are didactic IDEs targetted at microcontroller programming. While common microcontroller platforms such as Arduino or micro:bit are supported in many common IDEs (including didactic ones such as Thonny mentioned above), specialized IDEs would be the ideal location for allowing to inspect the inner workings of a (virtual) machine. However neither the oficial Arduino Lab for MicroPython editor\footnote{\url{https://labs.arduino.cc/en/labs/micropython}, documented at \url
+{https://docs.arduino.cc/micropython/environment/code-editor/}.} nor micro:bit's Python editor\footnote{\url{https://python.microbit.org/v/3}} offer any additional views, not even matching Thonny's.
