@@ -4,11 +4,11 @@
 
 In order to set up ``Processing Abstractions'', first download Glamorous Toolkit from \url{https://gtoolkit.com/download/} for your platform and extract the archive's entire content.
 
-Before running it, create a new text file called \ct{startup.st} in GT's top-level folder besides \ct{GlamorousToolkit.image} with the following content (access it through figure \ref{fig_startup_st_qr}):
+Before running it, create a new text file called \ct{startup.st} in \ac{GT}'s top-level folder besides \ct{GlamorousToolkit.image} with the following content (access it through figure \ref{fig_startup_st_qr}):
 
 \begin{code}
 Metacello new
-	repository: 'github://zeniko/gt-exploration:thesis/src';
+	repository: 'github://zeniko/\ac{GT}-exploration:thesis/src';
 	baseline: 'GtExploration';
 	load.
 
@@ -43,9 +43,9 @@ LeYoutubeReferenceElement compile:
 
 Finally run the \ct{GlamorousToolkit} executable (under Windows and Linux it's located in the \ct{bin} subfolder). The content of ``Processing Abstractions'' are now available behind the ``Unterrichtseinheiten'' home tile.
 
-Verify that everything works as desired and then close and save the changes to the image. Now, the above \ct{startup.st} can be removed, since all its changes have been persisted in GT's \ct{.image} file.
+Verify that everything works as desired and then close and save the changes to the image. Now, the above \ct{startup.st} can be removed, since all its changes have been persisted in \ac{GT}'s \ct{.image} file.
 
-\emph{Warning:} If you've already used GT before, the contents of your local knowledge database will also be included in GT's image. Therefore rename that folder (usually \ct{lepiter/default} in your documents folder) before starting the GT meant for distribution.
+\emph{Warning:} If you've already used \ac{GT} before, the contents of your local knowledge database will also be included in \ac{GT}'s image. Therefore rename that folder (usually \ct{lepiter/default} in your documents folder) before starting the \ac{GT} meant for distribution.
 
 Also, since the executable \ct{GlamorousToolkit.exe} is located in a subdirectory under Windows and Linux, adding a top-level link can help students. See \url{https://github.com/zeniko/gtRunner} for a ready-to-use drop-in.
 
@@ -57,7 +57,8 @@ Also, since the executable \ct{GlamorousToolkit.exe} is located in a subdirector
 
 \chapter{GT Processing API} \label{app_api}
 
-This appendix lists the available API calls implemented in Processing Abstraction's Processing. This has been auto-generated from GT page ``Processing API'':
+This appendix lists the available \ac{API} calls implemented in Processing Abstraction's Processing.\footnote{For comparison, the full \ac{API} or Processing's Python mode is available at \archivedurl{https://py.processing.org/reference/}.} This has been auto-generated from \ac{GT} page ``Processing API'':
+
 
 \section{Rendering}
 
@@ -88,8 +89,8 @@ Paths can be absolute or relative to either \ct{FileLocator class>>gtResource} o
 Element
 GtInspector newOn: FileLocator documents / 'lepiter'
 \end{code}
-\item[\texttt{rect(x, y, width, height)}] \hfill \\
-	Draws a rectangle of the given width and height, parallel to the coordinate axes with its top left corner at \ct{(x; y)}.
+\item[\texttt{rect(x, y, width, height)}, \texttt{rect(x, y, width, height, cornerRadius)}] \hfill \\
+	Draws a rectangle of the given width and height, parallel to the coordinate axes with its top left corner at \ct{(x; y)}. Optionally round the corners, if a fifth argument is given.
 \item[\texttt{square(x, y, side)}] \hfill \\
 	Draws a square with the given side length, parallel to the coordinate axes with its top left corner at \ct{(x; y)}. Short for \ct{rect(x, y, side, side)}.
 \item[\texttt{text(string, x, y)}] \hfill \\
@@ -102,7 +103,7 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 
 \subsection{Colors}
 \begin{description}
-\item[\texttt{color(r, g, b)}] \hfill \\
+\item[\texttt{color(r, g, b)}, \texttt{color(gray)}] \hfill \\
 	Generates a color object which can be stored in a variable also be used with \ct{fill(...)}, \ct{stroke(...)} and \ct{background(...)}.
 \item[\texttt{fill(r, g, b)}] \hfill \\
 	Selects the color to use for filling rendered shapes. The color is given as three values in the range of 0 to 255 (red, green and blue respectively). Default is white (255, 255, 255).
@@ -176,14 +177,17 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \begin{description}
 \item[\texttt{append(list, value)}] \hfill \\
 	Appends the value to the end of the list and returns \emph{a new} list (equivalent to \ct{list + [value]}).
+(Note: \ct{list.append(...)} is \emph{not yet} supported.)
 \item[\texttt{concat(list, otherList)}] \hfill \\
 	Combines the two lists to a single \emph{new} list (equivalent to \ct{list + otherList}).
-\item[\texttt{reversed(list)}, \texttt{reverse(list)}] \hfill \\
-	Returns a \emph{new} list with its content reversed. (Note: \ct{list[::-1]} is \emph{not yet} supported.)
+\item[\texttt{reversed(list)}] \hfill \\
+	Returns a \emph{new} list with its content reversed.
+(Note: \ct{list[::-1]} and \ct{list.reverse()} are \emph{not yet} supported.)
 \item[\texttt{shorten(list)}] \hfill \\
 	Returns a \emph{new} list without the last argument (equivalent to \ct{list[:-1]}).
-\item[\texttt{sorted(list)}, \texttt{sort(list)}] \hfill \\
+\item[\texttt{sorted(list)}] \hfill \\
 	Returns \emph{new} list with its content sorted.
+(Note: \ct{list.sort()} is \emph{not yet} supported.)
 \end{description}
 
 \section{Miscellanea}
@@ -201,16 +205,53 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \item[\texttt{print(value)}, \texttt{println(value)}] \hfill \\
 	Prints the given value into an output console (mainly for debugging and for graphic-less program).
 \item[\texttt{str(value)}] \hfill \\
-	Turns the value into a string, e.\,g. for concatenating several values for use with \ct{text(...)}.
+	Turns the value into a string, e.g. for concatenating several values for use with \ct{text(...)}.
 \item[\texttt{width}] \hfill \\
 	Contains the canvas width as set by \ct{size()}.
 \end{description}
 
 \begin{todo}
-\item Synchronize with \url{https://github.com/zeniko/gt-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
+\item Synchronize with \url{https://github.com/zeniko/\ac{GT}-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
 \end{todo}
 
 
 
 
 \chapter{Technical Implementation of ``Processing Abstractions''} \label{app_implementation}
+
+\begin{cfigure}[fig_uml_snippet]{Diagram of classes involved in \ct{LeProcessingSnippet}}
+
+\begin{tikzpicture}
+
+\begin{package}{Snippet}
+
+\begin{class}[text width=6.6cm]{LeProcessingSnippet}{0, 0}
+\end{class}
+
+\begin{class}[text width=6.6cm]{LeProcessingSnippetViewModel}{0, 2}
+\end{class}
+
+\begin{class}[text width=6.6cm]{LeProcessingSnippetElement}{0, 4}
+\end{class}
+
+\begin{class}[text width=6.6cm]{GtProcessingCoderModel}{8, 0}
+\end{class}
+
+\begin{class}[text width=6.6cm]{GtProcessingCoderViewModel}{8, 4}
+\operation{doIt:}
+\operation{doItAndGo:}
+\operation{doItAndGoAsynchronous:}
+\operation{doItAndGoSerialized:}
+\operation{doItAndPublish:with:}
+\end{class}
+
+\draw[umlcd style dashed line, ->] (LeProcessingSnippet) -- node[black]{asSnippetViewModel} (LeProcessingSnippetViewModel);
+\draw[umlcd style dashed line, ->] (LeProcessingSnippetViewModel) -- node[black]{snippetElementClass} (LeProcessingSnippetElement);
+\draw[umlcd style dashed line, ->] (LeProcessingSnippet) -- node[black, rotate=90]{newCoder} (GtProcessingCoderModel);
+\draw[umlcd style dashed line, ->] (GtProcessingCoderModel) -- node[black]{asCoderViewModel} (GtProcessingCoderViewModel);
+
+\end{package}
+
+\end{tikzpicture}
+
+\end{cfigure}

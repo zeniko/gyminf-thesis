@@ -193,10 +193,9 @@
 
 %:CONFIGURE THIS
 
+\usepackage[printonlyused,withpage]{acronym}
 \usepackage{tikz}
-\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,fit,positioning,shapes.symbols,chains,shapes.geometric,shapes.arrows,calc}
 \usepackage[simplified]{pgf-umlcd}
-
 \usepackage{pdflscape}
 \usepackage{fontawesome5}
 \usepackage{wasysym}
@@ -223,8 +222,8 @@
 }
 
 \newenvironment{todo}{
-	\PackageWarning{ToDo}{!!! Unresolved issues !!!}
-	\begin{list}{\faTasks}{}
+	\PackageWarning{todo}{!!! Unresolved issues !!!}
+	\begin{list}{\faTasks\ To do:}{}
 }{
 	\end{list}
 }
