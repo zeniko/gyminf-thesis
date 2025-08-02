@@ -41,7 +41,7 @@ LeYoutubeReferenceElement compile:
 		copyReplaceAll: '</iframe>'' ' with: '</iframe>''; removeChildAt: 1 ').
 \end{code}
 
-Finally run the \ct{GlamorousToolkit} executable (under Windows and Linux it's located in the \ct{bin} subfolder). The content of ``Processing Abstractions'' are now available behind the ``Unterrichtseinheiten'' home tile.
+Finally run the \ct{GlamorousToolkit} executable (under Windows and Linux it's located in the \ct{bin} subfolder). The teaching materials of ``Processing Abstractions'' are now available behind the ``Unterrichtseinheiten'' home tile.
 
 Verify that everything works as desired and then close and save the changes to the image. Now, the above \ct{startup.st} can be removed, since all its changes have been persisted in \ac{GT}'s \ct{.image} file.
 
@@ -205,7 +205,7 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \item[\texttt{print(value)}, \texttt{println(value)}] \hfill \\
 	Prints the given value into an output console (mainly for debugging and for graphic-less program).
 \item[\texttt{str(value)}] \hfill \\
-	Turns the value into a string, e.\,g. for concatenating several values for use with \ct{text(...)}.
+	Turns the value into a string, \eg for concatenating several values for use with \ct{text(...)}.
 \item[\texttt{width}] \hfill \\
 	Contains the canvas width as set by \ct{size()}.
 \end{description}

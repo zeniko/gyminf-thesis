@@ -17,18 +17,20 @@
 \end{class}
 
 \begin{class}[text width=6cm]{ProcessingProgram}{0, 2.5}
-\operation{source:}
+\operation{ast}
+\operation{compilation}
+\operation{run}
 \end{class}
 
-\begin{class}[text width=6cm]{ProcessingParser}{8, 0}
+\begin{class}[text width=6cm]{ProcessingParser}{-8, 0}
 \operation{parse:}
 \end{class}
 
-\begin{class}[text width=6cm]{ProcessingTranspiler}{8, 2.5}
+\begin{class}[text width=6cm]{ProcessingTranspiler}{-8, 2.5}
 \operation{transpile:}
 \end{class}
 
-\begin{class}[text width=6cm]{ProcessingTranspilationSlice}{16, 0}
+\begin{class}[text width=6cm]{ProcessingTranspilationSlice}{-8, 7.5}
 \operation{link:method:from:to:}
 \end{class}
 
@@ -42,40 +44,44 @@
 \end{class}
 
 \begin{class}[text width=6cm]{ProcessingCanvas}{0, 7.5}
+\operation{asElement}
+\operation{presenter}
 \end{class}
 
 \begin{class}[text width=6cm]{ProcessingCanvasPresenter}{8, 7.5}
 \implement{ProcessingCanvas}
 \end{class}
 
-\begin{class}[text width=6cm]{ProcessingCanvasElement}{16, 7.5}
+\begin{class}[text width=6cm]{ProcessingCanvasElement}{8, 9}
 \end{class}
 
-\begin{class}[text width=6cm]{ProcessingAstCleaner}{16, 2.5}
+\begin{class}[text width=6cm]{ProcessingAstCleaner}{-8, 5}
 \operation{clean:}
 \end{class}
 
-\begin{interface}[text width=6cm]{ProcessingCanvasShape}{8, 9}
+\begin{interface}[text width=6cm]{ProcessingCanvasShape}{0, 9}
 \end{interface}
 
-\begin{class}[text width=6cm]{ProcessingRunStep}{16, 5}
-\operation{clean:}
+\begin{class}[text width=6cm]{ProcessingRunStep}{8, 2.5}
 \end{class}
 
-\draw[umlcd style dashed line, ->] (ProcessingSource) -- node[black]{program} (ProcessingProgram);
-\draw[umlcd style dashed line, <->] (ProcessingProgram) -- node[black, sloped]{ast} (ProcessingParser);
-\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{(source:)} (ProcessingTranspiler);
-\draw[umlcd style dashed line, ->] (ProcessingTranspiler) -- node[black, sloped]{compile:} (ProcessingCodeBase);
-\draw[umlcd style dashed line, <->] (ProcessingTranspiler) -- node[black]{(transpile:)} (ProcessingAstCleaner);
-\draw[umlcd style dashed line, ->] (ProcessingTranspiler) -- node[black, sloped]{(compile:)} (ProcessingTranspilationSlice);
-\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{compilation} (ProcessingCodeBase);
-\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{run} (ProcessingRunner);
-\draw[umlcd style dashed line, ->] (ProcessingRunner) -- node[black]{runStepwise:} (ProcessingRunStep);
-\draw[umlcd style dashed line, ->] (ProcessingCodeBase) -- node[black]{gtCanvas} (ProcessingCanvas);
-\draw[umlcd style dashed line, ->] (ProcessingCanvas) -- node[black]{presenter} (ProcessingCanvasPresenter);
-\draw[umlcd style dashed line, ->] (ProcessingCanvasPresenter) -- node[black]{canvasElement} (ProcessingCanvasElement);
-\draw[umlcd style dashed line, ->] (ProcessingCanvas) -- node[black, sloped]{(draw)} (ProcessingCanvasShape);
-\draw[umlcd style dashed line, <-] (ProcessingCanvasShape) -- node[black, sloped]{asElement} (ProcessingCanvasElement);
+\draw[umlcd style dashed line, ->] (ProcessingSource) -- node[black]{$<<$accesses$>>$} (ProcessingProgram);
+\draw[umlcd style dashed line, <->] (ProcessingProgram) -- node[black]{$<<$source $\rightarrow$ \ac{AST}$>>$} (ProcessingParser);
+\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{$<<$uses$>>$} (ProcessingTranspiler);
+\draw[umlcd style dashed line, ->] (ProcessingTranspiler) -- node[black]{$<<$creates$>>$} (ProcessingCodeBase);
+\draw[umlcd style dashed line, <->] (ProcessingTranspiler) -- node[black]{$<<$uses$>>$} (ProcessingAstCleaner);
+\draw[umlcd style dashed line, ->] (ProcessingTranspiler) |- node[black]{$<<$creates$>>$} (ProcessingTranspilationSlice);
+\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{$<<$accesses$>>$} (ProcessingCodeBase);
+\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{$<<$uses$>>$} (ProcessingRunner);
+\draw[umlcd style dashed line, ->] (ProcessingRunner) -- node[black]{$<<$runs$>>$} (ProcessingCodeBase);
+\draw[umlcd style dashed line, ->] (ProcessingRunner) -- node[black]{$<<$creates$>>$} (ProcessingRunStep);
+\draw[umlcd style dashed line, ->] (ProcessingCodeBase) -- node[black]{$<<$owns$>>$} (ProcessingCanvas);
+\draw[umlcd style dashed line, ->] (ProcessingRunner) -- node[black]{$<<$creates$>>$} (ProcessingCanvas);
+\draw[umlcd style dashed line, ->] (ProcessingCanvas) -- node[black]{$<<$controls$>>$} (ProcessingCanvasPresenter);
+\draw[umlcd style dashed line, ->] (ProcessingCanvasPresenter) -- node[black]{$<<$interacts$>>$} (ProcessingCanvasElement);
+\draw[umlcd style dashed line, ->] (ProcessingCanvas) -- node[black]{$<<$creates$>>$} (ProcessingCanvasShape);
+\draw[umlcd style dashed line, ->] (ProcessingCanvasShape) -- node[black]{$<<$renders$>>$} (ProcessingCanvasElement);
+% node[black, sloped]
 
 \end{package}
 
