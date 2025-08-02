@@ -25,4 +25,4 @@ fixup:
 	-xse -x\0 "!/\\ct\{/ s/\.{3}/\\dots/g" *.tex
 
 clean:
-	del $(OBJS) $(MAIN:.tex=.synctex.gz) $(MAIN:.tex=.synctex.gz.sum.synctex)
+	del $(OBJS) $(MAIN:.tex=.synctex.gz) $(MAIN:.tex=.synctex.gz.sum.synctex) diagrams\*.aux

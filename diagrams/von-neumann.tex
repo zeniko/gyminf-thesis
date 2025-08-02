@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+
+\node [draw, rectangle, text width=1.5cm, align=center, minimum width=2cm, minimum height=2cm] (input) at (-5, 0) {Input Device};
+\node [draw, rectangle, text width=1.5cm, align=center, minimum width=2cm, minimum height=2cm] (output) at (5, 0) {Output Device};
+\node [draw, rectangle, minimum width=5cm, minimum height=7cm] (machine) at (0, 0) {};
+
+\node [draw, rectangle, minimum width=4cm, minimum height=4cm] (cpu) at (0, 1) {};
+\node [draw, rectangle, minimum width=4cm, minimum height=1cm] (memory) at (0, -2.5) {Memory Unit};
+
+\node at (0, 2.5) {Central Processing Unit};
+\node [draw, rectangle, minimum width=3.5cm, minimum height=1cm] at (0, 1.5) {Control Unit};
+\node [draw, rectangle, minimum width=3.5cm, minimum height=1cm] at (0, 0) {Arithmetic Logic Unit};
+
+\draw [-{Latex[length=5mm]}] (input) -- (machine);
+\draw [-{Latex[length=5mm]}] (machine) -- (output);
+\draw [->, transform canvas={shift={(-5pt, 0)}}] (cpu) -- (memory);
+\draw [<-, transform canvas={shift={(+5pt, 0)}}] (cpu) -- (memory);
+
+\end{tikzpicture}
