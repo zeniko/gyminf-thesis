@@ -65,8 +65,8 @@
 \begin{class}[text width=6cm]{ProcessingRunStep}{8, 2.5}
 \end{class}
 
-\draw[umlcd style dashed line, ->] (ProcessingSource) -- node[black]{$<<$accesses$>>$} (ProcessingProgram);
-\draw[umlcd style dashed line, <->] (ProcessingProgram) -- node[black, sloped]{$<<$source $\rightarrow$ \ac{AST}$>>$} (ProcessingParser);
+\draw[umlcd style dashed line, ->] (ProcessingSource) -- node[black]{$<<$creates$>>$} (ProcessingProgram);
+\draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black, sloped]{$<<$uses$>>$} (ProcessingParser);
 \draw[umlcd style dashed line, ->] (ProcessingProgram) -- node[black]{$<<$uses$>>$} (ProcessingTranspiler);
 \draw[umlcd style dashed line, ->] (ProcessingTranspiler) -- node[black, sloped]{$<<$creates$>>$} (ProcessingCodeBase);
 \draw[umlcd style dashed line, <->] (ProcessingTranspiler) -- node[black]{$<<$uses$>>$} (ProcessingAstCleaner);

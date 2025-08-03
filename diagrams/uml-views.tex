@@ -1,0 +1,87 @@
+\begin{tikzpicture}
+
+\begin{package}{Processing}
+
+\begin{class}[text width=6cm]{ProcessingSource}{8, 0}
+\operation[0]{gtAbstractionsFor:}
+\operation[0]{gtBytecodeFor:}
+\operation[0]{gtContentsFor:}
+\operation[0]{gtIntermediaryRepresentationFor:}
+\operation[0]{gtOutputFor:}
+\operation[0]{gtTranspilationFor:}
+\operation[0]{gtTreeFor:}
+\end{class}
+
+\begin{class}[text width=7cm]{ProcessingProgram}{0, 9.5}
+\operation{gtAbstractionsFor:}
+\operation[0]{gtBytecodeFor:}
+\operation{gtBytecodePlusIRFor:}
+\operation{gtBytecodePlusSourceFor:}
+\operation{gtContentsFor:}
+\operation[0]{gtIntermediaryRepresentationFor:}
+\operation{gtIntermediaryRepresentationPlusSourceFor:}
+\operation[0]{gtOutputFor:}
+\operation{gtOutputPlusSourceFor:}
+\operation[0]{gtOutputShapesFor:}
+\operation[0]{gtSlicesFor:}
+\operation{gtSourceBytesFor:}
+\operation{gtSourceBytesPlusCharsFor:}
+\operation{gtSourceBytesPlusSourceFor:}
+\operation{gtSourceCharsFor:}
+\operation{gtSourceCharsPlusSourceFor:}
+\operation[0]{gtStepsFor:}
+\operation{gtTokensFor:}
+\operation{gtTokensPlusSourceFor:}
+\operation{gtTokensPlusTreeFor:}
+\operation[0]{gtTranspilationFor:}
+\operation{gtTranspilationPlusSourceFor:}
+\operation{gtTranspilationPostfixFor:}
+\operation{gtTranspilationPrefixFor:}
+\operation{gtTreeFor:}
+\operation{gtTreeMondrianFor:}
+\operation{gtTreeOldFor:}
+\operation{gtTreePlusSourceFor:}
+\end{class}
+
+\begin{interface}[text width=6cm]{ProcessingCodeBase}{8, 4.5}
+\operation{gtAbstractionsFor:}
+\operation{gtBytecodeFor:}
+\operation{gtIntermediaryRepresentationFor:}
+\operation{gtOutputFor:}
+\operation{gtSlicesFor:}
+\operation{gtSourceCodeFor:}
+\end{interface}
+
+\begin{class}[text width=6cm]{ProcessingCanvas}{8, 7.5}
+\operation{asElement}
+\operation{gtShapesFor:}
+\operation{gtViewFor:}
+\end{class}
+
+\begin{class}[text width=6cm]{ProcessingRunStep}{8, 13}
+\operation{gtAbstractionsFor:}
+\operation{gtBytecodeFor:}
+\operation{gtOutputFor:}
+\operation{gtOverviewFor:}
+\operation[0]{gtSourceCodeFor:}
+\operation[0]{gtSourceCodesFor:}
+\operation{gtStackFor:}
+\operation{gtVariablesFor:}
+\end{class}
+
+\begin{class}[text width=7cm]{ProcessingTranspilationSlice}{0, 13}
+\operation{gtComparisonFor:}
+\operation{gtSourceFor:}
+\operation{gtTranspilationFor:}
+\end{class}
+
+\draw[umlcd style dashed line, ->] (ProcessingSource.south west) -| node[black]{$<<$forwards to$>>$} (ProcessingProgram.south);
+\draw[umlcd style dashed line, ->] (ProcessingProgram.north east) -- +(0.5, 0) -- +(0.5, -9.1) -| node[black]{$<<$forwards to$>>$} (ProcessingCodeBase.south);
+\draw[umlcd style dashed line, ->] (ProcessingProgram.north east) -- +(0.5, 0) -- +(0.5, -1.5) -| node[black]{$<<$forwards to$>>$} (ProcessingCanvas);
+\draw[umlcd style dashed line, ->] (ProcessingCodeBase) -- node[black]{$<<$embeds$>>$} (ProcessingCanvas);
+\draw[umlcd style dashed line, ->] (ProcessingProgram.north east) -- +(0.5, 0) -- +(0.5, -1) -| node[black]{$<<$embeds$>>$} (ProcessingRunStep);
+\draw[umlcd style dashed line, ->] (ProcessingRunStep.west) -- +(-0.5, 0) -- +(-0.5, -0.5) -| node[black]{$<<$forwards to$>>$} (ProcessingTranspilationSlice);
+
+\end{package}
+
+\end{tikzpicture}

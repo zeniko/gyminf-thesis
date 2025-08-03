@@ -59,169 +59,184 @@ Also, since the executable \ct{GlamorousToolkit.exe} is located in a subdirector
 
 This appendix lists the available \ac{API} calls implemented in Processing Abstraction's Processing.\footnote{For comparison, the full \ac{API} or Processing's Python mode is available at \archivedurl{https://py.processing.org/reference/}.} This has been auto-generated from \ac{GT} page ``Processing API'':
 
-
-\section{Rendering}
-
-\subsection{Setup}
-\begin{description}
-\item[\texttt{background(r, g, b)}] \hfill \\
-	Clears the canvas and changes its color (see \ct{fill(r, g, b)}). Default is light gray (192, 192, 192).
-\item[\texttt{background(gray)}] \hfill \\
-	Clears the canvas and changes its color (see \ct{fill(gray)}). Default is light gray (192).
-\item[\texttt{size(width, height)}] \hfill \\
-	Prepares an output canvas of the given dimensions. This command must always be called first (for animations: first command in \ct{def setup}).
-\end{description}
-
-\subsection{Shapes}
-\begin{description}
-\item[\texttt{circle(x, y, d)}] \hfill \\
-	Draws a circle with the given diameter and its center at \ct{(x; y)}. Short for \ct{ellipse(x, y, d, d)}.
-\item[\texttt{ellipse(x, y, dx, dy)}] \hfill \\
-	Draws an ellipse with the given diameters and its center at \ct{(x; y)}.
-\item[\texttt{image(image, x, y)}, \texttt{image(image, x, y, width, height)}] \hfill \\
-	Renders the image loaded with \ct{loadImage(...)} at the given coordinates (and scales it to fit the given size). Arguments following after the first are identical to \ct{rect}'s. If \ct{width} and \ct{height} are not given, the image's native dimensions are used.
-\item[\texttt{line(x1, y1, x2, y2)}] \hfill \\
-	Draws a line from \ct{(x1; y1)} to \ct{(x2; y2)}.
-\item[\texttt{loadImage(pathOrUrl)}] \hfill \\
-	Loads the image from the given URL or path. The returned value is to be used with \ct{image(...)}.
-Paths can be absolute or relative to either \ct{FileLocator class>>gtResource} or:
-\begin{code}
-Element
-GtInspector newOn: FileLocator documents / 'lepiter'
-\end{code}
-\item[\texttt{rect(x, y, width, height)}, \texttt{rect(x, y, width, height, cornerRadius)}] \hfill \\
-	Draws a rectangle of the given width and height, parallel to the coordinate axes with its top left corner at \ct{(x; y)}. Optionally round the corners, if a fifth argument is given.
-\item[\texttt{square(x, y, side)}] \hfill \\
-	Draws a square with the given side length, parallel to the coordinate axes with its top left corner at \ct{(x; y)}. Short for \ct{rect(x, y, side, side)}.
-\item[\texttt{text(string, x, y)}] \hfill \\
-	Renders the given \ct{string} with its baseline starting at \ct{(x; y)}.
-\item[\texttt{textSize(size)}] \hfill \\
-	Sets the size for rendering text in pixels. Default is 12px.
-\item[\texttt{triangle(x1, y1, x2, y2, x3, y3)}] \hfill \\
-	Draws a triangle with its vertices at the points \ct{(x1; y1)}, \ct{(x2; y2)} and \ct{(x3; y3)}.
-\end{description}
-
-\subsection{Colors}
-\begin{description}
-\item[\texttt{color(r, g, b)}, \texttt{color(gray)}] \hfill \\
-	Generates a color object which can be stored in a variable also be used with \ct{fill(...)}, \ct{stroke(...)} and \ct{background(...)}.
-\item[\texttt{fill(r, g, b)}] \hfill \\
-	Selects the color to use for filling rendered shapes. The color is given as three values in the range of 0 to 255 (red, green and blue respectively). Default is white (255, 255, 255).
-\item[\texttt{fill(gray)}] \hfill \\
-	Selects the gray scale value to use for filling rendered shapes. The color is given as a single value in the range of 0 to 255 (black/dark to white/light). Default is white (255).
-\item[\texttt{noStroke()}] \hfill \\
-	Disables borders for future shapes. Equivalent to \ct{strokeWeight(0)}.
-\item[\texttt{stroke(r, g, b)}] \hfill \\
-	Selects the color to use for the borders of rendered shapes (see \ct{fill(r, g, b)}). Default is black (0, 0, 0).
-\item[\texttt{stroke(gray)}] \hfill \\
-	Selects the gray scale value to use for the borders of rendered shapes (see \ct{fill(gray)}). Default is black (0).
-\item[\texttt{strokeWeight(weight)}] \hfill \\
-	Determines the size of drawn borders in pixels. Default is 0.5px.
-\end{description}
-
-\subsection{Transforms}
-\begin{description}
-\item[\texttt{rotate(angle)}] \hfill \\
-	Rotates all future shapes by the given angle (in \ct{radians}!) clockwise around the origin.
-\item[\texttt{scale(factor)}] \hfill \\
-	Linearly scales all future shapes by the given factor from the origin.
-\item[\texttt{translate(x, y)}] \hfill \\
-	Moves the origin \ct{(0; 0)} for all future shapes (defaults to the upper left corner).
-\end{description}
-
-\section{Events}
-\begin{description}
-\item[\texttt{def draw():}] \hfill \\
-	is called repeatedly (up to \ct{frameRate} times per second) for drawing the output.
-\item[\texttt{def mouseClicked():}] \hfill \\
-	is called whenever a mouse button has been clicked \emph{and} released.
-\item[\texttt{def mouseMoved():}] \hfill \\
-	is called whenever the mouse has been moved. Alternatively query \ct{mouseX} and \ct{mouseY} in \ct{draw()}.
-\item[\texttt{def mousePressed():}] \hfill \\
-	is called whenever a mouse button has been pressed. Alternatively query \ct{mousePressed} in \ct{draw()}.
-\item[\texttt{def mouseReleased():}] \hfill \\
-	is called whenever a mouse button has been released.
-\item[\texttt{def setup():}] \hfill \\
-	is called once as the program starts.
-\end{description}
-
-\section{Mathematics}
-\begin{description}
-\item[\texttt{cos(angle)}] \hfill \\
-	Returns the cosine value for the given angle (measured in radians).
-\item[\texttt{int(value)}] \hfill \\
-	Rounds the value to an integer.
-\item[\texttt{PI}] \hfill \\
-	The value of the mathematical constant p.
-\item[\texttt{max(a, b)}] \hfill \\
-	Returns the larger of the two values (\ct{max(a)} returns the largest value contained in the list \ct{a}).
-\item[\texttt{min(a, b)}] \hfill \\
-	Returns the smaller of the two values (\ct{min(a)} returns the smallest value contained in the list \ct{a}).
-\item[\texttt{radians(angle)}] \hfill \\
-	Converts the given angle (measured in degrees) into radians.
-\item[\texttt{random(limit)}] \hfill \\
-	Returns a random floating point number between 0 and limit (inclusive).
-\item[\texttt{randomSeed(seed)}] \hfill \\
-	Reinitializes the random generator with the given \ct{seed} number. Using the same number will result in the exact same sequence of pseudo-randomly generated numbers.
-\item[\texttt{sin(angle)}] \hfill \\
-	Returns the sine value for the given angle (measured in radians).
-\item[\texttt{sq(value)}] \hfill \\
-	Returns the squared value. Equivalent to \ct{value ** 2}
-\item[\texttt{sqrt(value)}] \hfill \\
-	Returns the square root of the given value.
-\item[\texttt{tan(angle)}] \hfill \\
-	Returns the tangent value for the given angle (measured in radians).
-\end{description}
-
-\section{Lists}
-\begin{description}
-\item[\texttt{append(list, value)}] \hfill \\
-	Appends the value to the end of the list and returns \emph{a new} list (equivalent to \ct{list + [value]}).
-(Note: \ct{list.append(...)} is \emph{not yet} supported.)
-\item[\texttt{concat(list, otherList)}] \hfill \\
-	Combines the two lists to a single \emph{new} list (equivalent to \ct{list + otherList}).
-\item[\texttt{reversed(list)}] \hfill \\
-	Returns a \emph{new} list with its content reversed.
-(Note: \ct{list[::-1]} and \ct{list.reverse()} are \emph{not yet} supported.)
-\item[\texttt{shorten(list)}] \hfill \\
-	Returns a \emph{new} list without the last argument (equivalent to \ct{list[:-1]}).
-\item[\texttt{sorted(list)}] \hfill \\
-	Returns \emph{new} list with its content sorted.
-(Note: \ct{list.sort()} is \emph{not yet} supported.)
-\end{description}
-
-\section{Miscellanea}
-\begin{description}
-\item[\texttt{delay(ms)}] \hfill \\
-	Waits \ct{ms} milliseconds before continuing (mainly needed for demonstration purposes).
-\item[\texttt{frameRate(fps)}] \hfill \\
-	Limits the frame rate of animations to a maximum of \ct{fps} frames per second. Default is 30.
-\item[\texttt{height}] \hfill \\
-	Contains the canvas height as set by \ct{size()}.
-\item[\texttt{millis()}] \hfill \\
-	Returns the number of milliseconds that have passed since the program has started.
-\item[\texttt{mouseX}, \texttt{mouseY}, \texttt{mousePressed}] \hfill \\
-	Contains the \ct{x}- and \ct{y}-coordinates of the mouse cursor and whether the mouse has been pressed at the start of a \ct{draw}-phase (undefined outside of \ct{draw}).
-\item[\texttt{print(value)}, \texttt{println(value)}] \hfill \\
-	Prints the given value into an output console (mainly for debugging and for graphic-less program).
-\item[\texttt{str(value)}] \hfill \\
-	Turns the value into a string, \eg for concatenating several values for use with \ct{text(...)}.
-\item[\texttt{width}] \hfill \\
-	Contains the canvas width as set by \ct{size()}.
-\end{description}
-
-\begin{todo}
-\item Synchronize with \url{https://github.com/zeniko/\ac{GT}-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
-\end{todo}
-
+\input{appendix-api}
 
 
 
 \chapter{Technical Implementation of ``Processing Abstractions''} \label{app_implementation}
 
+
+\section{Classes}
+
+\begin{description}
+
+\item[\texttt{BlContainerWithHeaderElement}] \hfill \\
+	
+\item[\texttt{BrTextEditorReadonlyWithNavigationMode}] \hfill \\
+	
+\item[\texttt{GtExplorationHomeSection}] \hfill \\
+	
+\item[\texttt{GtProcessingCoderDebugShortcut}] \hfill \\
+	
+\item[\texttt{GtProcessingCoderModel}] \hfill \\
+	
+\item[\texttt{GtProcessingCoderRunDetailsShortcut}] \hfill \\
+	
+\item[\texttt{GtProcessingCoderRunShortcut}] \hfill \\
+	
+\item[\texttt{GtProcessingCoderRunStepsShortcut}] \hfill \\
+	
+\item[\texttt{GtProcessingCoderViewModel}] \hfill \\
+	
+\item[\texttt{LeProcessingSnippet}] \hfill \\
+	
+\item[\texttt{LeProcessingSnippetElement}] \hfill \\
+	
+\item[\texttt{LeProcessingSnippetViewModel}] \hfill \\
+	
+\item[\texttt{LiveViewWrapper}] \hfill \\
+	
+\item[\texttt{ProcessingASTChanged}] \hfill \\
+	
+\item[\texttt{ProcessingAstCleaner}] \hfill \\
+	
+\item[\texttt{ProcessingCanvas}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasElement}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasEllipse}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasExamples}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasImage}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasLine}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasPolygon}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasPresenter}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasRectangle}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasRoundedRectangle}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasShape}] \hfill \\
+	
+\item[\texttt{ProcessingCanvasText}] \hfill \\
+	
+\item[\texttt{ProcessingCodeBase}] \hfill \\
+	
+\item[\texttt{ProcessingCompiler}] \hfill \\
+	
+\item[\texttt{ProcessingExecTest1}] \hfill \\
+	
+\item[\texttt{ProcessingExplainShape}] \hfill \\
+	
+\item[\texttt{ProcessingInterpreter}] \hfill \\
+	
+\item[\texttt{ProcessingList}] \hfill \\
+	
+\item[\texttt{ProcessingProgram}] \hfill \\
+	
+\item[\texttt{ProcessingProgramChanged}] \hfill \\
+	
+\item[\texttt{ProcessingProgramExamples}] \hfill \\
+	
+\item[\texttt{ProcessingRunner}] \hfill \\
+	
+\item[\texttt{ProcessingRunnerExamples}] \hfill \\
+	
+\item[\texttt{ProcessingRunStep}] \hfill \\
+	
+\item[\texttt{ProcessingSource}] \hfill \\
+	
+\item[\texttt{ProcessingSourceChanged}] \hfill \\
+	
+\item[\texttt{ProcessingSourceChangedError}] \hfill \\
+	
+\item[\texttt{ProcessingSourceExamples}] \hfill \\
+	
+\item[\texttt{ProcessingTokenExtractor}] \hfill \\
+	
+\item[\texttt{ProcessingTokenExtractorExamples}] \hfill \\
+	
+\item[\texttt{ProcessingTranspilationSlice}] \hfill \\
+	
+\item[\texttt{ProcessingTranspiler}] \hfill \\
+	
+\item[\texttt{ProcessingTranspilerExamples}] \hfill \\
+	
+\item[\texttt{ProcessingTranspilerVariant}] \hfill \\
+	
+\item[\texttt{ProcessingTranspilerVariantExamples}] \hfill \\
+	
+\item[\texttt{ProcessingTreeMondrianCreatorExamples}] \hfill \\
+	
+\item[\texttt{ProcessingViewSelectionChanged}] \hfill \\
+	
+\item[\texttt{Stepper}] \hfill \\
+	
+\item[\texttt{StepperExamples}] \hfill \\
+	
+\item[\texttt{ViewComparison}] \hfill \\
+	
+\item[\texttt{ViewComparisonExamples}] \hfill \\
+	
+
+\end{description}
+
+
 \begin{cfigure}[fig_uml_snippet]{Diagram of classes involved in \ct{LeProcessingSnippet}}
 \input{diagrams/uml-snippet}
 \end{cfigure}
+
+
+\section{Views}
+
+The following views are available as arguments for \ct{ProcessingSource>>>renderLiveView:} (see figure \ref{fig_embedding_view} on page \pageref{fig_embedding_view}). See figure \ref{fig_uml_views} for an overview of all view implementors.
+
+\begin{cfigure}[fig_uml_views]{Diagram of all views provided and their implementors (methods set in \textit{italics} are forwarded)}
+\input{diagrams/uml-views}
+\end{cfigure}
+
+\begin{description}
+\item[\texttt{gtAbstractionsFor:}] \hfill \\
+	(implemented by \ct{ProcessingProgram}) combines \ct{gtContentsFor:}, \ct{gtTreeFor:}, \ct{gtBytecodeFor:} and \ct{gtOutputFor:}, linking the source to the other three views through a common \ct{Announcer} reacting to selection changes (shown in figure \ref{fig_view_abstractions}).
+\item[\texttt{gtBytecodeFor:}] \hfill \\
+	uses the \ct{CompiledMethod} instances of each method in a compiled class' \ct{class methodDict} to access its \ct{symbolicBytecodes} and show the resulting \ct{SymbolicBytecode}s' bytes and mnemonic (shown on the right in figure \ref{fig_view_ir_bytecode}). \ct{gtBytecodePlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+\item[\texttt{gtBytecodePlusIRFor:}] \hfill \\
+	combines the \ct{gtBytecodeFor:} with \ct{gtIntermediaryRepresentationFor:} (shown in figure \ref{fig_view_ir_bytecode}).
+\item[\texttt{gtContentsFor:}] \hfill \\
+	displays a fresh read-only editor instance from \ct{SmaCCParseNode>>gtSourceEditorWithHightlight:} with a custom \ct{BrTextEditorReadonlyWithNavigationMode} mode (shown on the top left in figure \ref{fig_view_abstractions}, on the left in \ref{fig_view_transpilation}, \etc).
+\item[\texttt{gtIntermediaryRepresentationFor:}] \hfill \\
+	uses the \ct{OpalCompiler} for translating the transpiled Smalltalk code to \ct{IRInstruction}s (shown on the left in figure \ref{fig_view_ir_bytecode}). \ct{gtIntermediaryRepresentationPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+\item[\texttt{gtOutputFor:}] \hfill \\
+	displays a newly created \ct{ProcessingCanvasElement} with attached event listeners for interactivity (shown on the bottom right in figure \ref{fig_view_abstractions}). \ct{gtOutputPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+\item[\texttt{gtOutputShapesFor:}] \hfill \\
+	shows a list of all \ct{ProcessingCanvasShape}s in the order they were drawn (shown in figure \ref{fig_view_shapes}). Clearing the canvas with \ct{background(...)} also clears this list.
+\item[\texttt{gtSlicesFor:}] \hfill \\
+	shows a list of \ct{ProcessingTranspilationSlice}s with the corresponding expressions in Processing source code and Smalltalk transpilation highlighted (shown in figure \ref{fig_view_slices}).
+\item[\texttt{gtSourceBytesFor:}] \hfill \\
+	shows a list of \ct{SmallInteger}s corresponding to the bytes of the source code after UTF-8 encoding (shown on the right in figure \ref{fig_view_chars_bytes}) \ct{gtSourceBytesPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+\item[\texttt{gtSourceBytesPlusCharsFor:}] \hfill \\
+	combines \ct{gtSourceCharsFor:} and \ct{gtSourceBytesFor:} (shown in figure \ref{fig_view_chars_bytes}).
+\item[\texttt{gtSourceCharsFor:}] \hfill \\
+	shows a list of \ct{Character}s corresponding to each of the Processing source code's characters (shown on the left in figure \ref{fig_view_chars_bytes}). \ct{gtSourceCharsPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+\item[\texttt{gtStepsFor:}] \hfill \\
+	shows a list of \ct{ProcessingRunStep}s and their own \ct{gtAbstractionFor:} view, consisting of their \ct{gtSourceCodeFor:}, \ct{gtBytecodeFor:}, \ct{gtVariablesFor:}, \ct{gtStackFor:} and \ct{gtOutputFor:} (shown in figure \ref{fig_view_runsteps}). \ct{ProcessingRunStep>>gtOverviewFor:} is a simplified variant of this shown from the ``Processing/Python'' snippet.
+\item[\texttt{gtTokensFor:}] \hfill \\
+	shows a list of \ct{SmaCCToken}s that were produced by \ct{ProcessingParser} (shown on the left in figure \ref{fig_view_tokens_ast}). \ct{gtTokensPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+\item[\texttt{gtTokensPlusTreeFor:}] \hfill \\
+	combines \ct{gtTokensFor:} with \ct{gtTreeFor:} (shown in figure \ref{fig_view_tokens_ast}).
+\item[\texttt{gtTranspilationFor:}] \hfill \\
+	shows the transpiled Smalltalk code in \ct{GT}'s code viewer which separates methods and adds syntax highlighting. \ct{gtTranspilationPlusSourceFor:} combines this view with \ct{gtContentsFor:} (shown in figure \ref{fig_view_transpilation}).
+\item[\texttt{gtTranspilationPostfixFor:} and \texttt{gtTranspilationPrefixFor:}] \hfill \\
+	show a \ct{String} produced by \ct{ProcessingTranspilerVariant} in either its \ct{prefix} or \ct{postfix} modes (shown at the bottom in figure \ref{fig_view_prefix_postfix} respectively).
+\item[\texttt{gtTreeFor:}] \hfill \\
+	shows a treelist of \ct{PyRootNode}s for expression roots and \ct{SmaCCToken}s for structural tokens (shown on the right in figure \ref{fig_view_tokens_ast}).
+\item[\texttt{gtTreeMondrianFor:}] \hfill \\
+	shows a horizontal \ct{GtMondrian} tree produced by \ct{ProcessingTreeMondrianCreator} (shown in figure \ref{fig_view_ast_tree}). \ct{gtTreePlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+\end{description}
 
 \begin{cfigure}[fig_view_abstractions]{The `Abstractions' view with source code, \ac{AST}, bytecode and output showing}
 \includegraphics[width=.7\textwidth]{view_abstractions}

@@ -2,30 +2,53 @@
 
 \chapter{Conclusion} \label{ch_conclusion}
 
-\begin{todo}
-\item new teaching environment according to didactic recommended practice
-\item various abstraction layers observable for the same program, at the same time, with live changes
-\item works mostly with minor hiccups
-\item students have been using it somewhat successfully
-\item effects not (yet) measurable
-\item future work required
-\end{todo}
+In order to better understand complex content -- at least with regards to computer science --, didactic literature recommends for students to perform a \emph{Sichtenwechsel}, \ie observing the same entity at different abstraction layers, in order to better understand the subject at hand. As part of our teaching computer science to high school students, we've been particularly interested in being able to do so with regards to popular programming and less popular computer architecture.
+
+While various programming \acp{IDE} provide some possibilities to get relevant insights into a computer's inner workings, none of them offer an all-in-one solution as a building block at a complexity level manageable for high school students. As part of this thesis, a new teaching environment has thus been introduced, implementing a compiler and runtime for the Processing language inside of \acf{GT}, which allows to flexibly combine various forms of content in a unified environment. On the basis of the working Processing system, a wide variety of views into various aspects of it has been added, allowing to inspect a program from source bytes to machine bytecode and through its execution.
+
+This allowed creating interactive teaching material which engages students through its liveness and by allowing to lead them at their own pace and depth through the material, having students explore and experience what steps computers have to take for transforming their idea of a program into something sufficiently concrete that can actually be executed in a (virtual) machine.
+
+Working with students showed that the environment mostly worked and managed to get students involved. While students seem to have learned through their own investigation into lower abstraction levels, significant effects could not (yet) be measured. This was in large part due to both a small sample size and too brief an observation window.
+
+Further usage and studies will be required for verifying our initial assumptions. This remains planned for the school years to come. Additionally, the foundational idea of abstraction layers has to be introduced alongside explicitly, if students should be able to get a better understanding of when abstractions might leak and how that could be relevant.
+
 
 
 \section{Future Work} \label{sc_future}
 
+Continuing this path further, there are multiple ways to proceed. On the one hand, there are several aspects still missing from the environment itself. On the other hand, the same concept of \emph{Sichtenwechsel} might be applicable in other domains as well. Finally, a larger study confirming that this kind of approach is empirically sound is required.
+
+Within the environment itself, there are several kinds of views that we feel are still missing. In particular, at this point most views show a single state along abstraction deconstruction. Visualizations for how to get from one to the next are still missing and would have to happen mainly in students' minds for now. Even just animating the `Runsteps' view instead of having students to click through, with differences from one to the other step being highlighted, might help. More interesting would however be animating the process of parsing tokens into an \ac{AST} or more ambitiously the process of taking Processing source code, parsing it and then translating it.
+
+Then the machine code shown to students is for a stack machine. Common microprocessors, such as those of the x64 architecture at the heart of our students' computers, are however register based. Compiling code to a matching machine language by \eg transpiling it to C and then having it compiled to x64 machine code would be a possible approach. Another approach would consist in directly translating it to Intel Assembly or corresponding bytecode. In order to then run such code, a matching virtual machine or a better way to show intermediary processor states would be required, if the execution steps are again to be observed.
+
+Two other steps that are missing for inspecting the process of compilation are type inference and optimizations. Processing and Smalltalk are both dynamically typed languages, allowing to skip type checking considerations down to bytecode, as type differences are handled through inheritance and only optimized by a \ac{JIT}. Exposing type information and visualizing a type inference algorithm such as Hindley-Milner could be added. Python's syntax would even allow type hints which could also be used to allow students to experiment with types.
+
+Optimization on the other hand happens at various abstraction levels. With regards to choosing the right algorithm for a problem, a program's runtime behavior could be timed and shown. Alternatively, most programs written by high schoolers should be understandable and analyzable by current \acp{LLM}, so that adding a \ac{LLM}-enabled view could give students feedback at the highest layer. At lower layers, \ac{GT} offers a \ct{GtMethodAdvice} system for analyzing source code at the method or expression level which could be exposed and/or expanded. Similarly, \ac{GT}'s \ac{IR} could be optimized further than \ct{IrMethod>>optimize} does and its optimizations transformations exposed to students.
+
+As for the implementation of Processing, many bits are missing. Mainly support for object-oriented programming should be achievable, since Python's object model should again map sufficiently well onto Smalltalk's. What will however not be realistically possible is to get a sufficiently full Python inside \ac{GT} which would allow importing (arbitrary) further modules. This should however not be as much of an issue, since similar to the Processing \ac{IDE}, hitting the limitations of the environment should be taken as a hint that the environment has been outgrown and to move to more capable tools, continuing the investigations using professional debuggers, memory viewers, \etc.
+
+For students coming from a different programming language, adapting the environment to their language of choice might also be doable. Since \ac{GT} already contains support for parsing dozens of languages (among others JavaScript, C(++), Rust or even Visual Basic), matching a subset of that language from its \ac{AST} to Smalltalk should be doable in the same way as \ct{ProcessingTranspiler} was implemented. At least when sticking to the Processing \ac{API}, the rest of the environment could be reused with minimal adjustments.
+
+
 \begin{todo}
-\item better study
 \item applying the same principle to other domains: natural sciences (cf. simulations, \eg ``Epidemien-Simulation''), psychology, languages, \etc
-\item Things to implement
+\item better study
+\end{todo}
+
+
+\section*{Remaining To Do}
+
+\begin{todo}
+\item Validation: diagrams for visualization:
 \begin{itemize}
-\item fuller Processing API (although: manageability)
-\item inner functions, functions as objects (mapping to callable objects)
-\item objects (mapping to Smalltalk objects)
-\item type checking (Python and Smalltalk are both strictly but dynamically typed)
-\item Option to translate bytecode or intermediary code to other assembly syntaxes (Intel x86, LMA, WASM, \dots)
-\item optimizer and views
-\item animations, better visualizations
+\item number/percentage of students interacting
+\item successfully learned
 \end{itemize}
-\item adaption for different languages (few changes required for Python, whatever's missing is also missing for Processing)
+\item verify statistical claims (don't claim too much)
+\item how to best share data? \url{https://github.com/zeniko/gyminf-thesis/blob/main/data/data_6_1.csv}?
+\item use 2DET taxonomy for chapter 4/5? \cite{Sor13}
+\item Appendix: How detailed explanations are required in the appendix?
+\item consider removing/replacing page linking in ``Unterrichtseinheiten''
+\item Synchronize appendix \ref{app_api} with \url{https://github.com/zeniko/\ac{GT}-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
 \end{todo}
