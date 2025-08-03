@@ -42,6 +42,8 @@ Any of the views into a program require its source written in Processing with Py
 \input{diagrams/views}
 \end{cfigure}
 
+Screenshots of all views can be found in appendix \ref{app_implementation}. Note that most views show a molded collection of objects which can be inspected individually by double-clicking the corresponding item.
+
 
 \subsection{Source Snippet}
 
@@ -112,19 +114,60 @@ Since in the background we have an actual translation of the Processing program 
 Since a single program run usually takes many run steps, these views are meant to be displayed together in an interface allowing to step through the execution. For manageablility, when accessed directly from the Processing snippet, this combined view will not contain the `Bytecode' and `Stack' views. The full view will thus have to be shown explicitly to students once they have been introduced to the relevant concepts, whereas the reduced view can also be used for debugging the execution of a program during an introductionary programming course.
 
 
-\subsection{Source Data}
-% Source -> Characters -> Bytes
+\subsection{Encoding Views}
 
-At the level of source code, there's three different views showing the source with syntax highlighting (\ct{gtContentsFor:}), showing the individual source characters with their unicode value (\ct{gtSourceCharsFor:}), and showing the bytes as they would be written to disk, assuming the default UTF-8 encoding also used by the original Processing \ac{IDE}, with bytes also displayed in hexadecimal and binary notations (\ct{gtSourceBytesFor:}). With these views and suitable sample code, students might be able to deduce some regularities with relation to ASCII character ranges and UTF-8 encoding.
+For a different connection, source code can also be viewed as text that has to be stored somehow. To show this, there are two additional views to source code:
+
+The `Characters' view lists the source code split into individual characters and shows characters with their Unicode value in decimal and hexadecimal. The hexadecimal notation is for a later comparison with either a binary file viewer\footnote{Such as \eg \url{https://hexed.it/}.} or with the `Bytes' view.
+
+The `Bytes' view shows the UTF-8 encoding\footnote{UTF-8 is the default encoding of most modern software, in particular however it's the encoding chosen for both \ac{GT}'s notebook pages and for the Processing IDE.} of the source characters, as they are actually written to the disk. The bytes are again shown in their decimal and hexadecimal but also in binary notation. This is meant for students to combine programming also with text encoding lessons.
 
 
 \subsection{Other Views}
-% Source -> Slices
-% Source -> Shapes
+
+Two further views are provided for delving deeper into the implementation of compiler and runtime:
+
+The `Slices' view shows a list of all parsed Processing (sub)expressions with the corresponding transpiled expression. This list is used internally for matching Processing code to derivates of the transpiled Smalltalk.
+
+The `Shapes' view shows a list of all shapes produced by a Processing program, demonstrating that in an object oriented environment such as \ac{GT}, shapes aren't just collections of pixels but also objects with their properties that can be handled independently.
 
 
 
 \section{Implementation Details}
+
+The environment consists of a Processing compiler and a runtime environment both implemented in Smalltalk inside \ac{GT}. Views were primarily implemented as close to the required data as possible but are all mirrored inside the main class \ct{ProcessingProgram} with a subset of these being shown for \ct{ProcessingSource} which serves as entry class (see figure \ref{fig_uml_processing}).
+
+\input{diagrams/uml-processing}
+
+The implemented code can be found within \ac{GT}'s Coder (package manager) or by name through the Spotter (search engine (\faSearch)).\footnote{After it has been imported as described in appendix \ref{app_setup}. Note that a stable snapshot of the code discussed here is available at \url{https://github.com/zeniko/gt-exploration/tree/thesis}.}
+
+
+\subsection{Processing Compiler}
+
+Compiling a Processing program happens automatically when loading a source as a \ct{ProcessingSource} from snippet, file or string and then sending the source a \ct{program} message. Alternatively, the following steps can also be performed manually:
+
+The Processing compiler mainly uses \ac{GT}'s builtin \ct{PythonParser} class for parsing the code which is based upon the SmaCC parser generator.\footnote{\emph{Cf.} \archivedurl{https://refactory.com/smacc/}.} \ct{ProcessingParser} is a transparent subclass, allowing to intermittently fix issues encountered in the Python parser.\footnote{It should be noted: All reported parser issues have been fixed within a day.}
+
+The resulting \ac{AST} is then passed to \ct{ProcessingTranspiler} which first rewrites the constructs that Smalltalk doesn't support: in-place arithemtics (\eg \ct{a += 2} is expanded to \ct{a = a + 2}) and unreachable statements after a \ct{return} which have to be removed. Additionally, logical \ct{and} and \ct{or} operations are converted from being left associated (as per Python's precedence table) to being right associated which \ac{GT} suggests for more efficiently handle early exits.\footnote{The Smalltalk compiler doesn't seem to optimize this case. We have not been able to verify whether the optimizing JIT does.} This rewritten \ac{AST} is only used internally and not visible to users.
+
+Transpiling happens by a tree visitor, translating the individual \ac{AST} nodes to corresponding Smalltalk with no optimizations. For each node, a \ct{ProcessingTranspilationSlice} is recorded which contains a reference to the \ac{AST} node and the text span in the transpiled code.
+
+Finally, an anonymous subclass of \ct{ProcessingCodeBase} is created and all Processing functions are then compiled from the transpiled code by the \ct{OpalCompiler} to executable methods. Global Processing code is compiled into the \ct{gtRun} entry point method and, if \ct{setup} and/or \ct{draw} functions are defined in Processing code, the implicit animation loop is also added.\footnote{In order to prevent overriding of \ct{gtRun} and the different view messages, Processing names starting with \ct{gt} are renamed to starting with \ct{gt_} during transpilation.} Processing \ac{API} calls -- if not overwritten by user code -- are translated through messages of the form \ct{ProcessingTranspiler>>>emit_...:} which the transpiler detects through reflection.
+
+The compiled object can be used as any object. In particular, \ac{GT}'s reflective capabilities can be used, \eg for extracting bytecodes of a method through \ct{CompiledCode>>>symbolicBytecodes}. \ct{ProcessingCodeBase} thus implements all views related to the Smalltalk \ac{VM}.
+
+\ct{ProcessingProgram} mirrors those views and only implements views related to Processing code. In order not to overwhelm students with too many views, \ct{gtDefaultInspectorTool} has been implemented on \ct{ProcessingProgram} for hiding all but the main `Abstractions' combination view behind the same symbols as used by the snippet.
+
+During compilation, most common exceptions are \ct{SmaCCParserError} during parsing, \ct{ProcessingCompileTimeException} during transpilation and \ct{ProcessingRunTimeException} during execution.
+
+
+\subsection{Processing Runtime}
+
+The Processing runtime consists of \ct{ProcessingRunner} and \ct{ProcessingCanvas}:
+
+The runner moves code execution to a worker thread, leaving the UI thread available for output and interaction, and performs a simple heuristic for detecting accidental endless loops by simply terminating any program with too long a runtime. This is necessary in a live programming environment, as during composition students will almost inevitably write endless loops. The runner can also be used for extracting runtime steps. In order to achieve this, \ac{GT}'s debugging facilities for stepping through code are called and a debugging session is executed step-by-step in the background. For both users, the runner is automatically called by \ct{ProcessingProgram}.
+
+The canvas provides the implementation of most of the Processing \ac{API}: Every compiled Processing program is assigned a canvas by the runner and all Processing \ac{API} calls are forwarded to the canvas for rendering. The canvas is implemented using the model-presenter-view pattern, allowing for multiple views for a single canvas. Shapes are thus also only abstractly created by the canvas, being instantiated by the presenter in every single view instance.
 
 
 \subsection{Views}
@@ -143,112 +186,39 @@ ViewComparison newFor: {
 \end{code}
 
 
-Any of these views can be integrated on its own into an interactive notebook page for producing student content, they are however also all available to students through the Processing/Python snippet's various execution modes: Either running the program for pure output ({\small\faPlay} or \ct{Ctrl+R}) gives access to the most common views by inspecting the object behind the output ({\small\faPlay}\texttt{i} in the upper right corner); or running the program for details ({\small\faPlay}\texttt{a} or \ct{Ctrl+D}) yields all the views through \texttt{i} at the top center. For manageability, both of these options can be ignored at the start, as the default views should provide sufficient informations and the remaining ones can be continually introduced during class.
+\subsection{Snippet}
 
+The `Processing/Python' snippet is implemented through \ct{LeProcessingSnippet} and associated classes.\footnote{\emph{Cf.} figure \ref{fig_uml_snippet} on page \pageref{fig_uml_snippet}.} This is mostly based on the provided \ct{LePythonSnippet}, replacing the use of the Python language bridge with calls to our own Processing compiler and runtime.
 
-\section{Classes}
-
-\input{diagrams/uml-processing}
-
-\ac{GT} was chosen for its moldable environment: As shown in \ref{sc_gt}, different views are quick to implement and can be combined freely with interactions and updates between them.
-
-Since \ac{GT} is based on Smalltalk, an initial effort is required to learn language and environment before these benefits can be used. This is helped by Smalltalk's regular syntax and \ac{GT}'s reflective capabilities.\footnote{For Smalltalk and \ac{GT}'s ancestor Pharo, there are sufficient resources available online, for \ac{GT} itself, there's the ``Glamorous Toolkit Book'' \cite{Gir23} and a Discord server.}
-
-Implementing a new language in \ac{GT} can happen along the moldable patterns documented in \ref{sc_moldable}: Starting with concrete samples, classes and views for handling them are molded in steps until the desired behavior is reached; then code is refactored into permanent methods on the one hand and a concrete example serving as test case on the other. Whenever the need for a different view into the program or one of its intermediary forms (such as \ac{AST}, bytecode or output) arises, the view is constructed in the same way by first iteratively shaping the data into the desired form and then either passing this to one of \ac{GT}'s standard views (text, list, tree, table, forward) or composing the view's layout in the same way iteratively.
-
-The product consists of the following main classes which can be found in \ac{GT} through the spotter (\faSearch):
-
-\ct{ProcessingCanvas} provides the implementation of most of the Processing \ac{API} for rendering the various shapes in the form of \ct{BlElement}s (wrapped through \ct{ProcessingCanvasShape}). It does this through \ct{ProcessingCanvasPresenter} into a \ct{ProcessingCanvasElement} of which there can be multiple, allowing to use a canvas for multiple views. The canvas also provides access to the individual shapes and all of its state. Rendering onto the canvas happens through the transpiled and compiled Processing program for which a new canvas is created for every separate run.
-
-Processing programs can be written either inside \ac{GT}'s notebook in form of a ``Processing/Python'' snippet, in form of a Smalltalk string or in separate files. All forms are loaded through the \ct{ProcessingSource} class. Since we mostly want Processing source and its various views to be seen in a notebook page, the most common way to process a Processing program will be inside the page through\footnote{The \ct{at: 1} part of the message may also be omitted, if there's only one snippet on a notebook page. Omit the \ct{renderLive} message, if you want access to any of the intermediary states or different views.}
-\begin{code}
-(ProcessingSource fromPage: thisSnippet page at: 1) renderLive
-\end{code}
+The snippet can either create \ct{ProcessingSource} instances by itself, showing either the `Output', `Runsteps' or `Abstractions' views; or its code can be programmatically loaded in a notebook `Element' snippet as shown in figure \ref{fig_embedding_view}.\footnote{The \ct{at: 1} part of the message may also be omitted, if there's only one snippet on a notebook page. Inspect the `views' category of \ct{ProcessingProgram} in the coder or consult appendix \ref{app_implementation} for a full list of availble view names.}
 
 
 
+\subsection{Other approaches considered}
 
-The snippet is implemented in \ct{LeProcessingSnippet} which builds upon \ac{GT}'s \ct{LePythonSnippet} for syntax highlighting but accesses Processing through \ct{ProcessingSource} instead of Python through \ct{PythonBridge}.
+Since Processing implemented on top of Python is a strongly but dynamically typed language, it maps well onto Smalltalk. Still, initially three other approaches were considered:
 
-For embedding output or any other view inside a notebook page, an ``Element'' is added with either the code from above or with \ct{renderLive} replaced with \ct{renderLiveView:} with the symbol of the desired view appended (\ct{#gtTreeFor:}, \ct{#gtTranspilationFor:}, \ct{#gtBytecodeFor:}, \etc; see the ``views'' category of \ct{ProcessingSource} and \ct{ProcessingProgram} for all available views).
+Processing could be run either in the original \ac{JVM} and then accessed through Python or directly run using one of several Python libraries \cite{Tab22}. In all cases, its objects would be accessed through \ct{PythonBridge}. Unfortunately at the time of writing, support for PythonBridge under Windows was difficult to achieve in a portable manner (\ie without requiring students to install multiple different packages which increases the risk of accidental breaking and thus potential support issues). Additionally, \ct{PythonBridge} only gives access to dictionaries of serialized Python object properties which would have required a potentially slow level of indirection involved when running and inspecting animations.
 
-For all the views, a \ct{ProcessingProgram} is created through \ct{ProcessingSource>>>program} which transforms it into its various forms:
+Alternatively, Processing could have been implemented through an interpreter in \ac{GT}\footnote{Remnants of which are available as \ct{ProcessingInterpreter}.}. This would have required to write a separate compiler for creating bytecode just for demonstration purposes.
 
-\begin{itemize}
-\item \ct{ProcessingParser} is used for parsing the source into an \ac{AST}. Since Processing shares Python's syntax, the parser is a very thin wrapper around \ac{GT}'s \ct{PythonParser}. The \ac{AST} is then slightly modified through \ct{ProcessingAstCleaner} to better map Python to Smalltalk: Since statements after a \ct{return} are allowed in Python but not supported in Smalltalk, they're silently dropped (a warning about unreachable code could be added); and parenthesized expressions are parsed into \ct{PyTupleExpressionNode} which complicate later optimizations with relation to operator chains, in particular logical operators \ct{and} and \ct{or}.
-\item \ct{ProcessingTranspiler} then walks through the cleaned \ac{AST} and transpiles Python expressions to the corresponding Smalltalk, recording a \ct{ProcessingTranspilationSlice} for every (sub)expression, thus later allowing to map bytecode its mapping into Smalltalk code back to the corresponding Processing source. If \ct{setup} and/or \ct{draw} functions are defined in Processing code, the implicit animation loop is added to the end of top-level code. Processing \ac{API} calls -- if not overwritten by user code -- are translated through messages of the form \ct{ProcessingTranspiler>>>emit_...:} which the transpiler detects through reflection.
-\item The transpiled code is compiled to methods of an anonymous subclass of \ct{ProcessingCodeBase}. This base class provides views at the lower abstraction levels from transpiled code to bytecode and also the entry point to the user supplied program \ct{gtRun} which contains top-level code. Global variables are turned into instance variables, thus being available to all Processing functions in the form of Smalltalk methods.\footnote{In order to prevent overriding of \ct{gtRun} and the different view messages, Processing names starting with \ct{gt} are renamed to starting with \ct{gt_} during transpilation.}
-\end{itemize}
-
-While compiled Processing programs can be run directly, \ct{ProcessingRunner} is used for ensuring the presence of an output canvas, for allowing program execution to be interrupted and for extracting \ct{ProcessingRunStep} instances for every Processing (sub)expression.
-
-From these, \ct{ProcessingProgram} provides all views corresponding to Processing code and combined views. In order not to overwhelm students with too many views, \ct{gtDefaultInspectorTool} has been implemented for hiding all but the main four views behind the same symbols as used by the snippet.
-
-During compilation, most common exceptions are \ct{SmaCCParserError} during parsing, \ct{ProcessingCompileTimeException} during transpilation and \ct{ProcessingRunTimeException} during execution. At this point, exceptions occurring in the transpiled code are not translated yet. Since most programs are meant to be re-run live, a heuristic has been implemented for catching endless loops which may naturally occur while a program's source is modified where \eg a variable's value is modified but at the end of a \ct{while} loop. Instead of detecting the endless loop from code, runtime has been restricted to a maximum of two seconds for non-animated programs and thirty seconds for animated programs.
-
-
-
-\section{Usage}
-
-With this, high school teachers get a toolkit for teaching programming and systems at various levels:
-
-At the start of a course, the environment can be used as an introduction to programming (see the suggested lessons in \ref{sc_lesson_intro}). When the limitations of the environment are reached, the move over to the official Processing \ac{IDE} should be seamless: code copied over and run (with the same icon and shortcut) yields the same output and can then be further modified with the full Processing \ac{API}, once students are ready.
-
-When teaching computer architecture, the environment can be used for either exploring the various abstraction levels involved or even again as a full course embedded in notebook pages (see \ref{sc_lesson_ca}). In case of both usages, this better ties together programming and system architecture. And if programming has happened in Processing, students can investigate their own programs instead of mainly relying on those given by the teacher.
-
-In an in-depth course for students specializing in computer science, this environment can further be used to teach the inner workings of a compiler from lexer to optimizer (see \ref{sc_lesson_compiler}).
-
-Finally, this environment could also be used as a stepping stone for introducing Smalltalk as a different programming language and \ac{GT} as the moldable environment it is, leading students to molding the provided materials further by \eg extending the Processing \ac{API}, developing new views or starting to work on a language of their own (see \ref{sc_lesson_other}).
-
-In all cases, \ac{GT} can also be used as a digital notebook by students, where they solve tasks directly in the page, add their own notes and keep their modified examples.
-
-While this environment is mainly targetted at high school students, it could also be used in middle school. For middle schoolers, the exposed user interface would however have to be reduced as far as possible to keep it manageable. It could however work at least in a smaller group with interested and motivated students wanting to step beyond block based programming languages. For university students, there's currently not enough depth available.
-
-
-\section{Other approaches considered}
-
-A stable snapshot of the code discussed here is available at \url{https://github.com/zeniko/gt-exploration/tree/thesis}.
-
-Within \ac{GT}, Processing is implemented through transpilation to Smalltalk. This allows reusing several of \ac{GT}'s libraries: \ct{PythonParser} for parsing Processing with Python syntax and \ct{OpalCompiler} for compiling Smalltalk with bytecode extractable through \ct{CompiledCode>>>symbolicBytecodes}.
-
-Since Processing implemented on top of Python is a strongly but dynamically typed language, it maps well onto Smalltalk which is the same. Still, initially three other approaches were considered:
-
-Processing could be run either in the original \ac{JVM} and then accessed through Python or directly run using one of several Python libraries \cite{Tab22}. In all cases, its objects would be accessed through \ct{PythonBridge}. Since at the time of writing, support for PythonBridge under Windows was difficult to achieve in a portable manner (\ie without requiring students to install multiple different packages which increases the risk of accidental breaking and thus potential support issues), this approach was rejected.
-
-Alternatively, Processing could have been implemented through an interpreter in \ac{GT}\footnote{Remnants of which are available as \ct{ProcessingInterpreter}.}. This would have required to write a separate compiler for creating bytecode just for demonstration purposes. Instead, a compiler from Processing to Smalltalk bytecode could have been written.\footnote{A compiler for a tiny subset of Processing is included as \ct{ProcessingCompiler}.} While this would have allowed for closer control over optimizations, it would effectively have become a reimplementation of most of \ct{OpalCompiler}.
+As a third option, a compiler from Processing to Smalltalk bytecode could have been written.\footnote{A compiler for a tiny subset of Processing is included as \ct{ProcessingCompiler}.} While this would have allowed for closer control over optimizations, it would effectively have become a reimplementation of most of \ct{OpalCompiler}.
 
 
 
 \section{Potential Drawbacks}
 
-While Modrow and Strecker prefer a block based language, we feel that at least parts of their issue with a text based programming language can be remedied by having a live environment with custom error messages. For remedying their remaining issue about allowing individual bits of code to be called independently, that could be achieved in one of the ways \ac{GT} does this: either by offering separate playgrounds which do work similarly to a \ac{REPL}; by allowing multiple code snippets to access the same environment (as it also works in Jupyter notebooks); or by allowing only selected code to be executed. The last option would be easiest to implement.\footnote{It hasn't been implemented for three reasons: At least in the beginning, it might confuse students more than it helps, which goes against manageability (see \ref{ssc_manageability}); most visual commands can't be executed entirely independently in Processing, as output always depends on \ct{size} and maybe other stateful commands; and interaction with the animation loop would have to be figured out: whether it's has to be paused during the entire interaction, just between two user commands or even not at all.}
+Since \ac{GT} is based on Smalltalk, an initial effort is required to learn language and environment before their benefits can be used. This is helped by Smalltalk's regular syntax and \ac{GT}'s reflective capabilities.\footnote{For Smalltalk and \ac{GT}'s ancestor Pharo, there are sufficient resources available online, for \ac{GT} itself, there's the ``Glamorous Toolkit Book'' \cite{Gir23} and a Discord server.}
 
-Chiodini \etal \cite{Chi23} also propose starting with visual programming but have different requirements: In order to keep an introductionary language manageable, they ask among others for a limited \ac{API} which should be expandable by students (see also \ref{ssc_manageability}). And the full Processing \ac{API} can indeed be quite overwhelming, so only a subset must be introduced at the start. Indeed also for this reason only a subset has been implemented in \ac{GT} (see appendix \ref{app_api}), although already including some seemingly unnecessary functions: \eg the \ct{circle} function is easily implemented in terms of the more generic \ct{ellipse} function (see figure \ref{fig_circle}) -- either in the implementation of the Processing \ac{API} or by students.
+Modrow and Strecker \cite{Mod16} prefer a block based language in order to prevent students from getting lost in syntax errors. This issue has at least been remedied partially by having a live environment. Error messages are however not in optimal shape yet, sometimes rather hinting at an issue than explaining it as Bouvier \etal \cite{Bou24} call for.
 
-\begin{cfigure}[fig_circle]{Implementation of \ct{circle} as built-in \ac{API} and in user code}
-\begin{minipage}{.5\textwidth}
-\begin{code}
-ProcessingCanvas >> circle: x y: y d: d
-	self
-		ellipse: d
-		by: d
-		at: x @ y
-\end{code}
-\end{minipage}
-\begin{minipage}{.45\textwidth}
-\begin{code}
-def circle(x, y, d):
-	ellipse(x, y, d, d)
-\end{code}
-\end{minipage}
-\end{cfigure}
+Chiodini \etal \cite{Chi23} also propose starting with visual programming but have different requirements: In order to keep an introductionary language manageable, they ask among others for a limited \ac{API} which should be expandable by students (see also \ref{ssc_manageability}). And the full Processing \ac{API} can indeed be quite overwhelming, so only a subset must be introduced at the start. Indeed also for this reason only a subset has been implemented in \ac{GT} (see appendix \ref{app_api}).
 
-Another requirement by Chiodini \etal is for problems to be transparently decomposed and solutions recomposed. This is indeed an issue with Processing: Moving a composed shape to a different location requires adjusting the coordinates of all basic shapes involved, therefore variables and even functions have to be introduced sooner rather than latter to allow the examples shown \cite{Chi23} to work. Similar to how they introduce a library to achieve their desired \ac{API}, the same functionality could be implemented on top of Processing at a later stage if desired.\footnote{In the provided teaching materials, an example of how to implement a simpler Turtle based \ac{API} is provided (see ``Schildkröten und Rekursion'').}
+Another requirement by Chiodini \etal is for problems to be transparently decomposed and solutions recomposed. This is indeed an issue with Processing: Moving a composed shape to a different location requires adjusting the coordinates of all basic shapes involved, therefore variables and even functions have to be introduced sooner rather than later to allow the examples shown \cite{Chi23} to work. Similar to how they introduce a library to achieve their desired \ac{API}, the same functionality could be implemented on top of Processing at a later stage if desired.\footnote{In the provided teaching materials, an example of how to implement a simpler Turtle based \ac{API} is provided (see ``Schildkröten und Rekursion''), however even Turtles have state which makes composition non-trivial.}
 
 The main reason for not introducing a new \ac{API} as proposed by Chiodini \etal is the same as the reason for not introducing an entirely new programming language optimized for teaching (as done \eg by Black and Bruce \cite{Bla18}): This prevents benefiting from the large community and preexisting documentation and example code.
 
 \begin{todo}
-\item Shorten ``Implemented Classes'', move the details into an appendix
-\item Decide which screenshots belong into the appendix instead.
+\item Decide which screenshots belong into the appendix instead (\ct{screenshot_parser})
 \item use 2DET taxonomy? \cite{Sor13}
 \end{todo}
