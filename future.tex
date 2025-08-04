@@ -28,27 +28,27 @@ Optimization on the other hand happens at various abstraction levels. With regar
 
 As for the implementation of Processing, many bits are missing. Mainly support for object-oriented programming should be achievable, since Python's object model should again map sufficiently well onto Smalltalk's. What will however not be realistically possible is to get a sufficiently full Python inside \ac{GT} which would allow importing (arbitrary) further modules. This should however not be as much of an issue, since similar to the Processing \ac{IDE}, hitting the limitations of the environment should be taken as a hint that the environment has been outgrown and to move to more capable tools, continuing the investigations using professional debuggers, memory viewers, \etc.
 
-For students coming from a different programming language, adapting the environment to their language of choice might also be doable. Since \ac{GT} already contains support for parsing dozens of languages (among others JavaScript, C(++), Rust or even Visual Basic), matching a subset of that language from its \ac{AST} to Smalltalk should be doable in the same way as \ct{ProcessingTranspiler} was implemented. At least when sticking to the Processing \ac{API}, the rest of the environment could be reused with minimal adjustments.
+For students coming from a different programming language, adapting the environment to their language of choice might also be doable. Since \ac{GT} already contains support for parsing dozens of languages (among other languages JavaScript, C(++), Rust or even Visual Basic), matching a subset of that language from its \ac{AST} to Smalltalk should be doable in the same way as \ct{ProcessingTranspiler} was implemented. At least when sticking to the Processing \ac{API}, the rest of the environment could be reused with minimal adjustments.
+
+Going beyond programming, the same principle might also be applicable to other domains: We have already seen the Filius environment which allows to deconstruct networks to various depths. In natural sciences, processes can be investigated and deconstructed in a similar fashion in a simulated environment. Based on a framework like NetLogo\footnote{\emph{Cf.} \eg \url{https://www.netlogoweb.org/launch\#http://www.netlogoweb.org/assets/modelslib/Sample\%20Models/Biology/Ants.nlogo}.}, which already presents multiple views into the same phenomenon, further views for deconstructing and understanding the observed behavior could be added. Having the simulation inside a moldable environment would certainly help.
+
+In the same vein, in a psychology course, students could be exposed to views into the subconscious, neurology down to biology and maybe even physics, when discussing behavior -- for a better understanding of the various influences on what might be perceived as purely mental; or in a music class, students could get harmonics decomposed into oscillation and ratios -- for a better understanding of what causes harmony; \etc. Applying this principle in other domains is however left to specialists of those. What is however desired in all cases is an interdisciplinary approach, once lower abstraction levels go beyond one's own domain.\footnote{Similarly how chemistry and physics will have to be involved when discussing the innards of a modern microprocessor.}
+
+However first, we have to proceed with a further investigation into whether our students from different classes are indeed profiting in the way we intended them to.
 
 
-\begin{todo}
-\item applying the same principle to other domains: natural sciences (cf. simulations, \eg ``Epidemien-Simulation''), psychology, languages, \etc
-\item better study
-\end{todo}
-
-
-\section*{Remaining To Do}
-
-\begin{todo}
-\item Validation: diagrams for visualization:
-\begin{itemize}
-\item number/percentage of students interacting
-\item successfully learned
-\end{itemize}
-\item verify statistical claims (don't claim too much)
-\item how to best share data? \url{https://github.com/zeniko/gyminf-thesis/blob/main/data/data_6_1.csv}?
-\item use 2DET taxonomy for chapter 4/5? \cite{Sor13}
-\item Appendix: How detailed explanations are required in the appendix?
-\item consider removing/replacing page linking in ``Unterrichtseinheiten''
-\item Synchronize appendix \ref{app_api} with \url{https://github.com/zeniko/\ac{GT}-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
-\end{todo}
+% \section*{Remaining To Do}
+% 
+% \begin{todo}
+% \item Validation: diagrams for visualization:
+% \begin{itemize}
+% \item number/percentage of students interacting
+% \item successfully learned
+% \end{itemize}
+% \item verify statistical claims (don't claim too much)
+% \item how to best share data? \url{https://github.com/zeniko/gyminf-thesis/blob/main/data/data_6_1.csv}?
+% \item use 2DET taxonomy for chapter 4/5? \cite{Sor13}
+% \item Appendix: How detailed explanations are required in the appendix?
+% \item consider removing/replacing page linking in ``Unterrichtseinheiten''
+% \item Synchronize appendix \ref{app_api} with \url{https://github.com/zeniko/\ac{GT}-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
+% \end{todo}
