@@ -201,41 +201,41 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 
 \begin{description}
 \item[\texttt{gtAbstractionsFor:}] \hfill \\
-	(implemented by \ct{ProcessingProgram}) combines \ct{gtContentsFor:}, \ct{gtTreeFor:}, \ct{gtBytecodeFor:} and \ct{gtOutputFor:}, linking the source to the other three views through a common \ct{Announcer} reacting to selection changes (shown in figure \ref{fig_view_abstractions}).
+	(implemented by \ct{ProcessingProgram}) combines \ct{gtSourceCodeFor:}, \ct{gtTreeFor:}, \ct{gtBytecodeFor:} and \ct{gtOutputFor:}, linking the source to the other three views through a common \ct{Announcer} reacting to selection changes (shown in figure \ref{fig_view_abstractions}).
 \item[\texttt{gtBytecodeFor:}] \hfill \\
-	uses the \ct{CompiledMethod} instances of each method in a compiled class' \ct{class methodDict} to access its \ct{symbolicBytecodes} and show the resulting \ct{SymbolicBytecode}s' bytes and mnemonic (shown on the right in figure \ref{fig_view_ir_bytecode}). \ct{gtBytecodePlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+	uses the \ct{CompiledMethod} instances of each method in a compiled class' \ct{class methodDict} to access its \ct{symbolicBytecodes} and show the resulting \ct{SymbolicBytecode}s' bytes and mnemonic (shown on the right in figure \ref{fig_view_ir_bytecode}). \ct{gtBytecodePlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtBytecodePlusIRFor:}] \hfill \\
 	combines the \ct{gtBytecodeFor:} with \ct{gtIntermediaryRepresentationFor:} (shown in figure \ref{fig_view_ir_bytecode}).
-\item[\texttt{gtContentsFor:}] \hfill \\
-	displays a fresh read-only editor instance from \ct{SmaCCParseNode>>gtSourceEditorWithHightlight:} with a custom \ct{BrTextEditorReadonlyWithNavigationMode} mode (shown on the top left in figure \ref{fig_view_abstractions}, on the left in \ref{fig_view_transpilation}, \etc).
 \item[\texttt{gtIntermediaryRepresentationFor:}] \hfill \\
-	uses the \ct{OpalCompiler} for translating the transpiled Smalltalk code to \ct{IRInstruction}s (shown on the left in figure \ref{fig_view_ir_bytecode}). \ct{gtIntermediaryRepresentationPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+	uses the \ct{OpalCompiler} for translating the transpiled Smalltalk code to \ct{IRInstruction}s (shown on the left in figure \ref{fig_view_ir_bytecode}). \ct{gtIntermediaryRepresentationPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtOutputFor:}] \hfill \\
-	displays a newly created \ct{ProcessingCanvasElement} with attached event listeners for interactivity (shown on the bottom right in figure \ref{fig_view_abstractions}). \ct{gtOutputPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+	displays a newly created \ct{ProcessingCanvasElement} with attached event listeners for interactivity (shown on the bottom right in figure \ref{fig_view_abstractions}). \ct{gtOutputPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtOutputShapesFor:}] \hfill \\
 	shows a list of all \ct{ProcessingCanvasShape}s in the order they were drawn (shown in figure \ref{fig_view_shapes}). Clearing the canvas with \ct{background(...)} also clears this list.
 \item[\texttt{gtSlicesFor:}] \hfill \\
 	shows a list of \ct{ProcessingTranspilationSlice}s with the corresponding expressions in Processing source code and Smalltalk transpilation highlighted (shown in figure \ref{fig_view_slices}).
 \item[\texttt{gtSourceBytesFor:}] \hfill \\
-	shows a list of \ct{SmallInteger}s corresponding to the bytes of the source code after UTF-8 encoding (shown on the right in figure \ref{fig_view_chars_bytes}) \ct{gtSourceBytesPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+	shows a list of \ct{SmallInteger}s corresponding to the bytes of the source code after UTF-8 encoding (shown on the right in figure \ref{fig_view_chars_bytes}) \ct{gtSourceBytesPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtSourceBytesPlusCharsFor:}] \hfill \\
 	combines \ct{gtSourceCharsFor:} and \ct{gtSourceBytesFor:} (shown in figure \ref{fig_view_chars_bytes}).
 \item[\texttt{gtSourceCharsFor:}] \hfill \\
-	shows a list of \ct{Character}s corresponding to each of the Processing source code's characters (shown on the left in figure \ref{fig_view_chars_bytes}). \ct{gtSourceCharsPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+	shows a list of \ct{Character}s corresponding to each of the Processing source code's characters (shown on the left in figure \ref{fig_view_chars_bytes}). \ct{gtSourceCharsPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
+\item[\texttt{gtSourceCodeFor:}] \hfill \\
+	displays a fresh read-only editor instance from \ct{SmaCCParseNode>>gtSourceEditorWithHightlight:} with a custom \ct{BrTextEditorReadonlyWithNavigationMode} mode (shown on the top left in figure \ref{fig_view_abstractions}, on the left in \ref{fig_view_transpilation}, \etc).
 \item[\texttt{gtStepsFor:}] \hfill \\
 	shows a list of \ct{ProcessingRunStep}s and their own \ct{gtAbstractionFor:} view, consisting of their \ct{gtSourceCodeFor:}, \ct{gtBytecodeFor:}, \ct{gtVariablesFor:}, \ct{gtStackFor:} and \ct{gtOutputFor:} (shown in figure \ref{fig_view_runsteps}). \ct{ProcessingRunStep>>gtOverviewFor:} is a simplified variant of this shown from the ``Processing/Python'' snippet.
 \item[\texttt{gtTokensFor:}] \hfill \\
-	shows a list of \ct{SmaCCToken}s that were produced by \ct{ProcessingParser} (shown on the left in figure \ref{fig_view_tokens_ast}). \ct{gtTokensPlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+	shows a list of \ct{SmaCCToken}s that were produced by \ct{ProcessingParser} (shown on the left in figure \ref{fig_view_tokens_ast}). \ct{gtTokensPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtTokensPlusTreeFor:}] \hfill \\
 	combines \ct{gtTokensFor:} with \ct{gtTreeFor:} (shown in figure \ref{fig_view_tokens_ast}).
 \item[\texttt{gtTranspilationFor:}] \hfill \\
-	shows the transpiled Smalltalk code in \ct{GT}'s code viewer which separates methods and adds syntax highlighting. \ct{gtTranspilationPlusSourceFor:} combines this view with \ct{gtContentsFor:} (shown in figure \ref{fig_view_transpilation}).
+	shows the transpiled Smalltalk code in \ct{GT}'s code viewer which separates methods and adds syntax highlighting. \ct{gtTranspilationPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:} (shown in figure \ref{fig_view_transpilation}).
 \item[\texttt{gtTranspilationPostfixFor:} and \texttt{gtTranspilationPrefixFor:}] \hfill \\
 	show a \ct{String} produced by \ct{ProcessingTranspilerVariant} in either its \ct{prefix} or \ct{postfix} modes (shown at the bottom in figure \ref{fig_view_prefix_postfix} respectively).
 \item[\texttt{gtTreeFor:}] \hfill \\
 	shows a treelist of \ct{PyRootNode}s for expression roots and \ct{SmaCCToken}s for structural tokens (shown on the right in figure \ref{fig_view_tokens_ast}).
 \item[\texttt{gtTreeMondrianFor:}] \hfill \\
-	shows a horizontal \ct{GtMondrian} tree produced by \ct{ProcessingTreeMondrianCreator} (shown in figure \ref{fig_view_ast_tree}). \ct{gtTreePlusSourceFor:} combines this view with \ct{gtContentsFor:}.
+	shows a horizontal \ct{GtMondrian} tree produced by \ct{ProcessingTreeMondrianCreator} (shown in figure \ref{fig_view_ast_tree}). \ct{gtTreePlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \end{description}
 
 \begin{cfigure}[fig_view_abstractions]{The `Abstractions' view with source code, \ac{AST}, bytecode and output showing}

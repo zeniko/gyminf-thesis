@@ -6,7 +6,7 @@ OBJS = $(MAIN:.tex=.log) $(MAIN:.tex=.aux) $(MAIN:.tex=.out) $(MAIN:.tex=.toc) $
 thesis:
 	$(MAKE) fixup $(MAIN_PDF) clean
 
-$(MAIN_PDF): $(MAIN:.tex=.bib) $(glob *.tex)
+$(MAIN_PDF): $(MAIN:.tex=.bib) $(glob *.tex diagrams/*.tex images/*.png)
 
 $(glob *.tex:.tex=.pdf:$(MAIN_PDF)=):
 	$(MAKE) $(MAIN_PDF)
