@@ -99,8 +99,6 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 	Reinitializes the random generator with the given \ct{seed} number. Using the same number will result in the exact same sequence of pseudo-randomly generated numbers.
 \item[\texttt{sin(angle)}] \hfill \\
 	Returns the sine value for the given angle (measured in radians).
-\item[\texttt{sq(value)}] \hfill \\
-	Returns the squared value. Equivalent to \ct{value ** 2}
 \item[\texttt{sqrt(value)}] \hfill \\
 	Returns the square root of the given value.
 \item[\texttt{tan(angle)}] \hfill \\
@@ -108,21 +106,22 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \end{description}
 
 \section{Lists}
+Lists are objects which provide their own methods. Note that for the following commands, \ct{list} is a variable referencing a \ct{list}.
 \begin{description}
-\item[\texttt{append(list, value)}] \hfill \\
-	Appends the value to the end of the list and returns \emph{a new} list (equivalent to \ct{list + [value]}).
-(Note: \ct{list.append(...)} is \emph{not yet} supported.)
-\item[\texttt{concat(list, otherList)}] \hfill \\
-	Combines the two lists to a single \emph{new} list (equivalent to \ct{list + otherList}).
-\item[\texttt{reversed(list)}] \hfill \\
-	Returns a \emph{new} list with its content reversed.
-(Note: \ct{list[::-1]} and \ct{list.reverse()} are \emph{not yet} supported.)
-\item[\texttt{shorten(list)}] \hfill \\
-	Returns a \emph{new} list without the last argument (equivalent to \ct{list[:-1]}).
-(Note: \ct{list.pop()} is \emph{not yet} supported.)
-\item[\texttt{sorted(list)}] \hfill \\
-	Returns \emph{new} list with its content sorted.
-(Note: \ct{list.sort()} is \emph{not yet} supported.)
+\item[\texttt{len(list)}] \hfill \\
+	Returns the number of items in this list.
+\item[\texttt{list.append(value)}] \hfill \\
+	Appends the value to the end of the list.
+(\ct{list + [value]} instead produces a \emph{new} list. \ct{list + otherList} produces a \emph{new} list out of two lists.)
+\item[\texttt{list.pop()}] \hfill \\
+	Removes the last item from the list and returns the removed argument.
+(\ct{list[:-1]} instead produces a \emph{new} list without the last item.)
+\item[\texttt{list.reverse()}] \hfill \\
+	Reverses this list's items.
+(\ct{list[::-1]} instead produces a \emph{new} list with its items reversed.)
+\item[\texttt{list.sort()}] \hfill \\
+	Sorts this list's items.
+(\ct{sorted(list)} instead produces a \emph{new} sorted list.)
 \end{description}
 
 \section{Miscellanea}
