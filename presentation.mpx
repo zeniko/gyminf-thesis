@@ -1,0 +1,134 @@
+﻿Revealing Programming Language Abstractions
+===========================================
+@beamer_theme default,#9EE0F7 keynote alternate-rows
+@author Simon Bünzli Straub
+@date 20.08.2025
+@listings basicstyle=\small\ttfamily basewidth=0.51em
+
+	\usepackage{pgfplots}
+	\usepgfplotslibrary{statistics}
+	\newcommand{\ac}[1]{#1}
+	\newcommand{\acs}[1]{#1}
+
+What happens here?
+------------------
+``` python
+size(200, 200)
+ellipse(100, 100, 200, 200)
+ellipse(50, 100, 100, 100)
+ellipse(150, 100, 100, 100)
+rect(75, 175, 50, 1)
+```
+
+---
+
+Different Abstraction Levels
+----------------------------
+* Individual commands
+* Interactions
+* (Intended) output
+<PAUSE>
+* Inside the machine?
+
+---
+
+Multitier Architecture
+----------------------
+@todo LaTeX compilation happens in a subfolder, so all paths are one level off
+	{\centering\small
+	\input{../diagrams/multitier}
+	}
+
+---
+
+The Problem
+-----------
+* How to demonstrate students what has to happen for a program to be executed?
+
+---
+
+IDE Support
+-----------
+@todo screenshots (besides demo)
+* Example: Processing IDE
+<PAUSE>
+* Example: Thonny
+<PAUSE>
+* Example: Visual Studio
+
+---
+
+Brief Overview
+--------------
+* The Problem $\leftarrow$
+* Teaching Principles
+* New Environment
+* Results
+
+---
+
+| Teaching Principles |
+
+---
+
+Principle: Foundational Idea
+----------------------------
+* Core idea of a subject
+* Relevant, persistent
+
+---
+
+Principle: Foundational Idea
+----------------------------
+@todo reorder, visualize
+Examples:
+* Programming
+* Abstraction
+* Networking
+
+---
+
+Principle: *Sichtenwechsel*
+---------------------------
+
+---
+
+Principle: *Sichtenwechsel*
+---------------------------
+@todo images of books
+Examples:
+* "NAND to Tetris"
+* Programming Art (or games)
+
+---
+
+| New Environment |
+
+---
+
+"Processing Abstractions"
+-------------------------
+@todo prepare demo
+![stretch](images/gt_screenshot.png)
+
+---
+
+Viewing Abstractions
+--------------------
+	{\hspace*{-0.5cm}\small
+	\input{../diagrams/views}
+	}
+
+---
+
+| Results |
+
+---
+
+Question: How did you like it?
+------------------------------
+	\input{../diagrams/plots_q1}
+
+---
+
+| Thanks for listening. Questions? |
