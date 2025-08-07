@@ -208,6 +208,8 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 	uses the \ct{CompiledMethod} instances of each method in a compiled class' \ct{class methodDict} to access its \ct{symbolicBytecodes} and show the resulting \ct{SymbolicBytecode}s' bytes and mnemonic (shown on the right in figure \ref{fig_view_ir_bytecode}). \ct{gtBytecodePlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtBytecodePlusIRFor:}] \hfill \\
 	combines the \ct{gtBytecodeFor:} with \ct{gtIntermediaryRepresentationFor:} (shown in figure \ref{fig_view_ir_bytecode}).
+\item[\texttt{gtHexDumpFor:}] \hfill \\
+	shows type individual bytes for all compiled methods.
 \item[\texttt{gtIntermediaryRepresentationFor:}] \hfill \\
 	uses the \ct{OpalCompiler} for translating the transpiled Smalltalk code to \ct{IRInstruction}s (shown on the left in figure \ref{fig_view_ir_bytecode}). \ct{gtIntermediaryRepresentationPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtOutputFor:}] \hfill \\
@@ -287,3 +289,135 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 \begin{cfigure}[fig_view_meta]{The `Meta' view is provided by \ac{GT} and shows all methods defined for the instantiated object}
 \includegraphics[width=.7\textwidth]{view_meta}
 \end{cfigure}
+
+
+
+\chapter{Questionnaires}
+
+The questionnaires were implemented in \href{Microsoft Forms}{https://forms.office.com/} in the student's native language.
+
+
+\section{Questionnaire for \ref{sc_validation_ca}} \label{app_questionnaire_1}
+
+
+\subsection*{Feedback zur heutigen Unterrichtssequenz}
+
+\begin{Questionnaire}
+
+\item \Question{Wie hat Ihnen die heutige Unterrichtssequenz gefallen?} \\ gar nicht \Qrating{5} sehr gut
+
+\item \Question{Welche Themen haben Sie heute alle bearbeiten können?}
+\begin{Qlist}
+\item Arbeiten mit Glamorous Toolkit
+\item Maschinensprache und Prozessor
+\item Funktionen eines Compilers
+\item Anhang
+\end{Qlist}
+
+\item \Question{Wie sehr trauen Sie sich zu, die heutigen Inhalte jemand anderem zu erklären?} \\ gar nicht \Qrating{5} \emph{easy-peasy}
+
+\item \Question{Wie viele der Python-Progrämmchen haben Sie selbst verändert?}
+\begin{Qlist}[$\ocircle$]
+\item Keines
+\item Eines
+\item Zwei bis drei
+\item Vier oder mehr
+\end{Qlist}
+
+\item \Question{Was ist ein Stack?} \Qlines{1}
+
+\item \Question{Was machen Lexer und Parser?} \Qlines{1}
+
+\item \Question{Wie gut hat die Lernumgebung für Sie funktioniert?} \\ gar nicht \Qrating{5} problemlos
+
+\item \Question{Was hat Ihnen an der Lernumgebung gefallen?} \Qlines{2}
+
+\item \Question{Welche Änderungen an der Lernumgebung wünschen Sie sich für die nächste Klasse?} \Qlines{2}
+
+\item \Question{Wie hilfreich fanden Sie die Nebeneinanderstellungen der unterschiedlichen Schritte beim Ausführen/Übersetzen eines Programms?} \\ weglassen \Qrating{5} bitte mehr davon
+
+\item \Question{Beschreiben Sie in eigenen Worten: Wie wird ein Programm auf einem Prozessor ausgeführt?} \Qlines{2}
+
+\item \Question{Beschreiben Sie in eigenen Worten: Wie wird ein Programm in einer Hochsprache wie Processing für den Prozessor aufbereitet?} \Qlines{2}
+
+\item \Question{Was hatte das heutige Thema mit Silizium, Transistoren, Gattern und Schaltungen zu tun?} \Qlines{2}
+
+\suspend{Questionnaire}
+
+
+\subsection*{Feedback zum Informatikunterricht der letzten zwei Jahre}
+
+\resume{Questionnaire}
+
+\item \Question{Was war für Sie das Highlight vom Informatik-Unterricht? (Was hat Ihnen am meisten Eindruck gemacht?)} \Qlines{1}
+
+\item \Question{Was ist Ihnen vom Informatik-Unterricht alles geblieben (einige Stichworte zum Stoff)?} \Qlines{2}
+
+\item \Question{Was hat Ihnen am Informatik-Unterricht gefallen?} \Qlines{2}
+
+\item \Question{Wenn Sie mir vor zwei Jahren einen Hinweis geben könnten: Was hätten Sie sich für den Unterricht anders gewünscht?} \Qlines{2}
+
+\end{Questionnaire}
+
+
+
+\section{Questionnaire for \ref{sc_validation_compiler}} \label{app_questionnaire_2}
+
+
+\subsection*{Feedback zur heutigen Unterrichtssequenz}
+
+\begin{Questionnaire}
+
+\item \Question{Wie hat Ihnen die heutige Unterrichtssequenz gefallen?} \\ gar nicht \Qrating{5} sehr gut
+
+\item \Question{Welche Themen haben Sie heute alle bearbeiten können?}
+\begin{Qlist}
+\item Arbeiten mit Glamorous Toolkit
+\item Human Resource Machine (aus Maschinensprache und Prozessor)
+\item Lexer und Parser
+\item Transpiler und Compiler
+\item Optimierer
+\end{Qlist}
+
+\item \Question{Wie sehr trauen Sie sich zu, die heutigen Inhalte jemand anderem zu erklären?} \\ gar nicht \Qrating{5} \emph{easy-peasy}
+
+\item \Question{Wie viele der Python-Progrämmchen haben Sie selbst verändert?}
+\begin{Qlist}[$\ocircle$]
+\item Keines
+\item Eines
+\item Zwei bis drei
+\item Vier oder mehr
+\end{Qlist}
+
+\item \Question{Weshalb kann ein Prozessor ein Processing-Programm nicht ohne Übersetzung ausführen} \Qlines{1}
+
+\item \Question{Was machen Lexer und Parser?} \Qlines{1}
+
+\item \Question{Wie gut hat die Lernumgebung für Sie funktioniert?} \\ gar nicht \Qrating{5} problemlos
+
+\item \Question{Was hat Ihnen an der Lernumgebung gefallen?} \Qlines{2}
+
+\item \Question{Welche Änderungen an der Lernumgebung wünschen Sie sich für die nächste Klasse?} \Qlines{2}
+
+\item \Question{Wie hilfreich fanden Sie die Nebeneinanderstellungen der unterschiedlichen Schritte beim Ausführen/Übersetzen eines Programms?} \\ weglassen \Qrating{5} bitte mehr davon
+
+\item \Question{Beschreiben Sie in eigenen Worten: Wie wird ein Programm in einer Hochsprache wie Processing für den Prozessor aufbereitet?} \Qlines{2}
+
+\item \Question{Was hatte das heutige Thema mit Codierung und was mit Programmieren zu tun?} \Qlines{2}
+
+\suspend{Questionnaire}
+
+
+\subsection*{Feedback zum Informatikunterricht}
+
+\resume{Questionnaire}
+
+\item \Question{Was war für Sie das Highlight vom Informatik-Unterricht? (Was hat Ihnen am meisten Eindruck gemacht?)} \Qlines{1}
+
+\item \Question{Was ist Ihnen vom Informatik-Unterricht alles geblieben (einige Stichworte zum Stoff)?} \Qlines{2}
+
+\item \Question{Was hat Ihnen am Informatik-Unterricht gefallen?} \Qlines{2}
+
+\item \Question{Welche Änderungen wünschen Sie sich fürs kommende Schuljahr in Informatik?} \Qlines{2}
+
+\end{Questionnaire}

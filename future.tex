@@ -20,6 +20,8 @@ Continuing this path further, there are multiple ways to proceed. On the one han
 
 Within the environment itself, there are several kinds of views that we feel are still missing. In particular, at this point most views show a single state along abstraction deconstruction. Visualizations for how to get from one to the next are still missing and would have to happen mainly in students' minds for now. Even just animating the `Runsteps' view instead of having students to click through, with differences from one to the other step being highlighted, might help. More interesting would however be animating the process of parsing tokens into an \ac{AST} or more ambitiously the process of taking Processing source code, parsing it and then translating it.
 
+Also most lists provide access to native \ac{GT} objects which have views not optimized for students. Instead of \eg giving direct access to a bytecode object which only contains a pointer back to the Smalltalk source, these could be wrapped or extended so that their default view continues to be informative such as showing a short explanation of what the selected command does.
+
 Then the machine code shown to students is for a stack machine. Common microprocessors, such as those of the x64 architecture at the heart of our students' computers, are however register based. Compiling code to a matching machine language by \eg transpiling it to C and then having it compiled to x64 machine code would be a possible approach. Another approach would consist in directly translating it to Intel Assembly or corresponding bytecode. In order to then run such code, a matching virtual machine or a better way to show intermediary processor states would be required, if the execution steps are again to be observed.
 
 Two other steps that are missing for inspecting the process of compilation are type inference and optimizations. Processing and Smalltalk are both dynamically typed languages, allowing to skip type checking considerations down to bytecode, as type differences are handled through inheritance and only optimized by a \ac{JIT}. Exposing type information and visualizing a type inference algorithm such as Hindley-Milner could be added. Python's syntax would even allow type hints which could also be used to allow students to experiment with types.
@@ -40,15 +42,16 @@ However first, we have to proceed with a further investigation into whether our 
 \section*{Remaining To Do}
 
 \begin{todo}
+\item explain and evaluate methodical approach
 \item Validation: diagrams for visualization:
 \begin{itemize}
 \item number/percentage of students interacting
 \item successfully learned
 \end{itemize}
 \item verify statistical claims (don't claim too much)
-\item how to best share data? \url{https://github.com/zeniko/gyminf-thesis/blob/main/data/data_6_1.csv}?
 \item use 2DET taxonomy for chapter 4/5? \cite{Sor13}
 \item Appendix: How detailed explanations are required in the appendix?
 \item consider removing/replacing page linking in ``Unterrichtseinheiten''
+\item Update screenshots (Pre-/Postfix, HexDump)
 \item Synchronize appendix \ref{app_api} with \url{https://github.com/zeniko/\ac{GT}-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
 \end{todo}

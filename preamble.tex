@@ -200,6 +200,7 @@
 \usepackage{pdflscape}
 \usepackage{fontawesome5}
 \usepackage{wasysym}
+\usepackage{forloop}
 
 \urlstyle{same}
 
@@ -237,6 +238,23 @@
 		mathescape=false
 	}
 }{}
+
+% Questionnaire based on https://github.com/annerosenisser/latex-surveys
+\newenvironment{Questionnaire}{
+	\begin{enumerate}
+}{
+	\end{enumerate}
+}
+\newcommand{\Question}[1]{\textbf{#1}}
+\newcounter{qr}
+\newcommand{\Qrating}[1]{$\Box$\forloop{qr}{1}{\value{qr}<#1}{---$\Box$}}
+\newcounter{ql}
+\newcommand{\Qlines}[1]{\forloop{ql}{0}{\value{ql}<#1}{\vskip0em\noindent\rule{\linewidth}{0.5pt}}}
+\newenvironment{Qlist}[1][$\Box$]{
+	\begin{list}{#1}{}
+}{
+	\end{list}
+}
 
 % \bibliographystyle{plainnat}
 
