@@ -729,3 +729,35 @@
 	month        = {09},
 	pages        = {}
 }
+@phdthesis{Chi16,
+	title        = {Moldable Tools},
+	author       = {Andrei Chi\c{s}},
+	year         = 2016,
+	month        = sep,
+	url          = {http://scg.unibe.ch/archive/phd/chis-phd.pdf},
+	abstract     = {Development tools are a prerequisite for crafting software. They offer the lenses through which developers perceive and reason about their software systems. Generic development tools, while having a wide range of applicability, ignore the contextual nature of software systems and do not allow developers to directly reason in terms of domain abstractions. Domain-specific development tools, tailored to particular application domains, can address this problem. While it has clear advantages, incorporating domain abstractions into development tools is a challenging activity. The wide range of domains and contextual tasks that development tools need to support leads to costly or ad hoc mechanisms to incorporate and discover domain abstractions. Inherently, this limits developers from taking advantage of domain-specific information during the development and maintenance of their systems. To overcome this problem, we propose to embed domain abstractions into development tools through the design of moldable tools that support the inexpensive creation of domain-specific extensions capturing domain abstractions, and that automatically select extensions based on the domain model and the developer's interaction with the domain model. This solution aims to reduce the cost of creating extensions. Towards this goal, it provides precise extension points together with internal DSLs for configuring common types of extensions. This solution facilitates automatic discovery by enabling extension creators to specify together with an extension an activation predicate that captures the context in which that extension is applicable. We validate the moldable tools approach by applying it, in the context of object-oriented applications, to improve three development activities, namely: reasoning about run-time objects, searching for domain-specific artifacts, and reasoning about run-time behavior. For each activity we identify limitations of current tools, show how redesigning those tools following the moldable tools approach addresses the identified limitations, and discuss the cost for creating domain-specific extensions. We demonstrate that moldable tools address an existing need by analyzing the increase in domain-specific extensions after we integrated the moldable tools solving the aforementioned tasks with an IDE.  We also show what kinds of custom environments developers can create by continuously adapting their development tools.},
+	keywords     = {scg-phd, snf-asa2, scg16, jb17, Andrei Chis},
+	school       = {University of Bern},
+	type         = {{PhD} thesis},
+	bdsk-url-1   = {http://scg.unibe.ch/archive/phd/chis-phd.pdf},
+	bdsk-url-2   = {http://www.lulu.com/shop/andrei-chi\%C8\%99/moldable-tools/paperback/product-22849029.html}
+}
+@inproceedings{Chi15,
+	title        = {Towards moldable development tools},
+	author       = {Andrei Chi\c{s} and Tudor G\^{i}rba and Oscar Nierstrasz},
+	year         = 2015,
+	booktitle    = {Proceedings of the 6th Workshop on Evaluation and Usability of Programming Languages and Tools},
+	location     = {Pittsburgh, PA, USA},
+	publisher    = {ACM},
+	address      = {New York, NY, USA},
+	series       = {PLATEAU '15},
+	pages        = {25--26},
+	doi          = {10.1145/2846680.2846684},
+	isbn         = {978-1-4503-3907-0},
+	url          = {http://scg.unibe.ch/archive/papers/Chis15d\_TowardsMoldableDevelopmentTools.pdf},
+	abstract     = {Developers commonly ask detailed and domain-specific questions about the software systems they are developing and maintaining. Integrated development environments (IDEs) form an essential category of tools for developing software that should support software engineering decision making. Unfortunately, rigid and generic IDEs that focus on low-level programming tasks, that promote code rather than data, and that suppress customization, offer limited support for informed decision making during software development. We propose to improve decision making within IDEs by moving from generic to context-aware IDEs through moldable tools. In this paper, we promote the idea of moldable tools, illustrate it with concrete examples, and discuss future research directions.},
+	keywords     = {scg-pub scg15 jb16 snf-asa1, internationalworkshop, Andrei Chis,Tudor Girba, girba feenk-pub},
+	peerreview   = {yes},
+	medium       = 2,
+	acmid        = 2846684
+}
