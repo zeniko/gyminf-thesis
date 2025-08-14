@@ -2,7 +2,7 @@
 
 \chapter{Implementation: Lesson Plans} \label{ch_teaching}
 
-With this thesis' product, high school teachers get a toolkit for teaching programming and systems at various levels:
+With ``Processing Abstractions'', high school teachers get a toolkit for teaching programming and systems at various levels:
 
 At the start of a course, the environment can be used as an introduction to programming (see the suggested lessons in \ref{sc_lesson_intro}). When the limitations of the environment are reached, the move over to the official Processing \ac{IDE} should be seamless: code copied over and run (with the same icon and shortcut) yields the same output and can then be further modified with the full Processing \ac{API} once students are ready.
 
@@ -14,15 +14,15 @@ Finally, this environment could also be used as a stepping stone for introducing
 
 In all cases, \ac{GT} can also be used as a digital notebook by students, where they solve tasks directly in the page, add their own notes and keep their modified examples.
 
-While this environment is mainly targeted at high school students, it could also be used in middle school. For middle schoolers, the exposed user interface would however have to be reduced as far as possible to keep it manageable. It could however work at least in a smaller group with interested and motivated students wanting to step beyond block based programming languages. For university students, there's currently not enough depth available.
+While this environment is mainly targeted at high school students, it could also be used in middle school. For middle schoolers, the exposed user interface would however have to be reduced as far as possible to keep it manageable. It could however work at least in a smaller group with interested and motivated students wanting to step beyond block-based programming languages. For university students, there's currently not enough depth available.
 
-For all the lessons, students will need a local environment of ``Processing Abstractions'' installed on a computer available to them. See appendix \ref{app_setup} for how to set it up. Additionally, for non-German speaking students the contents will have to be translated to the teaching language.
+For all the lessons, students will need a local environment of ``Processing Abstractions'' installed on a computer available to them. See appendix \ref{app_setup} for how to set it up. Additionally, for non-German speaking students the content will have to be translated to the teaching language.
 
 
 
 \section{Introduction to Programming} \label{sc_lesson_intro}
 
-While the ``Processing Abstractions'' environment has been developed for linking programming and computer architecture, it can also be used for an introduction to programming. This does even help linking programming and computer architecture for students, since they can start at the same point and reuse the experience already gained.
+While the ``Processing Abstractions'' environment has been developed for linking programming and computer architecture, it can also be used for an introduction to programming. This even helps linking programming and computer architecture for students, since they can start at the same point and reuse the experience already gained.
 
 
 \subsection{Educational objective}
@@ -45,7 +45,7 @@ Students need experience in using their own computer, including \dots
 \item dealing with their virus scanner.\footnote{At least under Windows, many scanners flag \ac{GT} as untrustworthy due to its executable lacking a valid signature. Some virus scanners even block the entire download, if the archive is distributed over a network.}
 \end{itemize}
 
-Additionally, the teacher must prepare their contents in \ac{GT} \eg as described in \ref{app_setup} and distribute them. Ensure that the first lesson page will be displayed on first startup.
+Additionally, the teacher must prepare their content in \ac{GT} \eg as described in \ref{app_setup} and distribute them. Ensure that the first lesson page will be displayed on first startup.
 
 
 \subsection{Introduction to Glamorous Toolkit} \label{ssc_lesson_gt}
@@ -121,7 +121,7 @@ Whereas Nisan and Schocken \cite{Nis21} introduce their bottom up course with a 
 \item Start with a brief repetition on programming by giving students a few quickly solved tasks (including one about the animation loop, where at least the skeleton structure is given). If this is the student's first encounter with \ac{GT}, use this opportunity to introduce it (see \ref{ssc_lesson_gt}).
 \item Show students the innards of a computer and ask where their programs reside in there. Use this for discussing hard drives and volatile memory, and a repetition about encodings and how everything boils down to \ct{1}s and \ct{0}s (or current and no current respectively).
 \item Briefly start at the desired lowest abstraction layer, \eg (light) switches, and explain how they are used for creating processors.
-\item Ask students about games they play and have them describe possible player \emph{actions} and compare them with actual player \emph{input}.\footnote{Alternatively, if starting from art instead of games, decompose drawing \eg a house into individual brush strokes.}. This repeats top down abstraction decomposition as maybe already encountered in the introduction to programming lessons and allows teachers to bring the foundational idea of multitier architectures back to students minds.\footnote{Multitier architectures might already have been discussed as part of networking lessons.}
+\item Ask students about games they play and have them describe possible player \emph{actions} and compare them with actual player \emph{input}.\footnote{Alternatively, if starting from art instead of games, decompose drawing \eg a house into individual brush strokes.} This repeats top down abstraction decomposition as maybe already encountered in the introduction to programming lessons and allows teachers to bring the foundational idea of multitier architectures back to students' minds.\footnote{Multitier architectures might already have been discussed as part of networking lessons.}
 \item Have students go back to a sample or one of their own Processing progams and let it (again) be displayed in machine code. Provide them several examples, \eg with variable assignment, with conditionals and loops, and let them assemble the required machine code mnemonics and byte values.\footnote{Ideally, distribute the examples over small student groups, two groups per example.} Suggest variations for the example, so that even with less programming experience they may find regularities.
 \item Collect their findings and group their arguments: pushing to the stack/accumulator (machine codes 0--83), returning (88--94), binary arithmetic and comparison operations (96--111), common commands (112--127), message sending/function calls (128--175), jumps (176--199), storing results (200--216), combined multi-byte instructions (first byte: 224--255) \cite[p.\,12]{Ber14}.\footnote{Students should at this point be able to explain where these seemingly odd number ranges stem from.}
 \item Take a step back: What is relevant for running a program? This should yield memory, (arithmetic) operations, input and output and control flow. Let students go back to their examples and see if Processing code doing for one or multiple of these core concepts map to the found machine codes.
@@ -142,9 +142,9 @@ Whereas Nisan and Schocken \cite{Nis21} introduce their bottom up course with a 
 
 \section{Lesson on Compilers} \label{sc_lesson_compiler}
 
-Once students have an approximate understanding of into what a program must be transformed in order to be run on actual hardware or inside a \ac{VM}, the question remains as to how the transformation from source code to machine code happens.
+Once students have an approximate understanding of what a program must be transformed into in order to be run on actual hardware or inside a \ac{VM}, the question remains as to how the transformation from source code to machine code happens.
 
-While this is usually not in the focus of a general introduction to computer science beyond the superficial treatment occurring during the lessons on computer architecture, this is quite relevant for students specializing in computer science.
+While this is not usually in the focus of a general introduction to computer science beyond the superficial treatment occurring during the lessons on computer architecture, this is quite relevant for students specializing in computer science.
 
 However, using the environment presented here, this topic could just as well be used either for all students or for quicker students to work on mostly by themselves. Part of the lesson presented here has indeed been validated under these circumstances (cf. \ref{sc_validation_compiler}).
 
@@ -153,7 +153,7 @@ However, using the environment presented here, this topic could just as well be 
 
 After these lessons, students should be able to \dots
 \begin{itemize}
-\item explain the difference between high and low level languages.
+\item explain the difference between high-level and low-level languages.
 \item enumerate the steps required during compilation, using proper terminology (lexer, parser, transpiler, compiler, optimizer).
 \item connect this knowledge with their knowledge on computer architecture and programming.
 \end{itemize}
@@ -161,28 +161,28 @@ After these lessons, students should be able to \dots
 
 \subsection{Prerequisites}
 
-Students must have experience in programming and computer architecture, \eg from the lessons described above (cf. \ref{sc_lesson_intro} and \ref{sc_lesson_ca}). It helps, if their programming experience is based on Processing or at least Python. Additionally, the need to have \ac{GT} installed and introduced (see \ref{ssc_lesson_gt}).
+Students must have experience in programming and computer architecture, \eg from the lessons described above (cf. \ref{sc_lesson_intro} and \ref{sc_lesson_ca}). It helps, if their programming experience is based on Processing or at least Python. Additionally, they need to have \ac{GT} installed and introduced (see \ref{ssc_lesson_gt}).
 
 
 \subsection{Lesson Plan}
 
-The natural way to progress on understanding a compiler is top down, which is the same as chronological order:
+The natural way to progress on understanding a compiler is top down, which is the same as the chronological order:
 
 \begin{instructions}
-\item Before starting to fill in the content missing from the previous lesson on computer architecture, begin with a repetition on how a program is run in a \ac{VM} (see figure \ref{fig_screenshot_vm_execution}), letting students run again a given or one of their own program and seeing into what commands their code was translated.
+\item Before starting to fill in the content missing from the previous lesson on computer architecture, begin with a repetition on how a program is run in a \ac{VM} (see figure \ref{fig_screenshot_vm_execution}), letting students run again a given program or one of their own and seeing into what commands their code was translated.
 \item As an analogy, analyse with students how they would go about translating an unknown language using just a dictionary: splitting the text into words where punctuation yields some structure; then looking words up (where again several words might belong together for the sake of translation\footnote{Compare \eg the meanings of ``to see'', ``to see to'', ``to see through'' and ``to see out''.}); writing the translation down; and finally rewriting it, so that it sounds more akin to how you'd write it in the target language. This analogy yields a fitting overview over the different steps involved.
 \item Now let students work through discovering the individual concepts encountered:
 \begin{itemize}
 \item Have them compare a program and the resulting lexed tokens: What modifications to a program result in different tokens, what modifications don't cause changes? What does this correspond to in the analogy about translating a natural language?
-\item Have them compare the abstract syntax trees resulting from their program(s). Are they able to explain how the parser structures the tokens together? How would they go about if all they saw were just two tokens? (For this, use a view of tokens showing just two lines.)
+\item Have them compare the abstract syntax trees resulting from their program(s). Are they able to explain how the parser structures the tokens together? How would they proceed if all they saw were just two tokens? (For this, use a view of tokens showing just two lines.)
 \item Discuss how a recursive descent parser works through tokens. Since Python and thus Processing based on Python uses indentation for command grouping, also highlight the need for tracking indentation at least per statement.
 \item Optionally have students compare given Processing source code with the resulting \ac{AST} and transpiled Smalltalk: How literal is the translation? What is different between Processing and Smalltalk? Have them try to invent a syntax of their own that is easier to map to the \ac{AST} (and later discuss Lisp and Forth syntaxes as examples for alternative, easier to parse syntaxes\footnote{Views for variants of both are available.}).
-\item Since usually, an \ac{IR} is directly produced from an \ac{AST}, collect common statement types (variable assignment, function calls, loops, \dots) and have them translated live to \ac{IR}. Let students work out common patterns to see what translation might take place.
+\item Since usually an \ac{IR} is directly produced from an \ac{AST}, collect common statement types (variable assignment, function calls, loops, \dots) and have them translated live to \ac{IR}. Let students work out common patterns to see what translation might take place.
 \item Have views for \ac{IR} and actual Smalltalk bytecode side by side for students to figure out, what transformations remain and why these might be required (comparing with their knowledge from computer architecture lessons).
 \item Should students have prior experience with ``Human Resource Machine'' \cite{Tom15}, have them translate Processing to a program in that game's simplified language and translate code for a level of that game back to Processing (and from that Smalltalk bytecode with the environment's help).
 \item For the final step, offer some simple code examples that can obviously be simplified.\footnote{\eg \ct{print(1+1+1+1+1)} or \ct{for i in range(10): pass}, both of which should be trivially optimizable}. What optimizations are present in the \ac{IR} and which in bytecode? What patterns could be optimized? Also discuss the difference of optimizing for size, for speed and for quick compilation.\footnote{For players of ``Human Resource Machine'', the first two are the bonus challenges for all later levels.}
 \end{itemize}
-\item What can't be shown inside \ac{GT} are the equivalent of optimizations within a processor (or already the x86, IA64, \etc code produced by the Just in Time compiler). Students should at this point however have sufficient understanding of the various transformations that they might be able to understand what happened \eg with the Spectre attack \cite{Koc19} and why understanding of machine code might be relevant for timing attacks.
+\item What can't be shown yet using ``Processing Abstractions'' are the equivalent of optimizations within a processor (or already the x86, IA64, \etc code produced by the Just in Time compiler). Students should at this point however have sufficient understanding of the various transformations that they might be able to understand what happened \eg with the Spectre attack \cite{Koc19} and why understanding of machine code might be relevant for timing attacks.
 \end{instructions}
 
 
@@ -193,6 +193,6 @@ Whereas the environment presented here is mainly targeted at introductionary hig
 
 \begin{itemize}
 \item Smalltalk is a rather elegant language and has aged quite well. It can still be used to introduce students into pure object-oriented programming with a for them somewhat unusual syntax. And such an introduction could use transpilations from ``Processing Abstractions'' as a stepping stone, if students have already used it.
-\item Since the here provided code is run dynamically in \ac{GT}, it can also be molded further, \eg to implement as of yet missing support for object-oriented programming.
+\item Since the code provided here is run dynamically in \ac{GT}, it can also be molded further, \eg to implement as of yet missing support for object-oriented programming.
 \item The provided code might also be used as a template for students to implement their own programming language or see if they manage to write an interpreter for one of the two provided prefix and postfix mini-languages.\footnote{This might already have been discussed in the compiler lessons above. Very briefly, a program such as \ct{a = 42; print(a)} is translated to \ct{(= a 42) (print a)} and \ct{\$a 42 = a print} respectively, which both should be simple enough to parse.}
 \end{itemize}

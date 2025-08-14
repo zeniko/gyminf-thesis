@@ -11,7 +11,6 @@ Metacello new
 	repository: 'github://zeniko/\ac{GT}-exploration:thesis/src';
 	baseline: 'GtExploration';
 	load.
-
 Metacello new
 	repository: 'github://zeniko/processing-abstractions:thesis/src';
 	baseline: 'ProcessingAbstractions';
@@ -43,9 +42,9 @@ LeYoutubeReferenceElement compile:
 
 Finally run the \ct{GlamorousToolkit} executable (under Windows and Linux it is located in the \ct{bin} subfolder). The teaching materials of ``Processing Abstractions'' are now available behind the ``Unterrichtseinheiten'' home tile.
 
-Verify that everything works as desired and then close and save the changes to the image. Now, the above \ct{startup.st} can be removed, since all its changes have been persisted in \ac{GT}'s \ct{.image} file.
+Verify that everything works as desired and then close and save the changes to the image.
 
-\emph{Warning:} If you've already used \ac{GT} before, the contents of your local knowledge database will also be included in \ac{GT}'s image. Therefore rename that folder (usually \ct{lepiter/default} in your documents folder) before starting the \ac{GT} meant for distribution.
+\emph{Warning:} If you've already used \ac{GT} before, the contents of your local knowledge database will also be included in \ac{GT}'s image. Therefore rename that folder (usually \ct{lepiter/default} in your documents folder) before starting the \ac{GT} meant for distribution, and undo the renaming before again starting your own \ac{GT} instance.
 
 Also, since the executable \ct{GlamorousToolkit.exe} is located in a subdirectory under Windows and Linux, adding a top-level link can help students. See \url{https://github.com/zeniko/gtRunner} for a ready-to-use drop-in.
 
@@ -57,7 +56,7 @@ Also, since the executable \ct{GlamorousToolkit.exe} is located in a subdirector
 
 \chapter{GT Processing API} \label{app_api}
 
-This appendix lists the available \ac{API} calls implemented in Processing Abstraction's Processing.\footnote{For comparison, the full \ac{API} or Processing's Python mode is available at \archivedurl{https://py.processing.org/reference/}.} This has been auto-generated from \ac{GT} page ``Processing API'':
+This appendix lists the available \ac{API} calls implemented in Processing Abstraction's partial implementation of Processing.\footnote{For comparison, the full \ac{API} or Processing's Python mode is available at \archivedurl{https://py.processing.org/reference/}.} This has been auto-generated from the \ac{GT} page ``Processing API'':
 
 \input{appendix-api}
 
@@ -68,125 +67,6 @@ This appendix lists the available \ac{API} calls implemented in Processing Abstr
 
 \section{Classes}
 
-\begin{description}
-
-\item[\texttt{BlContainerWithHeaderElement}] \hfill \\
-	
-\item[\texttt{BrTextEditorReadonlyWithNavigationMode}] \hfill \\
-	
-\item[\texttt{GtExplorationHomeSection}] \hfill \\
-	
-\item[\texttt{GtProcessingCoderDebugShortcut}] \hfill \\
-	
-\item[\texttt{GtProcessingCoderModel}] \hfill \\
-	
-\item[\texttt{GtProcessingCoderRunDetailsShortcut}] \hfill \\
-	
-\item[\texttt{GtProcessingCoderRunShortcut}] \hfill \\
-	
-\item[\texttt{GtProcessingCoderRunStepsShortcut}] \hfill \\
-	
-\item[\texttt{GtProcessingCoderViewModel}] \hfill \\
-	
-\item[\texttt{LeProcessingSnippet}] \hfill \\
-	
-\item[\texttt{LeProcessingSnippetElement}] \hfill \\
-	
-\item[\texttt{LeProcessingSnippetViewModel}] \hfill \\
-	
-\item[\texttt{LiveViewWrapper}] \hfill \\
-	
-\item[\texttt{ProcessingASTChanged}] \hfill \\
-	
-\item[\texttt{ProcessingAstCleaner}] \hfill \\
-	
-\item[\texttt{ProcessingCanvas}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasElement}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasEllipse}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasExamples}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasImage}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasLine}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasPolygon}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasPresenter}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasRectangle}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasRoundedRectangle}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasShape}] \hfill \\
-	
-\item[\texttt{ProcessingCanvasText}] \hfill \\
-	
-\item[\texttt{ProcessingCodeBase}] \hfill \\
-	
-\item[\texttt{ProcessingCompiler}] \hfill \\
-	
-\item[\texttt{ProcessingEllipsis}] \hfill \\
-	
-\item[\texttt{ProcessingExecTest1}] \hfill \\
-	
-\item[\texttt{ProcessingExplainShape}] \hfill \\
-	
-\item[\texttt{ProcessingInterpreter}] \hfill \\
-	
-\item[\texttt{ProcessingList}] \hfill \\
-	
-\item[\texttt{ProcessingProgram}] \hfill \\
-	
-\item[\texttt{ProcessingProgramChanged}] \hfill \\
-	
-\item[\texttt{ProcessingProgramExamples}] \hfill \\
-	
-\item[\texttt{ProcessingRunner}] \hfill \\
-	
-\item[\texttt{ProcessingRunnerExamples}] \hfill \\
-	
-\item[\texttt{ProcessingRunStep}] \hfill \\
-	
-\item[\texttt{ProcessingSource}] \hfill \\
-	
-\item[\texttt{ProcessingSourceChanged}] \hfill \\
-	
-\item[\texttt{ProcessingSourceChangedError}] \hfill \\
-	
-\item[\texttt{ProcessingSourceExamples}] \hfill \\
-	
-\item[\texttt{ProcessingTokenExtractor}] \hfill \\
-	
-\item[\texttt{ProcessingTokenExtractorExamples}] \hfill \\
-	
-\item[\texttt{ProcessingTranspilationSlice}] \hfill \\
-	
-\item[\texttt{ProcessingTranspiler}] \hfill \\
-	
-\item[\texttt{ProcessingTranspilerExamples}] \hfill \\
-	
-\item[\texttt{ProcessingTranspilerVariant}] \hfill \\
-	
-\item[\texttt{ProcessingTranspilerVariantExamples}] \hfill \\
-	
-\item[\texttt{ProcessingTreeMondrianCreatorExamples}] \hfill \\
-	
-\item[\texttt{ProcessingViewSelectionChanged}] \hfill \\
-	
-\item[\texttt{Stepper}] \hfill \\
-	
-\item[\texttt{StepperExamples}] \hfill \\
-	
-\item[\texttt{ViewComparison}] \hfill \\
-	
-\item[\texttt{ViewComparisonExamples}] \hfill \\
-	
-
-\end{description}
-
 
 \begin{cfigure}[fig_uml_snippet]{Diagram of classes involved in \ct{LeProcessingSnippet}}
 \input{diagrams/uml-snippet}
@@ -195,7 +75,7 @@ This appendix lists the available \ac{API} calls implemented in Processing Abstr
 
 \section{Views}
 
-The following views are available as arguments for \ct{ProcessingSource>>>renderLiveView:} (see figure \ref{fig_embedding_view} on page \pageref{fig_embedding_view}). See figure \ref{fig_uml_views} for an overview of all view implementors.
+The following views are available as arguments for \ct{ProcessingSource>>>renderLiveView:} (see page \pageref{embedding_view}). See figure \ref{fig_uml_views} for an overview of all view implementors.
 
 \begin{cfigure}[fig_uml_views]{Diagram of all views provided and their implementors (methods set in \textit{italics} are forwarded)}
 \input{diagrams/uml-views}
@@ -227,7 +107,7 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 \item[\texttt{gtSourceCodeFor:}] \hfill \\
 	displays a fresh read-only editor instance from \ct{SmaCCParseNode>>gtSourceEditorWithHightlight:} with a custom \ct{BrTextEditorReadonlyWithNavigationMode} mode (shown on the top left in figure \ref{fig_view_abstractions}, on the left in \ref{fig_view_transpilation}, \etc).
 \item[\texttt{gtStepsFor:}] \hfill \\
-	shows a list of \ct{ProcessingRunStep}s and their own \ct{gtAbstractionFor:} view, consisting of their \ct{gtSourceCodeFor:}, \ct{gtBytecodeFor:}, \ct{gtVariablesFor:}, \ct{gtStackFor:} and \ct{gtOutputFor:} (shown in figure \ref{fig_view_runsteps}). \ct{ProcessingRunStep>>gtOverviewFor:} is a simplified variant of this shown from the ``Processing/Python'' snippet.
+	shows a list of \ct{ProcessingRunStep}s and their own \ct{gtAbstractionFor:} view, consisting of their \ct{gtSourceCodeFor:}, \ct{gtBytecodeFor:}, \ct{gtVariablesFor:}, \ct{gtStackFor:} and \ct{gtOutputFor:} (shown in figure \ref{fig_view_runsteps}). \ct{ProcessingRunStep>>gtOverviewFor:} is a simplified variant of this shown from the Processing/Python snippet.
 \item[\texttt{gtTokensFor:}] \hfill \\
 	shows a list of \ct{SmaCCToken}s that were produced by \ct{ProcessingParser} (shown on the left in figure \ref{fig_view_tokens_ast}). \ct{gtTokensPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtTokensPlusTreeFor:}] \hfill \\
@@ -242,15 +122,15 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 	shows a horizontal \ct{GtMondrian} tree produced by \ct{ProcessingTreeMondrianCreator} (shown in figure \ref{fig_view_ast_tree}). \ct{gtTreePlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \end{description}
 
-\begin{cfigure}[fig_view_abstractions]{The ``Abstractions'' view with source code, \ac{AST}, bytecode and output showing}
+\begin{cfigure}[fig_view_abstractions]{The Abstractions view with source code, \ac{AST}, bytecode and output showing}
 \includegraphics[width=.7\textwidth]{view_abstractions}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_chars_bytes]{The ``Characters'' and ``Bytes'' views, connected}
+\begin{cfigure}[fig_view_chars_bytes]{The Characters and Bytes views, connected}
 \includegraphics[width=.7\textwidth]{view_chars_bytes}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_tokens_ast]{The ``Tokens'' and ``\ac{AST}'' views, connected}
+\begin{cfigure}[fig_view_tokens_ast]{The Tokens and \ac{AST} views, connected}
 \includegraphics[width=.7\textwidth]{view_tokens_ast}
 \end{cfigure}
 
@@ -258,7 +138,7 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 \includegraphics[width=.7\textwidth]{view_ast_tree}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_transpilation]{The ``Transpilation'' view, showing Processing and Smalltalk code side by side}
+\begin{cfigure}[fig_view_transpilation]{The Transpilation view, showing Processing and Smalltalk code side by side}
 \includegraphics[width=.7\textwidth]{view_transpilation}
 \end{cfigure}
 
@@ -266,27 +146,27 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 \includegraphics[width=.7\textwidth]{view_prefix_postfix}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_ir_bytecode]{The ``\ac{IR}'' and ``Bytecode'' views, connected}
+\begin{cfigure}[fig_view_ir_bytecode]{The \ac{IR} and Bytecode views, connected}
 \includegraphics[width=.7\textwidth]{view_ir_bytecode}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_runsteps]{The ``Runsteps'' view allows users to step through execution and inspect variables and stack values}
+\begin{cfigure}[fig_view_runsteps]{The Runsteps view allows users to step through execution and inspect variables and stack values}
 \includegraphics[width=.7\textwidth]{view_runsteps}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_slices]{The ``Slices'' view shows the list of objects connecting Processing and Smalltalk code}
+\begin{cfigure}[fig_view_slices]{The Slices view shows the list of objects connecting Processing and Smalltalk code}
 \includegraphics[width=.7\textwidth]{view_slices}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_shapes]{The ``Shapes'' displays all output shapes individually}
+\begin{cfigure}[fig_view_shapes]{The Shapes displays all output shapes individually}
 \includegraphics[width=.7\textwidth]{view_shapes}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_raw]{The ``Raw'' view is provided by \ac{GT} and shows all variables of an instantiated object}
+\begin{cfigure}[fig_view_raw]{The Raw view is provided by \ac{GT} and shows all variables of an instantiated object}
 \includegraphics[width=.7\textwidth]{view_raw}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_meta]{The ``Meta'' view is provided by \ac{GT} and shows all methods defined for the instantiated object}
+\begin{cfigure}[fig_view_meta]{The Meta view is provided by \ac{GT} and shows all methods defined for the instantiated object}
 \includegraphics[width=.7\textwidth]{view_meta}
 \end{cfigure}
 

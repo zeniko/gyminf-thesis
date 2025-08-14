@@ -4,9 +4,9 @@
 
 In order to better understand complex content -- at least with regards to computer science --, didactic literature recommends for students to perform a \emph{Sichtenwechsel}, \ie observing the same entity at different abstraction levels, in order to better understand the subject at hand. As part of our teaching computer science to high school students, we've been particularly interested in being able to do so with regards to popular programming and less popular computer architecture.
 
-While various programming \acp{IDE} provide some possibilities to get relevant insights into a computer's inner workings, none of them offer an all-in-one solution as a building block at a complexity level manageable for high school students. As part of this thesis, a new teaching environment has thus been introduced, implementing a compiler and runtime for the Processing language inside of \acf{GT}, which allows teachers to flexibly combine various forms of content in a unified environment. On the basis of the working Processing system, a wide variety of views into various aspects of it has been added, allowing students to inspect a program from source bytes to machine bytecode and through its execution.
+While various programming \acp{IDE} provide some possibilities to get relevant insights into a computer's inner workings, none of them offer an all-in-one solution as a building block at a complexity level manageable for high school students. As part of this thesis, the new teaching environment ``Processing Abstractions'' has thus been introduced, implementing a compiler and runtime for the Processing language inside of \acf{GT}, which allows teachers to flexibly combine various forms of content in a unified environment. On the basis of the working Processing system, a wide variety of views of various aspects of it has been added, allowing students to inspect a program from source code to machine bytecode and through its execution.
 
-This allowed creating interactive teaching material that engages students through its liveness and by allowing teachers to lead them at their own pace and depth through the material, having students explore and experience what steps computers have to take for transforming their idea of a program into something sufficiently concrete that can actually be executed in a (virtual) machine.
+This enabled the creation of interactive teaching material that engages students through its liveness and by allowing teachers to lead them at their own pace and depth through the material, having students explore and experience what steps computers have to take for transforming their idea of a program into something sufficiently concrete that can actually be executed in a (virtual) machine.
 
 Working with students showed that the environment mostly worked and managed to get students involved. While students seem to have learned through their own investigation into lower abstraction levels, significant effects could not (yet) be measured. This was in large part due to both a small sample size and too brief an observation window.
 
@@ -18,7 +18,7 @@ Further usage and studies will be required for verifying our initial assumptions
 
 Continuing this path further, there are multiple ways to proceed. On the one hand, there are several aspects still missing from the environment itself. On the other hand, the same concept of \emph{Sichtenwechsel} might be applicable in other domains as well. Finally, a larger study confirming that this kind of approach is empirically sound is required.
 
-Within the environment itself, there are several kinds of views that we feel are still missing. In particular, at this point most views show a single state along abstraction deconstruction. Visualizations for how to get from one to the next are still missing and would have to happen mainly in students' minds for now. Even just animating the ``Runsteps'' view instead of having students to click through, with differences from one to the other step being highlighted, might help. More interesting would however be animating the process of parsing tokens into an \ac{AST} or more ambitiously the process of taking Processing source code, parsing it and then translating it.
+Within the environment itself, there are several kinds of views that we feel are still missing. In particular, at this point most views show a single state along abstraction deconstruction. Visualizations for how to get from one to the next are still missing and would have to happen mainly in students' minds for now. Even just animating the Runsteps view instead of students having to click through, with differences from one to the other step being highlighted, might help. More interesting would however be animating the process of parsing tokens into an \ac{AST} or more ambitiously the process of taking Processing source code, parsing it and then translating it.
 
 Also most lists provide access to native \ac{GT} objects, which have views not optimized for students. Instead of \eg giving direct access to a bytecode object, which only contains a pointer back to the Smalltalk source, these could be wrapped or extended, so that their default view continues to be informative such as showing a short explanation of what the selected command does.
 
@@ -32,26 +32,8 @@ As for the implementation of Processing, many bits are missing. Mainly support f
 
 For students coming from a different programming language, adapting the environment to their language of choice might also be doable. Since \ac{GT} already contains support for parsing dozens of languages (among other languages JavaScript, C(++), Rust or even Visual Basic), matching a subset of that language from its \ac{AST} to Smalltalk should be doable in the same way as \ct{ProcessingTranspiler} was implemented. At least when sticking to the Processing \ac{API}, the rest of the environment could be reused with minimal adjustments.
 
-Going beyond programming, the same principle might also be applicable to other domains: We have already seen the Filius environment, which allows students to deconstruct networks to various depths. In natural sciences, processes can be investigated and deconstructed in a similar fashion in a simulated environment. Based on a framework like NetLogo,\footnote{\emph{Cf.} \eg \url{https://www.netlogoweb.org/launch\#http://www.netlogoweb.org/assets/modelslib/Sample\%20Models/Biology/Ants.nlogo}.} which already presents multiple views into the same phenomenon, further views for deconstructing and understanding the observed behavior could be added. Having the simulation inside a moldable environment would certainly help.
+Going beyond programming, the same principle might also be applicable to other domains: We have already seen the Filius environment, which allows students to deconstruct networks to various depths. In natural sciences, processes can be investigated and deconstructed in a similar fashion in a simulated environment. Based on a framework like NetLogo,\footnote{\emph{Cf.} \eg \url{https://www.netlogoweb.org/launch\#http://www.netlogoweb.org/assets/modelslib/Sample\%20Models/Biology/Ants.nlogo}.} which already presents multiple views of the same phenomenon, further views for deconstructing and understanding the observed behavior could be added. Having the simulation inside a moldable environment would certainly help.
 
-In the same vein, in a psychology course, students could be exposed to views into the subconscious, neurology down to biology and maybe even physics, when discussing behavior -- for a better understanding of the various influences on what might be perceived as purely mental; or in a music class, students could get harmonics decomposed into oscillation and ratios -- for a better understanding of what causes harmony; \etc Applying this principle in other domains is however left to specialists of those. What is however desired in all cases is an interdisciplinary approach, once lower abstraction levels go beyond one's own domain.\footnote{Similarly how chemistry and physics will have to be involved when discussing the innards of a modern microprocessor.}
+In the same vein, in a psychology course, students could be exposed to views of the subconscious, neurology down to biology and maybe even physics, when discussing behavior -- for a better understanding of the various influences on what might be perceived as purely mental; or in a music class, students could get harmonics decomposed into oscillation and ratios -- for a better understanding of what causes harmony; \etc Applying this principle in other domains is however left to specialists of those. What is however desired in all cases is an interdisciplinary approach, once lower abstraction levels go beyond one's own domain.\footnote{Similarly how chemistry and physics will have to be involved when discussing the innards of a modern microprocessor.}
 
 However first, we have to proceed with a further investigation into whether our students from different classes are indeed profiting in the way we intended them to.
-
-
-\section*{Remaining To Do}
-
-\begin{todo}
-\item explain and evaluate methodical approach
-\item Validation: diagrams for visualization:
-\begin{itemize}
-\item number/percentage of students interacting
-\item successfully learned
-\end{itemize}
-\item verify statistical claims (don't claim too much)
-\item use 2DET taxonomy for chapter 4/5? \cite{Sor13}
-\item Appendix: How detailed explanations are required in the appendix?
-\item consider removing/replacing page linking in ``Unterrichtseinheiten''
-\item Update screenshots (Pre-/Postfix, HexDump)
-\item Synchronize appendix \ref{app_api} with \url{https://github.com/zeniko/\ac{GT}-exploration/blob/thesis/lepiter/68t44r92c7d0lr4e4ggiqmsq8.lepiter} and \url{https://github.com/zeniko/processing-abstractions/blob/thesis/lepiter/310yy5nuue5px1i3go4w0bjqo.lepiter}
-\end{todo}
