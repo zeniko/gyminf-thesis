@@ -38,7 +38,7 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \subsection{Colors}
 \begin{description}
 \item[\texttt{color(r, g, b)}, \texttt{color(gray)}] \hfill \\
-	Generates a color object which can be stored in a variable also be used with \ct{fill(...)}, \ct{stroke(...)} and \ct{background(...)}.
+	Generates a color value, which can be stored in a variable and can also be used as an argument for \ct{fill(...)}, \ct{stroke(...)} and \ct{background(...)}.
 \item[\texttt{fill(r, g, b)}] \hfill \\
 	Selects the color to use for filling rendered shapes. The color is given as three values in the range of 0 to 255 (red, green and blue respectively). Default is white (255, 255, 255).
 \item[\texttt{fill(gray)}] \hfill \\
@@ -83,18 +83,20 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \begin{description}
 \item[\texttt{cos(angle)}] \hfill \\
 	Returns the cosine value for the given angle (measured in radians).
+\item[\texttt{float(value)}] \hfill \\
+	Ensures that the value is a floating-point number (
 \item[\texttt{int(value)}] \hfill \\
 	Rounds the value to an integer.
-\item[\texttt{PI}] \hfill \\
-	The value of the mathematical constant p.
 \item[\texttt{max(a, b)}] \hfill \\
 	Returns the larger of the two values (\ct{max(a)} returns the largest value contained in the list \ct{a}).
 \item[\texttt{min(a, b)}] \hfill \\
 	Returns the smaller of the two values (\ct{min(a)} returns the smallest value contained in the list \ct{a}).
+\item[\texttt{PI}] \hfill \\
+	The value of the mathematical constant p.
 \item[\texttt{radians(angle)}] \hfill \\
 	Converts the given angle (measured in degrees) into radians.
 \item[\texttt{random(limit)}] \hfill \\
-	Returns a random floating point number between 0 and limit (inclusive).
+	Returns a random floating-point number between 0 and limit (inclusive).
 \item[\texttt{randomSeed(seed)}] \hfill \\
 	Reinitializes the random generator with the given \ct{seed} number. Using the same number will result in the exact same sequence of pseudo-randomly generated numbers.
 \item[\texttt{sin(angle)}] \hfill \\
@@ -106,7 +108,8 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \end{description}
 
 \section{Lists}
-Lists are objects which provide their own methods. Note that for the following commands, \ct{list} is a variable referencing a \ct{list}.
+Lists are objects that provide their own methods.
+Note that for the following commands, \ct{list} is a variable referencing a list.
 \begin{description}
 \item[\texttt{len(list)}] \hfill \\
 	Returns the number of items in this list.
