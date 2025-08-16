@@ -4,7 +4,7 @@
 
 In order to let students have a \emph{Sichtenwechsel} with relation to programming, \ie have them experience several different abstraction levels involved between a program's source code and its execution, a new teaching environment dubbed ``Processing Abstractions'' is proposed:
 
-Within \ac{GT}, we've implemented support for the Processing programming language and molded views for every implementation step along the way. This allows for creating interactive notebook pages containing source code and a variety of these views, showing \eg the \ac{AST} and resulting bytecode for the \ac{GT} \ac{VM} side by side.
+Within \ac{GT}, we have implemented support for the Processing programming language and molded views for every implementation step along the way. This allows for creating interactive notebook pages containing source code and a variety of these views, showing \eg the \ac{AST} and resulting bytecode for the \ac{GT} \ac{VM} side by side.
 
 In this chapter, we document the architecture of this environment and the reasons for the approaches chosen. If you want to inspect the environment yourself, see appendix \ref{app_setup} for how to install all referenced code.\footnote{Remove the line \ct{GtExplorationHomeSection studentMode: true.} in order to also see our implementation notes.}
 
@@ -12,7 +12,7 @@ In this chapter, we document the architecture of this environment and the reason
 
 \section{Overview of ``Processing Abstractions''}
 
-``Processing Abstractions'' consists of a transpiler for translating Processing source code into executable objects, a runtime environment, a large collection of views of various aspects of the program, and teaching materials using them.\footnote{The teaching materials currently provided are in the language used for teaching at the location of writing: German.} Tools and views as well as materials are all implemented within \acf{GT}, the former in Smalltalk code and the latter as Lepiter notebook pages.
+Processing Abstractions consists of a transpiler for translating Processing source code into executable objects, a runtime environment, a large collection of views of various aspects of the program, and teaching materials using them.\footnote{The teaching materials currently provided are in the language used for teaching at the location of writing: German.} Tools and views as well as materials are all implemented within \acf{GT}, the former in Smalltalk code and the latter as Lepiter notebook pages.
 
 \begin{cfigure}[fig_screenshot_vm_execution]{Excerpt from an interactive notebook page on program execution in a \ac{VM}.}
 \includegraphics[width=.7\textwidth]{screenshot_vm_execution}
