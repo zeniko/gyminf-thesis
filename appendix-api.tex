@@ -7,7 +7,7 @@
 \item[\texttt{background(gray)}] \hfill \\
 	Clears the canvas and changes its color (see \ct{fill(gray)}). Default is light gray (192).
 \item[\texttt{size(width, height)}] \hfill \\
-	Prepares an output canvas of the given dimensions. This command must always be called first (for animations: first command in \ct{def setup}).
+	Prepares an output canvas of the given dimensions. This command must always be called first (for animations, it must be the first command in \ct{def setup}).
 \end{description}
 
 \subsection{Shapes}
@@ -15,7 +15,7 @@
 \item[\texttt{ellipse(x, y, dx, dy)}] \hfill \\
 	Draws an ellipse with the given diameters and its center at \ct{(x; y)}.
 \item[\texttt{image(image, x, y)}, \texttt{image(image, x, y, width, height)}] \hfill \\
-	Renders the image loaded with \ct{loadImage(...)} at the given coordinates (and scales it to fit the given size). Arguments following after the first are identical to \ct{rect}'s. If \ct{width} and \ct{height} are not given, the image's native dimensions are used.
+	Renders the image loaded with \ct{loadImage(...)} at the given coordinates (and scales it to fit the given size). All arguments except the first are identical to \ct{rect}'s. If \ct{width} and \ct{height} are not given, the image's native dimensions are used.
 \item[\texttt{line(x1, y1, x2, y2)}] \hfill \\
 	Draws a line from \ct{(x1; y1)} to \ct{(x2; y2)}.
 \item[\texttt{loadImage(pathOrUrl)}] \hfill \\
@@ -32,15 +32,15 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \item[\texttt{textSize(size)}] \hfill \\
 	Sets the size for rendering text in pixels. Default is 12px.
 \item[\texttt{triangle(x1, y1, x2, y2, x3, y3)}] \hfill \\
-	Draws a triangle with its vertices at the points \ct{(x1; y1)}, \ct{(x2; y2)} and \ct{(x3; y3)}.
+	Draws a triangle with its vertices at the points \ct{(x1; y1)}, \ct{(x2; y2)}, and \ct{(x3; y3)}.
 \end{description}
 
 \subsection{Colors}
 \begin{description}
 \item[\texttt{color(r, g, b)}, \texttt{color(gray)}] \hfill \\
-	Generates a color value, which can be stored in a variable and can also be used as an argument for \ct{fill(...)}, \ct{stroke(...)} and \ct{background(...)}.
+	Generates a color value, which can be stored in a variable and can also be used as an argument for \ct{fill(...)}, \ct{stroke(...)}, and \ct{background(...)}.
 \item[\texttt{fill(r, g, b)}] \hfill \\
-	Selects the color to use for filling rendered shapes. The color is given as three values in the range of 0 to 255 (red, green and blue respectively). Default is white (255, 255, 255).
+	Selects the color to use for filling rendered shapes. The color is given as three values in the range of 0 to 255 (red, green, and blue, respectively). Default is white (255, 255, 255).
 \item[\texttt{fill(gray)}] \hfill \\
 	Selects the gray scale value to use for filling rendered shapes. The color is given as a single value in the range of 0 to 255 (black/dark to white/light). Default is white (255).
 \item[\texttt{noStroke()}] \hfill \\
@@ -66,17 +66,17 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \section{Events}
 \begin{description}
 \item[\texttt{def draw():}] \hfill \\
-	is called repeatedly (up to \ct{frameRate} times per second) for drawing the output.
+	Is called repeatedly (up to \ct{frameRate} times per second) for drawing the output.
 \item[\texttt{def mouseClicked():}] \hfill \\
-	is called whenever a mouse button has been clicked \emph{and} released.
+	Is called whenever a mouse button has been clicked \emph{and} released.
 \item[\texttt{def mouseMoved():}] \hfill \\
-	is called whenever the mouse has been moved. Alternatively query \ct{mouseX} and \ct{mouseY} in \ct{draw()}.
+	Is called whenever the mouse has been moved. Alternatively, query \ct{mouseX} and \ct{mouseY} in \ct{draw()}.
 \item[\texttt{def mousePressed():}] \hfill \\
-	is called whenever a mouse button has been pressed. Alternatively query \ct{mousePressed} in \ct{draw()}.
+	Is called whenever a mouse button has been pressed. Alternatively, query \ct{mousePressed} in \ct{draw()}.
 \item[\texttt{def mouseReleased():}] \hfill \\
-	is called whenever a mouse button has been released.
+	Is called whenever a mouse button has been released.
 \item[\texttt{def setup():}] \hfill \\
-	is called once as the program starts.
+	Is called once as the program starts.
 \end{description}
 
 \section{Mathematics}
@@ -98,7 +98,7 @@ GtInspector newOn: FileLocator documents / 'lepiter'
 \item[\texttt{random(limit)}] \hfill \\
 	Returns a random floating-point number between 0 and limit (inclusive).
 \item[\texttt{randomSeed(seed)}] \hfill \\
-	Reinitializes the random generator with the given \ct{seed} number. Using the same number will result in the exact same sequence of pseudo-randomly generated numbers.
+	Reinitializes the random generator with the given \ct{seed} number. Using the same number will result in the same exact sequence of pseudo-randomly generated numbers.
 \item[\texttt{sin(angle)}] \hfill \\
 	Returns the sine value for the given angle (measured in radians).
 \item[\texttt{sqrt(value)}] \hfill \\
@@ -136,13 +136,13 @@ Note that for the following commands, \ct{list} is a variable referencing a list
 \item[\texttt{height}] \hfill \\
 	Contains the canvas height as set by \ct{size()}.
 \item[\texttt{millis()}] \hfill \\
-	Returns the number of milliseconds that have passed since the program has started.
+	Returns the number of milliseconds that have passed since the program started.
 \item[\texttt{mouseX}, \texttt{mouseY}, \texttt{mousePressed}] \hfill \\
 	Contains the \ct{x}- and \ct{y}-coordinates of the mouse cursor and whether the mouse has been pressed at the start of a \ct{draw}-phase (undefined outside of \ct{draw}).
 \item[\texttt{print(value)}, \texttt{println(value)}] \hfill \\
-	Prints the given value into an output console (mainly for debugging and for graphic-less program).
+	Prints the given value into an output console (mainly for debugging and for programs without graphical output).
 \item[\texttt{str(value)}] \hfill \\
-	Turns the value into a string, e.g. for concatenating several values for use with \ct{text(...)}.
+	Turns the value into a string, \eg for concatenating several values for use with \ct{text(...)}.
 \item[\texttt{width}] \hfill \\
 	Contains the canvas width as set by \ct{size()}.
 \end{description}

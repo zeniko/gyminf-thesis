@@ -40,11 +40,11 @@ LeYoutubeReferenceElement compile:
 		copyReplaceAll: '</iframe>'' ' with: '</iframe>''; removeChildAt: 1 ').
 \end{code}
 
-Finally run the \ct{GlamorousToolkit} executable (under Windows and Linux it is located in the \ct{bin} subfolder). The teaching materials of Processing Abstractions are now available behind the ``Unterrichtseinheiten'' home tile.
+Finally, run the \ct{GlamorousToolkit} executable (under Windows and Linux it is located in the \ct{bin} subfolder). The teaching materials of Processing Abstractions are now available behind the ``Unterrichtseinheiten'' home tile.
 
 Verify that everything works as desired, and then close and save the changes to the image.
 
-\emph{Warning:} If you have already used \ac{GT} before, the contents of your local knowledge database will also be included in \ac{GT}'s image. Therefore, rename that folder (usually \ct{lepiter/default} in your documents folder) before starting the \ac{GT} meant for distribution, and undo the renaming before again starting your own \ac{GT} instance.
+\emph{Warning:} If you have already used \ac{GT} before, the contents of your local knowledge database will also be included in \ac{GT}'s image. Therefore, rename that folder (usually \ct{lepiter/default} in your documents folder) before starting the \ac{GT} meant for distribution, and undo the renaming before starting your own \ac{GT} instance again.
 
 Also, since the executable \ct{GlamorousToolkit.exe} is located in a subdirectory under Windows and Linux, adding a top-level link can help students. See \url{https://github.com/zeniko/gtRunner} for a ready-to-use drop-in.
 
@@ -83,7 +83,7 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 
 \begin{description}
 \item[\texttt{gtAbstractionsFor:}] \hfill \\
-	(implemented by \ct{ProcessingProgram}) combines \ct{gtSourceCodeFor:}, \ct{gtTreeFor:}, \ct{gtBytecodeFor:} and \ct{gtOutputFor:}, linking the source to the other three views through a common \ct{Announcer} reacting to selection changes (shown in figure \ref{fig_view_abstractions}).
+	(implemented by \ct{ProcessingProgram}) combines \ct{gtSourceCodeFor:}, \ct{gtTreeFor:}, \ct{gtBytecodeFor:}, and \ct{gtOutputFor:}, linking the source to the other three views through a common \ct{Announcer} reacting to selection changes (shown in figure \ref{fig_view_abstractions}).
 \item[\texttt{gtBytecodeFor:}] \hfill \\
 	uses the \ct{CompiledMethod} instances of each method in a compiled class' \ct{class methodDict} to access its \ct{symbolicBytecodes} and show the resulting \ct{SymbolicBytecode}s' bytes and mnemonic (shown on the right in figure \ref{fig_view_ir_bytecode}). \ct{gtBytecodePlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtBytecodePlusIRFor:}] \hfill \\
@@ -107,7 +107,7 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 \item[\texttt{gtSourceCodeFor:}] \hfill \\
 	displays a fresh read-only editor instance from \ct{SmaCCParseNode>>gtSourceEditorWithHightlight:} with a custom \ct{BrTextEditorReadonlyWithNavigationMode} mode (shown on the top left in figure \ref{fig_view_abstractions}, on the left in \ref{fig_view_transpilation}, \etc).
 \item[\texttt{gtStepsFor:}] \hfill \\
-	shows a list of \ct{ProcessingRunStep}s and their own \ct{gtAbstractionFor:} view, consisting of their \ct{gtSourceCodeFor:}, \ct{gtBytecodeFor:}, \ct{gtVariablesFor:}, \ct{gtStackFor:} and \ct{gtOutputFor:} (shown in figure \ref{fig_view_runsteps}). \ct{ProcessingRunStep>>gtOverviewFor:} is a simplified variant of this shown from the Processing/Python snippet.
+	shows a list of \ct{ProcessingRunStep}s and their own \ct{gtAbstractionFor:} view, consisting of their \ct{gtSourceCodeFor:}, \ct{gtBytecodeFor:}, \ct{gtVariablesFor:}, \ct{gtStackFor:}, and \ct{gtOutputFor:} (shown in figure \ref{fig_view_runsteps}). \ct{ProcessingRunStep>>gtOverviewFor:} is a simplified variant of this shown from the Processing/Python snippet.
 \item[\texttt{gtTokensFor:}] \hfill \\
 	shows a list of \ct{SmaCCToken}s that were produced by \ct{ProcessingParser} (shown on the left in figure \ref{fig_view_tokens_ast}). \ct{gtTokensPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtTokensPlusTreeFor:}] \hfill \\
@@ -115,14 +115,14 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 \item[\texttt{gtTranspilationFor:}] \hfill \\
 	shows the transpiled Smalltalk code in \ct{GT}'s code viewer, which separates methods and adds syntax highlighting. \ct{gtTranspilationPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:} (shown in figure \ref{fig_view_transpilation}).
 \item[\texttt{gtTranspilationPostfixFor:} and \texttt{gtTranspilationPrefixFor:}] \hfill \\
-	show a \ct{String} produced by \ct{ProcessingTranspilerVariant} in either its \ct{prefix} or \ct{postfix} modes (shown at the bottom in figure \ref{fig_view_prefix_postfix} respectively).
+	show a \ct{String} produced by \ct{ProcessingTranspilerVariant} in either its \ct{prefix} or \ct{postfix} modes (both shown at the bottom in figure \ref{fig_view_prefix_postfix}).
 \item[\texttt{gtTreeFor:}] \hfill \\
 	shows a treelist of \ct{PyRootNode}s for expression roots and \ct{SmaCCToken}s for structural tokens (shown on the right in figure \ref{fig_view_tokens_ast}).
 \item[\texttt{gtTreeMondrianFor:}] \hfill \\
 	shows a horizontal \ct{GtMondrian} tree produced by \ct{ProcessingTreeMondrianCreator} (shown in figure \ref{fig_view_ast_tree}). \ct{gtTreePlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \end{description}
 
-\begin{cfigure}[fig_view_abstractions]{The Abstractions view with source code, \ac{AST}, bytecode and output showing}
+\begin{cfigure}[fig_view_abstractions]{The Abstractions view with source code, \ac{AST}, bytecode, and output showing}
 \includegraphics[width=.7\textwidth]{view_abstractions}
 \end{cfigure}
 
@@ -142,7 +142,7 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 \includegraphics[width=.7\textwidth]{view_transpilation}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_prefix_postfix]{Source code, \ac{AST} and a transpilation to two pseudo languages (with pure prefix and postfix notation)}
+\begin{cfigure}[fig_view_prefix_postfix]{Source code, \ac{AST}, and a transpilation to two pseudolanguages (with pure prefix and postfix notation)}
 \includegraphics[width=.7\textwidth]{view_prefix_postfix}
 \end{cfigure}
 
@@ -158,7 +158,7 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 \includegraphics[width=.7\textwidth]{view_slices}
 \end{cfigure}
 
-\begin{cfigure}[fig_view_shapes]{The Shapes displays all output shapes individually}
+\begin{cfigure}[fig_view_shapes]{The Shapes view displays all output shapes individually}
 \includegraphics[width=.7\textwidth]{view_shapes}
 \end{cfigure}
 
