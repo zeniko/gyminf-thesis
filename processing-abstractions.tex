@@ -14,11 +14,11 @@ In this chapter, we document the architecture of this environment and the reason
 
 Processing Abstractions consists of a transpiler for translating Processing source code into executable objects, a runtime environment, a large collection of views of various aspects of the program, and teaching materials using them.\footnote{The teaching materials currently provided are in the language used for teaching at the location of writing: German.} Tools and views, as well as materials, are all implemented within \acf{GT}, the former in Smalltalk code and the latter as Lepiter notebook pages.
 
-\begin{cfigure}[fig_screenshot_vm_execution]{Excerpt from an interactive notebook page on program execution in a \ac{VM}.}
+\begin{cfigure}[fig_screenshot_vm_execution]{Excerpt from an interactive notebook page on program execution in a \ac{VM}}
 \includegraphics[width=.7\textwidth]{screenshot_vm_execution}
 \end{cfigure}
 
-Figure \ref{fig_screenshot_vm_execution} shows an excerpt from materials for students: The program visible at the top resides in a Processing-specific snippet with commands for running and inspecting the program independently of the page it resides on at the bottom; below a combined view for one execution step is shown with (clockwise) the step in question highlighted in source code; the corresponding bytecode visible; the program's output up to and including the current step; the contents of the execution stack of the Smalltalk \ac{VM}; and a list of all variable states.
+Figure \ref{fig_screenshot_vm_execution} shows an excerpt from materials for students: The program visible at the top resides in a Processing-specific snippet with commands to run and inspect the program, independently of the page it resides on, at the bottom; below a combined view for one execution step is shown with (clockwise) the step in question highlighted in source code; the corresponding bytecode visible; the program's output up to and including the current step; the contents of the execution stack of the Smalltalk \ac{VM}; and a list of all variable states.
 
 Many such views are updated live whenever the source code is modified, without any other action required by students.\footnote{The one exception is the combined run-step view, which, for longer running programs, would be too resource intensive to regenerate on the fly. Refreshing it manually is still possible.} The five views shown in figure \ref{fig_screenshot_vm_execution} can also be used on their own or in other arrangements (\eg only source and a full bytecode view where interacting with one automatically highlights the corresponding items in the other).
 
@@ -73,7 +73,7 @@ The Output view can be used at any state to quickly verify visually that a progr
 One way to show students what happens to a program before it can be executed on a (virtual) machine is to take them through the steps involved:
 
 \begin{itemize}
-\item The Tokens view (see figure \ref{fig_views_parser}) shows each of the tokens the lexer has encountered, including additionally required information such as a line number and line indentation.\footnote{Indentation is relevant, as Python and, as a consequence, Processing with Python syntax is a language with significant whitespace, using common indentation for denoting code blocks.} This view can be used for students to see what a compiler is looking at in their program, with whitespace and comments in particular removed.\footnote{As a limitation, tokens are currently extracted in reverse from the parser, which prevents inspecting tokens of syntactically invalid programs.}
+\item The Tokens view (see figure \ref{fig_views_parser}) shows each of the tokens the lexer has encountered, including additionally required information such as a line number and line indentation.\footnote{Indentation is relevant, as Python and, as a consequence, Processing with Python syntax is a language with significant whitespace, using common indentation to denote code blocks.} This view can be used for students to see what a compiler is looking at in their program, with whitespace and comments in particular removed.\footnote{As a limitation, tokens are currently extracted in reverse from the parser, which prevents inspecting tokens of syntactically invalid programs.}
 \item The \ac{AST} view (see figure \ref{fig_views_parser}) shows the resulting parse tree in a form that differentiates semantically relevant (sub)expressions from purely structural tokens. Combined with the Tokens view, this view can be used for hypothesizing and exploring how and what tokens are grouped together. In order to allow better interaction between Tokens and \ac{AST} views, the latter is a tree-list. A proper \ac{AST} Tree view is, however, also provided where the tree structure is more obviously visible, in particular also for larger programs.
 \item The Transpilation view shows the result of translating the \ac{AST} to Smalltalk. Since the \ac{AST} needs to be barely modified for this translation step, Smalltalk code should be relatively easy to understand, at least when the original Processing source is displayed in parallel.
 
@@ -88,7 +88,7 @@ All these views can be linked together, so that selecting an item in one view wi
 
 Being able to walk through all of these various compilation steps is something we haven't seen any \ac{IDE} offer. Furthermore, being able to connect this with an actually working program -- in the form of the Output view -- should offer students an explorable and interactive insight into a manageable package.
 
-\begin{cfigure}[fig_views_parser]{Screenshot of a page of student content showing modifiable Processing source with live views for tokenization (left) and abstract syntax tree (right).}
+\begin{cfigure}[fig_views_parser]{Screenshot of a page of student content showing modifiable Processing source with live views for tokenization (left) and abstract syntax tree (right)}
 \includegraphics[width=.8\textwidth]{screenshot_parser}
 \end{cfigure}
 
@@ -103,7 +103,7 @@ Since in the background we have an actual translation of the Processing program 
 
 \begin{itemize}
 \item The Source view shows the full source code with the (sub)expression in question being highlighted. This view is meant to be combined with any of the following views.
-\item The Bytecode view shows only the bytecodes relevant for executing the current (sub)expression. This will show students not only how many instructions a perceived single Processing instruction is compiled into, but also allow them to find that there's a calling convention that involves multiple instructions for every function call.\footnote{In the case of the Smalltalk \ac{VM}, this convention consists in pushing the receiver, \ie the object being sent a message, to the stack and, in the end, cleaning the stack up if the call's result isn't needed.}
+\item The Bytecode view shows only the bytecodes relevant for executing the current (sub)expression. This will show students not only how many instructions a perceived single Processing instruction is compiled into, but also allow them to find that there's a calling convention that involves multiple instructions for every function call.\footnote{In the case of the Smalltalk \ac{VM}, this convention consists in pushing the receiver, \ie the object being sent a message, to the stack and, in the end, cleaning the stack up if the call's result is not needed.}
 \item The Stack view shows the \ac{VM}'s value stack at the moment of a function call (\ie with the arguments already on the stack). For every stack argument, a ``pointer'' value is also shown as a pseudo-address, as effectively that's what the stack will contain. Since actual pointers aren't available from the Smalltalk \ac{VM}, these ``pointers'' are, in fact, hashes (except for small integers, which students will have to discover can, up to a point, be used as themselves).
 \item The Variables view shows the current values of all local and global variables (except for implicit variables for manageability reasons).
 \item The Output view shows the output state \emph{after} the step's execution, allowing students to better judge the effects of a function call.\footnote{Otherwise they would have to switch between states to verify that the expected result has actually happened.}
@@ -130,8 +130,6 @@ The Slices view shows a list of all parsed Processing (sub)expressions with the 
 The Shapes view shows a list of all shapes produced by a Processing program, demonstrating that in an object-oriented environment such as \ac{GT}, shapes aren't just collections of pixels but also objects with their properties, which can be handled independently.
 
 
-
-\input{diagrams/uml-processing}
 
 \section{Implementation Details}
 
@@ -163,7 +161,7 @@ During compilation, the most common exceptions are \ct{SmaCCParserError} during 
 
 The Processing runtime consists of \ct{ProcessingRunner} and \ct{ProcessingCanvas}:
 
-The runner moves code execution to a worker thread, leaving the UI thread available for output and interaction, and performs a simple heuristic for detecting accidental endless loops by simply terminating any program with too long a runtime. This is necessary in a live programming environment, as during composition, students will almost inevitably write endless loops. The runner can also be used for extracting runtime steps. In order to achieve this, \ac{GT}'s debugging facilities for stepping through code are called, and a debugging session is executed step-by-step in the background. For both use cases, the runner is automatically called by \ct{ProcessingProgram}.
+The runner moves code execution to a worker thread, leaving the UI thread available for output and interaction, and performs a simple heuristic to detect accidental endless loops by simply terminating any program with too long a runtime. This is necessary in a live programming environment, as during composition, students will almost inevitably write endless loops. The runner can also be used for extracting runtime steps. In order to achieve this, \ac{GT}'s debugging facilities for stepping through code are called, and a debugging session is executed step-by-step in the background. For both use cases, the runner is automatically called by \ct{ProcessingProgram}.
 
 The canvas provides the implementation of most of the Processing \ac{API}: Every compiled Processing program is assigned a canvas by the runner, and all Processing \ac{API} calls are forwarded to the canvas for rendering. The canvas is implemented using the model-view-presenter pattern, allowing for multiple views for a single canvas. Shapes are thus also only abstractly created by the canvas, being instantiated by the presenter in every single view instance.
 
@@ -174,7 +172,7 @@ All views in \ac{GT} are, by convention, provided by methods with names of the f
 
 With any view visible in \ac{GT}, \ct{Alt}+clicking on a view's name shows its source method(s), revealing the view's method name and implementation. The method name will be required for embedding a view in a notebook page as described on page \pageref{embedding_view} above.
 
-For comparing the same views of different programs, the \ct{ViewComparison} helper class is provided, which can be used in Element snippets as follows:
+To compare the same views of different programs, the \ct{ViewComparison} helper class is provided, which can be used in Element snippets as follows:
 
 \begin{code}
 ViewComparison newFor: {
@@ -198,7 +196,7 @@ Since Processing implemented on top of Python is a strongly but dynamically type
 
 Processing could be run either in the original \ac{JVM} and then accessed through Python or directly run using one of several Python libraries \cite{Tab22}. In all cases, its objects would be accessed through \ct{PythonBridge}. Unfortunately, at the time of writing, support for PythonBridge under Windows was difficult to achieve in a portable manner (\ie without requiring students to install multiple different packages, which increases the risk of accidental breaking and thus potential support issues). Additionally, \ct{PythonBridge} only gives access to dictionaries of serialized Python object properties, which would have required a potentially slow level of indirection involved when running and inspecting animations.
 
-Alternatively, Processing could have been implemented through an interpreter in \ac{GT}.\footnote{Remnants of which are available as \ct{ProcessingInterpreter}.} This would have required writing a separate compiler for creating bytecode just for demonstration purposes.
+Alternatively, Processing could have been implemented through an interpreter in \ac{GT}.\footnote{Remnants of which are available as \ct{ProcessingInterpreter}.} This would have required writing a separate compiler to create bytecode just for demonstration purposes.
 
 As a third option, a compiler from Processing to Smalltalk bytecode could have been written.\footnote{A compiler for a tiny subset of Processing is included as \ct{ProcessingCompiler}.} While this would have allowed for closer control over optimizations, it would effectively have become a reimplementation of most of \ct{OpalCompiler}.
 
@@ -217,3 +215,5 @@ Another requirement by Chiodini \etal is for problems to be transparently decomp
 The main reason for not introducing a new \ac{API} as proposed by Chiodini \etal is the same as the reason for not introducing an entirely new programming language optimized for teaching (as done \eg by Black and Bruce \cite{Bla18}): This prevents benefiting from the large community and preexisting documentation and example code.
 
 Using \ac{GT} for students also means introducing a new environment, which might introduce new pitfalls and adds additional cognitive tax on students.
+
+\input{diagrams/uml-processing}

@@ -2,19 +2,19 @@
 
 \chapter{Implementation: Lesson Plans} \label{ch_teaching}
 
-In order to show how the Processing Abstractions environment introduced in chapter \ref{ch_pa} can be employed for teaching high school students, we have assembled sketches for teaching sequences. Every sequence aims to have students explore further abstractions involved in programming and computer architecture and allows teachers to demonstrate that not just abstractions but also \emph{Sichtenwechsel} are foundational ideas in computer science.
+In order to show how the Processing Abstractions environment introduced in chapter \ref{ch_pa} can be employed for teaching high school students, we have assembled sketches of teaching sequences. Every sequence aims to have students explore further abstractions involved in programming and computer architecture and allows teachers to demonstrate that not just abstractions but also \emph{Sichtenwechsel} are foundational ideas in computer science.
 
 In this chapter, we propose three different sequences. The plans for these sequences list steps from which concrete lessons can be planned.\footnote{\eg according to a model as proposed by Manz and Schönenberger \cite{Man20}.} For brevity, we focus on learning steps 2 to 4 in Leisen's teaching model \cite{Lei18}, \ie developing ideas, students working on their own, and discussions of their results.
 
 The main sequence in \ref{sc_lesson_ca} shows how Processing Abstractions is meant to be used for, on the one hand, having students explore the various abstraction levels involved in translating a Processing program to bytecode and running it in the \ac{GT} \ac{VM}, and, on the other hand, discussing computer architecture based on these explorations. This sequence is also meant to better tie computer architecture to preexisting programming knowledge. In particular, if the introduction to programming has already happened in Processing or Python, this allows students to investigate their own programs instead of mainly relying on sample code given by the teacher.
 
-In order for students to best profit from that main sequence, we propose in \ref{sc_lesson_intro} to use Processing Abstractions also for the introduction to programming. This is meant to increase the recall effect in students when returning to programming, and is also meant for students to have programs of their own to investigate in the later sequences. When the limitations of the environment are reached, the move over to the official Processing \ac{IDE} should be seamless: code copied over and run (with the same icon and shortcut) yields the same output and can then be further modified with the full Processing \ac{API} once students are ready.
+In order for students to best profit from that main sequence, we propose to use Processing Abstractions also for the introduction to programming in \ref{sc_lesson_intro}. This is meant to increase the recall effect in students when returning to programming, and is also for students to have programs of their own to investigate in the later sequences. When the limitations of the environment are reached, the move over to the official Processing \ac{IDE} should be seamless: code copied over and run (with the same icon and shortcut) yields the same output and can then be further modified with the full Processing \ac{API} once students are ready.
 
-For diving further into the matter or for students specializing in computer science, we finally propose a third sequence in \ref{sc_lesson_compiler}, which uses the same environment and potentially the same student programs from the first two sequences for teaching the inner workings of a compiler from lexer to optimizer (and potentially again discussing abstractions \emph{per se}).
+To dive further into the matter or for students specializing in computer science, we finally propose a third sequence in \ref{sc_lesson_compiler}, which uses the same environment and potentially the same student programs from the first two sequences to teach the inner workings of a compiler from lexer to optimizer (and potentially again discussing abstractions \emph{per se}).
 
-Finally, in \ref{sc_lesson_other}, we close with a few ideas for how Processing Abstractions could be used as a stepping stone for introducing Smalltalk as a different programming language and \ac{GT} as the moldable environment it is, leading students in specialization courses to molding the provided materials further by \eg extending the Processing \ac{API}, developing new views or starting to work on a language of their own. This can be used to discuss abstractions involved in teaching by revealing the innards of Processing Abstractions.
+Finally, in \ref{sc_lesson_other}, we close with a few ideas for how Processing Abstractions could be used as a stepping stone to introduce Smalltalk as a different programming language and \ac{GT} as the moldable environment it is, leading students in specialization courses to molding the provided materials further by \eg extending the Processing \ac{API}, developing new views or starting to work on a language of their own. This can be used to discuss abstractions involved in teaching by revealing the innards of Processing Abstractions.
 
-For all proposed sequences, Processing Abstractions can either be used just for its Processing compiler, runtime environment, and the various views provided. We suggest also considering embedding the full course materials in interactive notebook pages for students to work in at their own pace. Processing Abstractions includes a foundation of such materials in German, which have already been tested with students and adjusted afterwards (see chapter \ref{ch_practice}). When used like this, \ac{GT} can also serve as a digital notebook to students, where they solve tasks directly in the page, add their own notes, and keep their modified examples.
+For all proposed sequences, Processing Abstractions can be used just for its Processing compiler, runtime environment, and the various views provided. However, we suggest also considering embedding the full course materials in interactive notebook pages for students to work in at their own pace. Processing Abstractions includes a foundation of such materials in German, which have already been tested with students and adjusted afterwards (see chapter \ref{ch_practice}). When used like this, \ac{GT} can also serve as a digital notebook to students, where they solve tasks directly in the page, add their own notes, and keep their modified examples.
 
 While Processing Abstractions is mainly targeted at high school students, the sequences proposed here could also be used in middle school. For middle schoolers, the exposed user interface would, however, have to be reduced as far as possible to keep it manageable. It could nonetheless work at least in a smaller group with interested and motivated students wanting to step beyond block-based programming languages. For university students, in contrast, there's currently not enough depth available.
 
@@ -22,7 +22,7 @@ While Processing Abstractions is mainly targeted at high school students, the se
 
 \section{Introduction to Programming} \label{sc_lesson_intro}
 
-While the Processing Abstractions environment has been developed for linking programming and computer architecture, it can also be used for an introduction to programming. This should help better link programming and computer architecture for students, since they can start at the same point and reuse the experience already gained and programs already written.
+While the Processing Abstractions environment has been developed to link programming and computer architecture, it can also be used for an introduction to programming. This should help better link programming and computer architecture for students, since they can start at the same point and reuse the experience already gained and programs already written.
 
 
 \subsection{Educational objective}
@@ -34,7 +34,7 @@ After the introduction, students should be able to \dots
 \item learn from their mistakes, correct themselves, and not be afraid of breaking things.
 \end{itemize}
 
-In the end, students should have a solid foundation for taking on the task of writing a basic but still interesting app or game.\footnote{Possible ideas, which all have been implemented by students, include: Flappy Bird, Geometry Dash, Pong, Doodle Jump, Snake, a quiz, a labyrinth, \etc For most of these, Processing Abstractions provides sufficient support, the main deficit being the lack of keyboard input.}
+In the end, students should have a solid foundation to take on the task of writing a basic but still interesting app or game.\footnote{Possible ideas, which all have been implemented by students, include: Flappy Bird, Geometry Dash, Pong, Doodle Jump, Snake, a quiz, a labyrinth, \etc For most of these, Processing Abstractions provides sufficient support, the main deficit being the lack of keyboard input.}
 
 
 \subsection{Prerequisites}
@@ -65,15 +65,15 @@ Please note that as described in \ref{sc_gt}, \ac{GT} is bleeding edge technolog
 
 \subsection{Lesson Plan}
 
-Since this isn't the focus of this thesis, we won't go into much detail about introducing programming, but just summarize what might work within the provided environment:
+Since this is not the focus of this thesis, we won't go into much detail about introducing programming, but just summarize what might work within the provided environment:
 
 Start top down as suggested in \ref{ssc_top_down} from either abstract art or games\footnote{Most one-tap games should work; \eg \url{https://www.lessmilk.com/almost-pong/} has reasonably simple gameplay with minimalist visuals.} and start dissecting how this concrete entity might be described, first in natural language and then in formalized language.
 
 Then follow Reas and Fry \cite{Rea14} and introduce the Processing language (see \ref{sc_processing}), by starting with a sequence of statements with few commands (\eg \ct{size}, \ct{rect}, \ct{ellipse}, and \ct{fill}), and then sequentially introducing comments, colors, variables, and arithmetic, the animation loop, conditions, and interactivity.
 
-Every concept can be described on a notebook page with given examples for first exploring the effects of a command and its arguments\footnote{Students may either describe the expected behavior and then verify that their expectation matches the outcome, or, as a less taxing alternative, try given or random values and then describe their observations. Variations consist \eg in a student describing desired behavior and then (another student) trying to achieve this.} and then later using the concept for solving problems by starting from a skeleton program (see figure \ref{fig_screenshot_introduction} for an example of both).
+Every concept can be described on a notebook page with given examples for first exploring the effects of a command and its arguments\footnote{Students may either describe the expected behavior and then verify that their expectation matches the outcome, or, as a less taxing alternative, try given or random values and then describe their observations. Variations consist \eg in a student describing desired behavior and then (another student) trying to achieve this.} and then later using the concept to solve problems by starting from a skeleton program (see figure \ref{fig_screenshot_introduction} for an example of both).
 
-\begin{cfigure}[fig_screenshot_introduction]{Excerpt from an interactive notebook page with exploratory and live programming tasks.}
+\begin{cfigure}[fig_screenshot_introduction]{Excerpt from an interactive notebook page with exploratory and live programming tasks}
 \includegraphics[width=.7\textwidth]{screenshot_introduction}
 \end{cfigure}
 
@@ -89,7 +89,7 @@ Sample content for this is included in the \emph{Unterrichtsmaterialien} of Proc
 
 The main objective of this thesis was to demonstrate how understanding of what happens when executing a program could be improved by having students perform a \emph{Sichtenwechsel}. The same goes for the other way around, where computer architecture is explained in more concrete form by tying it to previous programming experience.
 
-Introductions to computer science, which extend beyond a pure programming course, often contain lessons on computer architecture. \eg the curriculum \cite[p.\,145]{Erz16} asks for students to ``know how computers and networks are structured and work''.
+Introductions to computer science, which extend beyond a pure programming course, often contain lessons on computer architecture. The curriculum \cite[p.\,145]{Erz16} \eg asks for students to ``know how computers and networks are structured and work''.
 
 We again propose to approach this task top down (see \ref{ssc_top_down}) and move along the path specified in figure \ref{fig_multitier}. This will be outlined here, with validation of part of this approach following in \ref{sc_validation_ca}.
 
@@ -119,8 +119,8 @@ Whereas Nisan and Schocken \cite{Nis21} introduce their bottom up course with a 
 
 \begin{instructions}
 \item Start with a brief repetition on programming by giving students a few quickly solved tasks (including one about the animation loop, where at least the skeleton structure is given). If this is the students' first encounter with \ac{GT}, use this opportunity to introduce it (see \ref{ssc_lesson_gt}).
-\item Show students the innards of a computer and ask where their programs reside in there. Use this for discussing hard drives and volatile memory, and a repetition about encodings and how everything boils down to \ct{1}s and \ct{0}s (or current and no current, respectively).
-\item Briefly start at the desired lowest abstraction layer, \eg (light) switches, and explain how they are used for creating processors.
+\item Show students the innards of a computer and ask where their programs reside in there. Use this to discuss hard drives and volatile memory, and repeat encodings and how everything boils down to \ct{1}s and \ct{0}s (or current and no current, respectively).
+\item Briefly start at the desired lowest abstraction layer, \eg (light) switches, and explain how they are used to create processors.
 \item Ask students about games they play, and have them describe possible player \emph{actions} and compare them with actual player \emph{input}.\footnote{Alternatively, if starting from art instead of games, decompose drawing \eg a house into individual brush strokes.} This repeats top-down abstraction decomposition, as maybe already encountered in the introduction to programming lessons, and allows teachers to bring the foundational idea of multitier architectures back to students' minds.\footnote{Multitier architectures might already have been discussed as part of networking lessons.}
 \item Have students go back to a sample or one of their own Processing programs, and let it (again) be displayed in machine code. Provide them with several examples, \eg with variable assignment, with conditionals and loops, and let them assemble the required machine code mnemonics and byte values.\footnote{Ideally, distribute the examples over small student groups, two groups per example.} Suggest variations for the example, so that even with less programming experience, they may find regularities.
 \item Collect their findings and group their arguments: pushing to the stack/accumulator (machine codes 0--83), returning (88--94), binary arithmetic and comparison operations (96--111), common commands (112--127), message sending/function calls (128--175), jumps (176--199), storing results (200--216), combined multi-byte instructions (first byte: 224--255) \cite[p.\,12]{Ber14}.\footnote{Students should, at this point, be able to explain where these seemingly odd number ranges stem from.}
@@ -134,7 +134,7 @@ Whereas Nisan and Schocken \cite{Nis21} introduce their bottom up course with a 
 \item Finally, treat circuits, logic gates, transistors, and maybe down to silicon outside of \ac{GT} to the desired depth.
 \end{instructions}
 
-\begin{cfigure}[fig_von_neumann]{Von Neumann architecture.}
+\begin{cfigure}[fig_von_neumann]{Von Neumann architecture}
 \include{diagrams/von-neumann}
 \end{cfigure}
 
@@ -189,11 +189,11 @@ The natural way to progress on understanding a compiler is top down, which is th
 
 \section{Further Lesson Ideas} \label{sc_lesson_other}
 
-Whereas the environment presented here is mainly targeted at introductory high school classes, it might also be employed in a specialization course. Since this isn't this thesis' focus, we will just list a few ideas:
+Whereas the environment presented here is mainly targeted at introductory high school classes, it might also be employed in a specialization course. Since this is not this thesis' focus, we will just list a few ideas:
 
 \begin{itemize}
 \item Smalltalk is a rather elegant language and has aged quite well. It can still be used to introduce students to pure object-oriented programming with a somewhat unusual syntax for them, and such an introduction could use transpilations from Processing Abstractions as a stepping stone, if students have already used it.
 \item Since the code provided here is run dynamically in \ac{GT}, it can also be molded further, \eg to implement as of yet missing support for object-oriented programming.
-\item The provided code might also be used as a template for students to implement their own programming language or see if they manage to write an interpreter for one of the two provided prefix and postfix pseudolanguages.\footnote{This might already have been discussed in the compiler lessons above. Very briefly, a program such as \ct{a = 42; print(a)} is translated to \ct{(= a 42) (print a)} and \ct{\$a 42 = a print}, respectively, which both should be simple enough to parse.}
+\item The provided code might also be used as a template for students to implement their own programming language or see if they manage to write an interpreter for one of the two provided prefix and postfix pseudolanguages.\footnote{This might already have been discussed in the compiler lessons above. Very briefly, a program such as \ct{a = 42; print(a)} is translated to \ct{(= a 42) (print a)} and \ct{\$a 42 = a print}, respectively, both of which should be simple enough to parse.}
 \item Finally, Processing Abstractions allows one to drive the point home that abstractions leak by showing that teaching environments, \acp{IDE}, or, in fact, any app can be dissected, thereby revealing lower architectural layers, and modified at these lower layers.
 \end{itemize}

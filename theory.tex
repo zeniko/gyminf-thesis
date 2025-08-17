@@ -42,11 +42,11 @@ Interestingly, they don't mention any lower-level language as an alternative, co
 
 \subsection{\emph{Sichtenwechsel}} \label{ssc_sichtenwechsel}
 
-Consequently, Schubert and Schwill \cite{Sch11} propose to explicitly discuss the foundational idea of multitier architectures -- and that not only in the context of the networking stack and computer architecture (pp.\,113--116): They introduce the notion of \emph{Sichtenwechsel}, a change of perspective in relation to the current layer, which should help students better understand concepts of one layer by inspecting lower layers. As an example, they show a live model of a calculator app whose input is translated to both pseudocode and machine code (p.\,115); an environment for inspecting live Java objects (pp.\,208--209); or the Filius environment for inspecting a virtual computer network at its different layers (p.\,284, \cite{Gar15}).
+Starting from the observation that ``it was a fallacy to assume that students would be able to develop a working model of a computer [\dots] by designing small programs'' \cite[p.\,213]{Sch11},\footnote{German original: ``Es erwies sich als Irrtum, dass Schüler beim Entwerfen kleiner Programme ein tragfähiges kognitives Modell vom Rechner oder von Informatiksystemen im Allgemeinen entwickeln.''} Schubert and Schwill introduce the notion of \emph{Sichtenwechsel}, a change of perspective in relation to the current layer, which should help students better understand concepts of one layer by inspecting lower layers (p.\,173).\footnote{For lack of a concisely fitting English term, the German \emph{Sichtenwechsel} will be used throughout this thesis.}
 
-They conclude that ``it was a fallacy to assume that students would be able to develop a working model of a computer [\dots] by designing small programs'' (p.\,213),\footnote{German original: ``Es erwies sich als Irrtum, dass Schüler beim Entwerfen kleiner Programme ein tragfähiges kognitives Modell vom Rechner oder von Informatiksystemen im Allgemeinen entwickeln.''} reinforcing the need for combining programming with computer architecture.
+Since multitier architectures and abstractions are foundational ideas of computer science, they propose to introduce and teach both gradually -- and that not only in the context of the networking stack and computer architecture (pp.\,113--116). As examples for doing so, they show a live model of a calculator app whose input is translated to both pseudocode and machine code (p.\,115); an environment for inspecting live Java objects (pp.\,208--209); or the Filius environment for inspecting a virtual computer network at its different layers (p.\,284, \cite{Gar15}).
 
-The same conclusion has been reached repeatedly, also \eg by Jaokar \cite[p.\,51]{Jao12} or Zhang \cite[p.\,407]{Zha19}.
+Other authors, such as Jaokar \cite[p.\,51]{Jao12} or Zhang \cite[p.\,407]{Zha19}, have reached similar conclusions. This reinforces the need for combining programming \eg with computer architecture to allow students to perform a \emph{Sichtenwechsel}, which should help them to understand both better.
 
 
 \subsection{Computational Thinking} \label{ssc_ct}
@@ -77,7 +77,7 @@ One approach, which nowadays might already be considered rather traditional, sta
 
 While gaming works as an approach to programming, it is rarely used to inspect further layers in an educational context. Motivation for doing so is usually restricted to performance optimizations for game platform developers.
 
-An alternative approach, which originally targeted art students but works well in high school as well, is proposed by Reas and Fry \cite{Rea14}: Starting from visual arts and extending the capabilities of the artist through digital means. While the involved programming language, Processing, will be discussed on its own merit in \ref{sc_processing}, their didactic approach is notable as well: A work of art on its own is something abstract that not only can be interpreted but also created. To (re)create it, various painting techniques are needed, which can be further broken down to basic movements. At this abstraction layer, they start with high-level programming primitives for creating basic shapes. This allows them to achieve pleasing visual results with just a few commands and initially barely any programming knowledge. Afterwards, the question of how to achieve more complex output is naturally motivated by the more complex works of art already discussed.
+An alternative approach, which originally targeted art students but works well in high school as well, is proposed by Reas and Fry \cite{Rea14}: Starting from visual arts and extending the capabilities of the artist through digital means. While the involved programming language, Processing, will be discussed on its own merit in \ref{sc_processing}, their didactic approach is notable as well: A work of art on its own is something abstract that not only can be interpreted but also created. To (re)create it, various painting techniques are needed, which can be further broken down to basic movements. At this abstraction layer, they start with high-level programming primitives to create basic shapes. This allows them to achieve pleasing visual results with just a few commands and initially barely any programming knowledge. Afterwards, the question of how to achieve more complex output is naturally motivated by the more complex works of art already discussed.
 
 To achieve this, Reas and Fry \cite{Rea14} feature several chapters focused on exhibits of digital or hybrid art such as Manfred Mohr's \emph{Une esthétique programmée} or Steph Thirion's \emph{Eliss}.
 
@@ -124,7 +124,7 @@ In order to handle complexities arising in both theoretical and practical comput
 
 Common multitier architectures taught at high school level are the networking stack (for manageability reasons, rather the simplified four-layered DoD architecture, than the seven-layered OSI model) or the software-hardware stack, ranging from apps and operating system down to transistors consisting of \eg silicium atoms (see \cite{Oin25c} and figure \ref{fig_multitier}).
 
-\begin{cfigure}[fig_multitier]{Multitier model of a computer system \cite[p.\,xii]{Nis21}.}
+\begin{cfigure}[fig_multitier]{Multitier model of a computer system \cite[p.\,xii]{Nis21}}
 \input{diagrams/multitier}
 \end{cfigure}
 
@@ -157,7 +157,7 @@ Of these different layers, students usually focus on turning instructions into s
 \item Missing a stop condition in a recursive function leads to a cryptic ``Stack overflow'' error -- leaking information about the call stack.
 \item If a program outputs emojis, they might look notably different in source code and output -- leaking font rendering.
 \item Similarly, programs containing emojis might have the emojis garbled depending on the app used for inspecting the source code -- leaking text encoding.
-\item If a program contains an endless loop, there might be neither an error message nor output, so that it might wrongly seem that the computer isn't doing anything. This isn't an abstraction leak in the above sense but a related student misconception.
+\item If a program contains an endless loop, there might be neither an error message nor output, so that it might wrongly seem that the computer isn't doing anything. This is not an abstraction leak in the above sense but a related student misconception.
 \end{itemize}
 
 Besides the rather easily observable abstraction leaks mentioned above, the issue itself might also have to be discussed, since recently one class of leaky abstractions has been shown to be security critical: timing attacks. Since programs might be compiled differently, optimized differently, and run on different hardware, runtime timing is not considered to be inherent to a particular piece of source code.\footnote{At least beyond generic complexity considerations on an algorithmic level.}

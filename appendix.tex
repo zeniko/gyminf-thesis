@@ -89,9 +89,9 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 \item[\texttt{gtBytecodePlusIRFor:}] \hfill \\
 	combines the \ct{gtBytecodeFor:} with \ct{gtIntermediaryRepresentationFor:} (shown in figure \ref{fig_view_ir_bytecode}).
 \item[\texttt{gtHexDumpFor:}] \hfill \\
-	shows type individual bytes for all compiled methods.
+	shows individual bytes for all compiled methods.
 \item[\texttt{gtIntermediaryRepresentationFor:}] \hfill \\
-	uses the \ct{OpalCompiler} for translating the transpiled Smalltalk code to \ct{IRInstruction}s (shown on the left in figure \ref{fig_view_ir_bytecode}). \ct{gtIntermediaryRepresentationPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
+	uses the \ct{OpalCompiler} to translate the transpiled Smalltalk code to \ct{IRInstruction}s (shown on the left in figure \ref{fig_view_ir_bytecode}). \ct{gtIntermediaryRepresentationPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtOutputFor:}] \hfill \\
 	displays a newly created \ct{ProcessingCanvasElement} with attached event listeners for interactivity (shown on the bottom right in figure \ref{fig_view_abstractions}). \ct{gtOutputPlusSourceFor:} combines this view with \ct{gtSourceCodeFor:}.
 \item[\texttt{gtOutputShapesFor:}] \hfill \\
@@ -148,6 +148,10 @@ The following views are available as arguments for \ct{ProcessingSource>>>render
 
 \begin{cfigure}[fig_view_ir_bytecode]{The \ac{IR} and Bytecode views, connected}
 \includegraphics[width=.7\textwidth]{view_ir_bytecode}
+\end{cfigure}
+
+\begin{cfigure}[fig_view_hexdump]{The Hexdump view serializes every method into its individual bytes}
+\includegraphics[width=.7\textwidth]{view_hexdump}
 \end{cfigure}
 
 \begin{cfigure}[fig_view_runsteps]{The Runsteps view allows users to step through execution and inspect variables and stack values}
