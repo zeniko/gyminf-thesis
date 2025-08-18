@@ -13,11 +13,12 @@
 What happens here?
 ------------------
 ``` python
-size(200, 200)
-ellipse(100, 100, 200, 200)
-ellipse(50, 100, 100, 100)
-ellipse(150, 100, 100, 100)
-rect(75, 175, 50, 1)
+a = 1
+b = 1
+while a < 15:
+	a += b
+	b = a - b
+print(a)
 ```
 
 ---
@@ -47,14 +48,21 @@ The Problem
 
 ---
 
-IDE Support
------------
-@todo screenshots (besides demo)
-* Example: Processing IDE
-<PAUSE>
-* Example: Thonny
-<PAUSE>
-* Example: Visual Studio
+IDE Support: VS Code
+--------------------
+![stretch](media/debug_vscode.png)
+
+---
+
+IDE Support: Thonny
+-------------------
+![stretch](media/debug_thonny.png)
+
+---
+
+IDE Support: (*spoilers*)
+-------------------------
+![stretch](media/debug_pa.png)
 
 ---
 
@@ -109,7 +117,7 @@ Examples:
 "Processing Abstractions"
 -------------------------
 @todo prepare demo
-![stretch](images/gt_screenshot.png)
+![stretch](media/views.png)
 
 ---
 
@@ -131,4 +139,8 @@ Question: How did you like it?
 
 ---
 
-| Thanks for listening. Questions? |
+| Thanks for listening. |
+
+---
+
+| Q & A |
