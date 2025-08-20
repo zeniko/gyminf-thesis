@@ -1,6 +1,6 @@
 ﻿Revealing Programming Language Abstractions
 ===========================================
-@beamer_theme default,#9EE0F7 keynote alternate-rows
+@beamer_theme default,#80B0F7 keynote alternate-rows
 @author Simon Bünzli Straub
 @date 20.08.2025
 @listings basicstyle=\small\ttfamily basewidth=0.51em
@@ -14,7 +14,7 @@
 	\newunicodechar{✔}{\Checkmark}
 	\newunicodechar{❌}{\XSolidBrush}
 
-GymInf-Thesis
+GymInf Thesis
 -------------
 ![width=8cm](images/logos/gyminf_logo.png)
 * Program at UniFR, 2020-2025
@@ -23,8 +23,8 @@ GymInf-Thesis
 
 ---
 
-What happens here?
-------------------
+What does happen here?
+----------------------
 ``` python
 a = 1
 b = 1
@@ -45,24 +45,20 @@ print(a)
 
 ---
 
-The Problem
------------
-* How to demonstrate to students what happens when a program is executed?
-<PAUSE>
-* How to connect programming with computer architecture?
-
----
-
 Brief Overview
 --------------
 1. The Problem $\leftarrow$
-2. Teaching Principles
+2. State of the Art
 3. Solution: New Environment
-4. Results
+4. Validation
 
 ---
 
-| 2. Teaching Principles |
+Didactic Literature
+-------------------
+* Foundational ideas
+* Sichtenwechsel
+* Top-down and bottom-up approaches
 
 ---
 
@@ -85,6 +81,8 @@ Principle: *Sichtenwechsel*
 * Change of perspective in relation to an abstraction level
 <PAUSE>
 * Increase understanding by observing the same entity at different layers
+<PAUSE>
+* Also teach the concept itself as a foundational idea
 
 ---
 
@@ -97,21 +95,33 @@ Multitier Architecture
 
 ---
 
+The Problem
+-----------
+* How to demonstrate to students what happens when a program is executed?
+<PAUSE>
+* How to connect programming with computer architecture?
+
+---
+
 Requirements
 ------------
 * Beginner-friendly programming language
   * Python (Processing)
-* Environment with few dependencies
+* Manageable environment with few dependencies
 
 ---
 
-IDE Support: VS Code
+| 2. State of the Art |
+
+---
+
+Environment: VS Code
 --------------------
 ![stretch](media/debug_vscode.png)
 
 ---
 
-IDE Support: VS Code
+Environment: VS Code
 --------------------
 ![stretch](media/debug_vscode.png)
 
@@ -125,13 +135,13 @@ IDE Support: VS Code
 
 ---
 
-IDE Support: Thonny
+Environment: Thonny
 -------------------
 ![stretch](media/debug_thonny.png)
 
 ---
 
-IDE Support: Thonny
+Environment: Thonny
 -------------------
 ![stretch](media/debug_thonny.png)
 
@@ -139,13 +149,19 @@ IDE Support: Thonny
 
 * Manageability ✔
 * Didactic ✔
-* No VM access ❌
+* No VM access? ❌
 
 ---
 
-IDE Support: (*spoilers*)
+Environment: (*spoilers*)
 -------------------------
 ![stretch](media/debug_pa.png)
+
+***
+
+* Manageability ✔
+* Didactic ✔
+* VM access ✔
 
 ---
 
@@ -162,13 +178,13 @@ Didactic environment:
 
 ---
 
-Technical Foundation
---------------------
-* Glamorous Toolkit
-  * Smalltalk Environment
-  * Easy to extend (moldable)
-  * Complete: GUI, parsers
-  * Notebook
+Technical Foundation: GT
+------------------------
+Glamorous Toolkit:
+* Smalltalk Environment
+* Complete: GUI, parsers
+* Easy to extend (moldable)
+* Notebook
 
 ---
 
@@ -178,9 +194,89 @@ Glamorous Toolkit: Notebook
 
 ---
 
+Glamorous Toolkit: Notebook
+---------------------------
+![stretch](images/gt_screenshot.png)
+
+***
+
+* Various snippets
+* Object-based:
+  * embeddable
+  * inspectable
+  * moldable
+
+---
+
 Glamorous Toolkit: Coder
 ------------------------
 ![stretch](media/coder.png)
+
+---
+
+Glamorous Toolkit: Coder
+------------------------
+![stretch](media/coder.png)
+
+***
+
+* Open source
+* Extensions through `<pragma>`
+
+---
+
+Approaches Considered
+---------------------
+* Python through PythonBridge
+  * Requires separate Python installation ❌
+<PAUSE>
+* Python compiler
+  * GT contains a compiler ❌
+<PAUSE>
+* Python transpiler
+  * Reuse `OpalCompiler` ✔
+
+---
+
+Transpiling Python
+------------------
+Python source
+* parser $->$ AST
+* visitor $->$ Smalltalk
+* compiler $->$ Bytecode
+* runtime $->$ Output
+
+---
+
+Transpiling Python
+------------------
+## Python
+
+``` python
+a = 1
+b = 1
+while a < 15:
+	
+	a += b
+	b = a - b
+	
+print(a)
+```
+
+***
+
+## Smalltalk
+@textsize small
+```
+a := 1.
+b := 1.
+[ (a < 15) ]
+  whileTrue: [
+	a := (a + b).
+	b := (a - b).
+  ].
+gtCanvas print: a.
+```
 
 ---
 
@@ -189,6 +285,18 @@ Viewing Abstractions
 	{\hspace*{-0.5cm}\small
 	\input{../diagrams/views}
 	}
+
+---
+
+Views
+-----
+![stretch](media/views.png)
+
+***
+
+* Live
+* Composable
+* Stand-alone or embeddable
 
 ---
 
@@ -213,7 +321,7 @@ Course Material
 
 ---
 
-| 4. Results |
+| 4. Validation |
 
 ---
 
@@ -223,12 +331,14 @@ Setting
 * Two lessons each:
   * Computer architecture
   * Compiling
-* Feedback
+* Observations and feedback
 
 ---
 
-Question: Acceptance
+Feedback: Acceptance
 --------------------
+How did you like working with this environment?
+
 	\begin{center}
 	\begin{tikzpicture}[baseline=(current axis.center), scale=0.9]
 	\begin{axis}[
@@ -236,6 +346,8 @@ Question: Acceptance
 		y=0.5cm,
 		xmin=1,
 		xmax=5,
+		xlabel={1 = not at all, 5 = very much},
+		ylabel={No. of answers}
 	]
 		\addplot+[hist] table [row sep=\\,y index=0] {
 			Q1 \\ 4 \\ 4 \\ 3 \\ 3 \\ 4 \\ 4 \\ 4 \\ 4 \\ 3 \\
@@ -244,13 +356,12 @@ Question: Acceptance
 	\end{tikzpicture}
 	\end{center}
 
-How did you like working with this environment?
-(1 = not at all, 5 = very much)
-
 ---
 
-Question: Confidence
+Feedback: Confidence
 --------------------
+How confident do you feel to explain the learned content?
+
 	\begin{center}
 	\begin{tikzpicture}[baseline=(current axis.center), scale=0.9]
 	\begin{axis}[
@@ -258,6 +369,8 @@ Question: Confidence
 		y=0.5cm,
 		xmin=1,
 		xmax=5,
+		xlabel={1 = not at all, 5 = very much},
+		ylabel={No. of answers}
 	]
 		\addplot+[hist] table [row sep=\\,y index=0] {
 			Q3 \\ 4 \\ 3 \\ 2 \\ 1 \\ 2 \\ 3 \\ 2 \\ 3 \\ 2 \\
@@ -266,14 +379,11 @@ Question: Confidence
 	\end{tikzpicture}
 	\end{center}
 
-How confident do you feel to explain the learned content?
-(1 = not at all, 5 = very much)
-
 ---
 
-Question: Aspects
+Feedback: Aspects
 -----------------
-What did you like about it?
+What did you like most about it?
 
 * Interactivity
 * Modifiability
@@ -283,7 +393,11 @@ What did you like about it?
 
 Conclusion
 ----------
-* 
+* Interactive teaching material
+* Various (in)sights into abstraction layers
+* Not validated (yet)
+
+![height=3cm](images/gt_screenshot.png)
 
 ---
 
