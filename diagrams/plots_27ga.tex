@@ -1,10 +1,12 @@
-\begin{tikzpicture}[baseline=(current axis.center), scale=0.9]
+\begin{tikzpicture}[baseline=(current axis.center), scale=0.85]
 \begin{axis}[
 	y=1cm,
 	ytick={1,2},
 	yticklabels={Q1,Q3},
 	xtick={1,2,3,4,5},
+	xmin=1,
 	xmax=5,
+	xlabel={1 = not at all, 5 = very much},
 ]
 	\addplot+[boxplot] table [row sep=\\,y index=0] {
 		Q1 \\ 4 \\ 4 \\ 3 \\ 3 \\ 4 \\ 4 \\ 4 \\ 4 \\ 3 \\
@@ -14,11 +16,14 @@
 	};
 \end{axis}
 \end{tikzpicture}
-\begin{tikzpicture}[baseline=(current axis.center), scale=0.9]
+\begin{tikzpicture}[baseline=(current axis.center), scale=0.85]
 \begin{axis}[
 	ybar,
 	y=0.5cm,
+	xmin=1,
 	xmax=5,
+	xlabel={1 = not at all, 5 = very much},
+	ylabel={No. of answers}
 ]
 	\addplot+[hist] table [row sep=\\,y index=0] {
 		Q1 \\ 4 \\ 4 \\ 3 \\ 3 \\ 4 \\ 4 \\ 4 \\ 4 \\ 3 \\

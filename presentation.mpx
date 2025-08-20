@@ -131,7 +131,6 @@ Environment: VS Code
   (through extension)
 * Manageability ❌
   (too much information)
-* Not didactic ❌
 
 ---
 
@@ -148,7 +147,6 @@ Environment: Thonny
 ***
 
 * Manageability ✔
-* Didactic ✔
 * No VM access? ❌
 
 ---
@@ -160,7 +158,6 @@ Environment: (*spoilers*)
 ***
 
 * Manageability ✔
-* Didactic ✔
 * VM access ✔
 
 ---
@@ -251,7 +248,6 @@ Python source
 Transpiling Python
 ------------------
 ## Python
-
 ``` python
 a = 1
 b = 1
@@ -266,7 +262,6 @@ print(a)
 ***
 
 ## Smalltalk
-@textsize small
 ```
 a := 1.
 b := 1.

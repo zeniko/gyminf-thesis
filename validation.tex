@@ -7,13 +7,30 @@ The content produced for this thesis has been used in two courses. Evaluation of
 Both evaluation rounds were held with classes at Gymnasium Neufeld that we have been teaching ourself. These classes consist of Swiss high school students at ninth and tenth grade (of twelve grades), respectively.
 
 
+\section{Methodology}
+
+Due to time constraints, we could only do two evaluation rounds of a maximum of 90 minutes each that we had to teach and evaluate ourself. We therefore decided to combine qualitative observations during the lessons with a questionnaire at the end, in order to optimize the possible learnings during the limited time available.
+
+Observations were taken qualitatively, unstructured, and in the open during the lessons, with a focus on issues the students encountered and on what was already working satisfactorily. This was a compromise due to teaching, supporting students, and taking notes all being done by the same person. As a consequence, these observations were neither objective nor reliable. Still, they should have allowed us to detect some common trends.
+
+The questionnaires, which are available in full in appendix \ref{app_questionnaires}, combine quantitative rating scales with open questions. Since the questionnaires were only distributed to the students of the two classes, there was never going to be a sufficient number of answers for doing quantitative statistics. The expected small number of returns did, however, allow for open questions. Given the educational context, some of these questions were set in the form of a pop quiz, in order to determine what students had learnt. For this, we prefer open questions, because they allow us to better judge the depth of knowledge from how much a student has written.
+
+In addition to questions related directly to the lessons with Processing Abstractions, the questionnaires also contained a section with open feedback on the computer science class in general. That's not only valuable feedback for the teacher at the end of a school year, but, in this case, could also give an insight into the popularity of various topics, without having to explicitly ask about programming and computer architecture, and thus without influencing them too much beforehand.
+
+Both questionnaires were intentionally kept short, so that students could complete them in ten to fifteen minutes, and didn't include a grid of rating-scaled questions, so that the questions felt genuine to students and required intentional filling in.
+
+The first validation round took place during the semester, so it could be followed up by a graded test that included questions about the lessons with Processing Abstractions. Results from that test could then be correlated with questionnaire data. The second validation round took place at the end of the semester, with no time for another test remaining.
+
+
+
 \section{First Round} \label{sc_validation_ca} % 2025-05-12
+
 
 \subsection{Setting}
 
 The first evaluation round took place in a computer science class consisting of 17 tenth-grade students. This class had, at this point, encountered most of the base curriculum of computer science as required in the Canton of Berne \cite[p.\,145--146]{Erz16}, with only the introduction to systems architecture missing.
 
-Specifically, the introduction to programming had been taught using Processing with Python syntax inside the Processing \ac{IDE}, so students already had the desired prior experience in programming with Processing. Additionally, the class had written their last partial exam five weeks prior, which had, among other topics, contained a repetition sequence on binary numbers and encodings.
+Specifically, the introduction to programming had been taught using Processing with Python syntax inside the Processing \ac{IDE}, so students already had the desired prior experience in programming with Processing. Additionally, the class had written their last graded test five weeks prior, which had, among other topics, contained a repetition sequence on binary numbers and encodings.
 
 Contrary to the suggestions in \ref{sc_lesson_ca}, the introduction to computer architecture was being taught bottom up, loosely following Nisan and Schocken's ideas \cite{Nis21} in a significantly abbreviated course of only 6 instead of 12 weeks.\footnote{The reason for this was originally the same as Nisan and Schocken's, \ie building concepts on a solid foundation.}
 
@@ -23,7 +40,7 @@ The plan was thus to connect the already encountered foundation with their knowl
 
 On the day of the lessons, 14 of the 17 students were present. At the start of the first lesson, \ac{GT} was distributed through the school's OneDrive infrastructure. The \ac{GT} environment was then introduced similar to \ref{ssc_lesson_gt}, but, as was the rest of the lessons, mostly in a self-guided way, with instructions being provided in \ac{GT} notebook pages.\footnote{The exact state of the materials is available at \url{https://github.com/zeniko/processing-abstractions/tree/thesis} in commit \ct{71047704f7f70c13d3d01ac520618e15d569274f} of May 12th.}
 
-During the lessons, students were supported where needed but left to work at their own individual pace, which the reduced number of students allowed for. Afterwards, a questionnaire was distributed to students to receive their own feedback in addition to the collected observations.\footnote{See appendix \ref{app_questionnaire_1} on page \pageref{app_questionnaire_1} for the full questionnaire.}
+During the lessons, students were supported where needed but left to work at their own individual pace, which the reduced number of students allowed for. At the end, a questionnaire was distributed to students as a homework task to receive their own feedback in addition to the collected observations.\footnote{See appendix \ref{app_questionnaire_1} on page \pageref{app_questionnaire_1} for the full questionnaire.}
 
 At least one of the students missing the lessons was successfully able to work on the provided content on her own.
 
@@ -47,9 +64,9 @@ The overall impression of the lessons was that students had been working product
 
 In order to verify our own observations, students were provided with a questionnaire. Of the 17 students, however, only 11 returned feedback despite frequent reminders. Therefore, the following yields, at best, qualitative results.\footnote{Questionnaire data in anonymized form is available at \url{https://github.com/zeniko/gyminf-thesis/blob/main/data/data_6_1.csv}.}
 
-Additionally, three weeks later, the students have written another partial exam with individual tasks referring to the lessons with \ac{GT}.
+Additionally, three weeks later, the students have written another graded test with individual tasks referring to the lessons with \ac{GT}.
 
-Student feedback shows the following: Students quite liked working with the provided environment (grading it mostly 4/5 with a bootstrapped 95\%-confidence interval of between 3 and 4) and reported that it worked reasonably well but not yet perfectly (most students grading it either 3/5 or 4/5 with a bootstrapped 95\%-confidence interval of between 2 and 4). This is consistent with our own observations.
+Student feedback shows the following: Students quite liked working with the provided environment (grading it mostly 4/5 with a bootstrapped 95\%-confidence interval of between 3 and 4; see figure \ref{fig_plots_27ga}) and reported that it worked reasonably well but not yet perfectly (most students grading it either 3/5 or 4/5 with a bootstrapped 95\%-confidence interval of between 2 and 4). This is consistent with our own observations.
 
 \begin{cfigure}[fig_plots_27ga]{Answers to questionnaire questions 1 and 3: How well did you like working with this environment? How well do you think you could explain what you have learned today?}
 \input{diagrams/plots_27ga}
@@ -65,7 +82,7 @@ Their main concern was two of the more engaged students, noting that some explan
 
 Students gave their feedback between one day and one week after the lesson. When asked to reword the learned content in their own words, most of them failed to describe entirely correctly what they had learned. Had their answers been graded, all but one student would have only been awarded at most half the points. Also, the desired connection with the previously taught content about transistors and logic gates remained unclear, with this time all students getting at most half the points.
 
-Finally, the partial exam resulted in students answering questions related to these lessons correctly to only about 46\%. The result does, however, weakly correlate with students' general commitment (measured by their final grade, yielding a rank correlation of $0.48$).
+Finally, the graded test resulted in students answering questions related to these lessons correctly to only about 46\%. The result does, however, weakly correlate with students' general commitment (measured by their final grade, yielding a rank correlation of $0.48$).
 
 
 \subsection{Learnings}
@@ -110,7 +127,7 @@ Part of these issues might, however, relate to high temperatures, making it more
 
 Of the 15 students present, 14 managed to hand in the questionnaire (with the last student's computer previously running out of battery power).\footnote{Questionnaire data in anonymized form is available at \url{https://github.com/zeniko/gyminf-thesis/blob/main/data/data_6_2.csv}.} With this small number of answers, again, no reasonable quantitative evaluation is possible.
 
-The students' answers show that many of them (12/15) have worked more slowly than expected, only learning about lexer and parser in the hour provided. Also, disappointingly, only two of the 15 were at least somewhat confident that they would be able to explain the learned content to their peers.
+The students' answers show that many of them (12/15) have worked more slowly than expected, only learning about lexer and parser in the hour provided. Also, disappointingly, only two of the 15 were at least somewhat confident that they would be able to explain the learned content to their peers (see figure \cite{fig_plots_28ga}).
 
 \begin{cfigure}[fig_plots_28ga]{Answers to questionnaire questions 1 and 3: How well did you like working with this environment? How well do you think you could explain what you have learned today?}
 \input{diagrams/plots_28ga}
@@ -125,4 +142,12 @@ The only general remark that students agreed on was that they had enjoyed progra
 
 \subsection{Learnings}
 
-Unfortunately, not much was to be learned from this test, mostly due to environmental factors. A repetition of this setting will thus be required at a later time. At least the content that students actually got to seems to have been sufficiently clear for them to somewhat understand.
+Unfortunately, not much was to be learned from this round, mostly due to environmental factors. A repetition of this setting will thus be required at a later time. At least the content that students actually got to seems to have been sufficiently clear for them to somewhat understand.
+
+
+
+\section{Evaluation}
+
+Significant validation was unlikely within the given constraints: Time was too short, not all students handed in the questionnaire, in one case, and high temperatures came in the way in the other. All of these issues could be remedied by embedding the usage of Processing Abstractions into a longer sequence over multiple weeks, ideally followed by a graded test.
+
+Nonetheless, within the given limitations, the methodology seems to have been sufficient: at least in the first round, observations yielded valuable insights and led to several changes to Processing Abstractions and its content; and the questionnaire still broadly confirmed our observations, also from the point of view of our students.
