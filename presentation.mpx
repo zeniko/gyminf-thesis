@@ -9,6 +9,19 @@
 	\usepgfplotslibrary{statistics}
 	\newcommand{\ac}[1]{#1}
 	\newcommand{\acs}[1]{#1}
+	\usepackage{newunicodechar}
+	\usepackage{bbding}
+	\newunicodechar{✔}{\Checkmark}
+	\newunicodechar{❌}{\XSolidBrush}
+
+GymInf-Thesis
+-------------
+![width=8cm](images/logos/gyminf_logo.png)
+* Program at UniFR, 2020-2025
+* Teaching qualification
+  for high school
+
+---
 
 What happens here?
 ------------------
@@ -21,15 +34,57 @@ while a < 15:
 print(a)
 ```
 
----
+<PAUSE>
+***
 
-Different Abstraction Levels
-----------------------------
 * Individual commands
-* Interactions
+<PAUSE>
 * (Intended) output
 <PAUSE>
 * Inside the machine?
+
+---
+
+The Problem
+-----------
+* How to demonstrate to students what happens when a program is executed?
+<PAUSE>
+* How to connect programming with computer architecture?
+
+---
+
+Brief Overview
+--------------
+1. The Problem $\leftarrow$
+2. Teaching Principles
+3. Solution: New Environment
+4. Results
+
+---
+
+| 2. Teaching Principles |
+
+---
+
+Principle: Foundational Idea
+----------------------------
+* Core idea of a subject
+* Relevance, depth and breadth
+
+<PAUSE>
+
+Examples:
+* Algorithms
+* Connectivity
+* Modelling
+
+---
+
+Principle: *Sichtenwechsel*
+---------------------------
+* Change of perspective in relation to an abstraction level
+<PAUSE>
+* Increase understanding by observing the same entity at different layers
 
 ---
 
@@ -42,9 +97,11 @@ Multitier Architecture
 
 ---
 
-The Problem
------------
-* How to demonstrate students what has to happen for a program to be executed?
+Requirements
+------------
+* Beginner-friendly programming language
+  * Python (Processing)
+* Environment with few dependencies
 
 ---
 
@@ -54,9 +111,35 @@ IDE Support: VS Code
 
 ---
 
+IDE Support: VS Code
+--------------------
+![stretch](media/debug_vscode.png)
+
+***
+
+* VM access ✔
+  (through extension)
+* Manageability ❌
+  (too much information)
+* Not didactic ❌
+
+---
+
 IDE Support: Thonny
 -------------------
 ![stretch](media/debug_thonny.png)
+
+---
+
+IDE Support: Thonny
+-------------------
+![stretch](media/debug_thonny.png)
+
+***
+
+* Manageability ✔
+* Didactic ✔
+* No VM access ❌
 
 ---
 
@@ -66,58 +149,38 @@ IDE Support: (*spoilers*)
 
 ---
 
-Brief Overview
---------------
-* The Problem $\leftarrow$
-* Teaching Principles
-* New Environment
-* Results
-
----
-
-| Teaching Principles |
-
----
-
-Principle: Foundational Idea
-----------------------------
-* Core idea of a subject
-* Relevant, persistent
-
----
-
-Principle: Foundational Idea
-----------------------------
-@todo reorder, visualize
-Examples:
-* Programming
-* Abstraction
-* Networking
-
----
-
-Principle: *Sichtenwechsel*
----------------------------
-
----
-
-Principle: *Sichtenwechsel*
----------------------------
-@todo images of books
-Examples:
-* "NAND to Tetris"
-* Programming Art (or games)
-
----
-
-| New Environment |
+| 3. Solution: New Environment |
 
 ---
 
 "Processing Abstractions"
 -------------------------
-@todo prepare demo
-![stretch](media/views.png)
+Didactic environment:
+* Compiler and runtime environment
+* Views into all artifacts
+* Course material
+
+---
+
+Technical Foundation
+--------------------
+* Glamorous Toolkit
+  * Smalltalk Environment
+  * Easy to extend (moldable)
+  * Complete: GUI, parsers
+  * Notebook
+
+---
+
+Glamorous Toolkit: Notebook
+---------------------------
+![stretch](images/gt_screenshot.png)
+
+---
+
+Glamorous Toolkit: Coder
+------------------------
+![stretch](media/coder.png)
 
 ---
 
@@ -129,13 +192,98 @@ Viewing Abstractions
 
 ---
 
-| Results |
+Demo: Views
+-----------
+![stretch](media/views.png)
 
 ---
 
-Question: How did you like it?
-------------------------------
-	\input{../diagrams/plots_27Ga}
+Demo: Interaction
+-----------------
+![stretch](media/interaction.png)
+
+---
+
+Course Material
+---------------
+* Introduction to programming
+* Computer architecture
+  (from app to processor)
+* Compiling
+
+---
+
+| 4. Results |
+
+---
+
+Setting
+-------
+* Two classes
+* Two lessons each:
+  * Computer architecture
+  * Compiling
+* Feedback
+
+---
+
+Question: Acceptance
+--------------------
+	\begin{center}
+	\begin{tikzpicture}[baseline=(current axis.center), scale=0.9]
+	\begin{axis}[
+		ybar,
+		y=0.5cm,
+		xmin=1,
+		xmax=5,
+	]
+		\addplot+[hist] table [row sep=\\,y index=0] {
+			Q1 \\ 4 \\ 4 \\ 3 \\ 3 \\ 4 \\ 4 \\ 4 \\ 4 \\ 3 \\
+		};
+	\end{axis}
+	\end{tikzpicture}
+	\end{center}
+
+How did you like working with this environment?
+(1 = not at all, 5 = very much)
+
+---
+
+Question: Confidence
+--------------------
+	\begin{center}
+	\begin{tikzpicture}[baseline=(current axis.center), scale=0.9]
+	\begin{axis}[
+		ybar,
+		y=0.5cm,
+		xmin=1,
+		xmax=5,
+	]
+		\addplot+[hist] table [row sep=\\,y index=0] {
+			Q3 \\ 4 \\ 3 \\ 2 \\ 1 \\ 2 \\ 3 \\ 2 \\ 3 \\ 2 \\
+		};
+	\end{axis}
+	\end{tikzpicture}
+	\end{center}
+
+How confident do you feel to explain the learned content?
+(1 = not at all, 5 = very much)
+
+---
+
+Question: Aspects
+-----------------
+What did you like about it?
+
+* Interactivity
+* Modifiability
+* Autonomy
+
+---
+
+Conclusion
+----------
+* 
 
 ---
 
