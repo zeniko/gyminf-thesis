@@ -27,7 +27,7 @@ As will be shown below, dozens of premade views are available. Any of them can b
 
 \begin{code}
 (ProcessingSource fromPage: thisSnippet page at: 1) renderLiveView: #gtTreePlusSourceFor:
-\end{code} \label{embedding_view}
+\end{code} \label{code_embedding_view}
 
 From these views, interactive teaching materials related to programming, compilers and code execution in a (virtual) machine can be composed, allowing students to combine their preexisting knowledge from programming with concepts of different abstraction levels.
 
@@ -173,7 +173,7 @@ The canvas provides the implementation of most of the Processing \ac{API}: Every
 
 All views in \ac{GT} are, by convention, provided by methods with names of the form \ct{gt...For:} and are categorized as ``views'' in the class browser.\footnote{Actual requirement is only the \ct{<gtView>} pragma annotation and the method signature (\ct{GtPhlowView} $\rightarrow$ \ct{GtPhlowView}).}
 
-With any view visible in \ac{GT}, \ct{Alt}+clicking on a view's name shows its source method(s), revealing the view's method name and implementation. The method name will be required for embedding a view in a notebook page as described on page \pageref{embedding_view} above.
+With any view visible in \ac{GT}, \ct{Alt}+clicking on a view's name shows its source method(s), revealing the view's method name and implementation. The method name will be required for embedding a view in a notebook page as described on page \pageref{code_embedding_view} above.
 
 To compare the same views of different programs, the \ct{ViewComparison} helper class is provided, which can be used in Element snippets as follows:
 
@@ -189,7 +189,7 @@ ViewComparison newFor: {
 
 The Processing/Python snippet is implemented through \ct{LeProcessingSnippet} and associated classes.\footnote{See appendix \ref{app_snippet} for technical details.} This is mostly based on the provided \ct{LePythonSnippet}, replacing the use of the Python language bridge with calls to our own Processing compiler and runtime.
 
-The snippet can either create \ct{ProcessingSource} instances by itself, showing either the Output, Runsteps, or Abstractions views; or its code can be programmatically loaded in a notebook Element snippet as shown on page \ref{embedding_view}.\footnote{The \ct{at: 1} part of the message may also be omitted, if there's only one snippet on a notebook page. Inspect the ``views'' category of \ct{ProcessingProgram} in the coder or consult appendix \ref{app_view_names} for a full list of available view names.}
+The snippet can either create \ct{ProcessingSource} instances by itself, showing either the Output, Runsteps, or Abstractions views; or its code can be programmatically loaded in a notebook Element snippet as shown on page \pageref{code_embedding_view}.\footnote{The \ct{at: 1} part of the message may also be omitted, if there's only one snippet on a notebook page. Inspect the ``views'' category of \ct{ProcessingProgram} in the coder or consult appendix \ref{app_view_names} for a full list of available view names.}
 
 
 

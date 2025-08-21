@@ -55,7 +55,7 @@ Since \ac{GT} will be a new environment altogether for all students, some basics
 \begin{instructions}
 \item Ask students to download and extract your \ac{GT} distribution as homework for the first lesson. Under Windows, they might run into a first issue with their virus scanner blocking the download, so remind them about what to do in that case.\footnote{With most virus scanners, the warning can be overruled by the user; otherwise they might have to \emph{temporarily} disable the scanner for this one download.}
 \item Tell students to start \ac{GT} and open the notebook page about working with \ac{GT} (``Arbeiten mit Glamorous Toolkit'' in the included teaching materials). Also ask them to help their neighbours if they see them struggling. Use the time while students are reading and doing the first tasks to ensure that everyone has managed to get \ac{GT} running.
-\item Introduce \ac{GT} as an interactive notebook similar to what students already know from class.\footnote{Many schools have standardized their IT infrastructure and use the Microsoft 365 Office Suite, which includes OneNote.} One main difference will be that additional views will open to the side, hiding the table of contents. So show them how to get back by selecting the left-most view (through the blue dots at the center top) and expanding it (through the \faPlusCircle\ at the top left).
+\item Introduce \ac{GT} as an interactive notebook similar to what students already know from class.\footnote{Many schools have standardized their IT infrastructure and use the Microsoft 365 Office Suite, which includes OneNote.} One main difference will be that additional views will open to the side, hiding the table of contents. So show them how to get back by selecting the left-most view (through the blue dots at the center top) and expanding it (through the \faPlusCircle\ button at the top left).
 \item If you want students to be able to take notes of their own inside \ac{GT} notebooks, show them how to move a page to their local knowledge base (where it can be backed up individually) and how to create and structure new paragraphs (\ct{Ctrl+Enter}, \ct{Alt+Shift+Arrow}). Markdown syntax for formatting does not have to be introduced explicitly, as that can be replicated by students by inspecting your content.
 \item Finally, keep in mind \ac{GT}'s ability to be inspected at every level and point more advanced students towards using these (\eg by \ct{Ctrl+Shift+Alt+Click} anywhere, by double-clicking on list items, or by going through the different views of an object).
 \end{instructions}
@@ -105,6 +105,7 @@ After these lessons, students should be able to \dots
 \item explain why some commands are slower than others.
 \item connect their knowledge about encodings with how values and machine code are stored.
 \item consequently understand how one of their programs might be run on actual hardware and document their understanding with correct terms.
+\item understand the relevance of multitier architectures and why knowing about this concept is relevant beyond computer science.
 \end{itemize}
 
 
@@ -130,7 +131,7 @@ Whereas Nisan and Schocken \cite{Nis21} introduce their bottom up course with a 
 \item Go back to Processing and inspect a combined execution view (see figure \ref{fig_screenshot_vm_execution}). By stepping forward and backward, students should be able to observe the role of the stack and the program counter. Let them explore execution flow and write down what role the program counter has and what the calling convention for Processing \ac{API} calls seems to be.
 \item As a break or maybe as homework, let students play Human Resource Machine\footnote{The Hour of Code edition is free to download for Windows and macOS.} \cite{Tom15}, which introduces students to a different architecture. The first six levels should be doable for everybody, with quicker students finding sufficient challenges later on.\footnote{You can also come back to this during compiler lessons, as Human Resource Machine has players implement various optimizations as additional challenges.}
 \item Compare the two instruction architectures with regard to expressivity and register- \emph{vs.} stack-based design.
-
+\item To wrap up, go back to comparing high-level Processing code and low-level bytecode. Both are for the same program but at different layers. Where else do students encounter such different views on the same entity? In what other topics have they already performed such a \emph{Sichtenwechsel}, and in what topics would it still be helpful?
 \item Finally, treat circuits, logic gates, transistors, and maybe down to silicon outside of \ac{GT} to the desired depth.
 \end{instructions}
 
@@ -146,7 +147,7 @@ Once students have an approximate understanding of what a program must be transf
 
 While this is not usually the focus of a general introduction to computer science beyond the superficial treatment occurring during the lessons on computer architecture, this is quite relevant for students specializing in computer science.
 
-However, using the environment presented here, this topic could just as well be used either for all students or for quicker students to work on mostly by themselves. Part of the lesson presented here has indeed been validated under these circumstances (cf. \ref{sc_validation_compiler}).
+However, using the environment presented here, this topic could just as well be used either for all students or for quicker students to work on mostly by themselves. Part of the lesson presented here has already been held under these circumstances (see \ref{sc_validation_compiler}).
 
 
 \subsection{Educational objective}
@@ -161,7 +162,7 @@ After these lessons, students should be able to \dots
 
 \subsection{Prerequisites}
 
-Students must have experience in programming and computer architecture, \eg from the lessons described above (cf. \ref{sc_lesson_intro} and \ref{sc_lesson_ca}). It helps if their programming experience is based on Processing or at least Python. Additionally, they need to have \ac{GT} installed and introduced (see \ref{ssc_lesson_gt}).
+Students must have experience in programming and computer architecture, \eg from the lessons described above (see \ref{sc_lesson_intro} and \ref{sc_lesson_ca}). It helps if their programming experience is based on Processing or at least Python. Additionally, they need to have \ac{GT} installed and introduced (see \ref{ssc_lesson_gt}).
 
 
 \subsection{Lesson Plan}

@@ -66,6 +66,8 @@ This appendix lists the available \ac{API} calls implemented in Processing Abstr
 
 The following pages show screenshots of all the views available through \ct{ProcessingProgram}. Multiple views are combined in single screenshots. This is not only for compactness, but also the way most views are meant to be used: for comparing various aspects of the same program. Combined views are usually linked, so that interacting with one view also affects the linked view(s).
 
+To access the code implementing a view, \ct{Alt}+click on its tab. This will also show the view's internal name. Alternatively, all views of \ct{ProcessingProgram} are also listed in \ref{app_view_names}.
+
 \begin{cfigure}[fig_view_abstractions]{The Abstractions view with source code, \ac{AST}, bytecode, and output showing (this is the default view for \ct{ProcessingSource} and \ct{ProcessingProgram}, as it encapsulates the essence of Processing Abstractions)}
 \includegraphics[width=.7\textwidth]{view_abstractions}
 \end{cfigure}
@@ -127,9 +129,9 @@ The following pages show screenshots of all the views available through \ct{Proc
 
 The contents of Processing Abstractions are distributed over two GitHub repositories:
 
-The repository \ct{zeniko/gt-exploration}\footnote{\emph{Cf.} \url{https://github.com/zeniko/gt-exploration/tree/thesis}} contains the source code for the Processing compiler, for the runtime support, and for all the views. In addition, it also contains two dozen Processing programs as examples and test cases (in \ct{ProcessingSourceExamples}), demonstrating the entire range of implemented features. Furthermore, this repository contains process documentation in a \ac{GT} notebook named ``Implementation and Tests'' on \ac{GT}'s home screen and for that also prototype implementations of the other approaches mentioned in \ref{ssc_other_approaches}.
+The repository \ct{zeniko/gt-exploration}\footnote{\emph{Cf.} \url{https://github.com/zeniko/gt-exploration/tree/thesis}.} contains the source code for the Processing compiler, for the runtime support, and for all the views. In addition, it also contains two dozen Processing programs as examples and test cases (in \ct{ProcessingSourceExamples}), demonstrating the entire range of implemented features. Furthermore, this repository contains process documentation in a \ac{GT} notebook named ``Implementation and Tests'' on \ac{GT}'s home screen and for that also prototype implementations of the other approaches mentioned in \ref{ssc_other_approaches}.
 
-The repository \ct{zeniko/processing-abstractions}\footnote{\emph{Cf.} \url{https://github.com/zeniko/processing-abstractions/tree/thesis}} mainly contains teaching material for the sequences proposed in chapter \ref{ch_teaching} in a \ac{GT} notebook named ``Unterrichtseinheiten''. In contrast to the source code repository, this content is written in German, as that was the teaching language for the validation rounds in chapter \ref{ch_practice}. Programs for examples and tasks are contained in \ct{ProcessingAbstractionsExamples} and sketches in \ct{ProcessingAbstractionSceneries}.
+The repository \ct{zeniko/processing-abstractions}\footnote{\emph{Cf.} \url{https://github.com/zeniko/processing-abstractions/tree/thesis}.} mainly contains teaching material for the sequences proposed in chapter \ref{ch_teaching} in a \ac{GT} notebook named ``Unterrichtseinheiten''. In contrast to the source code repository, this content is written in German, as that was the teaching language for the validation rounds in chapter \ref{ch_practice}. Programs for examples and tasks are contained in \ct{ProcessingAbstractionsExamples} and sketches in \ct{ProcessingAbstractionSceneries}.
 
 Both repositories have a \ct{thesis} branch that has been frozen to the state described in this thesis, whereas development will continue on the \ct{main} branches.
 
@@ -156,7 +158,7 @@ The main difference to the Python snippet is in the \ct{GtProcessingCoderModel},
 
 \section{Views} \label{app_view_names}
 
-The following views are available as arguments for \ct{ProcessingSource>>renderLiveView:} (see page \pageref{embedding_view}). Figure \ref{fig_uml_views} shows an overview of all view implementors.
+The following views are available as arguments for \ct{ProcessingSource>>renderLiveView:} (see page \pageref{code_embedding_view}). Figure \ref{fig_uml_views} shows an overview of all view implementors.
 
 \begin{cfigure}[fig_uml_views]{Diagram of all views provided and their implementors (methods set in \textit{italics} are forwarded to the actual implementor)}
 \input{diagrams/uml-views}
